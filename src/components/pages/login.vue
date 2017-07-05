@@ -1,8 +1,8 @@
 <template>
 	<div class="login">
 		<form action="">
-			<input type="text" name="">
-			<input type="password" name="">
+			<input type="text" name=""><br>
+			<input type="password" name=""><br>
 			<input type="submit" value="登录">
 		</form>
 	</div>
