@@ -4,11 +4,11 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 
-//åˆ›å»ºè·¯ç”±å®ä¾‹å¹¶é…ç½®è·¯ç”±æ˜ å°„
-//pathï¼š'*'ï¼Œredirect:'/home'    é‡å®šå‘åˆ°pathæ˜¯/homeçš„æ˜ å°„
+//´´½¨Â·ÓÉÊµÀı²¢ÅäÖÃÂ·ÓÉÓ³Éä
+//path£º'*'£¬redirect:'/home'    ÖØ¶¨Ïòµ½pathÊÇ/homeµÄÓ³Éä
 const router = new Router({
 	routes:[{
-		path: '*',redirect:'/login'
+		path: '*',redirect:'/hello'
 	},{
 		path: '/movie',component:require('../components/movie.vue')
 	},{
@@ -20,19 +20,15 @@ const router = new Router({
 	},{
 		path: '/main',
 			meta:{
-				//æ·»åŠ è¯¥å­—æ®µï¼Œè¡¨ç¤ºè¿›å…¥è¿™ä¸ªè·¯ç”±æ˜¯éœ€è¦ç™»å½•çš„
+				//Ìí¼Ó¸Ã×Ö¶Î£¬±íÊ¾½øÈëÕâ¸öÂ·ÓÉÊÇĞèÒªµÇÂ¼µÄ
 				requireAuth: true,
 			},
 		component:require('../components/main.vue')
 	},{
 		path: '/register',component:require('../components/register/register.vue')
-	},{
-		path: '/iregister',component:require('../components/register/iRegister.vue')
-	},{
-		path: '/tregister',component:require('../components/register/tRegister.vue')
 	}]
 })
 
 
-//è¾“å‡ºrouter
+//Êä³örouter
 export default router

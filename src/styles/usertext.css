@@ -1,0 +1,60 @@
+.usertext{
+	margin: 0rem 2.5rem;
+	border-bottom: 1px solid #dcdcdc;
+	padding-bottom: 0.3rem;
+	margin-bottom: 1.2rem;
+	text-align: left;
+}
+.usertext img{
+	width:8%;
+	display: inline-block;
+	vertical-align: middle;
+}
+.usertext input{
+	border: 0;
+    width: 40%;
+    margin: 0 auto;
+    margin-left: 0.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+}
+.usertext input::-webkit-input-placeholder{
+	color: #626262;
+	font-family: "微软雅黑";
+	font-size: 1rem;
+	line-height: 1;
+	padding-left: 0.5rem;
+}
+.usertext a{
+	float: right;
+	display: inline-block;
+	color: #FFFFFF;
+	background: #1cbafb;
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+.usertext input[type=button]{
+	font-family: microsoft yahei;
+	float: right;
+	display: inline-block;
+	color: #FFFFFF;
+	background: #1cbafb;
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+.sub{
+	margin-top:3rem;
+	text-align: center;
+}
+.sub input{
+	border: 0;
+	margin: 0 auto;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-family: "微软雅黑";
+	background: #1cbafb;
+	padding: 0.7rem 7.3rem;
+	border-radius: 4px;
+}
