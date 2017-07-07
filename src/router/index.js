@@ -47,6 +47,10 @@ const router = new Router({
 		{
 			path: '/tregister',
 			component:require('../components/register/tRegister.vue')
+		},
+		{
+			path: '/goodlist',
+			component:require('../components/register/goodlist.vue')
 		}
 	]
 })

@@ -19,13 +19,13 @@
     font-size: 1rem;
 }
 .usertext input::-webkit-input-placeholder{
-	color: #626262;
+	color: #C9C9C9;
 	font-family: "微软雅黑";
 	font-size: 1rem;
 	line-height: 1;
 	padding-left: 0.5rem;
 }
-.usertext a{
+/*.usertext a{
 	float: right;
 	display: inline-block;
 	color: #FFFFFF;
@@ -33,16 +33,17 @@
 	padding: 0.5rem 1rem;
 	border-radius: 4px;
 	vertical-align: middle;
-}
+}*/
 .usertext input[type=button]{
 	font-family: microsoft yahei;
 	float: right;
 	display: inline-block;
-	color: #FFFFFF;
-	background: #1cbafb;
-	padding: 0.5rem 1rem;
+	color: #43B7B6;
+	border:1px solid #43B7B6;
+	padding: 0.3rem 1rem;
 	border-radius: 4px;
 	vertical-align: middle;
+	background: #fff;
 }
 .sub{
 	margin-top:3rem;
@@ -54,7 +55,7 @@
     color: #FFFFFF;
     font-size: 1rem;
     font-family: "微软雅黑";
-	background: #1cbafb;
+	background: #43B7B6;
 	padding: 0.7rem 7.3rem;
 	border-radius: 4px;
 }
