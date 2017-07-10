@@ -4,13 +4,13 @@
 		<form action="" method="post">
 			<ul>
 				<li>
-					<span>文化教育</span><input type="checkbox">
+					<span>文化教育</span>
 				</li>
 				<li>
-					<span>文化教育</span><input type="checkbox">
+					<span>文化教育</span>
 				</li>
 				<li>
-					<span>文化教育</span><input type="checkbox">
+					<span>文化教育</span>
 				</li>
 			</ul>
 			<div class="sub">
@@ -41,12 +41,17 @@
 	.goodlist{
 		font-size: 1rem;
 	}
+	.goodlist form{
+		margin-top:10%; 
+	}
 	.goodlist li{
-		margin: 0rem 2.5rem;
+		width: 92%;
+		margin: 0 auto;
 	    border-bottom: 1px solid #dcdcdc;
-	    padding-bottom: 0.3rem;
-	    margin-bottom: 1.2rem;
+	    padding-bottom: 1rem;
+	    margin-bottom: 1rem;
 	    text-align: left;
+	    color: #333;
 	}
 	.goodlist li span{
 		vertical-align: middle;

@@ -1,12 +1,12 @@
 <template>
-	<div class="login">
+	<div class="forgetpass">
 		<headerTip message="忘记密码" goBack="true"></headerTip>
 		<form action="" method="post">
 			<div class="usertext">
-				<input type="text" placeholder="请输入手机号" maxlength="11" />
+				<input type="tel" placeholder="请输入手机号" maxlength="11" />
 			</div>
 			<div class="usertext">
-				<input type="text" placeholder="请输入验证码" maxlength="11" />
+				<input type="number" placeholder="请输入验证码" maxlength="11" />
 				<input id="aaa" type="button" value="获取验证码" @click="mobileCode">
 			</div>
 			<div class="usertext">
@@ -29,7 +29,7 @@
 	  	name: 'login',
 	 	 data () {
 		    return {
-		      
+		      	
 		    }
 	  	},
 	  	components:{
@@ -45,4 +45,7 @@
 
 <style scoped>
 	@import '../../styles/usertext.css';
+	.forgetpass form{
+		margin-top: 10%;
+	}
 </style>

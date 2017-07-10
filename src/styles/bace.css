@@ -12,8 +12,7 @@ li{list-style: none;}
 img{border:none;display:block;}
 .clearfix{clear:both;display: block;overflow: hidden;}
 html{height: 100%;}
-body{margin: 0;padding: 0;height: 100%;color: #fff;font-size: 0.8rem;font-family: Arial,"微软雅黑";overflow: hidden;position: relative;min-height: 100%;box-sizing: border-box;
-    -webkit-box-sizing: border-box;}
-*{-webkit-tap-highlight-color: transparent;margin:0;padding:0;}
+body{height: 100%;font-size: 0.8rem;font-family: Arial,"微软雅黑";overflow: hidden;position: relative;box-sizing: border-box;
+    -webkit-box-sizing: border-box;max-width: 720px;margin: 0 auto;}
+*{-webkit-tap-highlight-color: transparent;margin:0;padding:0;-webkit-appearance:none;}
 input:focus{outline: none;}
-input:{-webkit-appearance:none;}

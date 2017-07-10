@@ -66,12 +66,25 @@
 
 <style scoped>
 	@import '../../styles/usertext.css';
-
+	.login{
+		text-align: center;
+	}
 	.link{
-		margin-top: 20%;
+		position: absolute;
+		bottom: 10%;
+		right: 0;left: 0;
+		margin: auto;
+		font-size: 0.9rem;
+		color: #666;
 	}
 	.link a{
-		color: #333;
 		text-decoration: none;
+		color: #666;
+	}
+	.link span{
+		margin: 0 0.5rem 0 0.5rem;
+	}
+	form{
+		margin-top: 30%;
 	}
 </style>

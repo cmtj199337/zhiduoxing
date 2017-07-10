@@ -5,11 +5,6 @@
 	margin-bottom: 1.2rem;
 	text-align: left;
 }
-.usertext img{
-	width:8%;
-	display: inline-block;
-	vertical-align: middle;
-}
 .usertext input{
 	border: 0;
     width: 40%;
@@ -56,6 +51,6 @@
     font-size: 1rem;
     font-family: "微软雅黑";
 	background: #43B7B6;
-	padding: 0.7rem 7.3rem;
+	padding: 0.7rem 5rem;
 	border-radius: 4px;
 }

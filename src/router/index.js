@@ -12,6 +12,11 @@ const router = new Router({
 			path: '*',
 			redirect:'/login'
 		},
+		//common 用户协议
+		{
+			path:'/agreement',
+			component:require('../components/common/Agreement.vue')
+		},
 		{
 			path: '/movie',
 			component:require('../components/movie.vue')

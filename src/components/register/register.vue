@@ -15,3 +15,9 @@
 	  	}
 	}
 </script>
+
+<style scoped>
+	.register a{
+		
+	}
+</style>
