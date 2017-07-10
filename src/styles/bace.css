@@ -16,3 +16,12 @@ body{height: 100%;font-size: 0.8rem;font-family: Arial,"微软雅黑";overflow: 
     -webkit-box-sizing: border-box;max-width: 720px;margin: 0 auto;}
 *{-webkit-tap-highlight-color: transparent;margin:0;padding:0;-webkit-appearance:none;}
 input:focus{outline: none;}
+.btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+    border: 1px solid #666;
+    color: #666;
+}

@@ -7,7 +7,8 @@
 			</div>
 			<div class="usertext">
 				<input type="number" placeholder="请输入验证码" maxlength="11" />
-				<timer class="getcode" @click="send" ref="btn">获取验证码</timer>
+				<!-- <count-down class="btn getcode" @click="aler" ref="btn" :disabled="disabled" v-ref:btn :second="5"></count-down> -->
+				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :disabled="disabled" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
 				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" /><br />
@@ -24,7 +25,7 @@
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
-	import countDown from '../common/tools/countdown.vue'
+	import TimerBtn from '../common/tools/countdown.vue'
 
 	export default {
 	  	name: 'forgetpass',
@@ -34,18 +35,28 @@
 		    }
 	  	},
 	  	components:{
-	  		'headerTip':headerTip,
-	  		'timer':countDown
+	  		headerTip,
+	  		TimerBtn
 	  	},
 	  	methods:{
-	  		send() {
-                this.disabled = true;
-                setTimeout(this.sended, 2000);
-            },
-            sended() {
-                this.$refs.btn.run();
-                this.disabled = false;
-            }
+	  		// send() {
+     //            this.disabled = true;
+     //            setTimeout(this.sended, 2000);
+     //        },
+     //        sended() {
+     //            this.$refs.btn.run();
+     //            this.disabled = false;
+     //        }
+     		send(){
+     			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
+	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
+	                if(data.status){
+	                    this.$refs.timerbtn.start(); //启动倒计时
+	                }else{
+	                    this.$refs.timerbtn.stop(); //停止倒计时
+	                }
+	            });
+     		}
 	  	}
 	}
 </script>
