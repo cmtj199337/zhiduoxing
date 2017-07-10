@@ -32,16 +32,16 @@
 				<i></i><span>我已阅读并授权</span><router-link to="agreement">《志多星用户协议》</router-link>
 			</div>
 			<div class="sub">
-				<input type="button" value="确认提交" />
+				<input type="button" value="确认提交" @click="confirm"/>
 			</div>
 		</form>
 		<!-- 遮罩、弹框 -->
-		<div class=""></div>
-		<div class="popup">
+		<div class="overlay" v-show="isConfirm"></div>
+		<div class="popup" v-bind:class="{'show':isConfirm}">
 			<p>马上去完善个人信息，可以获得10积分</p>
 			<div>
-				<a href="javascript:;">是</a>
-				<a href="javascript:;">否</a>
+				<router-link to="improve">是</router-link>
+				<a href="javascript:;" @click="isConfirm = false">否</a>
 			</div>
 		</div>
 	</div>
@@ -57,9 +57,14 @@
 	  	},
 	 	data () {
 		    return {
-		    	
+		    	isConfirm:false
 		    }
 	  	},
+	  	methods:{
+	  		confirm() {
+	  			this.isConfirm = true;
+	  		}
+	  	}
 	}
 </script>
 
@@ -118,21 +123,25 @@
 	.overlay{
 		width: 100%;
 		height: 100%;
-		position: absolute;
+		position: fixed;
 		top: 0;left: 0;
 		background: rgba(0,0,0,0.5);
-
+		z-index: 1;
 	}
 	.popup{
 		width: 16rem;
 		border: 1px solid #666;
-		position: absolute;
+		position: fixed;
 		top: 50%;
 		left: 50%;
+		background: #fff;
 		margin-left:-8rem; 
 		border-radius: 0.4rem;
-		padding: 1rem 1rem 0 1rem;
+		z-index: 10;
 		display: none;
+	}
+	.popup p{
+		margin: 1rem;
 	}
 	.popup div{
 		display: -webkit-box;
@@ -150,7 +159,6 @@
 	    line-height: 2.4;
 	}
 	.popup a:nth-child(2){
-		color: #A7DD87;
     	border-left: 1px solid #e5e5e5;
 	}
 	.show{display: block;}

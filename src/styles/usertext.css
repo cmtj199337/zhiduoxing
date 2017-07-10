@@ -20,16 +20,7 @@
 	line-height: 1;
 	padding-left: 0.5rem;
 }
-/*.usertext a{
-	float: right;
-	display: inline-block;
-	color: #FFFFFF;
-	background: #1cbafb;
-	padding: 0.5rem 1rem;
-	border-radius: 4px;
-	vertical-align: middle;
-}*/
-.usertext input[type=button]{
+.getcode{
 	font-family: microsoft yahei;
 	float: right;
 	display: inline-block;

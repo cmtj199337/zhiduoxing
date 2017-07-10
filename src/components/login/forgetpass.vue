@@ -7,7 +7,7 @@
 			</div>
 			<div class="usertext">
 				<input type="number" placeholder="请输入验证码" maxlength="11" />
-				<input id="aaa" type="button" value="获取验证码" @click="mobileCode">
+				<timer class="getcode" @click="send" ref="btn">获取验证码</timer>
 			</div>
 			<div class="usertext">
 				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" /><br />
@@ -24,21 +24,28 @@
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import countDown from '../common/tools/countdown.vue'
 
 	export default {
-	  	name: 'login',
+	  	name: 'forgetpass',
 	 	 data () {
 		    return {
-		      	
+		      	disabled: false
 		    }
 	  	},
 	  	components:{
-	  		headerTip
+	  		'headerTip':headerTip,
+	  		'timer':countDown
 	  	},
 	  	methods:{
-	  		mobileCode:function() {
-	  			
-	  		}
+	  		send() {
+                this.disabled = true;
+                setTimeout(this.sended, 2000);
+            },
+            sended() {
+                this.$refs.btn.run();
+                this.disabled = false;
+            }
 	  	}
 	}
 </script>

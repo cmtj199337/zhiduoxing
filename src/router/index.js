@@ -17,6 +17,7 @@ const router = new Router({
 			path:'/agreement',
 			component:require('../components/common/Agreement.vue')
 		},
+		//外部接口测试
 		{
 			path: '/movie',
 			component:require('../components/movie.vue')
@@ -41,6 +42,7 @@ const router = new Router({
 			},
 			component:require('../components/main.vue')
 		},
+		//个人注册
 		{
 			path: '/register',
 			component:require('../components/register/register.vue')
@@ -56,6 +58,10 @@ const router = new Router({
 		{
 			path: '/goodlist',
 			component:require('../components/register/goodlist.vue')
+		},
+		{
+			path: '/improve',
+			component:require('../components/register/improve.vue')
 		}
 	]
 })

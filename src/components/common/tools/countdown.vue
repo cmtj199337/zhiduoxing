@@ -6,7 +6,7 @@
 
 <script>
 export default{
-	name: 'login',
+	name: 'timerBtn',
   	props: {
 	    second: {
 	      type: Number,
@@ -24,26 +24,14 @@ export default{
 	},
   	methods: {
     	run: function () {
-     		this.$emit('run');
+     		this.time = this.second
+            this.timer()
     	},
-	    start: function(){
-		    this.time = this.second;
-		    this.timer();
-	    },
-	    stop: function(){
-	     	this.time = 0;
-	    	this.disabled = false;
-	    },
-	    setDisabled: function(val){
-	     	this.disabled = val;
-	    },
 	    timer: function () {
 	      	if (this.time > 0) {
-	        	this.time--;
-	        	setTimeout(this.timer, 1000);
-	      	}else{
-	       		this.disabled = false;
-	      	}
+                this.time--;
+                setTimeout(this.timer, 1000);
+            }
 	    }
   	},
   	computed: {
