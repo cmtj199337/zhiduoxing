@@ -66,9 +66,9 @@ const router = new Router({
 		//index 
 		{
 			path: '/index',
-			meta:{
-				requireAuth: true,
-			},
+			// meta:{
+			// 	requireAuth: true,
+			// },
 			component:require('../components/index/index.vue')
 		}
 	]

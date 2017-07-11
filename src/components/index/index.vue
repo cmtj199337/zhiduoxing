@@ -1,35 +1,55 @@
 <template>
 	<div class="index">
-		<slider-bar></slider-bar>
+		<div class="headerBar">
+			<div class="location">北京</div>
+			<div class="number">5000人</div>
+		</div>
+		<swipe v-model="index" style="text-align: center;">
+		  <swipe-item><img src="http://www.jq22.com/demo/jPicture201707092227/images/1.png" alt=""></swipe-item>
+		  <swipe-item><img src="http://www.jq22.com/demo/jPicture201707092227/images/2.png" alt=""></swipe-item>
+		  <swipe-item><img src="http://www.jq22.com/demo/jPicture201707092227/images/3.png" alt=""></swipe-item>
+		</swipe>
 	</div>
 </template>
 
 <script>
-
-	import SliderBar from '../../components/common/tools/swiper.vue'
-
+	import { Swipe, SwipeItem } from 'c-swipe';
 	export default {
-
-
 	  	name: 'index',
 	  	components:{
-	  		SliderBar
+	  		Swipe,
+	  		SwipeItem
 	  	},
 	 	data () {
 		    return {
-		    	listImg:[
-		    		'../register/ire.png'
-		    	]
+		    	index:0,
 		    }
 	  	},
 	  	methods:{
-	  		getImg(){
-
-	  		}
+	  		
 	  	}
 	}
 </script>
 
 <style scoped>
-	
+	@import '../../styles/swipe.css';
+	.index{
+		position: relative;
+	}
+	.headerBar{
+		position: absolute;
+		top: 0;left: 0;right: 0;
+		background: rgba(255,255,255,0.5);
+		padding: 1rem;
+		z-index: 10;
+		display: flex;
+	}
+	.headerBar div{
+		width: 50%;
+		font-size: 0.8rem;
+		color: #fff;
+	}
+	.number{
+		text-align: right;
+	}
 </style>
