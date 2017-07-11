@@ -62,6 +62,14 @@ const router = new Router({
 		{
 			path: '/improve',
 			component:require('../components/register/improve.vue')
+		},
+		//index 
+		{
+			path: '/index',
+			meta:{
+				requireAuth: true,
+			},
+			component:require('../components/index/index.vue')
 		}
 	]
 })

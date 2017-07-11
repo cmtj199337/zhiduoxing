@@ -14,24 +14,24 @@
 			<ul>
 				<li>
 					<span class="item-check-btn">
-						<svg class="icon icon-ok"><use></use></svg>
+						<svg class="icon icon-ok"></svg>
 					</span>
 					<span>身份证</span>
 				</li>
 				<li><span class="item-check-btn">
-						<svg class="icon icon-ok"><use></use></svg>
+						<svg class="icon icon-ok"></svg>
 					</span>
 					<span>护照</span></li>
 				<li><span class="item-check-btn">
-						<svg class="icon icon-ok"><use></use></svg>
+						<svg class="icon icon-ok"></svg>
 					</span>
 					<span>军官证</span></li>
 				<li><span class="item-check-btn">
-						<svg class="icon icon-ok"><use></use></svg>
+						<svg class="icon icon-ok"></svg>
 					</span>
 					<span>学生证</span></li>
 				<li><span class="item-check-btn">
-						<svg class="icon icon-ok"><use></use></svg>
+						<svg class="icon icon-ok"></svg>
 					</span>
 					<span>港澳通行证</span></li>
 			</ul>

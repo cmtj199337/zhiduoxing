@@ -56,7 +56,7 @@
                             // localStorage.setItem(this.name, this.pwd)
                             this.name=''
                             this.pwd= ''
-                            this.$router.push({ path: 'main' })
+                            this.$router.push({ path: 'index' })
                         }else{
                             alert('请输入正确的用户名和密码！！！');
                             this.name=''
