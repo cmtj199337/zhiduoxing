@@ -3,17 +3,21 @@
 		<headerTip message="忘记密码" goBack="true"></headerTip>
 		<form action="" method="post">
 			<div class="usertext">
+				<i class="s-icon"><img src="./phone.png"></i>
 				<input type="tel" placeholder="请输入手机号" maxlength="11" />
 			</div>
 			<div class="usertext">
+				<i class="s-icon"><img src="./yanzheng.png"></i>
 				<input type="number" placeholder="请输入验证码" maxlength="11" />
 				<!-- <count-down class="btn getcode" @click="aler" ref="btn" :disabled="disabled" v-ref:btn :second="5"></count-down> -->
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :disabled="disabled" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
+				<i class="s-icon"><img src="./lock.png"></i>
 				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" /><br />
 			</div>
 			<div class="usertext">
+				<i class="s-icon"><img src="./lock.png"></i>
 				<input type="password" placeholder="再次确认密码" /><br />
 			</div>
 			<div class="sub">

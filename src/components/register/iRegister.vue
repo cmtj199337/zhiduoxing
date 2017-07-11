@@ -1,17 +1,17 @@
 <template>
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
-        <h4><img src="" alt="">个人资料</h4>
+        <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
 		<form action="" method="post">
-			<div class="usertext">
-				<a href=""><span>头像上传</span><img src="../../images/lock_1.png"></a>
+			<div class="usertext userphoto">
+				<a href="javascript:;"><span>头像上传</span><img src="./picture.png"></a>
 			</div>
 			<div class="usertext">
 				<input type="tel" placeholder="请输入手机号" maxlength="11" />
 			</div>
 			<div class="usertext">
 				<input type="number" placeholder="请输入验证码" maxlength="11" />
-				<input id="aaa" type="button" value="获取验证码">
+				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
 				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" /><br />
@@ -22,8 +22,8 @@
 			<div class="usertext">
 				<input type="text" placeholder="请输入昵称" /><br />
 			</div>
-			<div class="usertext">
-				<router-link to="goodlist"><span>擅长</span><img src="../common/header/back.png"></router-link>
+			<div class="usertext right">
+				<router-link to="goodlist"><span>擅长<img src="./right.png"></span></router-link>
 			</div>
 			<div class="usertext">
 				<input type="text" placeholder="请输入志愿口号" /><br />
@@ -49,11 +49,13 @@
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import TimerBtn from '../common/tools/countdown.vue'
 
 	export default {
 	  	name: 'iRegister',
 	  	components:{
-	  		headerTip
+	  		headerTip,
+	  		TimerBtn
 	  	},
 	 	data () {
 		    return {
@@ -63,7 +65,17 @@
 	  	methods:{
 	  		confirm() {
 	  			this.isConfirm = true;
-	  		}
+	  		},
+	  		send(){
+     			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
+	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
+	                if(data.status){
+	                    this.$refs.timerbtn.start(); //启动倒计时
+	                }else{
+	                    this.$refs.timerbtn.stop(); //停止倒计时
+	                }
+	            });
+     		}
 	  	}
 	}
 </script>
@@ -77,6 +89,7 @@
 	    border: 0;
 	    width: 100%;
 	    height: 2.5rem;
+		line-height: 2.5rem;
 	    font-size: 1rem;
 	    display: inline-block;
 	    color: #333;
@@ -85,19 +98,19 @@
 	}
 
 	.usertext a img{
-		transform: rotate(180deg);
 		position: absolute;
 		right: 0;
 	}
-	.iRegister h4{
-		font-size: 1rem;
-		font-weight: normal;
-		margin: 1.2rem 1rem 1.2rem 1rem;
-	}
-	.usertext img{
-		width:1.5rem;
+	.userphoto img{
+		width:2rem;
 		display: inline-block;
 		vertical-align: middle;
+	}
+	.right img{
+		width:0.8rem;
+		display: inline-block;
+		vertical-align: middle;
+		top: 25%;
 	}
 	.sub{
 		margin-top: 1rem;
@@ -132,7 +145,7 @@
 		width: 16rem;
 		border: 1px solid #666;
 		position: fixed;
-		top: 50%;
+		top: 40%;
 		left: 50%;
 		background: #fff;
 		margin-left:-8rem; 

@@ -3,10 +3,15 @@
 		<headerTip message="登录" goBack="true"></headerTip>
 		<form action="" method="post">
 			<div class="usertext">
-				<input type="text" placeholder="请输入手机号" maxlength="11" v-model="name" />
+				<i class="s-icon"><img src="./phone.png"></i>
+				<input type="tel" placeholder="用户名/手机号/身份证号" maxlength="11" v-model="name" />
 			</div>
 			<div class="usertext">
-				<input type="password" v-model="pwd"  placeholder="请输入密码"/><br />
+				<i class="s-icon"><img src="./lock.png"></i>
+				<input type="text" v-model="pwd"  placeholder="请输入密码" v-if="checked"/>
+				<input type="password" v-model="pwd"  placeholder="请输入密码" v-else/>
+				<i class="s-icon right"><img src="./show.png"></i>
+				<input type="checkbox"  v-model="checked" >
 			</div>
 			<div class="sub">
 				<input type="button" @click="isLogin" value="登录"/>
@@ -33,7 +38,8 @@
 		    return {
 		      	name:'',
 		      	pwd:'',
-		      	error:''
+		      	error:'',
+		      	checked:false
 		    }
 	  	},
 	  	
@@ -43,9 +49,7 @@
 	  		}
 	  	},
 	  	methods:{
-	  		isLogin:function () {
-		        //全局安装 npm i json-server -g
-		        //启动json服务 json-server .\mock-data.json
+	  		isLogin() {
 	  			this.$http.get('http://localhost:3000/users?username='+this.name+'&password='+this.pwd).then(res => {
 	  				if(res.body != null & res.body.length > 0){
                             this.$store.commit('isLogin',res.body[0]);
@@ -86,5 +90,14 @@
 	}
 	form{
 		margin-top: 30%;
+	}
+	.right{
+		right: 0;
+	}
+	input[type=checkbox]{
+	    position: absolute;
+	    right: 0;
+	    top: 1rem;
+		opacity: 0;
 	}
 </style>

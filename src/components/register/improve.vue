@@ -3,24 +3,43 @@
 		<headerTip message="个人注册" goBack="true"></headerTip>
 		<form action="" method="post">
 			<div class="usertext">
-				<span>姓名：</span><input type="text">
+				<i class="s-icon"><img src="./name.png"></i><span>姓名</span>
+				<input type="text" placeholder="请输入真实姓名" />
 			</div>
 			<div class="usertext">
-				<span>性别：</span>
+				<i class="s-icon"><img src="./sex.png"></i><span>姓别</span>
+				<input type="text"/>
 			</div>
-			<h4><img src="" alt="">证件类型</h4>
+			<h4 class="texttitle"><span><img src="./type.png"></span>证件类型</h4>
 			<ul>
-				<li>身份证</li>
-				<li>护照</li>
-				<li>军官证</li>
-				<li>学生证</li>
-				<li>港澳通行证</li>
+				<li>
+					<span class="item-check-btn">
+						<svg class="icon icon-ok"><use></use></svg>
+					</span>
+					<span>身份证</span>
+				</li>
+				<li><span class="item-check-btn">
+						<svg class="icon icon-ok"><use></use></svg>
+					</span>
+					<span>护照</span></li>
+				<li><span class="item-check-btn">
+						<svg class="icon icon-ok"><use></use></svg>
+					</span>
+					<span>军官证</span></li>
+				<li><span class="item-check-btn">
+						<svg class="icon icon-ok"><use></use></svg>
+					</span>
+					<span>学生证</span></li>
+				<li><span class="item-check-btn">
+						<svg class="icon icon-ok"><use></use></svg>
+					</span>
+					<span>港澳通行证</span></li>
 			</ul>
 			<div class="usertext">
-				<input type="number" placeholder="请输入证件号码">
+				<input type="text" placeholder="请输入证件号码">
 			</div>
 			<div class="usertext">
-				<input type="mail" placeholder="请输入邮箱">
+				<input type="text" placeholder="请输入邮箱">
 			</div>
 			<div class="sub">
 				<input type="button" value="提交"/>
@@ -42,22 +61,33 @@
 		    	
 		    }
 	  	},
+	  	methods:{
+	  		
+	  	}
 	}
 </script>
 
 <style scoped>
 	@import '../../styles/usertext.css';
-	.improve h4{
+	form{
+		margin-top: 2rem;
+	}
+	.usertext span{
 		font-size: 1rem;
-		font-weight: normal;
-		margin: 1.2rem 1rem 1.2rem 1rem;
+		color: #333;
+		padding-left: 1.2rem;
+	}
+	.improve ul{
+		margin-bottom: 0.5rem;
+		margin: 0 1rem 1.2rem 1rem;
 	}
 	.improve ul li{
-		width: 30%;
-		display: inline-block;
-		text-align: center;
-		font-size: 1rem;
-		color: #666;
+	    width: 32%;
+	    display: inline-block;
+	    text-align: left;
+	    font-size: 1rem;
+	    color: #666;
+	    padding-bottom: 0.5rem;
 	}
 	.usertext{margin: 0 1rem 1.2rem 1rem;}
 </style>

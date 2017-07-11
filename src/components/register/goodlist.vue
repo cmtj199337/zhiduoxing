@@ -3,14 +3,11 @@
 		<headerTip message="擅长" goBack="true"></headerTip>
 		<form action="" method="post">
 			<ul>
-				<li>
-					<span>文化教育</span>
-				</li>
-				<li>
-					<span>文化教育</span>
-				</li>
-				<li>
-					<span>文化教育</span>
+				<li v-for="item in list">
+					<span>{{item.name}}</span>
+					<span class="item-check-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+						<svg class="icon icon-ok"></svg>
+					</span>
 				</li>
 			</ul>
 			<div class="sub">
@@ -30,9 +27,31 @@
 	  	},
 	 	data () {
 		    return {
-		    
+		    	list:[]
 		    }
 	  	},
+	  	mounted(){
+	  		this.$nextTick(function(){
+	  			this.listview();
+	  		})
+	  	},
+	  	methods:{
+	  		listview(){
+	  			this.$http.get('http://localhost:3000/list').then( response =>{
+	  				let result = response.body;
+	  				this.list = result;
+	  			})
+	  		},
+	  		checkFlag(item){
+	  			if(typeof item.checked == 'undefined'){
+	  				this.$set(item,'checked',true);
+	  			}else{
+	  				//最多选中3项。。。
+	  				//
+	  				item.checked = !item.checked;
+	  			}
+	  		}
+	  	}
 	}
 </script>
 
@@ -59,6 +78,9 @@
 	.goodlist li input{
 		vertical-align: sub;
 		float: right;
+	}
+	.item-check-btn {
+	    float: right;
 	}
 
 </style>

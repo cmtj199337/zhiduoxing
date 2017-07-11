@@ -1,10 +1,7 @@
 <template>
     <header id='head_top'>
         <div class='tip'>
-            <span>
-                <img src="./back.png" alt="">
-            </span>
-            <p>{{message}}</p>
+            <p><span><img src="./back.png"></span>{{message}}</p>
         </div>
     </header>
 </template>
@@ -33,17 +30,15 @@
 }
 .tip{
     width: 96%;
-    margin:0 auto;
-    height: 2rem;
-    line-height: 2rem;
+    margin:0.5rem auto;
     position: relative;
 }
 .tip span{
-    width: 2rem;
+    width: 0.7rem;
     display: inline-block;
     vertical-align: middle;
     position: absolute;
-    left: 0;
+    left: 0.5rem;
 }
 .tip span img{
     width: 100%;
@@ -51,6 +46,5 @@
 .tip p{
     vertical-align: middle;
     line-height: 1;
-    display: inline-block;
 }
 </style>

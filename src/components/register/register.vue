@@ -1,7 +1,17 @@
 <template>
 	<div class="register">
-		<router-link to="iregister">个人注册</router-link>
-		<router-link to="tregister">团队注册</router-link>
+		<img src="../../../static/bg.png">
+		<div class="fix">
+			<router-link class="ire" to="iregister">
+				<img src="./ire.png">
+				<span>个人注册</span>
+			</router-link>
+			<router-link class="tre" to="tregister">
+				<img src="./tre.png">
+				<span>团队注册</span>
+			</router-link>
+		</div>
+		<p>欢迎加入志多星</p>
 	</div>
 </template>
 
@@ -17,7 +27,36 @@
 </script>
 
 <style scoped>
-	.register a{
-		
+	.fix{
+		width: 80%;
+		position: absolute;
+		top: 30%;
+		right: 0;left: 0;
+		margin: auto;
+		display: flex;
+	}
+	.register{
+		position: relative;
+	}
+	.register p{
+		position: absolute;
+		font-size: 1.2rem;
+		color: #fff;
+		bottom: 15%;
+		right: 0;left: 0;
+		text-align: center;
+	}
+	.fix a{
+		width: 50%;
+		text-align: center;
+		display: inline-block;
+	}
+	.fix a img{
+		width: 50%;
+		margin:0 auto 0.5rem auto;
+	}
+	.fix a span{
+		font-size: 1.2rem;
+		color: #fff;
 	}
 </style>
