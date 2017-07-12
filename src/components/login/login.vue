@@ -16,6 +16,9 @@
 			<div class="sub">
 				<input type="button" @click="isLogin" value="登录"/>
 			</div>
+			<!-- index页面入口 -->
+			<router-link to="index" style="margin:1rem;display:block">登录</router-link>
+			
 		</form>
 		<div class="link">
 			<router-link to="register" class="regis">点此注册</router-link>
@@ -41,8 +44,7 @@
 		      	error:'',
 		      	checked:false
 		    }
-	  	},
-	  	
+	  	}, 	
 	  	computed:{
 	  		user () {
 	  			return this.$store.state.user
