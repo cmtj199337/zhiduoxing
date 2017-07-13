@@ -3,9 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-
-//创建路由实例并配置路由映射
-//path：'*'，redirect:'/home'    重定向到path是/home的映射
 const router = new Router({
 	routes:[
 		{
@@ -66,9 +63,6 @@ const router = new Router({
 		//index 
 		{
 			path: '/index',
-			// meta:{
-			// 	requireAuth: true,
-			// },
 			component:require('../components/index/index.vue')
 		}
 	]
