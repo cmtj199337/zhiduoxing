@@ -5,9 +5,9 @@
 			<div class="number"><img src="./logo.png">5000人</div>
 		</div>
 		<swipe v-model="index" style="text-align: center;">
-		  <swipe-item><img src="../../../static/banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="../../../static/banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="../../../static/banner.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
 		</swipe>
 		<div class="classify clearfix">
 			<input class="search" type="text" placeholder="搜索" align="center">
@@ -43,6 +43,47 @@
 				<li>
 					<img src="./1.png" alt="">
 					<span>服务中心</span>
+				</li>
+			</ul>
+		</div>
+		<div class="shoplist title">
+			<h5><i></i>猜你喜欢<span>更多</span></h5>
+			<ul>
+				<li>
+					<img class="shop" src="/static/list1.png">
+					<p>志愿者短T</p>
+					<p><img class="star" src="./star.png"><span>300</span></p>
+				</li>
+				<li>
+					<img src="/static/list1.png">
+					<p>环保帆布包</p>
+					<span></span>
+				</li>
+				<li>
+					<img src="/static/list1.png">
+					<p>手帐本</p>
+					<span></span>
+				</li>
+			</ul>
+		</div>
+		<div class="article title">
+			<h5><i></i>发现精彩<span>更多</span></h5>
+			<ul>
+				<li>
+					<div class="picture"><img src="/static/article1.png"></div>
+					<div class="text">
+						<h6>高原上的藏区小学</h6>
+						<span>17/02/05</span>
+						<p>四川甘孜州岛稻城县地处青藏高原东南部，全县以藏族为先啊放假啊舒服</p>
+					</div>
+				</li>
+				<li>
+					<div class="picture"><img src="/static/article2.png"></div>
+					<div class="text">
+						<h6>在自己头上按了一根天线</h6>
+						<span>17/02/05</span>
+						<p>四川甘孜州岛稻城县地处青藏高原东南部，全县以藏族为先啊放假啊舒服</p>
+					</div>
 				</li>
 			</ul>
 		</div>
@@ -103,8 +144,12 @@
 	}
 	.classify{
 		width: 88%;
-		margin: 0 auto;
+		margin: -0.8rem auto 0 auto;
 		text-align: center;
+		background: #fff;
+		position: relative;
+		border-radius: 0.3rem;
+		box-shadow:0px 5px 10px #ebeaea; 
 	}
 	.classify ul li{
 		width: 25%;
@@ -119,12 +164,101 @@
 	.search{
 	    width: 80%;
 	    border: 0; 
-	    margin: 0 auto;
+	    margin: 0.5rem auto;
 	    height: 2.5rem;
 	    font-size: 1rem;
+	    text-align: center;
+	    color: #C9C9C9;
 	}
 	.search::-webkit-input-placeholder{
 		color: #C9C9C9;
 		text-align: center;
+	}
+	.shoplist{
+		width: 100%;
+		margin-top:2rem; 
+	}
+	.title h5{
+		font-size: 1rem;
+		line-height: 1;
+		font-weight: normal;
+	}
+	.title h5 i{
+		width: 0.5rem;
+		height: 0.9rem;
+		background: #43B7B6;
+		display: inline-block;
+		margin-right: 0.4rem;
+	}
+	.title h5 span{
+		font-weight: normal;
+		float: right;
+		color: #43B7B6;
+		padding-right: 1rem
+	}
+	.shoplist ul{
+		display: flex;
+		padding: 1rem 0;
+	}
+	.shoplist ul li{
+		width: 33.33%;
+	}
+	.shoplist ul li p{
+		font-size: 0.85rem;
+		text-align: center;
+		margin-top: 0.3rem;
+	}
+	.star{
+		width: 1rem;
+		display: inline-block;
+		padding-right: 0.5rem;
+		vertical-align: text-bottom;
+	}
+	.shoplist ul li span{
+		font-size: 0.85rem;
+	}
+	.article{
+
+	}
+	.article ul{
+		
+	}
+	.article ul li{
+		display: flex;
+		padding: 1rem;
+		border-bottom: 1px solid #E5E5E5;
+	}
+	.picture{
+		width: 40%;
+		padding-right: 0.5rem;
+	}
+	.text{
+		width: 60%;
+	}
+	.text h6{
+		width: 100%;
+		font-size: 1.1rem;
+		font-weight: normal;
+		line-height: 1;
+		overflow: hidden;
+		white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+	.text span{
+		font-size: 0.85rem;
+		color: #999;
+		display: inline-block;
+		padding: 0.5rem 0;
+		line-height: 1;
+	}
+	.text p{
+		font-size: 0.85rem;
+		color: #999;
+		line-height: 1.5;
+	    display: -webkit-box;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    -webkit-line-clamp: 2;
+	    -webkit-box-orient: vertical;
 	}
 </style>

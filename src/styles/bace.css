@@ -12,7 +12,7 @@ li{list-style: none;}
 img{border:none;display:block;width: 100%;}
 .clearfix{clear:both;display: block;overflow: hidden;}
 html{height: 100%;}
-body{height: 100%;font-size: 0.8rem;font-family: Arial,"微软雅黑";overflow: hidden;position: relative;box-sizing: border-box;
+body{height: 100%;font-size: 0.8rem;font-family: Arial,"微软雅黑";position: relative;box-sizing: border-box;
     -webkit-box-sizing: border-box;max-width: 720px;margin: 0 auto;}
 *{-webkit-tap-highlight-color: transparent;margin:0;padding:0;}
 input:focus{outline: none;}
