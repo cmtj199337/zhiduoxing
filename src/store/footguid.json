@@ -1,0 +1,27 @@
+{
+	"list": [
+		{
+			"id" : 1,
+			"path": "/index",
+			"src": "./static/footicon/shouye1.png",
+			"checksrc":"./static/footicon/shouye2.png",
+			"title": "首页"
+		},
+		{
+			
+			"id" : 2,
+			"path": "/index",
+			"src": "./static/footicon/qiandaodaka1.png",
+			"checksrc":"./static/footicon/qiandaodaka2.png",
+			"title": "签到打卡"
+		},
+		{
+			
+			"id" : 3,
+			"path": "/index",
+			"src": "./static/footicon/geren1.png",
+			"checksrc":"./static/footicon/geren2.png",
+			"title": "个人中心"
+		}
+	]	
+}

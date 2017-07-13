@@ -64,7 +64,17 @@ const router = new Router({
 		{
 			path: '/index',
 			component:require('../components/index/index.vue')
-		}
+		},
+		//签到打卡
+		{
+			path: '/scan',
+			component:require('../components/scan/scan.vue')
+		},
+		//个人中心
+		{
+			path: '/profile',
+			component:require('../components/profile/profile.vue')
+		},
 	]
 })
 

@@ -1,5 +1,19 @@
 接口文档
 
+common
+
+foot
+请求参数：图片路径，选中图片路径，路由path，标题
+
+
+0.首页
+请求参数：banner1,图标分类，banner2，商品列表，文章列表
+banner1：src
+banner2 :src
+图标分类(iconlist)：title,url
+商品列表(goodslist)：url,goodsname,goodsmoney
+文章列表(article)：url,title,date,section
+
 1.登录
 请求参数：用户名，密码，（用户名）加密后的值
 响应值：result，code，msg，objects
@@ -10,3 +24,4 @@
 
 3.个人注册
 1、获取验证码接口   2、获取擅长列表接口  3、注册接口  4、完善个人资料接口  5、获取证件类型接口
+

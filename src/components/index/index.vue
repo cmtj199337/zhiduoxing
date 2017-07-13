@@ -10,7 +10,7 @@
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
 		</swipe>
 		<div class="classify clearfix">
-			<input class="search" type="text" placeholder="搜索" align="center">
+			<input class="search" type="search" placeholder="搜索" align="center">
 			<ul>
 				<li>
 					<img src="./7.png" alt="">
@@ -87,16 +87,20 @@
 				</li>
 			</ul>
 		</div>
+		<foot-bar></foot-bar>
 	</div>
 </template>
 
 <script>
 	import { Swipe, SwipeItem } from 'c-swipe';
+	import footBar from '../common/footer/footer.vue'
+
 	export default {
 	  	name: 'index',
 	  	components:{
 	  		Swipe,
-	  		SwipeItem
+	  		SwipeItem,
+	  		footBar
 	  	},
 	 	data () {
 		    return {
@@ -113,6 +117,7 @@
 	@import '../../styles/swipe.css';
 	.index{
 		position: relative;
+		padding-bottom: 15%;
 	}
 	.headerBar{
 		position: absolute;
