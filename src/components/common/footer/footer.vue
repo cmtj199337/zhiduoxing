@@ -47,6 +47,7 @@
 <style scoped>
     .foot{
         width: 100%;
+        max-width: 720px;
         padding: 0.3rem 0;
         position: fixed;
         bottom: 0;

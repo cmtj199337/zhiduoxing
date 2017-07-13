@@ -57,12 +57,12 @@
 				<li>
 					<img src="/static/list1.png">
 					<p>环保帆布包</p>
-					<span></span>
+					<p><img class="star" src="./star.png"><span>300</span></p>
 				</li>
 				<li>
 					<img src="/static/list1.png">
 					<p>手帐本</p>
-					<span></span>
+					<p><img class="star" src="./star.png"><span>300</span></p>
 				</li>
 			</ul>
 		</div>
@@ -204,9 +204,10 @@
 	.shoplist ul{
 		display: flex;
 		padding: 1rem 0;
+		justify-content: space-between;
 	}
 	.shoplist ul li{
-		width: 33.33%;
+		width: 30%;
 	}
 	.shoplist ul li p{
 		font-size: 0.85rem;

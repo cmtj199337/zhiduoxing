@@ -1,6 +1,6 @@
 <template>
 	<div class="register">
-		<img src="../../../static/bg.png">
+		<img src="/static/bg.png">
 		<div class="fix">
 			<router-link class="ire" to="iregister">
 				<img src="./ire.png">

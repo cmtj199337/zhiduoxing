@@ -52,6 +52,7 @@
 	  	},
 	  	methods:{
 	  		isLogin() {
+	  			//
 	  			this.$http.get('http://localhost:3000/users?username='+this.name+'&password='+this.pwd).then(res => {
 	  				if(res.body != null & res.body.length > 0){
                             this.$store.commit('isLogin',res.body[0]);
