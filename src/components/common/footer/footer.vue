@@ -61,10 +61,10 @@
         float: left;
     }
     .foot section img{
-        width: 33.33%;
+        width: 25%;
         margin: 0 auto;
     }
     .check{
-        color: #43B7B6;
+        color: #43B7B6 !important;
     }
 </style>

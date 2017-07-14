@@ -37,37 +37,37 @@
 			<section class="project">
 				<ul>
 					<li>
-						<img class="icon" src="./grzl@2x.png">
+						<img class="icon" src="./gere.png">
 						<span>个人资料</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
 					<li>
-						<img class="icon" src="./wdjt@2x.png">
+						<img class="icon" src="./jiat.png">
 						<span>我的家庭</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
 					<li>
-						<img class="icon" src="./wdxx@2x.png">
+						<img class="icon" src="./xx.png">
 						<span>我的消息</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
 					<li>
-						<img class="icon" src="./wdsc@2x.png">
+						<img class="icon" src="./sc.png">
 						<span>我的收藏</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
 					<li>
-						<img class="icon" src="./wdhk@2x.png">
+						<img class="icon" src="./hk.png">
 						<span>我的回馈</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
 					<li>
-						<img class="icon" src="./wdbd@2x.png">
+						<img class="icon" src="./bd.png">
 						<span>我的保单</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
 					<li>
-						<img class="icon" src="./fwzx@2x.png">
+						<img class="icon" src="./fuwu.png">
 						<span>服务中心</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
