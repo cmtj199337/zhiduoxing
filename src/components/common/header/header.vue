@@ -1,7 +1,7 @@
 <template>
     <header id='head_top'>
         <div class='tip'>
-            <p><span><img src="./back.png"></span>{{message}}</p>
+            <p><span @click="goBack"><img src="./back.png"></span>{{message}}</p>
         </div>
     </header>
 </template>
@@ -13,7 +13,12 @@
 
             }
         },
-        props: ['message', 'backUrl']
+        props: ['message'],
+        methods:{
+            goBack(){
+                this.$router.go(-1);
+            }
+        }
     }
 
 </script>
