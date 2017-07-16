@@ -23,7 +23,9 @@
 				<input type="text" placeholder="请输入昵称" /><br />
 			</div>
 			<div class="usertext right">
-				<router-link to="goodlist"><span>擅长<img src="./right.png"></span></router-link>
+				<router-link to="goodlist">
+					<span>擅长<img src="./right.png"></span>
+				</router-link>
 			</div>
 			<div class="usertext">
 				<input type="text" placeholder="请输入志愿口号" /><br />
