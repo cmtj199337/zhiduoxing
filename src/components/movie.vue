@@ -25,11 +25,13 @@
 			}
 		},
 		created:function () {
-			this.$http.get('/v2/movie/top250?count=10',{},{
-				headers: {
-
+			this.$http.get('/v2/movie/top250',{
+				params:{
+					count:5
 				},
-				emulateJSON:true
+				headers:{
+					token:'3298493ujfjn43jfmfksdf934'
+				}
 			}).then(res => {
 				console.log(res);
 				this.articles = res.data.subjects

@@ -29,7 +29,6 @@
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	import alertTip from '../../components/common/tools/alertTip.vue'
-	import api from '../../api/api.js'
 
 	export default {
 	  	name: 'login',
@@ -57,7 +56,19 @@
 	  	},
 	  	methods:{
 	  		isLogin() {
-	  			this.$http.get('/movie/top250?count=10').then(res => {
+	  			if(!this.name || !this.pwd){
+	  				this.showAlert = true
+                    this.alertText = '用户名密码不能为空'
+                    return
+	  			}
+	  			this.$http.post('http://localhost:3000/users',{
+	  				username:this.name,
+	  				password:this.pwd
+	  			},{
+	  				headers:{
+	  					access_token:'fsfsaf'
+	  				}
+	  			}).then(res => {
 	  				if(res.body != null & res.body.length > 0){
                             this.$store.commit('isLogin',res.body[0]);
                             // localStorage.setItem(this.name, this.pwd)
