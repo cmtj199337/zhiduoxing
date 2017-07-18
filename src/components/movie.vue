@@ -15,7 +15,7 @@
 </template>
 
 <script>
-	
+	import api from '../api/api.js'
 	export default{
 		name:'movie',
 		data(){
@@ -25,7 +25,7 @@
 			}
 		},
 		created:function () {
-			this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10',{},{
+			this.$http.get('/v2/movie/top250?count=10',{},{
 				headers: {
 
 				},

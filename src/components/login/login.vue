@@ -4,7 +4,7 @@
 		<form action="" method="post">
 			<div class="usertext">
 				<i class="s-icon"><img src="./phone.png"></i>
-				<input type="tel" placeholder="用户名/手机号/身份证号" maxlength="11" v-model="name" />
+				<input type="tel" placeholder="用户名/手机号/身份证号" v-model="name" />
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./lock.png"></i>
@@ -16,25 +16,26 @@
 			<div class="sub">
 				<input type="button" @click="isLogin" value="登录"/>
 			</div>
-			<!-- index页面入口 -->
-			<router-link to="index" style="margin:1rem;display:block">登录</router-link>
-			
 		</form>
 		<div class="link">
 			<router-link to="register" class="regis">点此注册</router-link>
 			<span>|</span>
 			<router-link to="forgetpass" class="forget">忘记密码</router-link>
 		</div>
+		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import alertTip from '../../components/common/tools/alertTip.vue'
+	import api from '../../api/api.js'
 
 	export default {
 	  	name: 'login',
 	  	components:{
-	  		headerTip
+	  		headerTip,
+	  		alertTip
 	  	},
 
 	 	data () {
@@ -42,7 +43,11 @@
 		      	name:'',
 		      	pwd:'',
 		      	error:'',
-		      	checked:false
+		      	checked:false,
+		      	showAlert: false, //显示提示组件
+                alertText: null, //提示的内容
+                userType:''
+
 		    }
 	  	}, 	
 	  	computed:{
@@ -52,8 +57,7 @@
 	  	},
 	  	methods:{
 	  		isLogin() {
-	  			//
-	  			this.$http.get('http://localhost:3000/users?username='+this.name+'&password='+this.pwd).then(res => {
+	  			this.$http.get('/movie/top250?count=10').then(res => {
 	  				if(res.body != null & res.body.length > 0){
                             this.$store.commit('isLogin',res.body[0]);
                             // localStorage.setItem(this.name, this.pwd)
@@ -61,12 +65,18 @@
                             this.pwd= ''
                             this.$router.push({ path: 'index' })
                         }else{
-                            alert('请输入正确的用户名和密码！！！');
+                            // alert('请输入正确的用户名和密码！！！');
+                            this.showAlert = true
+                            this.alertText = '用户名不正确'
                             this.name=''
                             this.pwd= ''
+                            
                         }
 	  			}).then((error)=> this.error = error)
-	  		}
+	  		},
+	  		closeTip(){
+                this.showAlert = false;
+            }
 	  	}
 	}
 </script>

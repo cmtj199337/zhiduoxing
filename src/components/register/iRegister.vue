@@ -37,6 +37,7 @@
 				<input type="button" value="确认提交" @click="confirm"/>
 			</div>
 		</form>
+		
 		<!-- 遮罩、弹框 -->
 		<div class="overlay" v-show="isConfirm"></div>
 		<div class="popup" v-bind:class="{'show':isConfirm}">
@@ -46,12 +47,32 @@
 				<a href="javascript:;" @click="isConfirm = false">否</a>
 			</div>
 		</div>
+		<div class="weui-cells weui-cells_form" id="uploader">
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <div class="weui-uploader">
+	          	<div class="weui-uploader__hd">
+                  <p class="weui-uploader__title">图片上传</p>
+                  <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
+                </div>
+	            <div class="weui-uploader__bd">
+	              <ul class="weui-uploader__files" id="uploaderFiles" @click="handleClickUploadList"></ul>
+	              <div class="weui-uploader__input-box">
+	                <input name="file" id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple=""/>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 	</div>
 </template>
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	import TimerBtn from '../common/tools/countdown.vue'
+	import weui from '../../../static/js/weui.min.js'
+	import $ from 'jquery'
 
 	export default {
 	  	name: 'iRegister',
@@ -61,8 +82,28 @@
 	  	},
 	 	data () {
 		    return {
-		    	isConfirm:false
+		    	isConfirm:false,
+		    	uploadCount:0,//初始化上传图片数量
+		    	uploadCountDom:null,
+		    	uploadList:[],
+		    	successImgList:[],
+		    	uploadToken:''
+
 		    }
+	  	},
+	  	mounted(){
+	  		uploadCountDom = document.getElementById('uploadCount')
+	  		weui.uploader('#uploader',{
+	  			url:'',
+	  			auto:false,
+	  			type:'file',
+	  			fileVal:'file',
+	  			compress:{
+	  				width:1600,
+	  				height:1600,
+	  				quality:0.8
+	  			}
+	  		})
 	  	},
 	  	methods:{
 	  		confirm() {
@@ -77,7 +118,91 @@
 	                    this.$refs.timerbtn.stop(); //停止倒计时
 	                }
 	            });
-     		}
+     		},
+     		onBeforeQueued(files){
+     			if(['image/jpg','image/jpeg','image/png','image/gif'].indexOf(this.type)<0){
+     				weui.alert('请上传图片')
+     				return false
+     			}
+     			if(this.size > 10*1024*1024){
+     				weui.alert('请上传不超过10M的图片')
+     				return false
+     			}
+     			if(files.length > 5){
+     				weui.alert('最多只能上传5张图片')
+     				return false
+     			}
+     			if(uploadCount+1 > 5){
+     				weui.alert('最多只能上传5张图片')
+     				return false
+     			}
+     			++uploadCount
+     			uploadCountDom.innerHTML = uploadCount
+     		},
+     		onQueued(){
+     			uploadList.push(this)
+
+     			let file = this
+     			API.getImageToken().then(response=>{
+     				uploadToken = response.token
+     				console.log('uploadImg----请求token----'+uploadToken)
+     				file.upload()
+     			})
+     		},
+     		onBeforeSend(data,headers){
+     			console.log("------onBeforeSend------"+uploadToken)
+     			$.extend(data,{token:uploadToken})
+     		},
+     		onProgress(procent){
+     			console.log(this,procent)
+     		},
+     		onSuccess(ret){
+     			console.log('---onSuccess---',this,ret)
+     			successImgList.push({id:this.id,key:ret.key})
+     			console.log('返回成功的图片集合>>>%s',JSON.stringify(successImgList))
+     		},
+     		onError(err){
+     			console.log(this,err)
+     		},
+     		// handleClickUploadList(e){
+     		// 	let target = e.target
+     		// 	while (!target.classList.contains('weui-uploader__files') && target){
+     		// 		target = target.parentNode
+     		// 	}
+     		// 	if(!target) return
+
+     		// 	var url = target.getAttribute('style') || ''
+     		// 	var id = target.getAttribute('data-id')
+     		// 	if(url){
+     		// 		url = url.match(/url\((.*?)\)/)[1].replace(/"/g,'')
+     		// 	}
+     		// 	var gallery = weui.gallery(url,{
+     		// 		className:'custom-name',
+     		// 		onDelete(){
+     		// 			weui.confirm('确定删除该图片？',function(){
+     		// 				--uploadCount
+     		// 				uploadCountDom.innerHTML = uploadCount
+     		// 				for(let i = 0,i<5,++i){
+     		// 					var file = uploadList[i]
+     		// 					if(file.id+'' === id){
+     		// 						uploadList.splice(i,1)
+     		// 						file.stop()
+     		// 						break
+     		// 					}
+     		// 				}
+     		// 				for(let i =0,len = 5,i<len,++i){
+     		// 					var item = successImgList[i]
+     		// 					if(item.id+''===id){
+     		// 						successImgList.splice(i,1)
+     		// 						break
+     		// 					}
+     		// 				}
+     		// 				target.remove()
+     		// 				gallery.hide()
+     		// 			})
+     		// 		}
+     		// 	})
+     		// }
 	  	}
 	}
 </script>
