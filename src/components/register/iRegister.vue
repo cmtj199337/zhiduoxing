@@ -23,7 +23,7 @@
 				<input type="text" placeholder="请输入昵称" /><br />
 			</div>
 			<div class="usertext right">
-				<router-link to="/iregister/goodlist">
+				<router-link to="goodlist">
 					<span>擅长<img src="./right.png"></span>
 				</router-link>
 			</div>
@@ -53,7 +53,6 @@
 				<a href="javascript:;" @click="isConfirm = false">否</a>
 			</div>
 		</div>
-		<router-view></router-view>
 	</div>
 </template>
 
@@ -74,11 +73,12 @@
 		    	isConfirm:false,
 		    	items:[{
 		            state: false
-		        }]
+		        }],
+		        value2:[]
 		    }
 	  	},
 	  	mounted(){
-	  		
+	  		this.getseesion()
 	  	},
 	  	methods:{
 	  		confirm() {
@@ -96,6 +96,14 @@
      		},
      		alocked(item) {
                 item.state = !item.state;
+            },
+            getseesion(){
+            	let value = sessionStorage.getItem("check");
+            	let value1 = value.split(',');
+            	let value2 = value1.slice(0,-1)
+            	//删除最后一个空元素得到值
+            	console.log(value2)
+            	return value2
             }
 	  	}
 	}

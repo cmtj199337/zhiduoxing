@@ -32,6 +32,9 @@
 	  			this.listview();
 	  		})
 	  	},
+	  	computed:{
+
+	  	},
 	  	methods:{
 	  		listview(){
 	  			this.$http.get('http://localhost:3000/list').then( response =>{
@@ -42,13 +45,19 @@
 	  		checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
+
+	  				
+	  				
 	  				//不管创建多少，点击第三个的时候将选中的三项数据传到上一页
-	  				let count = 0;
+	  				let count = 0,name='';
 	  				this.list.forEach((item,index) => {
 	  					if(item.checked == true){
+	  						//用逗号拼接字符串保存到sessionStorage
+	  						name += item.name+','
 	  						count++
 	  					}
 	  				})
+	  				sessionStorage.setItem("check", name);
 	  				if(count>=3){
 	  					// item.checked = !item.checked;
 	  					this.$router.push({path:'/iregister'})
@@ -56,6 +65,9 @@
 	  			}else{
 	  				item.checked = !item.checked;
 	  			}
+	  		},
+	  		choose(){
+	  			console.log(list)
 	  		}
 	  	}
 	}
