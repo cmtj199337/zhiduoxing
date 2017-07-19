@@ -4,7 +4,7 @@
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
 		<form action="" method="post">
 			<div class="usertext userphoto">
-				<a href="javascript:;"><span>头像上传</span><img src="./picture.png"></a>
+				<a href="javascript:;"><span>头像上传</span><upload-img v-model="target"></upload-img></a>
 			</div>
 			<div class="usertext">
 				<input type="tel" placeholder="请输入手机号" maxlength="11" />
@@ -73,18 +73,20 @@
 	import TimerBtn from '../common/tools/countdown.vue'
 	import weui from '../../../static/js/weui.min.js'
 	import $ from 'jquery'
+	import UploadImg from '../../components/common/tools/uploadImg.vue'
 
 	export default {
 	  	name: 'iRegister',
 	  	components:{
 	  		headerTip,
-	  		TimerBtn
+	  		TimerBtn,
+	  		UploadImg
 	  	},
 	 	data () {
 		    return {
 		    	isConfirm:false,
 		    	uploadCount:0,//初始化上传图片数量
-		    	uploadCountDom:null,
+		    	uploadCountDom:null, //初始化显示上传图片数量的dom元素
 		    	uploadList:[],
 		    	successImgList:[],
 		    	uploadToken:''
@@ -164,45 +166,45 @@
      		onError(err){
      			console.log(this,err)
      		},
-     		// handleClickUploadList(e){
-     		// 	let target = e.target
-     		// 	while (!target.classList.contains('weui-uploader__files') && target){
-     		// 		target = target.parentNode
-     		// 	}
-     		// 	if(!target) return
+     		handleClickUploadList(e){
+     			var target = e.target
+     			while (!target.classList.contains('weui-uploader__files') && target){
+     				target = target.parentNode
+     			}
+     			if(!target) return
 
-     		// 	var url = target.getAttribute('style') || ''
-     		// 	var id = target.getAttribute('data-id')
-     		// 	if(url){
-     		// 		url = url.match(/url\((.*?)\)/)[1].replace(/"/g,'')
-     		// 	}
-     		// 	var gallery = weui.gallery(url,{
-     		// 		className:'custom-name',
-     		// 		onDelete(){
-     		// 			weui.confirm('确定删除该图片？',function(){
-     		// 				--uploadCount
-     		// 				uploadCountDom.innerHTML = uploadCount
-     		// 				for(let i = 0,i<5,++i){
-     		// 					var file = uploadList[i]
-     		// 					if(file.id+'' === id){
-     		// 						uploadList.splice(i,1)
-     		// 						file.stop()
-     		// 						break
-     		// 					}
-     		// 				}
-     		// 				for(let i =0,len = 5,i<len,++i){
-     		// 					var item = successImgList[i]
-     		// 					if(item.id+''===id){
-     		// 						successImgList.splice(i,1)
-     		// 						break
-     		// 					}
-     		// 				}
-     		// 				target.remove()
-     		// 				gallery.hide()
-     		// 			})
-     		// 		}
-     		// 	})
-     		// }
+     			var url = target.getAttribute('style') || ''
+     			var id = target.getAttribute('data-id')
+     			if(url){
+     				url = url.match(/url\((.*?)\)/)[1].replace(/"/g,'')
+     			}
+     			var gallery = weui.gallery(url,{
+     				className:'custom-name',
+     				onDelete(){
+     					weui.confirm('确定删除该图片？',function(){
+     						--uploadCount
+     						uploadCountDom.innerHTML = uploadCount
+     						for(var i = 0, len = uploadList.length;i<len; ++i){
+     							var file = uploadList[i]
+     							if(file.id+'' === id){
+     								uploadList.splice(i,1)
+     								file.stop()
+     								break
+     							}
+     						}
+     						for(var i = 0,len = uploadList.length; i<len; ++i){
+     							var item = successImgList[i]
+     							if(item.id+'' === id){
+     								successImgList.splice(i,1)
+     								break
+     							}
+     						}
+     						target.remove()
+     						gallery.hide()
+     					})
+     				}
+     			})
+     		}
 	  	}
 	}
 </script>

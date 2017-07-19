@@ -61,28 +61,24 @@
                     this.alertText = '用户名密码不能为空'
                     return
 	  			}
-	  			this.$http.post('http://localhost:3000/users',{
-	  				username:this.name,
-	  				password:this.pwd
+	  			this.$http.post('/api/public/login',{
+	  				'userId':this.name,
+	  				'password':this.pwd,
+	  				'userType':0
 	  			},{
-	  				headers:{
-	  					access_token:'fsfsaf'
+	  				emulateJSON:true
+	  			}).then(response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.showAlert = true
+                        this.alertText = '登录成功'
+                        this.$store.commit('isLogin',response.body[0]);
+                        this.$router.push({ path: 'index' })
+	  				}else{
+	  					this.showAlert = true
+                        this.alertText = '用户名或密码错误'
+                        this.pwd = ''
 	  				}
-	  			}).then(res => {
-	  				if(res.body != null & res.body.length > 0){
-                            this.$store.commit('isLogin',res.body[0]);
-                            // localStorage.setItem(this.name, this.pwd)
-                            this.name=''
-                            this.pwd= ''
-                            this.$router.push({ path: 'index' })
-                        }else{
-                            // alert('请输入正确的用户名和密码！！！');
-                            this.showAlert = true
-                            this.alertText = '用户名不正确'
-                            this.name=''
-                            this.pwd= ''
-                            
-                        }
 	  			}).then((error)=> this.error = error)
 	  		},
 	  		closeTip(){
