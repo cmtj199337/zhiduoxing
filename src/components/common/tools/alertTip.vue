@@ -102,7 +102,7 @@
         color: #fff;
         font-weight: bold;
         padding: 0.3rem 0;
-        background-color: #4cd964;
+        background-color: #43B7B6;
         width: 100%;
         text-align: center;
         line-height: 1.8rem;

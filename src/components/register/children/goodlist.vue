@@ -15,7 +15,7 @@
 </template>
 
 <script>
-	import headerTip from '../../components/common/header/header.vue'
+	import headerTip from '../../../components/common/header/header.vue'
 
 	export default {
 	  	name: 'goodlist',
@@ -62,7 +62,7 @@
 </script>
 
 <style scoped>
-	@import '../../styles/usertext.css';
+	@import '../../../styles/usertext.css';
 	.goodlist{
 		font-size: 1rem;
 	}

@@ -266,17 +266,10 @@
   <div class="img-inputer" :class="[themeClass, sizeClass, nhe ? 'nhe': '', ]" ref="box">
     <img src="./picture.png">
     <p class="img-inputer__placeholder">{{placeholder}}</p>
-
     <div class="img-inputer__preview-box" v-if="imgSelected">
       <img :src="dataUrl" class="img-inputer__preview-img">
     </div>
     <label :for="readonly ? '' : inputId" class="img-inputer__label"></label>
-    <!-- 图片或文件选择后鼠标移入的提示-->
-    <div class="img-inputer__mask" v-if="imgSelected && !noMask">
-      <p class="img-inputer__file-name">{{fileName}}</p>
-      <p class="img-inputer__change" v-if="readonly">{{readonlyTipText}}</p>
-      <p class="img-inputer__change" v-else>{{bottomText}}</p>
-    </div>
     <!-- input主体-->
     <input
         ref="inputer"

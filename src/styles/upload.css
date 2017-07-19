@@ -68,8 +68,12 @@ a[data-v-67836422] {
 	content:"\E624"
 }
 .img-inputer {
-	position:relative;
-	display:inline-block;
+	position:absolute;
+	right: 0;
+	display: inline-block;
+}
+.img-inputer img{
+	width: 4rem
 }
 .img-inputer--small {
 	width:160px;
@@ -112,7 +116,7 @@ a[data-v-67836422] {
 	bottom:0;
 	left:0;
 	right:0;
-	border-radius:5px;
+	border-radius:50%;
 	overflow:hidden;
 	background:#333
 }

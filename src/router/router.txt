@@ -1,34 +1,87 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import App from '../App'
 
-Vue.use(Router)
-
-
-//创建路由实例并配置路由映射
-//path：'*'，redirect:'/home'    重定向到path是/home的映射
-const router = new Router({
-	routes:[{
-		path: '*',redirect:'/hello'
-	},{
-		path: '/movie',component:require('../components/movie.vue')
-	},{
-		path: '/login',component:require('../components/login/login.vue')
-	},{
-		path: '/hello',component:require('../components/Hello.vue')
-	},{
-		path: '/forgetpass',component:require('../components/login/forgetpass.vue')
-	},{
-		path: '/main',
-			meta:{
-				//添加该字段，表示进入这个路由是需要登录的
-				requireAuth: true,
-			},
-		component:require('../components/main.vue')
-	},{
-		path: '/register',component:require('../components/register/register.vue')
-	}]
-})
-
-
-//输出router
-export default router
+const index = r => require.ensure([], () => r(require('../components/index/index.vue')), 'index')
+const agreement = r => require.ensure([], () => r(require('../components/common/Agreement.vue')), 'agreement')
+const movie = r => require.ensure([], () => r(require('../components/movie.vue')), 'movie')
+const login = r => require.ensure([], () => r(require('../components/login/login.vue')), 'login')
+const forgetpass = r => require.ensure([], () => r(require('../components/login/forgetpass.vue')), 'forgetpass')
+const register = r => require.ensure([], () => r(require('../components/register/register.vue')), 'register')
+const iregister = r => require.ensure([], () => r(require('../components/register/iRegister.vue')), 'iregister')
+const goodlist = r => require.ensure([], () => r(require('../components/register/children/goodlist.vue')), 'goodlist')
+const tregister = r => require.ensure([], () => r(require('../components/register/tRegister.vue')), 'tregister')
+const improve = r => require.ensure([], () => r(require('../components/register/improve.vue')), 'improve')
+const scan = r => require.ensure([], () => r(require('../components/scan/scan.vue')), 'scan')
+const profile = r => require.ensure([], () => r(require('../components/profile/profile.vue')), 'profile')
+const main = r => require.ensure([], () => r(require('../components/main.vue')), 'main')
+	export default [{
+			path: '*',
+			component:App,//椤跺眰璺敱锛屽搴攊ndex.html
+			children:[		//浜岀骇璺敱锛屽搴擜pp.vue
+				//鍦板潃涓虹┖鏃惰烦杞埌index.html
+				{
+					path:'',
+					redirect:'/index'
+				},
+				{
+					path:'/agreement',
+					component:agreement
+				},
+				{
+					path:'/movie',
+					component:movie
+				},
+				{
+					path:'/login',
+					component:login,
+					children:[
+						//蹇樿瀵嗙爜
+						{
+							path:'/forgetpass',
+							component:forgetpass
+						}
+					]
+				},
+				//娉ㄥ唽
+				{
+					path:'/register',
+					component:register,
+					children:[
+						//涓汉娉ㄥ唽
+						{
+							path:'/iregister',
+							component:iregister,
+							children:[
+								{
+									path:'/improve',
+									component:improve
+								},
+								{
+									path:'/goodlist',
+									component:improve
+								}
+							]
+						},
+						//鍥㈤槦娉ㄥ唽
+					]
+				},
+				{
+					path: '/main',
+					meta:{
+						//娣诲姞璇ュ瓧娈碉紝琛ㄧず杩涘叆杩欎釜璺敱鏄渶瑕佺櫥褰曠殑
+						requireAuth: true,
+					},
+					component:main
+				},
+				//绛惧埌鎵撳崱
+				{
+					path: '/scan',
+					component:scan
+				},
+				//涓汉涓績
+				{
+					path: '/profile',
+					component:profile
+				}
+			]
+			
+		}]

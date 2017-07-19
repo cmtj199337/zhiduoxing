@@ -48,7 +48,10 @@
                 userType:''
 
 		    }
-	  	}, 	
+	  	},
+	  	mounted(){
+	  		// this.isLogin()
+	  	},
 	  	computed:{
 	  		user () {
 	  			return this.$store.state.user
@@ -56,6 +59,12 @@
 	  	},
 	  	methods:{
 	  		isLogin() {
+	  			//检测缓存，有则跳转到index，没有跳转到登录页
+	  			// if(!this.getCookie('access_token')){
+	  			// 	this.$router.push({ path: 'login' })
+	  			// }else{
+	  			// 	this.$router.push({ path: 'index' })
+	  			// }
 	  			if(!this.name || !this.pwd){
 	  				this.showAlert = true
                     this.alertText = '用户名密码不能为空'
@@ -64,14 +73,17 @@
 	  			this.$http.post('/api/public/login',{
 	  				'userId':this.name,
 	  				'password':this.pwd,
-	  				'userType':0
+	  				'userType':0 
 	  			},{
 	  				emulateJSON:true
 	  			}).then(response => {
 	  				let res = response.data
+	  				let verify = res.data
 	  				if(res.result == 0){
-	  					this.showAlert = true
-                        this.alertText = '登录成功'
+	  					//设置缓存
+	  					let expireDays = 1000 * 60 * 60 * 24 * 15;
+               			this.setCookie('access_token', verify, expireDays);
+
                         this.$store.commit('isLogin',response.body[0]);
                         this.$router.push({ path: 'index' })
 	  				}else{
@@ -79,7 +91,11 @@
                         this.alertText = '用户名或密码错误'
                         this.pwd = ''
 	  				}
-	  			}).then((error)=> this.error = error)
+	  			}).then(
+	  				this.showAlert = true,
+	  				this.alertText = '接口异常',
+	  				this.pwd = ''
+	  			)
 	  		},
 	  		closeTip(){
                 this.showAlert = false;

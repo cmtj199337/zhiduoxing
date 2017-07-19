@@ -36,7 +36,7 @@
 					<span>港澳通行证</span></li>
 			</ul>
 			<div class="usertext">
-				<input type="text" placeholder="请输入证件号码">
+				<input type="text" placeholder="请输入证件号码" maxlength="18">
 			</div>
 			<div class="usertext">
 				<input type="text" placeholder="请输入邮箱">
