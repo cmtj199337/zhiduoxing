@@ -24,7 +24,7 @@
 			</div>
 			<div class="usertext right">
 				<router-link to="goodlist">
-					<span>擅长<span v-for="item in value2">{{item}}</span><img src="./right.png"></span>
+					<span class="good">擅长<span v-for="item in userinfo.goodSelect">{{item}}</span><img src="./right.png"></span>
 				</router-link>
 			</div>
 			<div class="usertext">
@@ -74,6 +74,7 @@
 		    	items:[{
 		            state: false
 		        }],
+		        
 		        userinfo:{
 		        	userPhoto:'',			//用户头像
 		        	phoneNumber:'',			//手机号
@@ -107,13 +108,19 @@
                 item.state = !item.state;
             },
             getseesion(){
+
+
             	let value = sessionStorage.getItem("check");
             	//删除拼接之间的逗号
-            	let value1 = value.split(',');
-            	//删除最后一个空元素得到值
-            	let value2 = value1.slice(0,-1)
+            	let value2
+            	if(value != null){
+            		let value1 = value.split(',');
+	            	//删除最后一个空元素得到值
+	            	value2 = value1.slice(0,-1)
+	            	
+            	}
+            	this.userinfo.goodSelect = value2
             	
-            	this.goodSelect = value2
             }
 	  	}
 	}
@@ -220,4 +227,7 @@
     	border-left: 1px solid #e5e5e5;
 	}
 	.show{display: block;}
+	.good span{
+		padding-left:1.5rem;
+	}
 </style>

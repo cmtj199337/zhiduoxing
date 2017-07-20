@@ -24,7 +24,7 @@
 	  	},
 	 	data () {
 		    return {
-		    	list:{}
+		    	list:[]
 		    }
 	  	},
 	  	mounted(){
@@ -40,35 +40,56 @@
 	  			this.$http.get('api/public/getCommonList/goodAt').then( response =>{
 	  				let res = response.data;
 	  				if(res.result == 0){
-	  					this.list = res.data
+	  					let c = []
+	  					let value = sessionStorage.getItem("check")
+	  					if(value != null){
+	  						let value1 = value.split(',')
+		            		let value2 = value1.slice(0,-1)
+
+			            	for(var i = 0;i<res.data.length;i++){
+			            		let oo = {'key':res.data[i].key,'value':res.data[i].value}
+			            		for (var j = 0;j<value2.length;j++){
+			            			if(res.data[i].value == value2[j]){
+			            				oo.checked = true
+			            			}
+			            		}
+			            		c[i] = oo
+			            	}
+			            	this.list = c
+	  					}else{
+	  						this.list = res.data
+	  					}
+	  					
 	  				}
-	  				
-	  			})
+	  			})		
 	  		},
 	  		checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
-	  				this.$set(item,'checked',true);
+	  				let count = 0;
+	  				this.list.forEach((item,index) => {
+	  					if(item.checked == true){
+	  						//用逗号拼接字符串保存到sessionStorage
+	  						count++
+	  					}
+	  				})
+	  				if(count>=2){
+	  					this.$router.push({path:'/iregister'})
+	  				} 
 
-	  				//不管创建多少，点击第三个的时候将选中的三项数据传到上一页
-	  				let count = 0,name='';
+	  				this.$set(item,'checked',true);
+	  				let name='';
 	  				this.list.forEach((item,index) => {
 	  					if(item.checked == true){
 	  						//用逗号拼接字符串保存到sessionStorage
 	  						name += item.value+','
-	  						count++
 	  					}
 	  				})
 	  				sessionStorage.setItem("check", name);
-	  				if(count>=3){
-	  					// item.checked = !item.checked;
-	  					this.$router.push({path:'/iregister'})
-	  				}
+	  				
 	  			}else{
+
 	  				item.checked = !item.checked;
 	  			}
-	  		},
-	  		choose(){
-	  			console.log(list)
 	  		}
 	  	}
 	}
