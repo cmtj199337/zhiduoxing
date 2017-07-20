@@ -4,7 +4,7 @@
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
 		<form action="" method="post" @submit.prevent="submit">
 			<div class="usertext userphoto">
-				<a href="javascript:;"><span>头像上传</span><upload-img></upload-img></a>
+				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>
 			<div class="usertext">
 				<input type="tel" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber" />
@@ -76,7 +76,7 @@
 		        }],
 		        
 		        userinfo:{
-		        	userPhoto:'',			//用户头像
+		        	userPhoto:[],			//用户头像
 		        	phoneNumber:'',			//手机号
 		        	verify:'',				//验证码
 		        	newPassword:'',			//新密码
