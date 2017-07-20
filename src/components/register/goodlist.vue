@@ -4,7 +4,7 @@
 		<form action="" method="post">
 			<ul>
 				<li v-for="(item,index) in list">
-					<span>{{item.name}}</span>
+					<span>{{item.value}}</span>
 					<span class="item-check-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
 						<svg class="icon icon-ok"></svg>
 					</span>
@@ -24,7 +24,7 @@
 	  	},
 	 	data () {
 		    return {
-		    	list:[]
+		    	list:{}
 		    }
 	  	},
 	  	mounted(){
@@ -37,23 +37,24 @@
 	  	},
 	  	methods:{
 	  		listview(){
-	  			this.$http.get('http://localhost:3000/list').then( response =>{
-	  				let result = response.body;
-	  				this.list = result;
+	  			this.$http.get('api/public/getCommonList/goodAt').then( response =>{
+	  				let res = response.data;
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  				}
+	  				
 	  			})
 	  		},
 	  		checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
 
-	  				
-	  				
 	  				//不管创建多少，点击第三个的时候将选中的三项数据传到上一页
 	  				let count = 0,name='';
 	  				this.list.forEach((item,index) => {
 	  					if(item.checked == true){
 	  						//用逗号拼接字符串保存到sessionStorage
-	  						name += item.name+','
+	  						name += item.value+','
 	  						count++
 	  					}
 	  				})

@@ -12,77 +12,33 @@
 		<div class="classify clearfix">
 			<input class="search" type="search" placeholder="搜索" align="center">
 			<ul>
-				<li>
-					<img src="./7.png" alt="">
-					<span>志愿团队</span>
-				</li>
-				<li>
-					<img src="./8.png" alt="">
-					<span>志愿项目</span>
-				</li>
-				<li>
-					<img src="./3.png" alt="">
-					<span>志愿保障</span>
-				</li>
-				<li>
-					<img src="./6.png" alt="">
-					<span>补录时长</span>
-				</li>
-				<li>
-					<img src="./5.png" alt="">
-					<span>志愿回馈</span>
-				</li>
-				<li>
-					<img src="./2.png" alt="">
-					<span>社区互动</span>
-				</li>
-				<li>
-					<img src="./4.png" alt="">
-					<span>志愿攻略</span>
-				</li>
-				<li>
-					<img src="./1.png" alt="">
-					<span>服务中心</span>
+				<li v-for="item in filtIcon">
+					<router-link :to="item.url">
+						<img :src="item.icon" alt="">
+						<span>{{item.name}}</span>
+					</router-link>
 				</li>
 			</ul>
 		</div>
 		<div class="shoplist title">
 			<h5><i></i>猜你喜欢<span>更多</span></h5>
 			<ul>
-				<li>
-					<img class="shop" src="/static/list1.png">
-					<p>志愿者短T</p>
-					<p><img class="star" src="./star.png"><span>300</span></p>
-				</li>
-				<li>
-					<img src="/static/list1.png">
-					<p>环保帆布包</p>
-					<p><img class="star" src="./star.png"><span>300</span></p>
-				</li>
-				<li>
-					<img src="/static/list1.png">
-					<p>手帐本</p>
-					<p><img class="star" src="./star.png"><span>300</span></p>
+				<li v-for="item in filtShop">
+					<img class="shop" :src="item.itemPicture">
+					<p>{{item.itemName}}</p>
+					<p><img class="star" src="./star.png"><span>{{item.itemPrice}}</span></p>
 				</li>
 			</ul>
 		</div>
 		<div class="article title">
 			<h5><i></i>发现精彩<span>更多</span></h5>
 			<ul>
-				<li>
+				<li v-for="item in filtArticle">
 					<div class="picture"><img src="/static/article1.png"></div>
 					<div class="text">
-						<h6>高原上的藏区小学</h6>
-						<span>17/02/05</span>
-						<p>四川甘孜州岛稻城县地处青藏高原东南部，全县以藏族为先啊放假啊舒服</p>
-					</div>
-				</li>
-				<li>
-					<div class="picture"><img src="/static/article2.png"></div>
-					<div class="text">
-						<h6>在自己头上按了一根天线</h6>
-						<span>17/02/05</span>
-						<p>四川甘孜州岛稻城县地处青藏高原东南部，全县以藏族为先啊放假啊舒服</p>
+						<h6>{{item.title}}</h6>
+						<span>{{item.creatTime}}</span>
+						<p>{{item.intro}}</p>
 					</div>
 				</li>
 			</ul>
@@ -105,10 +61,66 @@
 	 	data () {
 		    return {
 		    	index:0,
+		    	iconList:[],
+		    	shoplist:[],
+		    	article:[]
 		    }
 	  	},
+	  	mounted(){
+	  		this.showList()
+	  	},
+	  	computed:{
+		    filtIcon() {
+		      	return this.iconList.slice(0,8)
+		    },
+		    filtShop(){
+				return this.shoplist.slice(0,3)
+		    },
+		    filtArticle(){
+				return this.article.slice(0,2)
+		    }
+		},
 	  	methods:{
-	  		
+	  		showList(){
+	  			this.$http.get('/api/public/homePage').then(response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					let data = res.data
+	  					this.iconList = data.menu
+	  					this.shoplist = data.goods
+	  					this.article = data.strategy
+	  				}
+	  			})
+	  			this.justify_location()
+	  		},
+	  		justify_location(){
+		        if(navigator.geolocation) {
+		            // 支持
+		            console.log("支持地理位置接口");
+
+		            this.agree_obtain_location()
+		        } else {
+		            // 不支持
+		            console.log("不支持地理位置接口");
+		        }
+		    },
+		    agree_obtain_location(){
+		        var option = {
+		            enableHighAccuracy : true,
+		            timeout : Infinity,
+		            maximumAge : 0
+		        };
+
+		        navigator.geolocation.getCurrentPosition(this.geoSuccess,this.geoError,option);
+
+		    },
+		    geoSuccess(event) {
+		        console.log(event.coords.latitude + ', ' + event.coords.longitude);
+
+		    },
+		    geoError(event) {
+		        console.log("Error code " + event.code + ". " + event.message);
+		    }
 	  	}
 	}
 </script>
@@ -159,8 +171,10 @@
 	.classify ul li{
 		width: 25%;
 		float: left;
+		margin-bottom:0.5rem;
+	}
+	.classify ul li a{
 		color: #333;
-		margin-bottom:0.5rem; 
 	}
 	.classify ul li img{
 		width: 50%;

@@ -29,7 +29,7 @@
             }
         },
         mounted(){
-            this.showlist()
+            // this.showlist()
         },
         methods:{
             showlist(){

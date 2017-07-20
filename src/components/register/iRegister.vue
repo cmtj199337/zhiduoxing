@@ -2,33 +2,33 @@
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
-		<form action="" method="post">
+		<form action="" method="post" @submit.prevent="submit">
 			<div class="usertext userphoto">
 				<a href="javascript:;"><span>头像上传</span><upload-img></upload-img></a>
 			</div>
 			<div class="usertext">
-				<input type="tel" placeholder="请输入手机号" maxlength="11" />
+				<input type="tel" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber" />
 			</div>
 			<div class="usertext">
-				<input type="number" placeholder="请输入验证码" maxlength="11" />
+				<input type="number" placeholder="请输入验证码" maxlength="6" v-model="userinfo.verify" />
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
-				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" /><br />
+				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" v-model="userinfo.newPassword" /><br />
 			</div>
 			<div class="usertext">
-				<input type="password" placeholder="请确认新密码" /><br />
+				<input type="password" placeholder="请确认新密码" v-model="userinfo.reNewPassword" /><br />
 			</div>
 			<div class="usertext">
-				<input type="text" placeholder="请输入昵称" /><br />
+				<input type="text" placeholder="请输入昵称" v-model="userinfo.nickName" /><br />
 			</div>
 			<div class="usertext right">
 				<router-link to="goodlist">
-					<span>擅长<img src="./right.png"></span>
+					<span>擅长<span v-for="item in value2">{{item}}</span><img src="./right.png"></span>
 				</router-link>
 			</div>
 			<div class="usertext">
-				<input type="text" placeholder="请输入志愿口号" /><br />
+				<input type="text" placeholder="请输入志愿口号" v-model="userinfo.slogan" /><br />
 			</div>
 			<div class="read">
 				<span v-for="item in items">
@@ -74,7 +74,16 @@
 		    	items:[{
 		            state: false
 		        }],
-		        value2:[]
+		        userinfo:{
+		        	userPhoto:'',			//用户头像
+		        	phoneNumber:'',			//手机号
+		        	verify:'',				//验证码
+		        	newPassword:'',			//新密码
+		        	reNewPassword:'',		//重复新密码
+		        	nickName:'',			//昵称
+		        	goodSelect:[],			//擅长
+		        	slogan:''				//口号
+		        }
 		    }
 	  	},
 	  	mounted(){
@@ -99,11 +108,12 @@
             },
             getseesion(){
             	let value = sessionStorage.getItem("check");
+            	//删除拼接之间的逗号
             	let value1 = value.split(',');
-            	let value2 = value1.slice(0,-1)
             	//删除最后一个空元素得到值
-            	console.log(value2)
-            	return value2
+            	let value2 = value1.slice(0,-1)
+            	
+            	this.goodSelect = value2
             }
 	  	}
 	}

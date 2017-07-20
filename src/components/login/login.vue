@@ -91,11 +91,7 @@
                         this.alertText = '用户名或密码错误'
                         this.pwd = ''
 	  				}
-	  			}).then(
-	  				this.showAlert = true,
-	  				this.alertText = '接口异常',
-	  				this.pwd = ''
-	  			)
+	  			}).then(error => error = error)
 	  		},
 	  		closeTip(){
                 this.showAlert = false;
