@@ -49,16 +49,25 @@ const router = new Router({
 			component:require('../components/register/iRegister.vue')
 		},
 		{
-			path: '/tregister',
-			component:require('../components/register/tRegister.vue')
-		},
-		{
 			path: '/goodlist',
 			component:require('../components/register/goodlist.vue')
 		},
 		{
 			path: '/improve',
 			component:require('../components/register/improve.vue')
+		},
+		//团队注册
+		{
+			path: '/tregister',
+			component:require('../components/register/tRegister.vue')
+		},
+		{
+			path: '/tregisternext',
+			component:require('../components/register/tRegisternext.vue')
+		},
+		{
+			path: '/liaisonGroup',
+			component:require('../components/register/liaisonGroup.vue')
 		},
 		//index 
 		{
@@ -75,6 +84,74 @@ const router = new Router({
 			path: '/profile',
 			component:require('../components/profile/profile.vue')
 		},
+		{
+			path: '/personalDetails',
+			component:require('../components/profile/personalDetails.vue')
+		},
+		//社区
+		{
+			path: '/communityInteraction',
+			component:require('../components/community/communityInteraction.vue')
+		},
+		{
+			path: '/communityDetails',
+			component:require('../components/community/communityDetails.vue')
+		},
+		{
+			path: '/myMessage',
+			component:require('../components/community/myMessage.vue')
+		},
+		{
+			path: '/release',
+			component:require('../components/community/Release.vue')
+		},
+		//项目
+		{
+			path: '/projectDetails',
+			component:require('../components/project/projectDetails.vue')
+		},
+		{
+			path: '/voluntaryProjects',
+			component:require('../components/project/voluntaryProjects.vue')
+		},
+		//志愿攻略
+		{
+			path: '/volunteerStrategy',
+			component:require('../components/volunte/volunteerStrategy.vue')
+		},
+		{
+			path: '/volunteerTeam',
+			component:require('../components/volunte/volunteerTeam.vue')
+		},
+		//补录时长
+		{
+			path: '/makeupTime',
+			component:require('../components/marktime/makeupTime.vue')
+		},
+		{
+			path: '/makeupTimet',
+			component:require('../components/marktime/makeupTimet.vue')
+		},
+		{
+			path: '/durationTask',
+			component:require('../components/marktime/durationTask.vue')
+		},
+		{
+			path: '/durationTask2',
+			component:require('../components/marktime/durationTask2.vue')
+		},
+		{
+			path: '/makeupRecord',
+			component:require('../components/marktime/makeupRecord.vue')
+		},
+		{
+			path: '/informationFilling',
+			component:require('../components/marktime/informationFilling.vue')
+		},
+		{
+			path: '/durationApproval',
+			component:require('../components/marktime/durationApproval.vue')
+		}
 	]
 })
 

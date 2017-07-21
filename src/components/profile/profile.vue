@@ -36,7 +36,7 @@
 			</section>
 			<section class="project">
 				<ul>
-					<li>
+					<li @click="toAddress({path: '/personalDetails'})">
 						<img class="icon" src="./gere.png">
 						<span>个人资料</span>
 						<img class="arrow" src="./you@2x.png">
@@ -92,7 +92,9 @@
 		    }
 	  	},
 	  	methods:{
-	  		
+	  		toAddress(path){
+                this.$router.push(path)
+            }
 	  	}
 	}
 </script>

@@ -4,7 +4,7 @@
 		<form action="" method="post">
 			<div class="usertext">
 				<i class="s-icon"><img src="./name.png"></i><span>姓名</span>
-				<input type="text" placeholder="请输入真实姓名" />
+				<input type="text" placeholder="请输入真实姓名" v-model="realName"/>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./sex.png"></i><span>姓别</span>
@@ -18,31 +18,39 @@
 					</span>
 					<span>身份证</span>
 				</li>
-				<li><span class="item-check-btn">
+				<li>
+					<span class="item-check-btn">
 						<svg class="icon icon-ok"></svg>
 					</span>
-					<span>护照</span></li>
-				<li><span class="item-check-btn">
+					<span>护照</span>
+				</li>
+				<li>
+					<span class="item-check-btn">
 						<svg class="icon icon-ok"></svg>
 					</span>
-					<span>军官证</span></li>
-				<li><span class="item-check-btn">
+					<span>军官证</span>
+				</li>
+				<li>
+					<span class="item-check-btn">
 						<svg class="icon icon-ok"></svg>
 					</span>
-					<span>学生证</span></li>
-				<li><span class="item-check-btn">
+					<span>学生证</span>
+					</li>
+				<li>
+					<span class="item-check-btn">
 						<svg class="icon icon-ok"></svg>
 					</span>
-					<span>港澳通行证</span></li>
+					<span>港澳通行证</span>
+				</li>
 			</ul>
 			<div class="usertext">
-				<input type="text" placeholder="请输入证件号码" maxlength="18">
+				<input type="text" placeholder="请输入证件号码" maxlength="18" v-model="certificatesNum">
 			</div>
 			<div class="usertext">
-				<input type="text" placeholder="请输入邮箱">
+				<input type="text" placeholder="请输入邮箱" v-model="email">
 			</div>
 			<div class="sub">
-				<input type="button" value="提交"/>
+				<input type="button" value="提交" @click="submitReal"/>
 			</div>
 		</form>
 	</div>
@@ -58,11 +66,20 @@
 	  	},
 	 	data () {
 		    return {
-		    	
+		    	realName:'',
+		    	sex:'',
+		    	certificatesType:'',
+				certificatesNum:'',
+				email:'',
 		    }
 	  	},
 	  	methods:{
-	  		
+	  		submitReal(){
+	  			console.log(this.data)
+	  			this.$http.post('').then({
+
+	  			})
+	  		}
 	  	}
 	}
 </script>

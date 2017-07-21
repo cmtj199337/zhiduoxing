@@ -1,0 +1,149 @@
+<template>
+	<div class="makeupTimet">
+		<headerTip message="补录时长" goBack="true"></headerTip>
+		<div class="header">
+		<span style="width:10%;margin-left:0.5rem"><img src="./td.png"></span><span style="text-align:left">团队项目</span>
+		</div>	
+		<div class="main">
+		<div class="m1">
+			<ul>
+				<li>
+					<img src="./toux1.png" class="touxiang">
+					<div class="text">
+						<h3>团中央网络影视中心第五团支部</h3>
+						<p class="passed">已结束</p>
+					
+					</div>
+					<div class="anniu">
+						<span><p class="btn">时长审批</p></span>
+						<span><p class="btn1">团队补录</p></span>
+					</div>	
+				</li>
+				<li>
+				<img src="./toux2.png" class="touxiang">
+				<div class="text"><h3>团中央网络影视中心第五团支部</h3>
+				<p class="being">进行中</p>
+				
+				</div>
+				<div class="anniu">
+					<span><p class="btn">时长审批</p></span>
+					<span><p class="btn1">团队补录</p></span>
+				</div>	
+				</li>
+			</ul>
+		</div>
+		</div>
+	
+		</div>
+	</template>
+	<script>
+	import headerTip from '../../components/common/header/header.vue'
+	export default{
+
+		name:'makeupTimet',
+		components:{
+	  		headerTip
+	  	},
+		data(){
+			return {
+				
+			}
+		},
+
+	}
+</script>
+<style scoped>
+.header{
+	padding:0.8rem 0;
+	display:flex;
+	border-bottom:1px 
+}
+.header img{
+	width:58%;
+}
+.header span{
+width:20%;
+
+}
+.main{
+	background: #F5F5F5;
+	padding:0.2rem 0;
+	height: 40rem;
+
+}
+.m1{
+	position:relative;
+}
+.m1 ul li{
+	margin:0.6rem 0.5rem 0.5rem 2.3rem;
+	background:white;
+	border-radius:5px;
+	position:relative;
+}
+.m1 ul li h3{
+	margin-bottom: 0.8rem;
+	width:12rem;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.text{
+	padding-top:0.8rem;
+	position:relative;
+	margin-left:2.4rem;
+}
+.anniu{
+	position:relative;
+	padding:1.2rem 0;
+}
+.m1 ul li .touxiang{
+	width:5rem;
+	height:5rem;
+	position:absolute;
+	left: -11%;
+	top:8%;
+}
+.m1 ul li p{
+	position:absolute;
+}
+.btn{
+	position: absolute;
+    top: 12%;
+    left: 16%;
+    font-size: 0.5rem;
+    color: rgb(70, 184, 183);
+    border:1px solid rgb(70, 184, 183);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.2rem;
+}
+.btn1{
+	position: absolute;
+    top: 12%;
+    left: 48%;
+    font-size: 0.5rem;
+    color: rgb(70, 184, 183);
+    border:1px solid rgb(70, 184, 183);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.2rem;
+}
+.being{
+	position: absolute;
+    right: 15%;
+    top: 40%;
+    font-size: 0.5rem;
+    color: rgb(70, 184, 183);
+    border: 1px solid rgb(70, 184, 183);
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
+}
+.passed{
+	position: absolute;
+    right: 15%;
+    top: 40%;
+    font-size: 0.5rem;
+    color: #e5e5e5;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
+}
+</style>

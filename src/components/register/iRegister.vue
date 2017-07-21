@@ -7,7 +7,9 @@
 				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>
 			<div class="usertext">
+			 	
 				<input type="tel" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber" />
+				
 			</div>
 			<div class="usertext">
 				<input type="number" placeholder="请输入验证码" maxlength="6" v-model="userinfo.verify" />
@@ -23,9 +25,9 @@
 				<input type="text" placeholder="请输入昵称" v-model="userinfo.nickName" /><br />
 			</div>
 			<div class="usertext right">
-				<router-link to="goodlist">
+				<a href="javascript:;" @click="toAddress({path: '/goodlist'})">
 					<span class="good">擅长<span v-for="item in userinfo.goodSelect">{{item}}</span><img src="./right.png"></span>
-				</router-link>
+				</a>
 			</div>
 			<div class="usertext">
 				<input type="text" placeholder="请输入志愿口号" v-model="userinfo.slogan" /><br />
@@ -43,7 +45,6 @@
 				<input type="button" value="确认提交" @click="confirm"/>
 			</div>
 		</form>
-		
 		<!-- 遮罩、弹框 -->
 		<div class="overlay" v-show="isConfirm"></div>
 		<div class="popup" v-bind:class="{'show':isConfirm}">
@@ -53,6 +54,7 @@
 				<a href="javascript:;" @click="isConfirm = false">否</a>
 			</div>
 		</div>
+		<toast :toastshow.sync="toastshow" :toasttext="toasttext"></toast>	
 	</div>
 </template>
 
@@ -60,13 +62,15 @@
 	import headerTip from '../../components/common/header/header.vue'
 	import TimerBtn from '../common/tools/countdown.vue'
 	import UploadImg from '../../components/common/tools/uploadImg.vue'
+	import Toast from '../../components/common/tools/toast.vue'
 
 	export default {
 	  	name: 'iRegister',
 	  	components:{
 	  		headerTip,
 	  		TimerBtn,
-	  		UploadImg
+	  		UploadImg,
+	  		Toast
 	  	},
 	 	data () {
 		    return {
@@ -74,7 +78,8 @@
 		    	items:[{
 		            state: false
 		        }],
-		        
+		        toastshow:false,
+		        toasttext:'',
 		        userinfo:{
 		        	userPhoto:[],			//用户头像
 		        	phoneNumber:'',			//手机号
@@ -90,10 +95,19 @@
 	  	mounted(){
 	  		this.getseesion()
 	  	},
+	  	computed:{
+	  		rightPhoneNumber: function (){
+                return /^1\d{10}$/gi.test(this.phoneNumber)
+            }
+	  	},
 	  	methods:{
+	  		toAddress(path){
+	  			this.$router.push(path)
+	  		},
 	  		confirm() {
 	  			this.isConfirm = true;
 	  		},
+	  		//发送短信验证码
 	  		send(){
      			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
 	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
@@ -108,19 +122,15 @@
                 item.state = !item.state;
             },
             getseesion(){
-
-
             	let value = sessionStorage.getItem("check");
-            	//删除拼接之间的逗号
+            	
             	let value2
             	if(value != null){
             		let value1 = value.split(',');
-	            	//删除最后一个空元素得到值
-	            	value2 = value1.slice(0,-1)
 	            	
+	            	value2 = value1.slice(0,-1)
             	}
             	this.userinfo.goodSelect = value2
-            	
             }
 	  	}
 	}

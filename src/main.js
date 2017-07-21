@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import App from './App'
-// import VueRouter from 'vue-router'
 import router from './router'
 import store from './vuex/store'
-// import {routerMode} from './config/env'
 
 //引入vue-resource模块
 import VueResource from 'vue-resource'
