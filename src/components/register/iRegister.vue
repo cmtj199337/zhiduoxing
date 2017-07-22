@@ -2,7 +2,7 @@
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
-		<form action="" method="post" @submit.prevent="submit">
+		<form action="" method="post" @submit.prevent="submit" v-show="wrap">
 			<div class="usertext userphoto">
 				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>
@@ -25,8 +25,8 @@
 				<input type="text" placeholder="请输入昵称" v-model="userinfo.nickName" /><br />
 			</div>
 			<div class="usertext right">
-				<a href="javascript:;" @click="toAddress({path: '/goodlist'})">
-					<span class="good">擅长<span v-for="item in userinfo.goodSelect">{{item}}</span><img src="./right.png"></span>
+				<a href="javascript:;" @click="showToggle">
+					<span class="good">擅长<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="usertext">
@@ -54,6 +54,24 @@
 				<a href="javascript:;" @click="isConfirm = false">否</a>
 			</div>
 		</div>
+		<!-- goodlist选项 -->
+		<div class="goodlist" v-show="isShow">
+			<div class="head_top">
+				<div class='tip'>
+	            	<p><span @click="showToggle"><img src="./back.png"></span>擅长</p>
+	        	</div>
+        	</div>
+			<form action="" method="post">
+				<ul>
+					<li v-for="item in list">
+						<span>{{item.name}}</span>
+						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+							<svg class="icon icon-ok"></svg>
+						</span>
+					</li>
+				</ul>
+			</form>
+		</div>
 		<toast :toastshow.sync="toastshow" :toasttext="toasttext"></toast>	
 	</div>
 </template>
@@ -80,6 +98,7 @@
 		        }],
 		        toastshow:false,
 		        toasttext:'',
+		        list:{},					//擅长选项
 		        userinfo:{
 		        	userPhoto:[],			//用户头像
 		        	phoneNumber:'',			//手机号
@@ -89,11 +108,15 @@
 		        	nickName:'',			//昵称
 		        	goodSelect:[],			//擅长
 		        	slogan:''				//口号
-		        }
+		        },
+		        isShow:false,
+		        wrap:true,
+		        listSelected:[]
 		    }
 	  	},
 	  	mounted(){
-	  		this.getseesion()
+	  		// this.getseesion()
+	  		this.goodList()
 	  	},
 	  	computed:{
 	  		rightPhoneNumber: function (){
@@ -101,9 +124,6 @@
             }
 	  	},
 	  	methods:{
-	  		toAddress(path){
-	  			this.$router.push(path)
-	  		},
 	  		confirm() {
 	  			this.isConfirm = true;
 	  		},
@@ -121,17 +141,46 @@
      		alocked(item) {
                 item.state = !item.state;
             },
+            showToggle(){
+            	this.isShow = !this.isShow
+
+                if(this.isShow){
+                    this.wrap = false  
+                }else{  
+                    this.wrap = !this.wrap   
+                }  
+            },
             getseesion(){
             	let value = sessionStorage.getItem("check");
-            	
             	let value2
             	if(value != null){
             		let value1 = value.split(',');
-	            	
-	            	value2 = value1.slice(0,-1)
+	            		value2 = value1.slice(0,-1)
             	}
             	this.userinfo.goodSelect = value2
-            }
+            },
+            goodList(){
+            	this.$http.get('http://localhost:3000/list').then( response =>{
+            		let res = response.data;
+            		this.list = res
+            	})
+            },
+            checkFlag(item){
+	  			if(typeof item.checked == 'undefined'){
+	  				this.$set(item,'checked',true);
+	  				let count = 0
+	  				this.list.forEach((item,index)=>{
+	  					if(item.checked == true){
+	  						count++
+	  					}
+	  				})
+	  				if(count>=3){
+	  					this.isShow = false;
+	  					this.wrap = true;
+	  					//将name拿出来保存到listSelected进行遍历
+	  				}
+	  			}
+	  		}
 	  	}
 	}
 </script>
@@ -152,7 +201,6 @@
 	    text-indent: 0;
 	    position: relative;
 	}
-
 	.usertext a img{
 		position: absolute;
 		right: 0;
@@ -239,5 +287,69 @@
 	.show{display: block;}
 	.good span{
 		padding-left:1.5rem;
+	}
+
+	/*goodlist*/
+	.goodlist{
+		width: 100%;
+		font-size: 1rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		background: #fff;
+
+	}
+	.goodlist form{
+		margin-top:10%; 
+	}
+	.goodlist li{ 
+		width: 92%;
+		margin: 0 auto;
+	    border-bottom: 1px solid #dcdcdc;
+	    padding-bottom: 1rem;
+	    margin-bottom: 1rem;
+	    text-align: left;
+	    color: #333;
+		line-height: 1;
+		display: block;
+	}
+	.goodlist li span{
+		vertical-align: middle;
+	}
+	.goodlist li input{
+		vertical-align: sub;
+		float: right;
+	}
+	.list-btn {
+	    float: right;
+	}
+	.head_top{
+	    width: 100%;
+	    font-size:1.2rem;
+	    font-family: arial,'microsoft yahei';
+	    color: #333;
+	    text-align: center;
+	    padding: 0.5rem 0;
+	    border-bottom: 0.5px solid #c9c9c9;
+	}
+	.tip{
+	    width: 96%;
+	    margin:0.5rem auto;
+	    position: relative;
+	}
+	.tip span{
+	    width: 0.7rem;
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: absolute;
+	    left: 0.5rem;
+	}
+	.tip span img{
+	    width: 100%;
+	}
+	.tip p{
+	    vertical-align: middle;
+	    line-height: 1;
 	}
 </style>
