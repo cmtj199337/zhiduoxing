@@ -17,26 +17,26 @@
             <h4 class="texttitle"><span><img src="./t1.png"></span>团队信息</h4>
         </div>
         <div class="usertext tlo">
-			<a href="javascript:;"><span>头像上传</span><upload-img></upload-img></a>
+			<a href="javascript:;"><span>头像上传</span><upload-img v-model="teamInfo.teamPhoto"></upload-img></a>
 		</div>
         <div class="usertext">
-       		 <input type="text" name="" placeholder="请输入团队名称">
+       		 <input type="text" v-model="teamInfo.teamName" placeholder="请输入团队名称">
         </div>
         <div class="usertext">
-			<input type="tel" placeholder="请输入手机号" maxlength="11" />
+			<input type="tel" v-model="teamInfo.teamPhone" placeholder="请输入手机号" maxlength="11" />
 		</div>
         <div class="usertext">
-			<input type="number" placeholder="请输入验证" maxlength="11"  style="width:60%" />
+			<input type="number" v-model="teamInfo.verify" placeholder="请输入验证" maxlength="11"  style="width:60%" />
 			<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
 		</div>
 		<div class="usertext">
-			<input type="password" style="width:100%" placeholder="请输入密码" /><br />
+			<input type="password" v-model="teamInfo.password" style="width:100%" placeholder="请输入密码" /><br />
 		</div>
 		<div class="usertext">
-			<input type="password" placeholder="请确认密码" /><br />
+			<input type="password" v-model="teamInfo.rePassword" placeholder="请确认密码" /><br />
 		</div>
 		<div class="usertext">
-			<input type="password" placeholder="请输入团队口号" /><br />
+			<input type="password" v-model="teamInfo.teamSlogan" placeholder="请输入团队口号" /><br />
 		</div>
 		<div class="usertext right">
 			<router-link to="liaisonGroup"><span>联络团队：志愿者服务联合会<img src="./right.png"></span></router-link>
@@ -51,10 +51,10 @@
 			<router-link to="goodlist"><span>团队种类：中级团队<img src="./bottom.png"></span></router-link>
 		</div>
 		<div class="usertext">
-        	<input type="text" name="" placeholder="请输入团队管理员">
+        	<input type="text" v-model="teamInfo.teamAdmin" placeholder="请输入团队管理员">
         </div>
         <div class="usertext">
-			<input type="tel" placeholder="请输入联系电话" maxlength="11" />
+			<input type="tel" v-model="teamInfo.adminPhone" placeholder="请输入联系电话" maxlength="11" />
 		</div>
 		<div class="kong">
 		</div>
@@ -68,7 +68,7 @@
 			<router-link to="goodlist"><span>所在区县<img src="./right.png"></span></router-link>
 		</div>
 		<div class="usertext">
-       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字">
+       		 <input type="text" placeholder="请填写详细地址，不少于5个字">
         </div>
         <div class="kong">
 		</div>
@@ -76,7 +76,7 @@
             <h4 class="texttitle"><span><img src="./dizhi.png"></span>团队简介</h4>
         </div>
         <div class="usertextend">
-       		 <textarea name="" class="jianjie"></textarea>
+       		 <textarea v-model="teamInfo.teamProfile" class="jianjie"></textarea>
         </div>
         <div class="end">
         不超过100字
@@ -104,7 +104,7 @@
             	teamInfo:{
             		teamPhoto:[],		//团队头像
             		teamName:null,		//团队名
-            		teamPhone,			//电话
+            		teamPhone:'',		//电话
             		verify:'',			//验证码
 		        	password:'',		//密码
 		        	rePassword:'',		//确认密码

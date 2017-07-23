@@ -111,11 +111,11 @@
 		        },
 		        isShow:false,
 		        wrap:true,
+		        arr:'',
 		        listSelected:[]
 		    }
 	  	},
 	  	mounted(){
-	  		// this.getseesion()
 	  		this.goodList()
 	  	},
 	  	computed:{
@@ -143,21 +143,11 @@
             },
             showToggle(){
             	this.isShow = !this.isShow
-
                 if(this.isShow){
                     this.wrap = false  
                 }else{  
                     this.wrap = !this.wrap   
                 }  
-            },
-            getseesion(){
-            	let value = sessionStorage.getItem("check");
-            	let value2
-            	if(value != null){
-            		let value1 = value.split(',');
-	            		value2 = value1.slice(0,-1)
-            	}
-            	this.userinfo.goodSelect = value2
             },
             goodList(){
             	this.$http.get('http://localhost:3000/list').then( response =>{
@@ -168,6 +158,8 @@
             checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
+	  				this.arr += item.name+','
+		            this.listSelected = this.arr.split(',').slice(0,-1)
 	  				let count = 0
 	  				this.list.forEach((item,index)=>{
 	  					if(item.checked == true){
@@ -175,10 +167,8 @@
 	  					}
 	  				})
 	  				if(count>=3){
-
 	  					this.isShow = false;
 	  					this.wrap = true;
-	  					//将name拿出来保存到listSelected进行遍历
 	  				}
 	  			}else{
 	  				item.checked = !item.checked
