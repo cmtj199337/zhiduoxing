@@ -17,7 +17,7 @@
             <h4 class="texttitle"><span><img src="./t1.png"></span>团队信息</h4>
         </div>
         <div class="usertext tlo">
-			<router-link to="goodlist"><span>团队logo<img src="./tlogo1.png"></span></router-link>
+			<a href="javascript:;"><span>头像上传</span><upload-img></upload-img></a>
 		</div>
         <div class="usertext">
        		 <input type="text" name="" placeholder="请输入团队名称">
@@ -90,23 +90,38 @@
 <script>
     import headerTip from '../../components/common/header/header.vue'
     import TimerBtn from '../common/tools/countdown.vue'
+    import UploadImg from '../../components/common/tools/uploadImg.vue'
     export default{
 
         name:'teamRegistration',
         components:{
             headerTip,
-            TimerBtn
+            TimerBtn,
+            UploadImg
         },
         data(){
             return {
-            	isConfirm:false
+            	teamInfo:{
+            		teamPhoto:[],		//团队头像
+            		teamName:null,		//团队名
+            		teamPhone,			//电话
+            		verify:'',			//验证码
+		        	password:'',		//密码
+		        	rePassword:'',		//确认密码
+		        	teamSlogan:null,	//团队口号
+		        	liaisonTeam:null,	//联系团队
+		        	serviceType:null,	//服务类型
+		        	teamType:null,		//团队类别
+		        	teamSub:null,		//团队种类（大小）
+		        	teamAdmin:null,		//团队管理员
+		        	adminPhone:null,	//联系人电话
+		        	address:'',			//地址
+		        	teamProfile:null	//团队简介
+            	}
                 
             }
         },
         methods:{
-	  		confirm() {
-	  			this.isConfirm = true;
-	  		},
 	  		send(){
      			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
 	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
@@ -194,12 +209,22 @@
 	}
 .tlo{
 	margin: 0.8rem;
-	padding: 0.8rem;
 }
 .tlo img{
 	width:2.5rem;
 		display: inline-block;
 		vertical-align: middle;
+}
+.tlo a{
+	border: 0;
+    width: 100%;
+    height: 4rem !important;
+	line-height: 4rem !important;
+    font-size: 1rem;
+    display: inline-block;
+    color: #333;
+    text-indent: 0;
+    position: relative;
 }
 .bottom img{
 		width:1rem;

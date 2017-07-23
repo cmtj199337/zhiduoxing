@@ -12,8 +12,8 @@
 		</div>
 		<h4 class="texttitle"><span><img src="./type.png"></span>证件类型</h4>
 		<ul>
-			<li>
-				<span class="item-check-btn">
+			<li v-for="item in typeList">
+				<span class="item-check-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
 					<svg class="icon icon-ok"></svg>
 				</span>
 				<span>身份证</span>
@@ -54,6 +54,7 @@
 	  	name: 'improve',
 	 	data () {
 		    return {
+		    	typeList:[],
 		    	sexFlag:0,
 		    	checkFlag:false,
 		    	info:{
@@ -70,7 +71,20 @@
 	  	methods:{
 	  		changeSex(){
 	  			this.sexFlag = !this.sexFlag
+	  		},
+	  		checkFlag(item){
+	  			if(typeof item.checked == 'undefined'){
+	  				this.$set(item,'checked',true);
+	  			}else{
+	  				item.checked = !item.checked
+	  			}
+	  		},
+	  		typeList(){
+	  			this.$http.get('').then({
+
+	  			})
 	  		}
+
 	  	}
 	}
 </script>
