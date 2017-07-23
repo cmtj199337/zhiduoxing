@@ -175,10 +175,13 @@
 	  					}
 	  				})
 	  				if(count>=3){
+
 	  					this.isShow = false;
 	  					this.wrap = true;
 	  					//将name拿出来保存到listSelected进行遍历
 	  				}
+	  			}else{
+	  				item.checked = !item.checked
 	  			}
 	  		}
 	  	}

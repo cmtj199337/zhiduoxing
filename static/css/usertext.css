@@ -1,0 +1,113 @@
+.usertext{
+	margin: 0rem 2.5rem;
+	border-bottom: 1px solid #dcdcdc;
+	padding-bottom: 0.3rem;
+	margin-bottom: 1.2rem;
+	text-align: left;
+	position: relative;
+}
+.usertext input[type=text]{
+	border: 0;
+    margin: 0 auto;
+    margin-left: 1.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+}
+.usertext input[type=password]{
+	border: 0;
+    margin: 0 auto;
+    margin-left: 1.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+}
+.usertext input[type=number]{
+	width: 40%;
+	border: 0;
+    margin: 0 auto;
+    margin-left: 1.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+}
+.usertext input[type=tel]{
+	border: 0;
+    margin: 0 auto;
+    margin-left: 1.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+}
+.usertext input::-webkit-input-placeholder{
+	color: #C9C9C9;
+	font-family: "微软雅黑";
+	font-size: 1rem;
+	line-height: 1;
+	padding-left: 0.2rem;
+}
+.getcode{
+	font-family: microsoft yahei;
+	float: right;
+	display: inline-block;
+	color: #43B7B6;
+	border:1px solid #43B7B6;
+	padding: 0.3rem 1rem;
+	border-radius: 4px;
+	vertical-align: middle;
+	background: #fff;
+}
+.sub{
+	margin-top:3rem;
+	text-align: center;
+}
+.sub input{
+	border: 0;
+	margin: 0 auto;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-family: "微软雅黑";
+	background: #43B7B6;
+	padding: 0.7rem 5rem;
+	border-radius: 4px;
+}
+/* checkbox 美化*/
+.item-check-btn {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.item-check-btn .icon-ok {
+    display: none;
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+}
+.item-check-btn.check {
+    background: url(../images/check.png) no-repeat;
+    background-size: 100% 100%;
+    border-color: #43B7B6;
+}
+/*表单图标*/
+.s-icon{
+	width: 1rem;
+	display: inline-block;
+	position: absolute;
+	bottom: 1rem;
+}
+
+/*标题*/
+.texttitle{
+	font-size: 1rem;
+	font-weight: normal;
+	margin: 1.2rem 1rem 1.2rem 1rem;
+}
+.texttitle span{
+	width: 1rem;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0.5rem;
+}
