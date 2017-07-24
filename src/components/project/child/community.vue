@@ -1,46 +1,49 @@
 <template>
-	<div class="projectDetails">
-		<headerTip message="项目详情" goBack="true"></headerTip>
-		<swipe v-model="index" style="text-align: center;">
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		</swipe>
-		<div class="header">
-			<ul>
-				<li><router-link to="/projectDetails/detail"><span>项目详情</span></router-link></li>
-				<li><router-link to="/projectDetails/introduce"><span>项目介绍</span></router-link></li>
-				<li><router-link to="/projectDetails/community"><span>项目社区</span></router-link></li>
-			</ul>
+	<div class="community">
+		<div class="cheader">
+			<span><img src="../touxiang2.png"></span>
+			<div class="name"><span>大蜗牛子</span><p>1小时</p></div>
 		</div>
-		<router-view></router-view>
+		<div class="ctext">
+			<p>社区互动详情，社区互动情况，社区互动详情，社区互动情况，社区互动详情，社区互动情况</p>
+		</div>
+		<div class="cpicture">
+			<img src="../tu11.png">
+			<img src="../tu22.png">
+			<img src="../tu11.png">
+		</div>
+		<div class="usertext">
+			<span>#志愿项目#</span>
+		</div>
+		<div class="pl">
+			<span><img src="../zan.png">50</span>
+			<span><img src="../pinglun.png">42</span>
+			<span><img src="../jubao.png">举报</span>
+		</div>
+		<div class="kong"></div>
+		<div class="fb"><img src="../fabiao.png"></div>
 	</div>
 </template>
 <script>
-	import { Swipe, SwipeItem } from 'c-swipe';
-	import headerTip from '../../components/common/header/header.vue'
 	export default{
 
-		name:'projectDetails',
+		name:'community',
 		components:{
-			Swipe,
-	  		SwipeItem,
-	  		headerTip
+		
 	  	},
 		data () {
 		    return {
-		    	index:0,
+		    	
 		    }
 	  	},
 	  	methods:{
-
+	  		
 	  	}
 
 	}
 </script>
 <style scoped>
-@import '../../styles/usertext.css';
-@import '../../styles/swipe.css';
+@import '../../../styles/usertext.css';
 .usertext{
 	margin:0rem 1rem;
 	padding:0.8rem 0; 
@@ -56,24 +59,22 @@
 	background:rgba(235, 234, 234, 0.48);
 }
 .header ul{
-	display:flex;
-	margin:0.1rem 0;
-	padding:0.5rem 0;
-	background:white;
-	text-align: center;
+display:flex;
+margin:0.1rem 0;
+padding:0.5rem 0;
+background:white;
+text-align: center;
 }
 .header ul li{
-	width:33%;
-}
-.header ul li a{
-	color: #333;
+width:33%;
+
 }
 .header ul li span{
 	display: inline-block;
-}
-.router-link-active{
 	padding-bottom: 0.4rem;
-	color:#43B7B5 !important;
+}
+.active{
+	color:#43B7B5;
 	border-bottom: 3px solid #43B7B5;
 }
 	.kong{

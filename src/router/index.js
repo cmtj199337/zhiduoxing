@@ -108,7 +108,21 @@ const router = new Router({
 		//项目
 		{
 			path: '/projectDetails',
-			component:require('../components/project/projectDetails.vue')
+			component:require('../components/project/projectDetails.vue'),
+			children:[
+				{
+					path: '/projectDetails/detail',
+					component:require('../components/project/child/detail.vue')
+				},
+				{
+					path: '/projectDetails/introduce',
+					component:require('../components/project/child/introduce.vue')
+				},
+				{
+					path: '/projectDetails/community',
+					component:require('../components/project/child/community.vue')
+				},
+			]
 		},
 		{
 			path: '/voluntaryProjects',
@@ -151,7 +165,29 @@ const router = new Router({
 		{
 			path: '/durationApproval',
 			component:require('../components/marktime/durationApproval.vue')
-		}
+		},
+		// 团队中心
+		{
+			path: '/teamcenter',
+			component:require('../components/team/teamcenter.vue')
+		},
+
+		{
+			path: '/itemdetail',
+			component:require('../components/team/ltemdetail.vue')
+		},
+		{
+			path: '/teamdetail',
+			component:require('../components/team/teamdetail.vue')
+		},
+		{
+			path: '/teammanage',
+			component:require('../components/team/teammanage.vue')
+		},
+		{
+			path: '/teamPresentation',
+			component:require('../components/team/teamPresentation.vue')
+		},
 	]
 })
 

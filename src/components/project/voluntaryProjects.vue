@@ -2,7 +2,7 @@
 	<div class="voluntaryProjects">
 		<headerTip message="项目列表" goBack="true"></headerTip>
 		<div class="sousuo">
-			<input v-model="search" name="" placeholder="       搜索">
+			<input v-model="search" name="" placeholder="搜索">
 		<img src="./sou.png"><span>筛选<img src="./shaixuan.png"></span>
 		</div>
 		<div class="header">

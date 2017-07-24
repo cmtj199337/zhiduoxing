@@ -1,46 +1,38 @@
 <template>
-	<div class="projectDetails">
-		<headerTip message="项目详情" goBack="true"></headerTip>
-		<swipe v-model="index" style="text-align: center;">
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		</swipe>
-		<div class="header">
-			<ul>
-				<li><router-link to="/projectDetails/detail"><span>项目详情</span></router-link></li>
-				<li><router-link to="/projectDetails/introduce"><span>项目介绍</span></router-link></li>
-				<li><router-link to="/projectDetails/community"><span>项目社区</span></router-link></li>
-			</ul>
+	<div class="introduce">
+		<div class="jheader">
+			<img src="../jieshaotu.png">
 		</div>
-		<router-view></router-view>
+		<div class="jtext">
+			<p>据《报告》数据披露，蚂蚁金服旗下网商银行已成功为650万小微经营者提供超过8000亿贷款，更多蓝领、大学生、进城务工人员开启了精彩人生;2000万人通过芝麻信用获得了金融机构的授信，累计总额1000亿元</p>
+		</div>
+		<footer class="foot">
+			<span class="bm1"><img src="../shoucang.png">收藏</span>
+			<span class="bm2"><img src="../fenxiang.png">分享</span>
+			<span class="bm3"><img src="../baoming.png"><p class="bm">我要报名</p></span>
+		</footer>
 	</div>
 </template>
 <script>
-	import { Swipe, SwipeItem } from 'c-swipe';
-	import headerTip from '../../components/common/header/header.vue'
 	export default{
 
-		name:'projectDetails',
+		name:'introduce',
 		components:{
-			Swipe,
-	  		SwipeItem,
-	  		headerTip
+			
 	  	},
 		data () {
 		    return {
-		    	index:0,
+		    	
 		    }
 	  	},
 	  	methods:{
-
+	  		
 	  	}
 
 	}
 </script>
 <style scoped>
-@import '../../styles/usertext.css';
-@import '../../styles/swipe.css';
+@import '../../../styles/usertext.css';
 .usertext{
 	margin:0rem 1rem;
 	padding:0.8rem 0; 
@@ -56,24 +48,22 @@
 	background:rgba(235, 234, 234, 0.48);
 }
 .header ul{
-	display:flex;
-	margin:0.1rem 0;
-	padding:0.5rem 0;
-	background:white;
-	text-align: center;
+display:flex;
+margin:0.1rem 0;
+padding:0.5rem 0;
+background:white;
+text-align: center;
 }
 .header ul li{
-	width:33%;
-}
-.header ul li a{
-	color: #333;
+width:33%;
+
 }
 .header ul li span{
 	display: inline-block;
-}
-.router-link-active{
 	padding-bottom: 0.4rem;
-	color:#43B7B5 !important;
+}
+.active{
+	color:#43B7B5;
 	border-bottom: 3px solid #43B7B5;
 }
 	.kong{
