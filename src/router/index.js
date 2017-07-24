@@ -188,6 +188,11 @@ const router = new Router({
 			path: '/teamPresentation',
 			component:require('../components/team/teamPresentation.vue')
 		},
+		//城市选择
+		{
+			path: '/city',
+			component:require('../components/city/city.vue')
+		}
 	]
 })
 

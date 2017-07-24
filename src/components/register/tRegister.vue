@@ -48,7 +48,11 @@
 			<router-link to="goodlist"><span>团队类别：党政机关<img src="./right.png"></span></router-link>
 		</div>
 		<div class="usertext bottom">
-			<router-link to="goodlist"><span>团队种类：中级团队<img src="./bottom.png"></span></router-link>
+			<span>团队种类：<select class="select" v-model="teamInfo.teamSub">
+				<option value="初级团队" selected>初级团队</option>
+				<option value="中级团队">中级团队</option>
+				<option value="高级团队">高级团队</option>
+			</select><img src="./bottom.png"></span>
 		</div>
 		<div class="usertext">
         	<input type="text" v-model="teamInfo.teamAdmin" placeholder="请输入团队管理员">
@@ -58,17 +62,10 @@
 		</div>
 		<div class="kong">
 		</div>
-		 <div class="header3">
-            <h4 class="texttitle"><span><img src="./dizhi.png"></span>团队地址</h4>
-        </div>
-        <div class="usertext right">
-			<router-link to="goodlist"><span>所在地区<img src="./right.png"></span></router-link>
-		</div>
-		<div class="usertext right">
-			<router-link to="goodlist"><span>所在区县<img src="./right.png"></span></router-link>
-		</div>
+
+		<my-area @select="haha"></my-area>
 		<div class="usertext">
-       		 <input type="text" placeholder="请填写详细地址，不少于5个字">
+       		 <input type="text" v-model="teamInfo.address" placeholder="请填写详细地址，不少于5个字">
         </div>
         <div class="kong">
 		</div>
@@ -91,13 +88,15 @@
     import headerTip from '../../components/common/header/header.vue'
     import TimerBtn from '../common/tools/countdown.vue'
     import UploadImg from '../../components/common/tools/uploadImg.vue'
+    import MyArea from '../../components/common/tools/area.vue'
     export default{
 
         name:'teamRegistration',
         components:{
             headerTip,
             TimerBtn,
-            UploadImg
+            UploadImg,
+            MyArea
         },
         data(){
             return {
@@ -112,13 +111,13 @@
 		        	liaisonTeam:null,	//联系团队
 		        	serviceType:null,	//服务类型
 		        	teamType:null,		//团队类别
-		        	teamSub:null,		//团队种类（大小）
+		        	teamSub:'中级团队',		//团队种类（大小）
 		        	teamAdmin:null,		//团队管理员
 		        	adminPhone:null,	//联系人电话
 		        	address:'',			//地址
-		        	teamProfile:null	//团队简介
-            	}
-                
+		        	teamProfile:null,	//团队简介
+		        	area:[]
+            	},
             }
         },
         methods:{
@@ -134,7 +133,10 @@
      		},
      		toAddress(path){
                 this.$router.push(path)
-            }
+            },
+            haha(d){
+            	this.area = d
+			}
 	  	}
 
     }
@@ -148,8 +150,6 @@
     display:flex;
     position: relative;
 }
-
-
 .header span{
 	width:50%;
 	display: inline-block;
@@ -276,8 +276,13 @@
 		width:60%;
 		height:3rem;
 	}
-
-
-
-
+	.select{
+		width: 35%;
+		border: 0;
+	    margin: 0 auto;
+	    height: 2.5rem;
+	    font-size: 1rem;
+	    appearance:none;
+	    position: relative;
+	}
 </style>

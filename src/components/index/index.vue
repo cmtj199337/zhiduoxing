@@ -1,7 +1,7 @@
 <template>
 	<div class="index">
 		<div class="headerBar">
-			<div class="location"><img src="./location.png">北京</div>
+			<div class="location"><img src="./location.png">{{guessCity}}</div>
 			<div class="number"><img src="./logo.png">5000人</div>
 		</div>
 		<swipe v-model="index" style="text-align: center;">
@@ -63,10 +63,16 @@
 		    	index:0,
 		    	iconList:[],
 		    	shoplist:[],
-		    	article:[]
+		    	article:[],
+		    	guessCity:'',				//当前定位城市
 		    }
 	  	},
 	  	mounted(){
+	  		// 获取当前城市
+	        this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then(response => {
+	            let res = response.data;
+	            this.guessCity = res.name;
+	        })
 	  		this.showList()
 	  	},
 	  	computed:{
@@ -92,35 +98,7 @@
 	  				}
 	  			})
 	  			this.justify_location()
-	  		},
-	  		justify_location(){
-		        if(navigator.geolocation) {
-		            // 支持
-		            console.log("支持地理位置接口");
-
-		            this.agree_obtain_location()
-		        } else {
-		            // 不支持
-		            console.log("不支持地理位置接口");
-		        }
-		    },
-		    agree_obtain_location(){
-		        var option = {
-		            enableHighAccuracy : true,
-		            timeout : Infinity,
-		            maximumAge : 0
-		        };
-
-		        navigator.geolocation.getCurrentPosition(this.geoSuccess,this.geoError,option);
-
-		    },
-		    geoSuccess(event) {
-		        console.log(event.coords.latitude + ', ' + event.coords.longitude);
-
-		    },
-		    geoError(event) {
-		        console.log("Error code " + event.code + ". " + event.message);
-		    }
+	  		}
 	  	}
 	}
 </script>
@@ -150,7 +128,7 @@
 	.number img{
 		width: 1rem;
 	    display: inline-block;
-	    vertical-align: middle;
+	    vertical-align: text-top;
 	    padding-right: 0.5rem;
 	}
 	.location img{

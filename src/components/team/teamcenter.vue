@@ -143,11 +143,9 @@ hr{
 .column{
 	margin:1rem 0;
 	background-color: #fff;
-
-
 }
 .icon{
-		width: 6%;
+		width: 4%;
 		display: inline-block;
 		padding:0 0.6rem 0 1.5rem;
 }

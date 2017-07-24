@@ -7,8 +7,12 @@
 		<div class="usertext">
 			<i class="s-icon"><img src="./sex.png"></i>
 			<span>姓别</span>
-			<span class="radio-btn nan" :class="{'active':sexFlag==0}" @click="changeSex" v-model="info.sex"></span>
-			<span class="radio-btn nv" :class="{'active':sexFlag==1}" @click="changeSex" v-model="info.sex"></span>
+			<span class="radio-btn nan" :class="{'active':sexFlag==0}" @click="changeSex" v-model="info.sex">
+				<img src="./nan@2x.png"><i>男</i>
+			</span>
+			<span class="radio-btn nv" :class="{'active':sexFlag==1}" @click="changeSex" v-model="info.sex">
+				<img src="./nv@2x.png"><i>女</i>
+			</span>
 		</div>
 		<h4 class="texttitle"><span><img src="./type.png"></span>证件类型</h4>
 		<ul>
@@ -113,18 +117,23 @@
 	}
 	.usertext{margin: 0 1rem 1.2rem 1rem;}
 	.radio-btn{
-	    width: 2rem !important;
+	    width: 3rem !important;
 	    height: 1.4rem !important;
-	    vertical-align: sub;
+	    line-height: 1.4rem !important;
 	    margin-left: 0.5rem;
+	    background: #cacaca;
+	    padding-left: 0 !important;
+	    text-align: center;
+	    font-size: 0.5rem;
+	    border-radius: 0.2rem;
 	}
-	.nan{
-	    background: url('./nan2@2x.png') no-repeat;
-	    background-size:cover; 
+	.radio-btn img{
+	    width: 0.7rem;
+	    display: inline-block;
 	}
-	.nv{
-	    background: url('./nv1@2x.png') no-repeat;
-	    background-size:cover; 
+	.radio-btn i{
+	   color: #fff;
+	   padding-left:0.2rem; 
 	}
 	.active{
 		background: #43B7B6

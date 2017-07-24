@@ -43,14 +43,6 @@
 	  		TimerBtn
 	  	},
 	  	methods:{
-	  		// send() {
-     //            this.disabled = true;
-     //            setTimeout(this.sended, 2000);
-     //        },
-     //        sended() {
-     //            this.$refs.btn.run();
-     //            this.disabled = false;
-     //        }
      		send(){
      			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
 	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
