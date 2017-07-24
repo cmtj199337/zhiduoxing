@@ -65,7 +65,7 @@
         </div>
     </div>
 </template>
-        <script>
+<script>
 	import headerTip from '../../components/common/header/header.vue'
 	export default{
 
