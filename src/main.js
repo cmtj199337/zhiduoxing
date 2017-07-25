@@ -7,6 +7,12 @@ import store from './vuex/store'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
+
+//自定义规则
+// import Validator from './assets/js/customValidate';
+
+//VeeValidate语言包切换,放自定义提示前
+
 // Vue.use(VueRouter)
 // const router = new VueRouter({
 //   routes,

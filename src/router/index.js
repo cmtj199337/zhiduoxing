@@ -109,6 +109,7 @@ const router = new Router({
 		{
 			path: '/projectDetails',
 			component:require('../components/project/projectDetails.vue'),
+			redirect:'/projectDetails/detail',
 			children:[
 				{
 					path: '/projectDetails/detail',

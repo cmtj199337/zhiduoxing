@@ -1,11 +1,11 @@
 <template>
     <footer class="foot">
         <!-- 由于mocudata，手机无法显示数据 -->
-        <!--  <section @click="toAddress({path: item.path})" class="check" v-for="item in footlist">
+         <section @click="toAddress({path: item.path})" :class="check" v-for="item in footlist">
             <img :src="item.src">
-            <p v-text="item.title"></p>
-        </section> -->
-        <section @click="toAddress({path: '/index'})" class="check">
+            <p v-text="item.text"></p>
+        </section>
+<!--         <section @click="toAddress({path: '/index'})" class="check">
             <img src="./shouye1.png">
             <p>首页</p>
         </section>
@@ -16,7 +16,7 @@
         <section @click="toAddress({path: '/profile'})">
             <img src="./geren1.png">
             <p>个人中心</p>
-        </section>
+        </section> -->
     </footer>
 </template>
 
@@ -24,7 +24,11 @@
     export default {
     	data(){
             return{
-                footlist:[],
+                footlist:[
+                    {text:'首页',path:'/index',src:'./shouye1.png'},
+                    {text:'签到打卡',path:'/scan',src:'./qiandaodaka1.png'},
+                    {text:'个人中心',path:'/profile',src:'./geren1.png'}
+                ],
                 checkFlag:false
             }
         },
@@ -32,11 +36,6 @@
             // this.showlist()
         },
         methods:{
-            showlist(){
-                this.$http.get('http://localhost:3000/list').then( response =>{
-                    this.footlist = response.data;
-                })
-            },
             toAddress(path){
                 this.$router.push(path)
             }

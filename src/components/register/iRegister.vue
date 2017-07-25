@@ -2,14 +2,13 @@
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
-		<form action="" method="post" @submit.prevent="submit" v-show="wrap">
+		<form action="" method="post" @submit.prevent="submit" v-show="wrap" enctype="multipart/form-data"
+>
 			<div class="usertext userphoto">
 				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>
 			<div class="usertext">
-			 	
-				<input type="tel" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber" />
-				
+				<input type="tel" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber"/>
 			</div>
 			<div class="usertext">
 				<input type="number" placeholder="请输入验证码" maxlength="6" v-model="userinfo.verify" />
@@ -26,7 +25,7 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
-					<span class="good">擅长<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
+					<span class="good">擅长<span v-for="item in userinfo.goodSelect">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="usertext">
@@ -64,7 +63,7 @@
 			<form action="" method="post">
 				<ul>
 					<li v-for="item in list">
-						<span>{{item.name}}</span>
+						<span>{{item.value}}</span>
 						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
 							<svg class="icon icon-ok"></svg>
 						</span>
@@ -112,7 +111,7 @@
 		        isShow:false,
 		        wrap:true,
 		        arr:'',
-		        listSelected:[]
+		        type:'GOOD_AT'
 		    }
 	  	},
 	  	mounted(){
@@ -125,7 +124,16 @@
 	  	},
 	  	methods:{
 	  		confirm() {
-	  			this.isConfirm = true;
+	  			this.$http.post('/api/upload',this.userinfo).then(response => {
+	  				let res = response.data
+	  				
+	  				if(res.result == 0){
+	  					console.log(res)
+						this.isConfirm = true;
+	  				}else{
+
+	  				}
+	  			})
 	  		},
 	  		//发送短信验证码
 	  		send(){
@@ -150,16 +158,26 @@
                 }  
             },
             goodList(){
-            	this.$http.get('http://localhost:3000/list').then( response =>{
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			'type':this.type
+            		}
+            	}).then( response =>{
             		let res = response.data;
-            		this.list = res
+            		if(res.result == 0){
+            			this.list = res.data
+            		}else{
+            			//接口失败
+            		}
             	})
             },
             checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
-	  				this.arr += item.name+','
-		            this.listSelected = this.arr.split(',').slice(0,-1)
+	  				this.arr += item.value+','
+
+		            this.userinfo.goodSelect = this.arr.split(',').slice(0,-1)
+
 	  				let count = 0
 	  				this.list.forEach((item,index)=>{
 	  					if(item.checked == true){
@@ -170,10 +188,16 @@
 	  					this.isShow = false;
 	  					this.wrap = true;
 	  				}
-	  			}else{
+	  			}else if(item.checked == false){
+	  				this.arr = ''
 	  				item.checked = !item.checked
+	  			}else{
+	  				this.arr += item.value+','
+	  				item.checked = !item.checked
+	  				
 	  			}
 	  		}
+
 	  	}
 	}
 </script>

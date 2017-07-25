@@ -64,11 +64,11 @@
 </style>
 
 <script>
-import data from "./data";
+// import data from "./data";
 export default {
 	data(){
 		return {
-           data:data,
+           data:[],
            pro:"",
            city:'',
            f:{
@@ -78,9 +78,7 @@ export default {
 		}
 	},
 	mounted(){
-		this.pro=this.data;
-		this.city=this.pro[0]['child'];
-		this.result();
+		this.dataList();
 	},
 	methods:{
 		selpro(){
@@ -97,6 +95,18 @@ export default {
 				city:{id:this.city[this.f.c].id,name:this.city[this.f.c].name}
 			};
 			this.$emit("select",re);
+		},
+		dataList(){
+			this.$http.get('/api/public/getAreaList').then(response =>{
+				let res = response.data
+				if(res.result == 0){
+					this.data = res.data
+
+					this.pro=this.data;
+					this.city=this.pro[0]['child'];
+					this.result();
+				}
+			})
 		}
 	}
 }	

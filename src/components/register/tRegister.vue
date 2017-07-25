@@ -1,86 +1,114 @@
 <template>
 	<div class="teamRegistration">
-		<headerTip message="团队注册" goBack="true"></headerTip>
-        <div class="header">
-       		<span class="ire">
-				<img src="./t3.png">
-				<p style="font-size:1rem;padding:0.4rem">团队信息</p>
-			</span>
-			<img src="./t4.png" class="hx">
-			<span class="tre">
-				<img src="./t2.png" >
-				<p style="font-size:1rem;padding:0.4rem">团队法人/负责人信息</p>
-			</span>
-        </div>
-        
-        <div class="header2">
-            <h4 class="texttitle"><span><img src="./t1.png"></span>团队信息</h4>
-        </div>
-        <div class="usertext tlo">
-			<a href="javascript:;"><span>头像上传</span><upload-img v-model="teamInfo.teamPhoto"></upload-img></a>
-		</div>
-        <div class="usertext">
-       		 <input type="text" v-model="teamInfo.teamName" placeholder="请输入团队名称">
-        </div>
-        <div class="usertext">
-			<input type="tel" v-model="teamInfo.teamPhone" placeholder="请输入手机号" maxlength="11" />
-		</div>
-        <div class="usertext">
-			<input type="number" v-model="teamInfo.verify" placeholder="请输入验证" maxlength="11"  style="width:60%" />
-			<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
-		</div>
-		<div class="usertext">
-			<input type="password" v-model="teamInfo.password" style="width:100%" placeholder="请输入密码" /><br />
-		</div>
-		<div class="usertext">
-			<input type="password" v-model="teamInfo.rePassword" placeholder="请确认密码" /><br />
-		</div>
-		<div class="usertext">
-			<input type="password" v-model="teamInfo.teamSlogan" placeholder="请输入团队口号" /><br />
-		</div>
-		<div class="usertext right">
-			<router-link to="liaisonGroup"><span>联络团队：志愿者服务联合会<img src="./right.png"></span></router-link>
-		</div>
-		<div class="usertext right">
-			<router-link to="goodlist"><span>服务类型<img src="./right.png"></span></router-link>
-		</div>
-		<div class="usertext right">
-			<router-link to="goodlist"><span>团队类别：党政机关<img src="./right.png"></span></router-link>
-		</div>
-		<div class="usertext bottom">
-			<span>团队种类：<select class="select" v-model="teamInfo.teamSub">
-				<option value="初级团队" selected>初级团队</option>
-				<option value="中级团队">中级团队</option>
-				<option value="高级团队">高级团队</option>
-			</select><img src="./bottom.png"></span>
-		</div>
-		<div class="usertext">
-        	<input type="text" v-model="teamInfo.teamAdmin" placeholder="请输入团队管理员">
-        </div>
-        <div class="usertext">
-			<input type="tel" v-model="teamInfo.adminPhone" placeholder="请输入联系电话" maxlength="11" />
-		</div>
-		<div class="kong">
-		</div>
+		<div v-show="wrap">
+			<headerTip message="团队注册" goBack="true"></headerTip>
+	        <div class="header">
+	       		<span class="ire">
+					<img src="./t3.png">
+					<p style="font-size:1rem;padding:0.4rem">团队信息</p>
+				</span>
+				<img src="./t4.png" class="hx">
+				<span class="tre">
+					<img src="./t2.png" >
+					<p style="font-size:1rem;padding:0.4rem">团队法人/负责人信息</p>
+				</span>
+	        </div>
+	        
+	        <div class="header2">
+	            <h4 class="texttitle"><span><img src="./t1.png"></span>团队信息</h4>
+	        </div>
+	        <div class="usertext tlo">
+				<a href="javascript:;"><span>头像上传</span><upload-img v-model="teamInfo.teamPhoto"></upload-img></a>
+			</div>
+	        <div class="usertext">
+	       		 <input type="text" v-model="teamInfo.teamName" placeholder="请输入团队名称">
+	        </div>
+	        <div class="usertext">
+				<input type="tel" v-model="teamInfo.teamPhone" placeholder="请输入手机号" maxlength="11" />
+			</div>
+	        <div class="usertext">
+				<input type="number" v-model="teamInfo.verify" placeholder="请输入验证" maxlength="11"  style="width:60%" />
+				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
+			</div>
+			<div class="usertext">
+				<input type="password" v-model="teamInfo.password" style="width:100%" placeholder="请输入密码" /><br />
+			</div>
+			<div class="usertext">
+				<input type="password" v-model="teamInfo.rePassword" placeholder="请确认密码" /><br />
+			</div>
+			<div class="usertext">
+				<input type="password" v-model="teamInfo.teamSlogan" placeholder="请输入团队口号" /><br />
+			</div>
+			<div class="usertext right">
+				<router-link to="liaisonGroup"><span>联络团队：志愿者服务联合会<img src="./right.png"></span></router-link>
+			</div>
+			<div class="usertext right">
+				<a href="javascript:;" @click="showToggle">
+					<span class="good">服务类型<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
+				</a>
+			</div>
+			<div class="usertext right">
+				<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamType">
+					<option value="党政机关" selected>党政机关</option>
+					<option value="党政机关">党政机关</option>
+					<option value="党政机关">党政机关</option>
+				</select><img src="./right.png"></span>
+			</div>
+			<div class="usertext bottom">
+				<span>团队种类：<select class="select" v-model="teamInfo.teamSub">
+					<option value="初级团队" selected>初级团队</option>
+					<option value="中级团队">中级团队</option>
+					<option value="高级团队">高级团队</option>
+				</select><img src="./bottom.png"></span>
+			</div>
+			<div class="usertext">
+	        	<input type="text" v-model="teamInfo.teamAdmin" placeholder="请输入团队管理员">
+	        </div>
+	        <div class="usertext">
+				<input type="tel" v-model="teamInfo.adminPhone" placeholder="请输入联系电话" maxlength="11" />
+			</div>
+			<div class="kong">
+			</div>
 
-		<my-area @select="haha"></my-area>
-		<div class="usertext">
-       		 <input type="text" v-model="teamInfo.address" placeholder="请填写详细地址，不少于5个字">
+			<my-area @select="haha"></my-area>
+			<div class="usertext">
+	       		 <input type="text" v-model="teamInfo.address" placeholder="请填写详细地址，不少于5个字">
+	        </div>
+	        <div class="kong">
+			</div>
+			<div class="header2">
+	            <h4 class="texttitle"><span><img src="./dizhi.png"></span>团队简介</h4>
+	        </div>
+	        <div class="usertextend">
+	       		 <textarea v-model="teamInfo.teamProfile" class="jianjie" rows="10"></textarea>
+	        </div>
+	        <div class="end">
+	        不超过100字
+	        </div>
+	        <div class="eee">
+	        	<input type="button" name=""  class="next" value="下一步" @click="toAddress({path: '/tregisternext'})">
+	        </div>
         </div>
-        <div class="kong">
+		<!-- 服务类型 -->
+		<div class="goodlist" v-show="isShow">
+			<div class="head_top">
+				<div class='tip'>
+	            	<p><span @click="showToggle"><img src="./back.png"></span>服务类型</p>
+	        	</div>
+        	</div>
+			<form action="" method="post">
+				<ul>
+					<li v-for="item in list">
+						<span>{{item.name}}</span>
+						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+							<svg class="icon icon-ok"></svg>
+						</span>
+					</li>
+				</ul>
+			</form>
 		</div>
-		<div class="header2">
-            <h4 class="texttitle"><span><img src="./dizhi.png"></span>团队简介</h4>
-        </div>
-        <div class="usertextend">
-       		 <textarea v-model="teamInfo.teamProfile" class="jianjie"></textarea>
-        </div>
-        <div class="end">
-        不超过100字
-        </div>
-        <div class="eee">
-        	<input type="button" name=""  class="next" value="下一步" @click="toAddress({path: '/tregisternext'})">
-        </div>
+		<!-- 联络团体 -->
+
     </div>
 		
 </template>
@@ -110,7 +138,7 @@
 		        	teamSlogan:null,	//团队口号
 		        	liaisonTeam:null,	//联系团队
 		        	serviceType:null,	//服务类型
-		        	teamType:null,		//团队类别
+		        	teamType:'党政机关',		//团队类别
 		        	teamSub:'中级团队',		//团队种类（大小）
 		        	teamAdmin:null,		//团队管理员
 		        	adminPhone:null,	//联系人电话
@@ -118,7 +146,15 @@
 		        	teamProfile:null,	//团队简介
 		        	area:[]
             	},
+            	isShow:false,
+		        wrap:true,
+		        arr:'',
+		        listSelected:[],
+		        list:{}
             }
+        },
+        mounted(){
+        	this.showList()
         },
         methods:{
 	  		send(){
@@ -135,8 +171,43 @@
                 this.$router.push(path)
             },
             haha(d){
-            	this.area = d
-			}
+            	this.teamInfo.area = d
+			},
+			showToggle(){
+            	this.isShow = !this.isShow
+                if(this.isShow){
+                    this.wrap = false  
+                }else{  
+                    this.wrap = !this.wrap   
+                }  
+            },
+            showList(){
+            	this.$http.get('http://localhost:3000/list').then(response => {
+            		this.list = response.data
+            	})
+            },
+            checkFlag(item){
+	  			if(typeof item.checked == 'undefined'){
+	  				this.$set(item,'checked',true);
+	  				this.arr += item.name+','
+
+		            this.listSelected = this.arr.split(',').slice(0,-1)
+
+		            console.log(this.arr)
+	  				let count = 0
+	  				this.list.forEach((item,index)=>{
+	  					if(item.checked == true){
+	  						count++
+	  					}
+	  				})
+	  				if(count>=3){
+	  					this.isShow = false;
+	  					this.wrap = true;
+	  				}
+	  			}else{
+	  				item.checked = !item.checked
+	  			}
+	  		}
 	  	}
 
     }
@@ -252,8 +323,9 @@
 	
 	.usertextend textarea{
 		border: none; 
-		padding: 2.5rem 0;
-		width: 100%;
+		padding: 0.5rem 2%;
+		text-indent: 2em;
+		width: 96%;
 
 	}
 	.end{
@@ -284,5 +356,71 @@
 	    font-size: 1rem;
 	    appearance:none;
 	    position: relative;
+	}
+
+	.goodlist{
+		width: 100%;
+		font-size: 1rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		background: #fff;
+
+	}
+	.goodlist form{
+		margin-top:10%; 
+	}
+	.goodlist li{ 
+		width: 92%;
+		margin: 0 auto;
+	    border-bottom: 1px solid #dcdcdc;
+	    padding-bottom: 1rem;
+	    margin-bottom: 1rem;
+	    text-align: left;
+	    color: #333;
+		line-height: 1;
+		display: block;
+	}
+	.goodlist li span{
+		vertical-align: middle;
+	}
+	.goodlist li input{
+		vertical-align: sub;
+		float: right;
+	}
+	.list-btn {
+	    float: right;
+	}
+	.head_top{
+	    width: 100%;
+	    font-size:1.2rem;
+	    font-family: arial,'microsoft yahei';
+	    color: #333;
+	    text-align: center;
+	    padding: 0.5rem 0;
+	    border-bottom: 0.5px solid #c9c9c9;
+	}
+	.tip{
+	    width: 96%;
+	    margin:0.5rem auto;
+	    position: relative;
+	}
+	.tip span{
+	    width: 0.7rem;
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: absolute;
+	    left: 0.5rem;
+	}
+	.tip span img{
+	    width: 100%;
+	}
+	.tip p{
+	    vertical-align: middle;
+	    line-height: 1;
+	}
+	.good span{
+		padding-left:1.5rem;
 	}
 </style>

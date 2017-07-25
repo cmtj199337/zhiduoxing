@@ -44,6 +44,10 @@
 			</ul>
 		</div>
 		<foot-bar></foot-bar>
+		<div class="loading" v-if="isLoading">
+            <p><img src="/static/loading.gif" alt=""></p>
+            <span>正在加载</span>
+        </div>
 	</div>
 </template>
 
@@ -60,6 +64,7 @@
 	  	},
 	 	data () {
 		    return {
+		    	isLoading:true,
 		    	index:0,
 		    	iconList:[],
 		    	shoplist:[],
@@ -95,9 +100,10 @@
 	  					this.iconList = data.menu
 	  					this.shoplist = data.goods
 	  					this.article = data.strategy
+
+	  					this.isLoading = false
 	  				}
 	  			})
-	  			this.justify_location()
 	  		}
 	  	}
 	}
@@ -259,4 +265,28 @@
 	    -webkit-line-clamp: 2;
 	    -webkit-box-orient: vertical;
 	}
+	.loading{
+	    position: absolute;
+	    width:4.4rem;
+	    height: 4.4rem;
+	    border-radius: 5px;
+	    text-align: center;
+	    background: rgba(0,0,0,.5);
+	    padding: 0.6rem 0;
+	    box-sizing:border-box;
+	    bottom: 30%;
+	    left:50%;
+	    margin-left: -2.2rem;
+	  }
+	  .loading p{
+	      width:50%;
+	      margin: 0 auto;
+	  }
+	  .loading p>img{
+	      width: 100%;
+	  }
+	  .loading span{
+	    color: #fff;
+	    font-size: 0.65rem;
+	  }
 </style>
