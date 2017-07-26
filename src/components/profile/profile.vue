@@ -46,12 +46,12 @@
 						<span>我的家庭</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li>
+					<li @click="toAddress({path: '/myNews'})">
 						<img class="icon" src="./xx.png">
 						<span>我的消息</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li>
+					<li @click="toAddress({path: '/myCollection'})">
 						<img class="icon" src="./sc.png">
 						<span>我的收藏</span>
 						<img class="arrow" src="./you@2x.png">
@@ -61,7 +61,7 @@
 						<span>我的回馈</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li>
+					<li @click="toAddress({path: '/insurancePolicy'})">
 						<img class="icon" src="./bd.png">
 						<span>我的保单</span>
 						<img class="arrow" src="./you@2x.png">

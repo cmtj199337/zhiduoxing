@@ -44,14 +44,16 @@
         已报名列表<span>20/200<img src="../right.png"></span>
         </div>
 		<div class="touxiang">
-			<img src="../touxiang1.png" class="img1">
-			<img src="../touxiang2.png">
-			<img src="../touxiang3.png">
-			<img src="../touxiang4.png">
-			<img src="../touxiang1.png">
-			<img src="../touxiang2.png">
-			<img src="../touxiang3.png">
-			<img src="../touxiang4.png">
+			<router-link to="/signList">
+				<img src="../touxiang1.png" class="img1">
+				<img src="../touxiang2.png">
+				<img src="../touxiang3.png">
+				<img src="../touxiang4.png">
+				<img src="../touxiang1.png">
+				<img src="../touxiang2.png">
+				<img src="../touxiang3.png">
+				<img src="../touxiang4.png">
+			</router-link>
 		</div>
 		<div class="kong2">
 		</div>

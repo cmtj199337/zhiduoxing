@@ -2,8 +2,7 @@
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
-		<form action="" method="post" @submit.prevent="submit" v-show="wrap" enctype="multipart/form-data"
->
+		<form action="" method="post" @submit.prevent="submit" v-show="wrap" enctype="multipart/form-data">
 			<div class="usertext userphoto">
 				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>
@@ -80,7 +79,6 @@
 	import TimerBtn from '../common/tools/countdown.vue'
 	import UploadImg from '../../components/common/tools/uploadImg.vue'
 	import Toast from '../../components/common/tools/toast.vue'
-
 	export default {
 	  	name: 'iRegister',
 	  	components:{

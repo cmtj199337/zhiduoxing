@@ -88,6 +88,44 @@ const router = new Router({
 			path: '/personalDetails',
 			component:require('../components/profile/personalDetails.vue')
 		},
+		{
+			path: '/myNews',
+			component:require('../components/profile/myNews.vue')
+		},
+		{
+			path: '/insurancePolicy',
+			component:require('../components/profile/insurancePolicy.vue'),
+			redirect:'/insurancePolicy/alreadyPaid',
+			children:[
+				{
+					path: '/insurancePolicy/alreadyPaid',
+					component:require('../components/profile/child/alreadyPaid.vue'),
+				},
+				{
+					path: '/insurancePolicy/unpaid',
+					component:require('../components/profile/child/unpaid.vue'),
+				}
+			]
+		},
+		{
+			path: '/myCollection',
+			component:require('../components/profile/myCollection.vue'),
+			redirect:'/myCollection/team',
+			children:[
+				{
+					path: '/myCollection/article',
+					component:require('../components/profile/collectChild/article.vue'),
+				},
+				{
+					path: '/myCollection/project',
+					component:require('../components/profile/collectChild/project.vue'),
+				},
+				{
+					path: '/myCollection/team',
+					component:require('../components/profile/collectChild/team.vue'),
+				}
+			]
+		},
 		//社区
 		{
 			path: '/communityInteraction',
@@ -106,6 +144,14 @@ const router = new Router({
 			component:require('../components/community/Release.vue')
 		},
 		//项目
+		{
+			path: '/myProject',
+			component:require('../components/project/myProject.vue')
+		},
+		{
+			path: '/confirmEnrollment',
+			component:require('../components/project/confirmEnrollment.vue')
+		},
 		{
 			path: '/projectDetails',
 			component:require('../components/project/projectDetails.vue'),
@@ -128,6 +174,10 @@ const router = new Router({
 		{
 			path: '/voluntaryProjects',
 			component:require('../components/project/voluntaryProjects.vue')
+		},
+		{
+			path: '/signList',
+			component:require('../components/project/signList.vue')
 		},
 		//志愿攻略
 		{
@@ -193,7 +243,37 @@ const router = new Router({
 		{
 			path: '/city',
 			component:require('../components/city/city.vue')
-		}
+		},
+		//心语心愿
+		{
+			path: '/shop',
+			component:require('../components/shop/voluntaryFeedback.vue')
+		},
+		{
+			path: '/shopDetail',
+			component:require('../components/shop/commodityDetails.vue')
+		},
+		{
+			path: '/deliveryAddress',
+			component:require('../components/shop/deliveryAddress.vue')
+		},
+		{
+			path: '/offerLove',
+			component:require('../components/shop/offerLove.vue')
+		},
+		{
+			path: '/offerLovedetails',
+			component:require('../components/shop/offerLovedetails.vue')
+		},
+		//保险
+		{
+			path: '/insurance',
+			component:require('../components/Insurance/voluntaryGuarantee.vue')
+		},
+		{
+			path: '/insuranceDetails',
+			component:require('../components/Insurance/insuranceDetails.vue')
+		},
 	]
 })
 

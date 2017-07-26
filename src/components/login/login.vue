@@ -46,7 +46,6 @@
 		      	showAlert: false, //显示提示组件
                 alertText: null, //提示的内容
                 userType:''
-
 		    }
 	  	},
 	  	mounted(){

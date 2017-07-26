@@ -8,27 +8,9 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 
+// import './config/validate.js'
 //自定义规则
-// import Validator from './assets/js/customValidate';
 
-//VeeValidate语言包切换,放自定义提示前
-
-// Vue.use(VueRouter)
-// const router = new VueRouter({
-//   routes,
-//   mode: routerMode,
-//   strict: process.env.NODE_ENV !== 'production',
-//   scrollBehavior (to, from, savedPosition) {
-//       if (savedPosition) {
-//         return savedPosition
-//     } else {
-//       if (from.meta.keepAlive) {
-//         from.meta.savedPosition = document.body.scrollTop;
-//       }
-//         return { x: 0, y: to.meta.savedPosition ||0}
-//     }
-//   }
-// })
 
 
 import Base from './styles/bace.css'
@@ -47,7 +29,7 @@ router.beforeEach((to, from, next) => {
         }
         else { 
             next({
-                path: '/login',
+                path: '/index',
                 query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
            })
         }
