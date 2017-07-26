@@ -77,10 +77,10 @@
 	}
 
 	.detail img{
-		vertical-align: middle;
+		vertical-align: sub;
 	}
 	.icon{
-		width: 6%;
+		width: 1rem;
 		display: inline-block;
 		padding:0 0.6rem 0 0rem;
 	}

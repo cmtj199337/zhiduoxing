@@ -29,21 +29,21 @@
 		<!-- 栏目列表 -->
 		<div class="column">
 			<ul>
-					<li>
-						<img class="icon" src="./jbxx.png">
-						<span>基本信息</span>
-					</li>
-					<hr>
-					<li>
-						<img class="icon" src="./sz.png">
-						<span>团队管理</span>
-					</li>
-					<hr>
-					<li>
-						<img class="icon" src="./tdbd.png">
-						<span>团队保单</span>
-					</li>
-				</ul>
+				<li @click="toAddress({path: '/teamdetail'})">
+					<img class="icon" src="./jbxx.png">
+					<span>基本信息</span>
+				</li>
+				<hr>
+				<li @click="toAddress({path: '/teammanage'})">
+					<img class="icon" src="./sz.png">
+					<span>团队管理</span>
+				</li>
+				<hr>
+				<li @click="toAddress({path: '/myPolicy'})">
+					<img class="icon" src="./tdbd.png">
+					<span>团队保单</span>
+				</li>
+			</ul>
 		</div>
 
 		<div class="column">
@@ -53,12 +53,12 @@
 						<span>下级团队管理</span>
 					</li>
 					<hr>
-					<li>
+					<li @click="toAddress({path: '/allTeam'})">
 						<img class="icon" src="./qbtdck.png">
 						<span>全部团队查看</span>
 					</li>
 					<hr>
-					<li>
+					<li @click="toAddress({path: '/createTeam'})">
 						<img class="icon" src="./cjtd.png">
 						<span>创建团队</span>
 					</li>
@@ -81,7 +81,22 @@
 	</div>
 </template>
 
+<script>
+	export default {
+	  	name: 'teamcenter',
+	 	data () {
+		    return {
 
+		    }
+	  	},
+	  	methods: {
+        	toAddress(path){
+                this.$router.push(path)
+            }
+        }
+	  
+	}
+</script>
 <style scoped>
 hr{
 		height: 1px;
@@ -129,7 +144,7 @@ hr{
 
 } 
 .topview p{
-	font-size: 0.7rem;
+	font-size: 0.85rem;
 }
 .title{
 	color: #AFAFAF;

@@ -89,6 +89,10 @@ const router = new Router({
 			component:require('../components/profile/personalDetails.vue')
 		},
 		{
+			path: '/myProject',
+			component:require('../components/profile/myProject.vue')
+		},
+		{
 			path: '/myNews',
 			component:require('../components/profile/myNews.vue')
 		},
@@ -126,6 +130,25 @@ const router = new Router({
 				}
 			]
 		},
+		{
+			path: '/myprojectDetails',
+			component:require('../components/profile/projectDetails.vue'),
+			redirect:'/myprojectDetails/detail',
+			children:[
+				{
+					path: '/myprojectDetails/detail',
+					component:require('../components/profile/detailChild/detail.vue')
+				},
+				{
+					path: '/myprojectDetails/introduce',
+					component:require('../components/profile/detailChild/introduce.vue')
+				},
+				{
+					path: '/myprojectDetails/community',
+					component:require('../components/profile/detailChild/community.vue')
+				},
+			]
+		},
 		//社区
 		{
 			path: '/communityInteraction',
@@ -145,32 +168,14 @@ const router = new Router({
 		},
 		//项目
 		{
-			path: '/myProject',
-			component:require('../components/project/myProject.vue')
+			path: '/project',
+			component:require('../components/project/project.vue')
 		},
 		{
 			path: '/confirmEnrollment',
 			component:require('../components/project/confirmEnrollment.vue')
 		},
-		{
-			path: '/projectDetails',
-			component:require('../components/project/projectDetails.vue'),
-			redirect:'/projectDetails/detail',
-			children:[
-				{
-					path: '/projectDetails/detail',
-					component:require('../components/project/child/detail.vue')
-				},
-				{
-					path: '/projectDetails/introduce',
-					component:require('../components/project/child/introduce.vue')
-				},
-				{
-					path: '/projectDetails/community',
-					component:require('../components/project/child/community.vue')
-				},
-			]
-		},
+		
 		{
 			path: '/voluntaryProjects',
 			component:require('../components/project/voluntaryProjects.vue')
@@ -222,7 +227,29 @@ const router = new Router({
 			path: '/teamcenter',
 			component:require('../components/team/teamcenter.vue')
 		},
-
+		{
+			path: '/allTeam',
+			component:require('../components/team/allTeamChecked.vue')
+		},
+		{
+			path: '/myPolicy',
+			component:require('../components/team/myPolicy.vue'),
+			redirect:'/myPolicy/alreadyPaid',
+			children:[
+				{
+					path: '/myPolicy/alreadyPaid',
+					component:require('../components/team/child/alreadyPaid.vue'),
+				},
+				{
+					path: '/myPolicy/unpaid',
+					component:require('../components/team/child/unpaid.vue'),
+				}
+			]
+		},
+		{
+			path: '/createTeam',
+			component:require('../components/team/setUpTeam.vue')
+		},
 		{
 			path: '/itemdetail',
 			component:require('../components/team/ltemdetail.vue')
@@ -238,6 +265,18 @@ const router = new Router({
 		{
 			path: '/teamPresentation',
 			component:require('../components/team/teamPresentation.vue')
+		},
+		{
+			path: '/teamVolunteer',
+			component:require('../components/team/teamVolunteer.vue')
+		},
+		{
+			path: '/detailsOfTheTeam',
+			component:require('../components/team/detailsOfTheTeam.vue')
+		},
+		{
+			path: '/personnelList',
+			component:require('../components/team/personnelList.vue')
 		},
 		//城市选择
 		{
@@ -268,12 +307,17 @@ const router = new Router({
 		//保险
 		{
 			path: '/insurance',
-			component:require('../components/Insurance/voluntaryGuarantee.vue')
+			component:require('../components/insurance/voluntaryGuarantee.vue')
 		},
 		{
 			path: '/insuranceDetails',
-			component:require('../components/Insurance/insuranceDetails.vue')
+			component:require('../components/insurance/insuranceDetails.vue')
 		},
+		//服务中心
+		{
+			path: '/service',
+			component:require('../components/service/service.vue')
+		}
 	]
 })
 

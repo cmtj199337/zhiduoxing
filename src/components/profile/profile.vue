@@ -20,7 +20,7 @@
 						<p>20</p>
 						<span>我的团队</span>
 					</li>
-					<li>
+					<li @click="toAddress({path: '/myProject'})">
 						<p>100</p>
 						<span>我的项目</span>
 					</li>
