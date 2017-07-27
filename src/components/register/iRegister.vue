@@ -3,7 +3,11 @@
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
 		<form action="" method="post" @submit.prevent="submit" v-show="wrap" enctype="multipart/form-data">
-
+		<div>
+	        <label for="email">邮箱：</label>
+	        <input v-validate ="'required|email'" type="text" id="email" name="myEmail">
+	    </div>
+    	<span v-show="errors.has('myEmail')">{{ errors.first('myEmail')}}</span>
 			<div class="usertext userphoto">
 				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>

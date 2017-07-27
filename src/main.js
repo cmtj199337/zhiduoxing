@@ -10,7 +10,7 @@ Vue.use(VueResource)
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 
-// import './config/validate.js'
+import './config/validate.js'
 
 import Base from './styles/bace.css'
 // import 'weui/dist/style/weui.min.css'
