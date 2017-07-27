@@ -28,7 +28,7 @@
 						<p>20</p>
 						<span>志愿时长</span>
 					</li>
-					<li>
+					<li @click="toAddress({path: '/myStarcoin'})">
 						<p>20</p>
 						<span>星币</span>
 					</li>
@@ -56,7 +56,7 @@
 						<span>我的收藏</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li>
+					<li >
 						<img class="icon" src="./hk.png">
 						<span>我的回馈</span>
 						<img class="arrow" src="./you@2x.png">
@@ -66,7 +66,7 @@
 						<span>我的保单</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li>
+					<li @click="toAddress({path: '/service'})">
 						<img class="icon" src="./fuwu.png">
 						<span>服务中心</span>
 						<img class="arrow" src="./you@2x.png">
@@ -74,18 +74,26 @@
 				</ul>
 			</section>
 		</div>
-		<foot-bar></foot-bar>
+		<footer class="foot">
+	        <section @click="toAddress({path: '/index'})">
+	            <img src="/static/footicon/shouye1.png">
+	            <p>首页</p>
+	        </section>
+	        <section @click="toAddress({path: '/scan'})">
+	            <img src="/static/footicon/qiandaodaka1.png">
+	            <p>签到打卡</p>
+	        </section>
+	        <section class="check">
+	            <img src="/static/footicon/geren2.png">
+	            <p>个人中心</p>
+	        </section>
+	    </footer>
 	</div>
 </template>
 
 <script>
-	import footBar from '../common/footer/footer.vue'
-
 	export default {
 	  	name: 'profile',
-	  	components:{
-	  		footBar
-	  	},
 	 	data () {
 		    return {
 		    	
@@ -211,4 +219,28 @@
 	.project ul li span{
 		vertical-align: middle;
 	}
+	.foot{
+        width: 100%;
+        height: 2.5rem;
+        max-width: 720px;
+        padding: 0.3rem 0;
+        position: fixed;
+        bottom: 0;
+        background: #fff;
+        box-shadow: 0px 5px 10px #000;
+        z-index: 10;
+    }
+    .foot section{
+        width: 33.33%;
+        text-align: center;
+        color: #cbcbcb;
+        float: left;
+    }
+    .foot section img{
+        width: 25%;
+        margin: 0 auto;
+    }
+    .check{
+        color: #43B7B6 !important;
+    }
 </style>

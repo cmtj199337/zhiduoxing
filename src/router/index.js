@@ -7,7 +7,7 @@ const router = new Router({
 	routes:[
 		{
 			path: '*',
-			redirect:'/login'
+			redirect:'/index'
 		},
 		//common 用户协议
 		{
@@ -87,6 +87,10 @@ const router = new Router({
 		{
 			path: '/personalDetails',
 			component:require('../components/profile/personalDetails.vue')
+		},
+		{
+			path: '/myStarcoin',
+			component:require('../components/profile/myStarcoin.vue')
 		},
 		{
 			path: '/myProject',
@@ -232,6 +236,26 @@ const router = new Router({
 			component:require('../components/team/allTeamChecked.vue')
 		},
 		{
+			path: '/juniorTeamManagement',
+			component:require('../components/team/juniorTeamManagement.vue')
+		},
+		//子团队管理
+		{
+			path: '/juniorTeamProject',
+			component:require('../components/team/juniorTeamProject.vue'),
+			redirect:'/juniorTeamProject/uncheckPending',
+			children:[
+				{
+					path: '/juniorTeamProject/uncheckPending',
+					component:require('../components/team/junior/uncheckPending.vue'),
+				},
+				{
+					path: '/juniorTeamProject/checkPending',
+					component:require('../components/team/junior/checkPending.vue'),
+				}
+			]
+		},
+		{
 			path: '/myPolicy',
 			component:require('../components/team/myPolicy.vue'),
 			redirect:'/myPolicy/alreadyPaid',
@@ -251,12 +275,28 @@ const router = new Router({
 			component:require('../components/team/setUpTeam.vue')
 		},
 		{
+			path: '/sendProject',
+			component:require('../components/team/publishProject.vue')
+		},
+		{
 			path: '/itemdetail',
 			component:require('../components/team/ltemdetail.vue')
 		},
 		{
 			path: '/teamdetail',
 			component:require('../components/team/teamdetail.vue')
+		},
+		{
+			path: '/teamIntroduction',
+			component:require('../components/team/teamIntroduction.vue')
+		},
+		{
+			path: '/pendingVolunteer',
+			component:require('../components/team/pendingVolunteer.vue')
+		},
+		{
+			path: '/personalData',
+			component:require('../components/team/personalData.vue')
 		},
 		{
 			path: '/teammanage',
@@ -277,6 +317,18 @@ const router = new Router({
 		{
 			path: '/personnelList',
 			component:require('../components/team/personnelList.vue')
+		},
+		{
+			path: '/volunteerList',
+			component:require('../components/team/volunteerList.vue')
+		},
+		{
+			path: '/recordVolunteerTime',
+			component:require('../components/team/recordVolunteerTime.vue')
+		},
+		{
+			path: '/useHelp',
+			component:require('../components/team/useHelp.vue')
 		},
 		//城市选择
 		{
@@ -317,6 +369,10 @@ const router = new Router({
 		{
 			path: '/service',
 			component:require('../components/service/service.vue')
+		},
+		{
+			path: '/servicesDetails',
+			component:require('../components/service/servicesDetails.vue')
 		}
 	]
 })

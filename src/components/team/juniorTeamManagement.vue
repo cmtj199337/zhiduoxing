@@ -1,26 +1,25 @@
 <template>
-	<div class="allTeamChecked">
-		<headerTip message="全部团队查看" goBack="true"></headerTip>
-		<div class="header"><img src="/static/service.png"></div>
+	<div class="juniorTeamManagement">
+		<headerTip message="下级团队管理" goBack="true"></headerTip>
 		<div class="main">
 			<div class="header1">
-				<ul>
-					<li>
-						<img src="./a1.png"><p>平台介绍</p>
-					</li>
-					<li>
-						<img src="./a2.png"><p>使用帮助</p>
-					</li>
+			<ul>
+				<li>
+				<img src="./a@2x.png"><b>27</b><p>团队总数（个）</p>
+				</li>
+				<li>
+				<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
+				</li>
 				</ul>
 			</div>
 			<div class="header2">
-				<ul>
-					<li>
-						<img src="./a3.png" class="zhiyuan"><p>客服中心</p>
-					</li>
-					<li>
-						<img src="./a4.png"><p>意见反馈</p>
-					</li>
+			<ul>
+				<li>
+				<img src="./c@2x.png" class="zhiyuan"><b>2000</b><p>志愿者总人数（人）</p>
+				</li>
+				<li>
+				<img src="./d@2x.png"><b>2200</b><p>志愿时长（小时）</p>
+				</li>
 				</ul>
 			</div>
 		</div>
@@ -30,7 +29,7 @@
 	import headerTip from '../../components/common/header/header.vue'
 	export default{
 
-		name:'allTeamChecked',
+		name:'juniorTeamManagement',
 		components:{
 	  		headerTip
 	  	},
@@ -39,21 +38,15 @@
 				
 			}
 		},
-		methods:{
-			getList(){
-				this.$http.get('').then(res=>{
-					
-				})
-			}
-		}
+
 	}
 </script>
 <style scoped>
 .main{
-	background:#0000001a;
+	background:#f6f6f9;
 }
 .header1{
-	padding:0.3rem 0 0 0;
+	padding:0.3rem 0;
 }
 .header1 ul{
 display:flex;
@@ -77,10 +70,10 @@ border-radius:5px;
 }
 .header1 ul li b{
 	font-size:2rem;
-	color: #555;
+
 }
 .header2{
-	padding:0 0 0.3rem 0;
+	padding:0.3rem 0;
 }
 .header2 ul{
 display:flex;
@@ -104,12 +97,9 @@ border-radius:5px;
 }
 .header2 ul li b{
 	font-size:2rem;
-	color: #555
+
 }
 .header2 ul li .zhiyuan{
-	width:23%;
-}
-.main li p{
-	padding-top: 0.5rem;
+	width:13%;
 }
 </style>

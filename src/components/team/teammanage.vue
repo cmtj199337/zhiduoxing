@@ -116,8 +116,8 @@
 		width: 35%;
 		display: inline-block;
 		text-align: right;
-		position:fixed;
-		right: 1rem;
+		position:absolute;
+		right: 0;
 		/*top: 1.2rem;*/
 	}
 

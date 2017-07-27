@@ -2,10 +2,10 @@
 	<div class="volunteerTeam">
 		<headerTip message="志愿团队" goBack="true"></headerTip>
 		<div class="sousuo">
-			<input v-model="search" name="" placeholder="       搜索">
-		<img src="./sou.png"><span>筛选<img src="./shaixuan.png"></span>
+			<input class="search" name="" placeholder="       搜索">
+			<img src="./sou.png"><span style="color:#43B7B6">筛选<img src="./shaixuan.png"></span>
 		</div>
-		<div class="mm">
+		<div class="mm" @click="toAddress({path: '/teamPresentation'})">
 			<ul>
 				<li>
 					<img src="./zt.png">
@@ -33,6 +33,11 @@
 				
 			}
 		},
+		methods:{
+			toAddress(path){
+			    this.$router.push(path)
+			}
+		}
 
 	}
 </script>
@@ -42,7 +47,12 @@
 	padding:0.8rem 0;
 	position:relative; 
 }
-	
+.search{
+	text-indent: 1.5rem;
+}
+.search::-webkit-input-placeholder{
+	text-indent: 0;
+}
 .sousuo input{
 	border:none;
 	border-radius:0.2rem;

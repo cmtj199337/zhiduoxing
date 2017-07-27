@@ -3,6 +3,7 @@
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
 		<form action="" method="post" @submit.prevent="submit" v-show="wrap" enctype="multipart/form-data">
+
 			<div class="usertext userphoto">
 				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>
@@ -95,7 +96,14 @@
 		        }],
 		        toastshow:false,
 		        toasttext:'',
-		        list:{},					//擅长选项
+		        list:[
+		        	{value:'保险服务'},
+		        	{value:'保险服务'},
+		        	{value:'保险服务'},
+		        	{value:'保险服务'},
+		        	{value:'保险服务'},
+		        	{value:'保险服务'}
+		        ],					//擅长选项
 		        userinfo:{
 		        	userPhoto:[],			//用户头像
 		        	phoneNumber:'',			//手机号
@@ -172,27 +180,26 @@
             checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
-	  				this.arr += item.value+','
 
-		            this.userinfo.goodSelect = this.arr.split(',').slice(0,-1)
+	  				if(item.checked == true){
+	  					this.arr += item.value+','
+	  					this.userinfo.goodSelect = this.arr.split(',').slice(0,-1)
 
-	  				let count = 0
-	  				this.list.forEach((item,index)=>{
-	  					if(item.checked == true){
-	  						count++
-	  					}
-	  				})
-	  				if(count>=3){
-	  					this.isShow = false;
-	  					this.wrap = true;
+	  					let count = 0
+		  				this.list.forEach((item,index)=>{
+		  					if(item.checked == true){
+		  						count++
+		  					}
+		  				})
+		  				if(count>=3){
+		  					this.isShow = false;
+		  					this.wrap = true;
+		  				}
 	  				}
-	  			}else if(item.checked == false){
-	  				this.arr = ''
-	  				item.checked = !item.checked
 	  			}else{
-	  				this.arr += item.value+','
 	  				item.checked = !item.checked
-	  				
+	  				this.arr += item.value+','
+	  				this.userinfo.goodSelect = this.arr.split(',').slice(0,-1)
 	  			}
 	  		}
 

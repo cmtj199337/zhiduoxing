@@ -1,7 +1,7 @@
 <template>
     <div class="_full_router component-sao-yi-sao">
         <div class="_full_inner">
-            <headerTip message="扫一扫"></headerTip>
+            <!-- <headerTip message="扫一扫"></headerTip> -->
             <div class="_cover-content _effect" :class="{'_effect--30':decline}">
                 <div class="sao-yi-sao-panel">
                     <div :class="menu[current].type">

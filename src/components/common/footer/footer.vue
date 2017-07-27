@@ -1,11 +1,11 @@
 <template>
     <footer class="foot">
         <!-- 由于mocudata，手机无法显示数据 -->
-         <section @click="toAddress({path: item.path})" :class="check" v-for="item in footlist">
+        <!-- <section @click="toAddress({path: item.path})" :class="check" v-for="item in footlist">
             <img :src="item.src">
             <p v-text="item.text"></p>
-        </section>
-<!--         <section @click="toAddress({path: '/index'})" class="check">
+        </section> -->
+        <section @click="toAddress({path: '/index'})" class="check">
             <img src="./shouye1.png">
             <p>首页</p>
         </section>
@@ -16,7 +16,7 @@
         <section @click="toAddress({path: '/profile'})">
             <img src="./geren1.png">
             <p>个人中心</p>
-        </section> -->
+        </section>
     </footer>
 </template>
 

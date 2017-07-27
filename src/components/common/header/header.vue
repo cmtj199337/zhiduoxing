@@ -32,6 +32,7 @@
     text-align: center;
     padding: 0.5rem 0;
     border-bottom: 0.5px solid #c9c9c9;
+    background: #fff;
 }
 .tip{
     width: 96%;

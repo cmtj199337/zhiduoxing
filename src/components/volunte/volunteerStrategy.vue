@@ -3,7 +3,7 @@
 	<div class="volunteerStrategy">
 		<headerTip message="志愿攻略" goBack="true"></headerTip>
 		<div class="sousuo">
-			<input v-model="search" name="" placeholder="       搜索">
+			<input name="" placeholder="       搜索">
 			<img src="./sou.png">
 		</div>
 		<div class="header">
@@ -40,7 +40,7 @@
 			</div>
 			<div class="text">
 				<ul>
-					<li>
+					<li @click="toAddress({path: '/servicesDetails'})">
 						<span style="width:40%"><img src="./tup3.png"></span>
 						<span>
 							<h3>高原上的藏区小学</h3>
@@ -81,6 +81,11 @@
 				index:0,
 			}
 		},
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            }
+		}
 	}
 
 </script>

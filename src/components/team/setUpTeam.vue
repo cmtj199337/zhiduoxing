@@ -5,19 +5,19 @@
             <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
         </div>
         <div class="usertext tlo">
-			<router-link to="goodlist"><span>团队logo<img src="./tlogo1.png"></span></router-link>
+			<a href="javascript:;"><span>团队logo<img src="./tlogo1.png"></span></a>
 		</div>
 		<div class="usertext">
 			<input type="password" placeholder="请输入团队口号" /><br />
 		</div>
 		<div class="usertext bottom">
-			<router-link to="goodlist"><span>团队种类：中级团队<img src="./xial@2x.png"></span></router-link>
+			<a href="javascript:;"><span>团队种类：中级团队<img src="./xial@2x.png"></span></a>
 		</div>
 		 <div class="usertext right">
-			<router-link to="goodlist"><span>服务类型<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>服务类型<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>团队类别：党政机关<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>团队类别：党政机关<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext">
         	<input type="text" name="" placeholder="请输入团队管理员">
@@ -31,10 +31,10 @@
             <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>团队地址</h4>
         </div>
         <div class="usertext right">
-			<router-link to="goodlist"><span>所在地区<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>所在地区<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>所在区县<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>所在区县<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext">
        		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字">

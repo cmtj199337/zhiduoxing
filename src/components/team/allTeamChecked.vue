@@ -5,21 +5,21 @@
 		<div class="main">
 			<div class="header1">
 			<ul>
-				<li>
-				<img src="./a@2x.png"><b>27</b><p>团队总数（个）</p>
+				<li >
+					<img src="./a@2x.png"><b>27</b><p>团队总数（个）</p>
 				</li>
 				<li>
-				<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
+					<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
 				</li>
 				</ul>
 			</div>
 			<div class="header2">
 			<ul>
 				<li>
-				<img src="./c@2x.png" class="zhiyuan"><b>2000</b><p>志愿者总人数（人）</p>
+					<img src="./c@2x.png" class="zhiyuan"><b>2000</b><p>志愿者总人数（人）</p>
 				</li>
 				<li>
-				<img src="./d@2x.png"><b>2200</b><p>志愿时长（小时）</p>
+					<img src="./d@2x.png"><b>2200</b><p>志愿时长（小时）</p>
 				</li>
 				</ul>
 			</div>
@@ -39,6 +39,11 @@
 				
 			}
 		},
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            }
+		}
 
 	}
 </script>
@@ -104,5 +109,8 @@ border-radius:5px;
 }
 .header2 ul li .zhiyuan{
 	width:13%;
+}
+.main li p{
+	padding-top: 0.3rem;
 }
 </style>

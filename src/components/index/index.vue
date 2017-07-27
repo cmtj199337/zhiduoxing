@@ -12,38 +12,131 @@
 		<div class="classify clearfix">
 			<input class="search" type="search" placeholder="搜索" align="center">
 			<ul>
-				<li v-for="item in filtIcon">
+				<!-- <li v-for="item in filtIcon">
 					<router-link :to="item.url">
 						<img :src="item.icon" alt="">
 						<span>{{item.name}}</span>
 					</router-link>
+				</li> -->
+				<li>
+					<router-link to="volunteerTeam">
+						<img src="./7.png" alt="">
+						<span>志愿团队</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="voluntaryProjects">
+						<img src="./8.png" alt="">
+						<span>志愿项目</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="insurance">
+						<img src="./3.png" alt="">
+						<span>志愿保障</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="makeupTime">
+						<img src="./6.png" alt="">
+						<span>补录时长</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="shop">
+						<img src="./5.png" alt="">
+						<span>志愿回馈</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="communityInteraction">
+						<img src="./2.png" alt="">
+						<span>社区互动</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="volunteerStrategy">
+						<img src="./4.png" alt="">
+						<span>志愿攻略</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="service">
+						<img src="./1.png" alt="">
+						<span>服务中心</span>
+					</router-link>
 				</li>
 			</ul>
 		</div>
+		<swiper class="swiper"></swiper>
 		<div class="shoplist title">
-			<h5><i></i>猜你喜欢<span>更多</span></h5>
+			<h5><i></i>猜你喜欢<span @click="toAddress({path: '/shop'})">更多</span></h5>
 			<ul>
-				<li v-for="item in filtShop">
+				<!-- <li v-for="item in filtShop">
 					<img class="shop" :src="item.itemPicture">
 					<p>{{item.itemName}}</p>
 					<p><img class="star" src="./star.png"><span>{{item.itemPrice}}</span></p>
+				</li> -->
+				<li @click="toAddress({path: '/shopDetail'})">
+					<img class="shop" src="/static/list1.png">
+					<p>志愿者短T</p>
+					<p><img class="star" src="./star.png"><span>300</span></p>
+				</li>
+				<li @click="toAddress({path: '/shopDetail'})">
+					<img class="shop" src="/static/list1.png">
+					<p>志愿者短T</p>
+					<p><img class="star" src="./star.png"><span>300</span></p>
+				</li>
+				<li @click="toAddress({path: '/shopDetail'})">
+					<img class="shop" src="/static/list1.png">
+					<p>志愿者短T</p>
+					<p><img class="star" src="./star.png"><span>300</span></p>
 				</li>
 			</ul>
 		</div>
 		<div class="article title">
 			<h5><i></i>发现精彩<span>更多</span></h5>
 			<ul>
-				<li v-for="item in filtArticle">
+				<!-- <li v-for="item in filtArticle">
 					<div class="picture"><img src="/static/article1.png"></div>
 					<div class="text">
 						<h6>{{item.title}}</h6>
 						<span>{{item.creatTime}}</span>
 						<p>{{item.intro}}</p>
 					</div>
+				</li> -->
+				<li>
+					<div class="picture"><img src="/static/article1.png"></div>
+					<div class="text">
+						<h6>高原上的藏区小学</h6>
+						<span>17/02/05</span>
+						<p>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</p>
+					</div>
+				</li>
+				<li>
+					<div class="picture"><img src="/static/article2.png"></div>
+					<div class="text">
+						<h6>头上安装了一根线天线</h6>
+						<span>17/02/05</span>
+						<p>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</p>
+					</div>
 				</li>
 			</ul>
 		</div>
-		<foot-bar></foot-bar>
+		<footer class="foot">
+	        <section class="check">
+	            <img src="/static/footicon/shouye2.png">
+	            <p>首页</p>
+	        </section>
+	        <section @click="toAddress({path: '/scan'})">
+	            <img src="/static/footicon/qiandaodaka1.png">
+	            <p>签到打卡</p>
+	        </section>
+	        <section @click="toAddress({path: '/profile'})">
+	            <img src="/static/footicon/geren1.png">
+	            <p>个人中心</p>
+	        </section>
+	    </footer>
 		<div class="loading" v-if="isLoading">
             <p><img src="/static/loading.gif" alt=""></p>
             <span>正在加载</span>
@@ -53,18 +146,17 @@
 
 <script>
 	import { Swipe, SwipeItem } from 'c-swipe';
-	import footBar from '../common/footer/footer.vue'
-
+	import Swiper from '../common/swiper.vue'
 	export default {
 	  	name: 'index',
 	  	components:{
 	  		Swipe,
 	  		SwipeItem,
-	  		footBar
+	  		Swiper
 	  	},
 	 	data () {
 		    return {
-		    	isLoading:true,
+		    	isLoading:false,
 		    	index:0,
 		    	iconList:[],
 		    	shoplist:[],
@@ -78,7 +170,7 @@
 	            let res = response.data;
 	            this.guessCity = res.name;
 	        })
-	  		this.showList()
+	  		// this.showList()
 	  	},
 	  	computed:{
 		    filtIcon() {
@@ -104,7 +196,10 @@
 	  					this.isLoading = false
 	  				}
 	  			})
-	  		}
+	  		},
+	  		toAddress(path){
+                this.$router.push(path)
+            }
 	  	}
 	}
 </script>
@@ -114,6 +209,7 @@
 	.index{
 		position: relative;
 		padding-bottom: 15%;
+		background: #f5f5f5;
 	}
 	.headerBar{
 		position: absolute;
@@ -167,11 +263,12 @@
 	.search{
 	    width: 80%;
 	    border: 0; 
-	    margin: 0.5rem auto;
-	    height: 2.5rem;
+	    margin: 1rem auto;
+	    height: 2rem;
 	    font-size: 1rem;
 	    text-align: center;
 	    color: #C9C9C9;
+	    background: #f5f5f5;
 	}
 	.search::-webkit-input-placeholder{
 		color: #C9C9C9;
@@ -179,7 +276,11 @@
 	}
 	.shoplist{
 		width: 100%;
-		margin-top:2rem; 
+		margin-top:0.5rem;
+		padding-top: 1rem;
+	}
+	.title{
+		background: #fff;
 	}
 	.title h5{
 		font-size: 1rem;
@@ -222,7 +323,8 @@
 		font-size: 0.85rem;
 	}
 	.article{
-
+		margin-top: 0.5rem;
+		padding-top: 1rem;
 	}
 	.article ul{
 		
@@ -289,4 +391,31 @@
 	    color: #fff;
 	    font-size: 0.65rem;
 	  }
+	.foot{
+        width: 100%;
+        height: 2.5rem;
+        max-width: 720px;
+        padding: 0.3rem 0;
+        position: fixed;
+        bottom: 0;
+        background: #fff;
+        box-shadow: 0px 5px 10px #000;
+        z-index: 10;
+    }
+    .foot section{
+        width: 33.33%;
+        text-align: center;
+        color: #cbcbcb;
+        float: left;
+    }
+    .foot section img{
+        width: 25%;
+        margin: 0 auto;
+    }
+    .check{
+        color: #43B7B6 !important;
+    }
+    .swiper{
+    	margin-top: 0.8rem;
+    }
 </style>

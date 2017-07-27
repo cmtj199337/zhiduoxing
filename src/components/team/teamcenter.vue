@@ -48,35 +48,35 @@
 
 		<div class="column">
 			<ul>
-					<li>
-						<img class="icon" src="./xjtdgl.png">
-						<span>下级团队管理</span>
-					</li>
-					<hr>
-					<li @click="toAddress({path: '/allTeam'})">
-						<img class="icon" src="./qbtdck.png">
-						<span>全部团队查看</span>
-					</li>
-					<hr>
-					<li @click="toAddress({path: '/createTeam'})">
-						<img class="icon" src="./cjtd.png">
-						<span>创建团队</span>
-					</li>
-					<hr>
-					<li>
-						<img class="icon" src="./cjxm.png">
-						<span>创建项目</span>
-					</li>
-				</ul>
+				<li @click="toAddress({path: '/juniorTeamManagement'})">
+					<img class="icon" src="./xjtdgl.png">
+					<span>下级团队管理</span>
+				</li>
+				<hr>
+				<li @click="toAddress({path: '/allTeam'})">
+					<img class="icon" src="./qbtdck.png">
+					<span>全部团队查看</span>
+				</li>
+				<hr>
+				<li @click="toAddress({path: '/createTeam'})">
+					<img class="icon" src="./cjtd.png">
+					<span>创建团队</span>
+				</li>
+				<hr>
+				<li @click="toAddress({path: '/sendProject'})">
+					<img class="icon" src="./cjxm.png">
+					<span>创建项目</span>
+				</li>
+			</ul>
 		</div>
 
 			<div class="column" style="">
 			<ul>
-					<li style="border:none;">
-						<img class="icon" src="./sybz.png">
-						<span>使用帮助</span>
-					</li>
-				</ul>
+				<li style="border:none;" @click="toAddress({path: '/useHelp'})">
+					<img class="icon" src="./sybz.png">
+					<span>使用帮助</span>
+				</li>
+			</ul>
 		</div>
 	</div>
 </template>

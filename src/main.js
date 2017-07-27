@@ -7,11 +7,10 @@ import store from './vuex/store'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
 
 // import './config/validate.js'
-//自定义规则
-
-
 
 import Base from './styles/bace.css'
 // import 'weui/dist/style/weui.min.css'
@@ -72,7 +71,6 @@ Vue.prototype.delCookie =(name) => {
   if (cval != null)
     document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 }
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

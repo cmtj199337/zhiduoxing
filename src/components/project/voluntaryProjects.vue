@@ -2,36 +2,37 @@
 	<div class="voluntaryProjects">
 		<headerTip message="项目列表" goBack="true"></headerTip>
 		<div class="sousuo">
-			<input v-model="search" name="" placeholder="搜索">
-		<img src="./sou.png"><span>筛选<img src="./shaixuan.png"></span>
+			<input class="search" name="" placeholder="       搜索">
+			<img src="./sou.png"><span style="color:#43B7B6">筛选<img src="./shaixuan.png"></span>
 		</div>
 		<div class="header">
 		<ul>
-		<li>全部</li>
-		<li>待启动</li>
-		<li>招募中</li>
-		<li>进行中</li>
-		<li>已结束</li>
+			<li>全部</li>
+			<li>待启动</li>
+			<li>招募中</li>
+			<li>进行中</li>
+			<li>已结束</li>
 		</ul>
 		</div>
 		<div class="main">
-		<span>
-		<img src="./xiangm.png" >
-		<img src="./teb2.png" >
-		<img src="./quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
-		<img src="./xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
-		<img src="./quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
-		<img src="./baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
-		<ul class="te">
-		<li>北京市朝阳区</li>
-		<li>50/100</li>
-		<li style="text-align:right.png">待启动</li>
-		</ul>
-		<ul class="te2">
-		<li>智多星项目名称</li>
-		<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
-		</ul>
-		</span>
+			<span @click="toAddress({path: '/myprojectDetails'})">
+				<img src="./xiangm.png" >
+				<img src="./teb2.png" >
+				<img src="./quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
+				<img src="./xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
+				<img src="./quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
+				<img src="./baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
+				<ul class="te">
+					<li>北京市朝阳区</li>
+					<li>50/100</li>
+					<li style="text-align:right.png">待启动</li>
+				</ul>
+				<ul class="te2">
+					<li>智多星项目名称</li>
+					<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
+				</ul>
+			</span>
+
 		</div>
 	</div>
 	</template>
@@ -48,6 +49,11 @@
 				
 			}
 		},
+		methods:{
+			toAddress(path){
+			    this.$router.push(path)
+			}
+		}
 
 	}
 </script>
@@ -56,7 +62,12 @@
 	padding:0.8rem 0;
 	position:relative; 
 }
-	
+.search{
+	text-indent: 1.5rem;
+}
+.search::-webkit-input-placeholder{
+	text-indent: 0;
+}
 .sousuo input{
 	border:none;
 	border-radius:0.3rem;

@@ -1,0 +1,57 @@
+<template>
+	<div class="juniorTeamProject">
+		<headerTip message="下级团队项目" goBack="true"></headerTip>
+		<div class="header">
+			<ul>
+			<li><router-link to="/juniorTeamProject/uncheckPending"><span>待审核</span></router-link></li>
+			<li><router-link to="/juniorTeamProject/checkPending"><span>已审核</span></router-link></li>
+			</ul>
+		</div>
+		<div class="kong"></div>
+		<router-view></router-view>
+	</div>
+</template>
+<script>
+	import headerTip from '../../components/common/header/header.vue'
+	export default{
+		name:'juniorTeamProject',
+		components:{
+	  		headerTip
+	  	},
+		data(){
+			return {
+			}
+		},
+
+	}
+</script>
+<style scoped>
+span{
+	font-size:0.85rem;
+	}
+.router-link-active{
+	padding-bottom: 0.4rem;
+	color: #43B7B5 !important;
+	border-bottom: 3px solid #43B7B5;
+}
+.header ul li a {
+	color:#333;
+}
+.kong{
+	padding: 0.4rem 0;
+	background: #F5F5F5;
+}
+.header{
+	padding: 0.4rem 0;
+}
+.header ul{
+	display: flex;
+	margin:0.1rem 0;
+	padding: 0.2rem 0;
+	background: white;
+	text-align: center;
+}
+.header ul li{
+	width: 50%;
+}
+</style>
