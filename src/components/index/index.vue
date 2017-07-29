@@ -95,7 +95,7 @@
 			</ul>
 		</div>
 		<div class="article title">
-			<h5><i></i>发现精彩<span>更多</span></h5>
+			<h5><i></i>发现精彩<span @click="toAddress({path: '/volunteerStrategy'})">更多</span></h5>
 			<ul>
 				<!-- <li v-for="item in filtArticle">
 					<div class="picture"><img src="/static/article1.png"></div>
@@ -105,7 +105,7 @@
 						<p>{{item.intro}}</p>
 					</div>
 				</li> -->
-				<li>
+				<li @click="toAddress({path: '/servicesDetails'})">
 					<div class="picture"><img src="/static/article1.png"></div>
 					<div class="text">
 						<h6>高原上的藏区小学</h6>
@@ -113,7 +113,7 @@
 						<p>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</p>
 					</div>
 				</li>
-				<li>
+				<li @click="toAddress({path: '/servicesDetails'})">
 					<div class="picture"><img src="/static/article2.png"></div>
 					<div class="text">
 						<h6>头上安装了一根线天线</h6>

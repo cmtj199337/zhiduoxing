@@ -2,9 +2,9 @@
 	<div class="voluntaryFeedback">
 		<headerTip message="志愿回馈" goBack="true"></headerTip>
 		<swipe v-model="index" style="text-align: center;">
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/vobanner.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/vobanner.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/vobanner.png" alt=""></swipe-item>
 		</swipe>
 		<div class="header">
 		<span class="sp1"><img src="./shangp.png" ></span>

@@ -102,56 +102,35 @@ const router = new Router({
 		},
 		{
 			path: '/insurancePolicy',
-			component:require('../components/profile/insurancePolicy.vue'),
-			redirect:'/insurancePolicy/alreadyPaid',
-			children:[
-				{
-					path: '/insurancePolicy/alreadyPaid',
-					component:require('../components/profile/child/alreadyPaid.vue'),
-				},
-				{
-					path: '/insurancePolicy/unpaid',
-					component:require('../components/profile/child/unpaid.vue'),
-				}
-			]
+			component:require('../components/profile/insurancePolicy.vue')
 		},
 		{
 			path: '/myCollection',
-			component:require('../components/profile/myCollection.vue'),
-			redirect:'/myCollection/team',
-			children:[
-				{
-					path: '/myCollection/article',
-					component:require('../components/profile/collectChild/article.vue'),
-				},
-				{
-					path: '/myCollection/project',
-					component:require('../components/profile/collectChild/project.vue'),
-				},
-				{
-					path: '/myCollection/team',
-					component:require('../components/profile/collectChild/team.vue'),
-				}
-			]
+			component:require('../components/profile/myCollection.vue')
 		},
 		{
 			path: '/myprojectDetails',
-			component:require('../components/profile/projectDetails.vue'),
-			redirect:'/myprojectDetails/detail',
-			children:[
-				{
-					path: '/myprojectDetails/detail',
-					component:require('../components/profile/detailChild/detail.vue')
-				},
-				{
-					path: '/myprojectDetails/introduce',
-					component:require('../components/profile/detailChild/introduce.vue')
-				},
-				{
-					path: '/myprojectDetails/community',
-					component:require('../components/profile/detailChild/community.vue')
-				},
-			]
+			component:require('../components/profile/projectDetails.vue')
+		},
+		{
+			path: '/myFamily',
+			component:require('../components/profile/myFamily.vue')
+		},
+		{
+			path: '/addFamily',
+			component:require('../components/profile/addFamily.vue')
+		},
+		{
+			path: '/checkLogistics',
+			component:require('../components/profile/checkLogistics.vue')
+		},
+		{
+			path: '/checkLog',
+			component:require('../components/profile/checkLog.vue')
+		},
+		{
+			path: '/myFeedback',
+			component:require('../components/profile/myFeedback.vue')
 		},
 		//社区
 		{
@@ -188,6 +167,14 @@ const router = new Router({
 			path: '/signList',
 			component:require('../components/project/signList.vue')
 		},
+		{
+			path: '/projectList',
+			component:require('../components/project/projectList.vue')
+		},
+		{
+			path: '/projectQrCode',
+			component:require('../components/project/projectQrCode.vue')
+		},
 		//志愿攻略
 		{
 			path: '/volunteerStrategy',
@@ -223,8 +210,20 @@ const router = new Router({
 			component:require('../components/marktime/informationFilling.vue')
 		},
 		{
+			path: '/informationFill',
+			component:require('../components/marktime/informationFill.vue')
+		},
+		{
 			path: '/durationApproval',
 			component:require('../components/marktime/durationApproval.vue')
+		},
+		{
+			path: '/timeInput',
+			component:require('../components/marktime/timeInput.vue')
+		},
+		{
+			path: '/personalLength',
+			component:require('../components/marktime/personalLength.vue')
 		},
 		// 团队中心
 		{
@@ -242,33 +241,11 @@ const router = new Router({
 		//子团队管理
 		{
 			path: '/juniorTeamProject',
-			component:require('../components/team/juniorTeamProject.vue'),
-			redirect:'/juniorTeamProject/uncheckPending',
-			children:[
-				{
-					path: '/juniorTeamProject/uncheckPending',
-					component:require('../components/team/junior/uncheckPending.vue'),
-				},
-				{
-					path: '/juniorTeamProject/checkPending',
-					component:require('../components/team/junior/checkPending.vue'),
-				}
-			]
+			component:require('../components/team/juniorTeamProject.vue')
 		},
 		{
 			path: '/myPolicy',
-			component:require('../components/team/myPolicy.vue'),
-			redirect:'/myPolicy/alreadyPaid',
-			children:[
-				{
-					path: '/myPolicy/alreadyPaid',
-					component:require('../components/team/child/alreadyPaid.vue'),
-				},
-				{
-					path: '/myPolicy/unpaid',
-					component:require('../components/team/child/unpaid.vue'),
-				}
-			]
+			component:require('../components/team/myPolicy.vue')
 		},
 		{
 			path: '/createTeam',
@@ -330,6 +307,10 @@ const router = new Router({
 			path: '/useHelp',
 			component:require('../components/team/useHelp.vue')
 		},
+		{
+			path: '/bulletedList',
+			component:require('../components/team/bulletedList.vue')
+		},
 		//城市选择
 		{
 			path: '/city',
@@ -373,7 +354,24 @@ const router = new Router({
 		{
 			path: '/servicesDetails',
 			component:require('../components/service/servicesDetails.vue')
-		}
+		},
+		{
+			path: '/detailsProblem',
+			component:require('../components/service/detailsProblem.vue')
+		},
+		{
+			path: '/platformIntroduction',
+			component:require('../components/service/platformIntroduction.vue')
+		},
+		{
+			path: '/feedback',
+			component:require('../components/service/feedback.vue')
+		},
+		//项目周期
+		{
+			path: '/during',
+			component:require('../components/during/projectCycle.vue')
+		},
 	]
 })
 

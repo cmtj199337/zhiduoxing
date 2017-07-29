@@ -81,9 +81,6 @@
 	width:1rem;
 	height:1rem;
 	margin-top:0.8rem;
-	
-
-
 }
 
 .header1 ul{
@@ -140,7 +137,12 @@
 .header2 ul li p span{
 	margin-left:0.2rem;
 }
-
+.end{
+	width: 100%;
+	position: fixed;
+	background: #fff;
+	bottom: 0;
+}
 .end ul {
 	display:flex;
 }

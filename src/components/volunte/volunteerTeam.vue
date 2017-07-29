@@ -16,6 +16,15 @@
 						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
 					</div>
 				</li>
+				<li>
+					<img src="./zt.png">
+					<h3>北京西站地区志愿服务</h3>
+					<div class="m1">
+						<div class="mm1"><span><i>120</i>小时</span><p>志愿总时长</p></div>
+						<div class="mm1"><span><i>200</i>人</span><p>团队人数</p></div>
+						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -88,14 +97,18 @@
 	border-radius:7px;
 	margin-left:15%;
 	margin-right: 2%;
-	top: 5%;
+	position:relative;
+	margin-bottom: 0.6rem;
+}
+.mm ul li:last-child{
+	margin-bottom: 0;
 }
 .mm ul li img{
 	width:5rem;
 	height:5rem;
 	position:absolute;
-	left: 2%;
-	top:14%;
+	left: -2.5rem;
+	top:5%;
 }
 .mm ul li .m1{
 	display:flex;

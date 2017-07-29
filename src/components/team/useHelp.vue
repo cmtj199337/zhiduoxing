@@ -1,6 +1,6 @@
 <template>
 	<div class="useHelp">
-		<headerTip message="使用帮助（团队）" goBack="true"></headerTip>
+		<headerTip message="使用帮助" goBack="true"></headerTip>
 		<div class="kong"></div>
 		<div class="main">
 		<div class="title">

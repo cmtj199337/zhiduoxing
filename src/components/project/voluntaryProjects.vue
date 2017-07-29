@@ -7,11 +7,14 @@
 		</div>
 		<div class="header">
 		<ul>
-			<li>全部</li>
-			<li>待启动</li>
-			<li>招募中</li>
-			<li>进行中</li>
-			<li>已结束</li>
+		<!-- 	<li><span class="active">全部</span></li>
+			<li><span>待启动</span></li>
+			<li><span>招募中</span></li>
+			<li><span>进行中</span></li>
+			<li><span>已结束</span></li> -->
+			<li v-for="(item,index) in tabs">
+					<span :class="{active: index == iscur }" @click="toggle(index)">{{item.type}}</span>
+				</li>
 		</ul>
 		</div>
 		<div class="main">
@@ -46,13 +49,22 @@
 	  	},
 		data(){
 			return {
-				
+				iscur:0,
+                tabs:[
+				 	{type: '全部'},  
+				 	{type: '招募中'},
+				 	{type: '进行中'},
+				 	{type: '已结束'}
+				],
 			}
 		},
 		methods:{
 			toAddress(path){
 			    this.$router.push(path)
-			}
+			},
+			 toggle(index) {
+		    	this.iscur = index
+		    }
 		}
 
 	}
@@ -96,9 +108,17 @@
 	display:flex;
 }
 .header ul li{
-	width:20%;
+	width:25%;
 	text-align:center;
 	padding-bottom:0.5rem;
+}
+.header ul li span{
+	display: inline-block;
+	padding-bottom: 0.4rem;
+}
+.active{
+	color: #43B7B5;
+    border-bottom: 3px solid #43B7B5;
 }
 .main{
 	background:#F5F5F5;

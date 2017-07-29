@@ -1,5 +1,5 @@
 <template>
-<div class="uncheckPending">
+<div class="uncheckPend">
 	<div class="main">
 			<span>
 			<img src="../banner@2x.png" >
@@ -74,6 +74,11 @@
 	</div>
 </div>
 </template>
+<script>
+	export default{
+		name:'uncheckPend',
+	}
+</script>
 <style scoped>
 .main{
 	background:#F5F5F5;

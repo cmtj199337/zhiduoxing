@@ -4,31 +4,43 @@
 		<headerTip message="我的保单" goBack="true"></headerTip>
 		<div class="header">
 			<ul>
-				<li @click="tabToggle">
-					<router-link to="/insurancePolicy/alreadyPaid"><span>已支付</span></router-link>
-				</li>
-				<li>
-					<router-link to="/insurancePolicy/unpaid"><span>未支付</span></router-link>
+				<li v-for="(item,index) in tabs">
+					<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
 				</li>
 			</ul>
 		</div>
 		<div class="kong"></div>
-		<router-view></router-view>
+		<component :is='currentView' keep-alive></component>
 		</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import alreadyPaid from '../../components/profile/child/alreadyPaid.vue'
+	import UnPaid from '../../components/profile/child/unpaid.vue'
 	export default{
 
 		name:'insurancePolicy',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		alreadyPaid,
+	  		UnPaid
 	  	},
 		data(){
 			return {
+				iscur:0,
+                currentView:'alreadyPaid',
+                tabs:[
+				 	{type: '已支付',view: 'alreadyPaid'},  
+				 	{type: '未支付',view: 'UnPaid'}
+				],
 			}
 		},
-
+		methods:{
+			toggle(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
+		}
 	}
 </script>
 <style scoped>
@@ -60,5 +72,13 @@ text-align: center;
 }
 .header ul p{
 	color:#43B7B5;
+}
+.header ul li span{
+	display: inline-block;
+	padding-bottom: 0.4rem;
+}
+.active{
+	color:#43B7B5;
+	border-bottom: 3px solid #43B7B5;
 }
 </style>

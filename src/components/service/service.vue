@@ -1,24 +1,24 @@
 <template>
 	<div class="allTeamChecked">
-		<headerTip message="全部团队查看" goBack="true"></headerTip>
+		<headerTip message="服务中心" goBack="true"></headerTip>
 		<div class="header"><img src="/static/service.png"></div>
 		<div class="main">
 			<div class="header1">
 				<ul>
-					<li>
+					<li @click="toAddress({path: '/platformIntroduction'})">
 						<img src="./a1.png"><p>平台介绍</p>
 					</li>
-					<li>
+					<li @click="toAddress({path: '/useHelp'})">
 						<img src="./a2.png"><p>使用帮助</p>
 					</li>
 				</ul>
 			</div>
 			<div class="header2">
 				<ul>
-					<li>
+					<li @click="toAddress({path: '/detailsProblem'})">
 						<img src="./a3.png" class="zhiyuan"><p>客服中心</p>
 					</li>
-					<li>
+					<li @click="toAddress({path: '/feedback'})">
 						<img src="./a4.png"><p>意见反馈</p>
 					</li>
 				</ul>
@@ -40,11 +40,9 @@
 			}
 		},
 		methods:{
-			getList(){
-				this.$http.get('').then(res=>{
-					
-				})
-			}
+			toAddress(path){
+                this.$router.push(path)
+            }
 		}
 	}
 </script>

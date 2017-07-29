@@ -16,7 +16,7 @@
 		<div class="main">
 			<section class="mine">
 				<ul class="clearfix">
-					<li>
+					<li @click="toAddress({path: '/bulletedList'})">
 						<p>20</p>
 						<span>我的团队</span>
 					</li>
@@ -36,12 +36,12 @@
 			</section>
 			<section class="project">
 				<ul>
-					<li @click="toAddress({path: '/personalDetails'})">
+					<li @click="toAddress({path: '/personalData'})">
 						<img class="icon" src="./gere.png">
 						<span>个人资料</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li>
+					<li @click="toAddress({path: '/myFamily'})">
 						<img class="icon" src="./jiat.png">
 						<span>我的家庭</span>
 						<img class="arrow" src="./you@2x.png">
@@ -56,7 +56,7 @@
 						<span>我的收藏</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li >
+					<li @click="toAddress({path: '/myFeedback'})">
 						<img class="icon" src="./hk.png">
 						<span>我的回馈</span>
 						<img class="arrow" src="./you@2x.png">

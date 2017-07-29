@@ -3,88 +3,62 @@
 	<div class="volunteerStrategy">
 		<headerTip message="志愿攻略" goBack="true"></headerTip>
 		<div class="sousuo">
-			<input name="" placeholder="       搜索">
+			<input class="search" name="" placeholder="搜索">
 			<img src="./sou.png">
 		</div>
 		<div class="header">
 			<ul>
-				<li><span class="active">行业政策</span></li>
-				<li><span>培训课程</span></li>
-				<li><span>经验分享</span></li>
+				<!-- <li @click="tabToggle(tab01Text)"><span :class="{'active':currentView=tabText}">行业政策</span></li>
+				<li @click="tabToggle(tab02Text)"><span>培训课程</span></li>
+				<li @click="tabToggle(tab03Text)"><span>经验分享</span></li> -->
+				<!-- <li v-for='item in tabs'  @click="iscur = $index">
+					<span :class="{active:iscur==$index}">{{item.type}}</span>
+				</li> -->
+				<li v-for='(item,index) in tabs'>
+					<span @click="toggle(item.view,index)" :class="{active: index == iscur }">{{item.type}}</span>
+				</li>
 			</ul>
 		</div>
-		<swipe v-model="index" style="text-align: center;">
-		  <swipe-item><img src="./tup1.png" alt=""></swipe-item>
-		  <swipe-item><img src="./tup1.png" alt=""></swipe-item>
-		  <swipe-item><img src="./tup1.png" alt=""></swipe-item>
-		</swipe>
-		<div class="kong"></div>
-		<div class="main">
-			<ul>
-				<li>
-					<span style="width:40%"><img src="./tup2.png"></span>
-						<span><h3>高原上的藏区小学</h3>
-						<p>2017/02/05</p>
-						<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
-					</span>
-				</li>	
-			</ul>
-		</div>
-		<div class="main2">
-			<div class="tou">
-				<ul>
-					<li >基础知识<img src="./bottom.png" style="top:35%;left:24%;"></li>
-					<li>管理培训<img src="./bottom.png" style="top:35%;left:57%;"></li>
-					<li>技能培训<img src="./bottom.png" style="top:35%;left:89%;"></li>
-				</ul>
-			</div>
-			<div class="text">
-				<ul>
-					<li @click="toAddress({path: '/servicesDetails'})">
-						<span style="width:40%"><img src="./tup3.png"></span>
-						<span>
-							<h3>高原上的藏区小学</h3>
-							<p>2017/02/05</p>
-							<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
-						</span>
-					</li>	
-				</ul>
-			</div>
-		</div>
-		<div class="main3">
-			<ul>
-				<li>
-					<span style="width:40%"><img src="./tup3.png"></span>
-					<span>
-						<h3>高原上的藏区小学</h3>
-						<p>2017/02/05</p>
-						<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
-					</span>
-				</li>	
-			</ul>
-		</div>
+		<component :is='currentView' keep-alive></component>
 	</div>
 </template>
 <script>
 	import { Swipe, SwipeItem } from 'c-swipe';
 	import headerTip from '../../components/common/header/header.vue'
+	import TabsOne from '../../components/volunte/child/tabs01.vue'
+	import TabsTwo from '../../components/volunte/child/tabs02.vue'
+	import TabsThree from '../../components/volunte/child/tabs03.vue'
+
 	export default{
 
 		name:'volunteerStrategy',
 		components:{
 			Swipe, 
 			SwipeItem,
-	  		headerTip
+	  		headerTip,
+	  		TabsOne,
+	  		TabsTwo,
+	  		TabsThree
 	  	},
 		data(){
 			return {
-				index:0,
+				iscur:0,
+				tabs:[
+				 	{type: '行业政策',view: 'TabsOne',id:0},  
+				 	{type: '培训课程',view: 'TabsTwo',id:1},
+				 	{type: '经验分享',view: 'TabsThree',id:2}
+				],
+                currentView:'TabsOne'
 			}
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
-            }
+            },
+            toggle: function(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
 		}
 	}
 
@@ -103,7 +77,6 @@
 	padding:0.8rem 0;
 	position:relative; 
 }
-	
 .sousuo input{
 	border:none;
 	border-radius:0.2rem;
@@ -112,6 +85,7 @@
 	margin-left:2%;
 	margin-right: 2%;
 	width:95%;
+	text-indent: 2em;
 }
 .sousuo p{
 	margin-right:5%; 

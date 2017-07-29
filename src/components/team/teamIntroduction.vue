@@ -124,6 +124,13 @@ import{ Swipe,SwipeItem}from'c-swipe';
 	width:60%;
 	height:2rem;
 	}
+.end{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	display: block;
+	background: #fff;
+}
 .end ul {
 	display:flex;
 }

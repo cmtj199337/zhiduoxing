@@ -8,32 +8,48 @@
 		</swipe>
 		<div class="header">
 			<ul>
-				<li><router-link to="/myprojectDetails/detail"><span>项目详情</span></router-link></li>
-				<li><router-link to="/myprojectDetails/introduce"><span>项目介绍</span></router-link></li>
-				<li><router-link to="/myprojectDetails/community"><span>项目社区</span></router-link></li>
+				<li v-for="(item,index) in tabs">
+					<span :class="{active:index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
+				</li>
 			</ul>
 		</div>
-		<router-view></router-view>
+		<component :is='currentView' keep-alive></component>
 	</div>
 </template>
 <script>
 	import { Swipe, SwipeItem } from 'c-swipe';
 	import headerTip from '../../components/common/header/header.vue'
+	import Detail from '../../components/profile/detailChild/detail.vue'
+	import Introduce from '../../components/profile/detailChild/introduce.vue'
+	import Community from '../../components/profile/detailChild/community.vue'
 	export default{
 
 		name:'projectDetails',
 		components:{
 			Swipe,
 	  		SwipeItem,
-	  		headerTip
+	  		headerTip,
+	  		Detail,
+	  		Introduce,
+	  		Community
 	  	},
 		data () {
 		    return {
 		    	index:0,
+		    	iscur:0,
+                currentView:'Detail',
+                tabs:[
+				 	{type: '项目详情',view: 'Detail'},  
+				 	{type: '项目介绍',view: 'Introduce'},
+				 	{type: '项目社区',view: 'Community'}
+				],
 		    }
 	  	},
 	  	methods:{
-
+	  		toggle(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
 	  	}
 
 	}
@@ -70,6 +86,11 @@
 }
 .header ul li span{
 	display: inline-block;
+	padding-bottom: 0.4rem;
+}
+.active{
+	color: #43B7B5;
+    border-bottom: 3px solid #43B7B5;
 }
 .router-link-active{
 	padding-bottom: 0.4rem;

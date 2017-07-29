@@ -26,78 +26,44 @@
 		<div class="kong" style="background:rgba(235, 234, 234, 0.48);height:4rem;"></div>
 		<div class="header3">
 			<ul>
-				<li><span class="active">项目（10）</span></li>
-				<li><span>团队（20）</span></li>
-			</ul>
-		</div>
-		<div class="main">
-			<span @click="toAddress({path: '/projectDetails'})">
-				<img src="./xiangm.png" >
-				<img src="./teb2.png" >
-				<img src="./quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
-				<img src="./xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
-				<img src="./quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
-				<img src="./baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
-				<ul class="te">
-					<li>北京市朝阳区</li>
-					<li>50/100</li>
-					<li style="text-align:right.png">待启动</li>
-				</ul>
-				<ul class="te2">
-					<li>智多星项目名称</li>
-					<li style="text-align:center;color:#666">2017/05/02-2017/05/02</li>
-				</ul>
-			</span>
-			<span >
-				<img src="./xiangm.png" >
-				<img src="./teb2.png" >
-				<img src="./quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
-				<img src="./xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
-				<img src="./quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
-				<img src="./baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
-				<ul class="te">
-					<li>北京市朝阳区</li>
-					<li>50/100</li>
-					<li style="text-align:right.png">待启动</li>
-				</ul>
-				<ul class="te2">
-					<li>智多星项目名称</li>
-					<li style="text-align:center;color:#666">2017/05/02-2017/05/02</li>
-				</ul>
-			</span>
-		</div>
-		<div class="main2">
-			<ul>
-				<li @click="toAddress({path: '/teamDetails'})">
-					<img src="./zt.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
+				<li v-for="(item,index) in tabs">
+					<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
 				</li>
 			</ul>
 		</div>
-		
+		<component :is='currentView' keep-alive></component>
 	</div>
 </template>
  <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import Project from '../../components/profile/detail/project.vue'
+	import Team from '../../components/profile/detail/team.vue'
 	export default{
 
 		name:'personalDetails',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		Project,
+	  		Team
 	  	},
 		data(){
 			return {
-				
+				iscur:0,
+                currentView:'Project',
+                tabs:[
+				 	{type: '项目（10）',view: 'Project'},  
+				 	{type: '团队（20）',view: 'Team'}
+				],
 			}
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
-            }
+            },
+            toggle(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
 		}
 	}
 
@@ -161,7 +127,6 @@ margin:1rem 0rem 1rem 1rem;
 }
 .ziliao2{
 width:40%;
-
 margin:1.2rem 0;
 margin-left:1rem;
 }
@@ -206,13 +171,11 @@ margin-left:1rem;
 .te2 li{
 	width: 40%;
 	margin-left: 5%
-
 }
 .main2{
 	background:#F5F5F5;
 	padding: 0.6rem 0;
 	position:relative;
-	display:none;
 }
 .main2 ul{
 	margin:0.2rem 0;
@@ -224,13 +187,18 @@ margin-left:1rem;
 	margin-left:15%;
 	margin-right: 2%;
 	top: 5%;
+	position: relative;
+	margin-bottom:0.6rem; 
+}
+.main2 ul li:last-child{
+	margin-bottom:0; 
 }
 .main2 ul li img{
-	width:5rem;
-	height:5rem;
-	position:absolute;
-	left: 2%;
-	top:14%;
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    left: -2.5rem;
+    top: 5%;
 }
 .main2 ul li .m1{
 	display:flex;
@@ -239,14 +207,13 @@ margin-left:1rem;
 .main2 ul li .mm1{
 	width:50%;
 	margin-left:10%
-
 }
 .mm1 p{
 	color:#BCBCBC;
 }
 .main2 ul li h3{
-margin-bottom: 0.8rem;
-margin-left:4rem;
+	margin-bottom: 0.8rem;
+	margin-left:4rem;
 }
 
 </style>

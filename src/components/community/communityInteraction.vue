@@ -2,85 +2,52 @@
 	<div class="communityInteraction">
 		<headerTip message="社区互动" goBack="true"></headerTip><span class="message" @click="toAddress({path: '/mymessage'})">我的消息</span>
 		<div class="sousuo">
-			<input name="" placeholder="       搜索">
-		<img src="./sou.png"><span>筛选<img src="./shaixuan.png"></span>
+			<input name="" placeholder="搜索">
+		<img src="./sou.png"><span style="color: rgb(67, 183, 181);">筛选<img src="./shaixuan.png"></span>
 		</div>
 		<div class="header">
 			<ul>
-				<li><span class="active">志愿社区</span></li>
-				<li><span>我的社区</span></li>
+				<li v-for="(item,index) in tabs">
+					<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
+				</li>
 			</ul>
 		</div>
 		<div class="kong"></div>
-		<div class="zhiyuan" @click="toAddress({path: '/communityDetails'})">
-			<div class="cheader">
-			<span><img src="./touxiang2.png"></span>
-			<div class="name"><span>大蜗牛子</span><p>1小时</p></div>
-			</div>
-
-			<div class="ctext">
-				<p>社区互动详情，社区互动情况，社区互动详情，社区互动情况，社区互动详情，社区互动情况</p>
-			</div>
-			<div class="cpicture">
-				<img src="./tu11.png">
-				<img src="./tu22.png">
-				<img src="./tu11.png">
-			</div>
-			<div class="usertext">
-				<span style="color:#43B7B5">#志愿项目#</span>
-			</div>
-			<div class="pl">
-				<span><img src="./zan.png">50</span>
-				<span><img src="./pinglun.png">42</span>
-				<span><img src="./jubao.png">举报</span>
-			</div>
-			<div class="kong"></div>
-			<div class="fb"><img src="./fabiao.png"></div>
-		</div>
-		<div class="mycommunity">
-			<div class="cheader">
-			<span><img src="./touxiang2.png"></span>
-			<div class="name"><span>大蜗牛子</span><p>1小时</p></div>
-			</div>
-
-			<div class="ctext">
-				<p>社区互动详情，社区互动情况，社区互动详情，社区互动情况，社区互动详情，社区互动情况</p>
-			</div>
-			<div class="cpicture">
-				<img src="./tu11.png">
-				<img src="./tu22.png">
-				<img src="./tu11.png">
-			</div>
-			<div class="usertext">
-				<span>#志愿项目#</span>
-			</div>
-			<div class="pl">
-				<span><img src="./zan.png">50</span>
-				<span><img src="./pinglun.png">42</span>
-				<span><img src="./shanchu.png"></span>
-			</div>
-			<div class="kong"></div>
-		</div>
+		
+		<component :is='currentView' keep-alive></component>
 		<div class="fb" ><img src="./fabiao.png" @click="toAddress({path: '/release'})"></div>
 		</div>
 </template>
 <script >
 import headerTip from '../../components/common/header/header.vue'
+import vCommunity from '../../components/community/child/vCommunity.vue'
+import myCommunity from '../../components/community/child/myCommunity.vue'
 	export default{
 
 		name:'communityInteraction',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		vCommunity,
+	  		myCommunity
 	  	},
 		data(){
 			return {
-				
+				iscur:0,
+                currentView:'vCommunity',
+                tabs:[
+				 	{type: '志愿社区',view: 'vCommunity'},  
+				 	{type: '我的社区',view: 'myCommunity'}
+				],
 			}
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
-            }
+            },
+            toggle(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
 		}
 
 	}
@@ -93,9 +60,6 @@ import headerTip from '../../components/common/header/header.vue'
 	top:2.5%;
 	font-size:0.9rem; 
 
-}
-.mycommunity{
-	display: none;
 }
 .kong{
 		background:rgba(235, 234, 234, 0.48);
@@ -120,6 +84,7 @@ import headerTip from '../../components/common/header/header.vue'
 	margin-left:2%;
 	margin-right: 2%;
 	width:80%;
+	text-indent: 2em
 }
 .sousuo p{
 	margin-right:5%; 

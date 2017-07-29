@@ -3,73 +3,42 @@
 		<headerTip message="补录时长" goBack="true"></headerTip>
 		<div class="header">
 			<ul>
-				<li><span class="active">我的项目</span></li>
-				<li><span>历史记录</span></li>
-			</ul>
-		</div>
-		<div class="main">
-		<div class="m1">
-			<ul>
-				<li  style="border-right:1px #F5F5F5 solid">
-					<p style="font-size:1.2rem;color:#49B9B7"><b>20</b></p>
-					<p style="color:#AFAFAF;font-size:0.9rem">参加项目</p>
-				</li>
-				<li>
-					<p style="font-size:1.2rem;color:#49B9B7"><b>500</b></p>
-					<p style="color:#AFAFAF;font-size:0.9rem">志愿者时长（小时）</p>
+				<li v-for="(item,index) in tabs">
+				<span :class="{active:index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
 				</li>
 			</ul>
 		</div>
-		<div class="m2">
-			<ul>
-				<li>
-					<img src="./toux2.png"  class="touxiang">
-					<div class="m11">
-						<div class="mm1">
-							<h3>团中央网络影视中心第五团支部</h3>
-							<p>志愿总时长<b class="mark">120</b>小时</p>
-						</div>
-						<div class="mm2">
-							<span>
-								<p class="being">进行中</p>
-							</span>
-							<p class="btn">补录时长</p>
-						</div>
-					</div>
-				</li>
-				<li>
-					<img src="./toux1.png"  class="touxiang">
-					<div class="m11">
-						<div class="mm1">
-							<h3>团中央网络影视中心第五团支部</h3>
-							<p>志愿总时长<b class="mark">120</b>小时</p>
-						</div>
-						<div class="mm2">
-							<span>
-								<p class="passed">已结束</p>
-							</span>
-							<p class="btn">补录时长</p>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-		</div>	
+		<component :is='currentView' keep-alive></component>
 	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import MyProject from '../../components/marktime/child/myproject.vue'
+	import Record from '../../components/marktime/child/record.vue'
 	export default{
 
 		name:'makeupTime',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		MyProject,
+	  		Record
 	  	},
 		data(){
 			return {
-				
+				iscur:0,
+                currentView:'MyProject',
+                tabs:[
+				 	{type: '我的项目',view: 'MyProject'},  
+				 	{type: '历史记录',view: 'Record'}
+				],
 			}
 		},
+		methods:{
+			toggle(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
+		}
 
 	}
 </script>

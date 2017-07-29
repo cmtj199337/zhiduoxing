@@ -3,7 +3,7 @@
 		<headerTip message="社区详情" goBack="true"></headerTip>
 		<div class="kong"></div>
 		<div class="sqxq">
-			<div class="cheader">
+			<div class="cheader" @click="toAddress({path: '/personalDetails'})">
 			<span><img src="./touxiang2.png"></span>
 			<div class="name"><span>大蜗牛子</span><p>1小时</p></div>
 			</div>
@@ -63,6 +63,11 @@
 				
 			}
 		},
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            }
+		}
 	}
 
 </script>

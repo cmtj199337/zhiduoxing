@@ -3,26 +3,43 @@
 		<headerTip message="下级团队项目" goBack="true"></headerTip>
 		<div class="header">
 			<ul>
-			<li><router-link to="/juniorTeamProject/uncheckPending"><span>待审核</span></router-link></li>
-			<li><router-link to="/juniorTeamProject/checkPending"><span>已审核</span></router-link></li>
+				<li v-for="(item,index) in tabs">
+					<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
+				</li>
 			</ul>
 		</div>
 		<div class="kong"></div>
-		<router-view></router-view>
+		<component :is='currentView' keep-alive></component>
 	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import UncheckPend from '../../components/team/junior/uncheckPending.vue'
+	import CheckPend from '../../components/team/junior/checkPending.vue'
+
 	export default{
 		name:'juniorTeamProject',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		UncheckPend,
+	  		CheckPend
 	  	},
 		data(){
 			return {
+				iscur:0,
+                currentView:'UncheckPend',
+                tabs:[
+				 	{type: '待审核',view: 'UncheckPend'},  
+				 	{type: '已审核',view: 'CheckPend'}
+				],
 			}
 		},
-
+		methods:{
+			toggle(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
+		}
 	}
 </script>
 <style scoped>
@@ -53,5 +70,13 @@ span{
 }
 .header ul li{
 	width: 50%;
+}
+.header ul li span{
+	display: inline-block;
+	padding-bottom: 0.4rem;
+}
+.active{
+	color:#43B7B5;
+	border-bottom: 3px solid #43B7B5;
 }
 </style>

@@ -5,7 +5,7 @@
             <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
         </div>
         <div class="usertext tlo">
-			<router-link to="goodlist"><span>项目图片<img src="./tlogo1.png"></span></router-link>
+			<a href="javascript:;"><span>项目图片<img src="./tlogo1.png"></span></a>
 		</div>
 		<div class="usertext">
 			<input type="password" placeholder="请输入项目名称" /><br />
@@ -17,13 +17,13 @@
 			<input type="tel" placeholder="请输入联系手机号" maxlength="11" />
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>服务类别:关爱服务<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>服务类别:关爱服务<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>招募时间<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>招募时间<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>项目时间<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>项目时间<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext">
         	<input type="text" name="" placeholder="计划招募人数">
@@ -34,20 +34,15 @@
 		 <div class="header1">
             <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>项目地址</h4>
         </div>
-        <div class="usertext right">
-			<router-link to="goodlist"><span>所在地区<img src="./you@2x.png"></span></router-link>
-		</div>
-		<div class="usertext right">
-			<router-link to="goodlist"><span>所在区县<img src="./you@2x.png"></span></router-link>
-		</div>
+        <my-area @select="haha"></my-area>
 		<div class="usertext">
        		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字">
         </div>
         <div class="usertext right">
-			<router-link to="goodlist"><span>项目打卡定位 马哥波罗大厦<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>项目打卡定位 马哥波罗大厦<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>项目打卡区域 一千米<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>项目打卡区域 一千米<img src="./you@2x.png"></span></a>
 		</div>
         <div class="kong">
 		</div>
@@ -68,13 +63,13 @@
             <h4 class="texttitle"><span><img src="./baoxian@2x.png"></span>保险选择</h4>
         </div>
         <div class="usertext right">
-			<router-link to="goodlist"><span>团队购买<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>团队购买<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>个人购买<img src="./you@2x.png"></span></router-link>
+			<a href="javascript:;"><span>个人购买<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext right">
-			<router-link to="goodlist"><span>不购买</span></router-link>
+			<a href="javascript:;"><span>不购买</span></a>
 		</div>
 		<div class="eee">
         	<input type="button" name=""  class="next" value="确定">
@@ -83,17 +78,26 @@
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import MyArea from '../../components/common/tools/area.vue'
 	export default{
 
 		name:'publishProject',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		MyArea
 	  	},
 		data(){
 			return {
-				
+				projectInfo:{
+					area:'',
+				}
 			}
 		},
+		methods:{
+			haha(d){
+            	this.teamInfo.area = d
+			},
+		}
 
 	}
 </script>

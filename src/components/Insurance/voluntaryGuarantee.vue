@@ -3,9 +3,9 @@
 	<div class="voluntaryGuarantee">
 		<headerTip message="志愿保障" goBack="true"></headerTip>
 		<swipe v-model="index" style="text-align: center;">
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
-		  <swipe-item><img src="./banner.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/bxbanner01.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/bxbanner01.png" alt=""></swipe-item>
+		  <swipe-item><img src="/static/bxbanner01.png" alt=""></swipe-item>
 		</swipe>
 		<div class="header">
 			<ul>
@@ -17,7 +17,7 @@
 		</div>
 		<div class="kong">
 		</div>
-		<div class="main">
+		<div class="main" @click="toAddress({path: '/insuranceDetails'})">
 		<div class="title">
 		<img src="./bian.png"><span><b>推荐产品</b></span>
 		</div>
@@ -28,7 +28,7 @@
 		</div>
 		</div>
 		<div class="kong"></div>
-		<div class="main">
+		<div class="main" @click="toAddress({path: '/insuranceDetails'})">
 		<div class="title">
 		<img src="./bian.png"><span><b>保险产品</b></span>
 		</div>
@@ -57,6 +57,11 @@ import { Swipe, SwipeItem } from 'c-swipe';
 				index:0,
 			}
 		},
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            }
+		}
 
 	}
 </script>
