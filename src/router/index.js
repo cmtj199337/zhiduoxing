@@ -275,10 +275,10 @@ const router = new Router({
 			path: '/itemdetail',
 			component:require('../components/team/ltemdetail.vue')
 		},
-		{
-			path: '/teamdetail',
-			component:require('../components/team/teamdetail.vue')
-		},
+		// {
+		// 	path: '/teamdetail',
+		// 	component:require('../components/team/teamdetail.vue')
+		// },
 		//待审核团队-下级
 		{
 			path: '/teamIntroduction',
