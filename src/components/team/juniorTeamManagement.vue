@@ -5,17 +5,17 @@
 		<div class="main">
 			<div class="header1">
 			<ul>
-				<li @click="toAddress({path: '/bulletedList'})">
+				<li @click="toAddress({path: '/junior/team'})">
 				<img src="./a@2x.png"><b>27</b><p>团队总数（个）</p>
 				</li>
-				<li @click="toAddress({path: '/projectList'})">
+				<li @click="toAddress({path: '/junior/project'})">
 				<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
 				</li>
 				</ul>
 			</div>
 			<div class="header2">
 			<ul>
-				<li @click="toAddress({path: '/personnelList'})">
+				<li @click="toAddress({path: '/junior/volunteer'})">
 				<img src="./c@2x.png" class="zhiyuan"><b>2000</b><p>志愿者总人数（人）</p>
 				</li>
 				<li>

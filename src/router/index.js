@@ -234,11 +234,27 @@ const router = new Router({
 			path: '/allTeam',
 			component:require('../components/team/allTeamChecked.vue')
 		},
+		//下级团队管理
 		{
 			path: '/juniorTeamManagement',
 			component:require('../components/team/juniorTeamManagement.vue')
 		},
-		//子团队管理
+		//团队-下级
+		{
+			path: '/junior/team',
+			component:require('../components/team/junChild/team.vue')
+		},
+		//项目-下级
+		{
+			path: '/junior/project',
+			component:require('../components/team/junChild/project.vue')
+		},
+		//志愿者-下级
+		{
+			path: '/junior/volunteer',
+			component:require('../components/team/junChild/volunteer.vue')
+		},
+		//下级团队项目
 		{
 			path: '/juniorTeamProject',
 			component:require('../components/team/juniorTeamProject.vue')
@@ -263,6 +279,7 @@ const router = new Router({
 			path: '/teamdetail',
 			component:require('../components/team/teamdetail.vue')
 		},
+		//待审核团队-下级
 		{
 			path: '/teamIntroduction',
 			component:require('../components/team/teamIntroduction.vue')
@@ -275,9 +292,20 @@ const router = new Router({
 			path: '/personalData',
 			component:require('../components/team/personalData.vue')
 		},
+		//本团队管理
 		{
 			path: '/teammanage',
 			component:require('../components/team/teammanage.vue')
+		},
+		//项目
+		{
+			path: '/teammanage/project',
+			component:require('../components/team/manageSelf/project')
+		},
+		//志愿者
+		{
+			path: '/teammanage/volunteer',
+			component:require('../components/team/manageSelf/volunteer'),
 		},
 		{
 			path: '/teamPresentation',

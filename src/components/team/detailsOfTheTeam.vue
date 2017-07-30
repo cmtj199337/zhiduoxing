@@ -1,7 +1,7 @@
 <template>
 	<div class="detailsOfTheTeam">
 		<headerTip message="团队详情" goBack="true"></headerTip>
-			<span class="paopao">编辑</span>
+			<!-- <span class="paopao">编辑</span> -->
 
 			<div class="header"><img src="./banner.png"></div>
 			<div class="kong"></div>
@@ -10,35 +10,42 @@
             <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
         	</div>
 			<div class="usertext">
-			<span>团队名称：志多星团队</span>
+			<span>团队名称：</span><input type="text" value="志多星团队">
 			</div>
 			<div class="usertext">
-			<span>团队口号：志愿改变人生</span>
+			<span>团队口号：</span><input type="text" value="志愿改变人生">
 			</div>
 			<div class="usertext">
-			<span>联络团队：志愿服务联合会</span>
+			<span>联络团队：</span><input type="text" value="志愿服务联合会">
 			</div>
 			<div class="usertext">
-			<span>服务类别：中级团队</span>
+				<span>服务类别：</span>
+				<select name="" id="">
+					<option value="">初级团队</option>
+					<option value="">中级团队</option>
+					<option value="">高级团队</option>
+				</select>
 			</div>
 			<div class="usertext">
-			<span>组织管理员：吴彦祖</span>
+			<span>组织管理员：</span><input type="text" value="吴彦祖">
 			</div>
 			<div class="usertext">
-			<span>联系电话：</span>
+			<span>联系电话：</span><input type="text" value="1371293819">
 			</div>
 
 			<div class="header2">
             <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>团队地址</h4>
         	</div>
         	<div class="usertext">
-			<span>所在地区：北京市</span>
+				<span>所在地区：</span>
+				<input type="text" value="北京市">
 			</div>
 			<div class="usertext">
-			<span>所在区县：顺义区</span>
+				<span>所在区县：</span>
+				<input type="text" value="顺义区">
 			</div>
 			<div class="usertext">
-			<span>组北京市顺义区二十里堡</span>
+				<input style="text-indent:0" type="text" value="组北京市顺义区二十里堡">
 			</div>
 
 			<div class="header3">
@@ -73,13 +80,6 @@
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
-.usertext input{
-		margin: 0;
-		width: 100%;
-	}
-.usertext{
-	margin: 0 1rem 1.2rem 1rem;
-}
 .header1{
     border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
 }
@@ -99,6 +99,29 @@
 	color: #333;
 	text-indent: 0;
 	position: relative;
+	}
+	.usertext{
+		margin: 0 1rem 1.2rem 1rem;
+		position: relative;
+	}
+	.usertext input{
+		margin: 0;
+		width: 100%;
+		text-indent: 5rem;
+	}
+	.usertext select{
+		border: 0;
+	    margin: 0 auto;
+	    margin-left: 5.5rem;
+	    height: 2.5rem;
+	    font-size: 1rem;
+	}
+	.usertext span{
+		position: absolute;
+		left: 0;
+		height: 2.5rem;
+		line-height: 2.5rem;
+		font-size: 1rem;
 	}
 .kong{
 	background:#f6f6f9;

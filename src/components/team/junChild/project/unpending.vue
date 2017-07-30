@@ -2,8 +2,8 @@
 <div class="uncheckPend">
 	<div class="main" @click="toAddress({path: '/myprojectDetails'})">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="./banner@2x.png" >
+			<img src="./teb2.png" >
 			<ul class="te">
 				<li class="cc1">志多星项目</li>
 			</ul>
@@ -20,8 +20,8 @@
 	</div>
 	<div class="main">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="./banner@2x.png" >
+			<img src="./teb2.png" >
 			<ul class="te">
 			<li class="cc1">志多星项目</li>
 			</ul>
@@ -38,8 +38,8 @@
 	</div>
 	<div class="main">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="./banner@2x.png" >
+			<img src="./teb2.png" >
 			<ul class="te">
 			<li class="cc1">志多星项目</li>
 			</ul>
@@ -56,8 +56,8 @@
 	</div>
 	<div class="main">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="./banner@2x.png" >
+			<img src="./teb2.png" >
 			<ul class="te">
 			<li class="cc1">志多星项目</li>
 			</ul>

@@ -1,20 +1,20 @@
 <template>
-<div class="uncheckPend">
+<div class="pass">
 	<div class="main" @click="toAddress({path: '/myprojectDetails'})">
 			<span>
 			<img src="../banner@2x.png" >
 			<img src="../teb2.png" >
 			<ul class="te">
-				<li class="cc1">志多星项目</li>
+			<li class="cc1">志多星项目</li>
 			</ul>
 			<ul class="te1">
-				<li class="cc1">北京市朝阳区</li>
-				<li class="cc2">40/100</li>
-				<li class="cc3">招募中</li>
+			<li class="cc1">北京市朝阳区</li>
+			<li class="cc2">40/100</li>
+			<li class="cc3">招募中</li>
 			</ul>
 			<ul class="te2">
-				<li class="cc1">项目时间</li>
-				<li class="cc4">2017/05/02-2017/05/02</li>
+			<li class="cc1">项目时间</li>
+			<li class="cc4">2017/05/02-2017/05/02</li>
 			</ul>
 			</span>
 	</div>
@@ -76,7 +76,7 @@
 </template>
 <script>
 	export default{
-		name:'uncheckPend',
+		name:'pass',
 		methods:{
 			toAddress(path){
                 this.$router.push(path)

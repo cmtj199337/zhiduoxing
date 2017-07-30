@@ -29,7 +29,7 @@
 		<!-- 栏目列表 -->
 		<div class="column">
 			<ul>
-				<li @click="toAddress({path: '/teamIntroduction'})">
+				<li @click="toAddress({path: '/detailsOfTheTeam'})">
 					<img class="icon" src="./jbxx.png">
 					<span>基本信息</span>
 				</li>
