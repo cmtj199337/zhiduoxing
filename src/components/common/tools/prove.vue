@@ -4,7 +4,7 @@
 			<i class="s-icon"><img src="./name.png"></i><span>姓名</span>
 			<input type="text" placeholder="请输入真实姓名" v-model="info.realName"/>
 		</div>
-		<div class="usertext">
+		<div class="usertext" style="margin-bottom:0;border:0">
 			<i class="s-icon"><img src="./sex.png"></i>
 			<span>姓别</span>
 			<span class="radio-btn nan" :class="{'active':sexFlag==0}" @click="changeSex" v-model="info.sex">
@@ -14,6 +14,7 @@
 				<img src="./nv@2x.png"><i>女</i>
 			</span>
 		</div>
+		<div class="borderBottom"></div>
 		<h4 class="texttitle"><span><img src="./type.png"></span>证件类型</h4>
 		<ul>
 			<li v-for="item in typeList">
@@ -103,6 +104,10 @@
 		line-height: 2.5rem;
 		display: inline-block;
 	}
+	.improve{
+		padding-top: 0.4rem;
+		border-top: 0.8rem solid #f5f5f5;
+	}
 	.improve ul{
 		margin-bottom: 0.5rem;
 		margin: 0 1rem 1.2rem 1rem;
@@ -138,4 +143,8 @@
 	.active{
 		background: #43B7B6
 	}
+	.borderBottom{
+		background: #f5f5f5;
+		height: 0.8rem;
+	}	
 </style>

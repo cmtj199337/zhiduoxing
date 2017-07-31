@@ -3,10 +3,18 @@
    <headerTip message="我的家庭" goBack="true"></headerTip>
 
 	<div class="header">
-		<div class="t1"><img src="./name.png" alt=""><p>真实姓名</p><input type="text" name="" placeholder="	    吴彦祖" style="border:none"></div>
-		<div class="t1"><img src="./sex.png" alt=""><p>性别</p><input type="text" name="" placeholder="                  男" style="border:none"></div>
-		<div class="t1"><img src="./type.png" alt=""><p>身份证号</p><input type="text" name="" placeholder="   12345678901" style="border:none"></div>
-		
+		<div class="t1">
+			<img src="./name.png" alt="">
+			<p>真实姓名</p><input type="text" name="" placeholder="吴彦祖" style="border:none">
+		</div>
+		<div class="t1">
+			<img src="./sex.png" alt="">
+			<p>性别</p><input type="text" name="" placeholder="男" style="border:none">
+		</div>
+		<div class="t1">
+			<img src="./type.png" alt="">
+			<p>身份证号</p><input type="text" name="" placeholder="12345678901" style="border:none">
+		</div>
 	</div>	
 	<div class="jieshu">
 		<p>确认</p>
@@ -50,16 +58,16 @@
 }
 .t1 p{
 	margin-left: 0.5rem;
-	font-size: 14px;
-	width: 65%;
+	font-size: 1rem;
+	width: 20%;
 }
 .t1 input{
-	width: 30%;
-
+	font-size: 1rem;
+	width: 70%;
+	text-align: right;
 }
-.t1 input{
-	width: 30%;
-	
+.t1 input::-webkit-input-placeholder{
+	text-align: right;
 }
 .t1 img{
 	margin-top: 0.8rem;

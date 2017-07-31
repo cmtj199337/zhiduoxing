@@ -203,8 +203,15 @@
 	  				this.arr += item.value+','
 	  				this.userinfo.goodSelect = this.arr.split(',').slice(0,-1)
 	  			}
+	  		},
+	  		isRegister(mobile){
+	  			this.$http.post('/api/public/checkIdNo',{mobileNo:mobile}).then(response =>{
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					//可以注册
+	  				}
+	  			})
 	  		}
-
 	  	}
 	}
 </script>

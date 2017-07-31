@@ -45,8 +45,5 @@
 
 <style scoped>
 	@import '../../styles/usertext.css';
-	form{
-		margin-top: 2rem;
-	}
 	.usertext{margin: 0 1rem 1.2rem 1rem;}
 </style>

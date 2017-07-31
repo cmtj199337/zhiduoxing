@@ -8,8 +8,8 @@
 					<img class="renz" src="./renzheng@2x.png">
 				</div>
 				<div class="info-right">
-					<p class="name"><span>彭笑笑</span><i></i><i></i><i></i><i></i><i></i></p>
-					<p class="kouhao"><span>志愿口号</span><i>将志愿服务进行到底。</i></p>
+					<p class="name"><span>彭笑笑{{voluInfo.nickName}}</span><i></i><i></i><i></i><i></i><i></i></p>
+					<p class="kouhao"><span>志愿口号</span><i>将志愿服务进行到底。{{voluInfo.volunteSlogan}}</i></p>
 				</div>
 			</section>
 		</div>
@@ -17,19 +17,19 @@
 			<section class="mine">
 				<ul class="clearfix">
 					<li @click="toAddress({path: '/bulletedList'})">
-						<p>20</p>
+						<p>20{{voluInfo.myTeam}}</p>
 						<span>我的团队</span>
 					</li>
 					<li @click="toAddress({path: '/myProject'})">
-						<p>100</p>
+						<p>100{{voluInfo.myProject}}</p>
 						<span>我的项目</span>
 					</li>
 					<li>
-						<p>20</p>
+						<p>20{{voluInfo.serviceHour}}</p>
 						<span>志愿时长</span>
 					</li>
 					<li @click="toAddress({path: '/myStarcoin'})">
-						<p>20</p>
+						<p>20{{voluInfo.eMoneyBalance}}</p>
 						<span>星币</span>
 					</li>
 				</ul>
@@ -97,14 +97,21 @@
 	 	data () {
 		    return {
 		    	volunteerId:null,
-		    	voluInfo:[]
+		    	voluInfo:[],
+		    	username:null
 		    }
+	  	},
+	  	mounted(){
+	  		this.profile();
 	  	},
 	  	methods:{
 	  		toAddress(path){
                 this.$router.push(path)
             },
             profile(){
+            	localStorage.getItem('access-token',this.token);
+            	localStorage.getItem('access-token',this.username);
+
             	this.$http.get('/api/private/getVolunteerDetail',{
             		params:{
             			id:this.volunteerId

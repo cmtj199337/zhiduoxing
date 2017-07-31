@@ -60,10 +60,10 @@
 		<footer class="foot">
 			<span class="bm1"><img src="../shoucang.png">收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
-			<span class="bm3"><img src="../baoming.png"><p class="bm">我要报名</p></span>
+			<span class="bm3" @click="toAddress({path: '/familys'})"><p class="bm">我要报名</p></span>
 		</footer>
-	</div>
-		
+		<!-- <div class="overlay"></div> -->
+	</div>	
 </template>
 <script>
 	export default{
@@ -94,7 +94,10 @@
 	  					this.data = res.data
 	  				}
 	  			})
-	  		}
+	  		},
+	  		toAddress(path){
+                this.$router.push(path)
+            },
 	  	}
 
 	}
@@ -154,7 +157,11 @@
 	}
 	.foot{
 		display:flex;
-		text-align:center; 
+		text-align:center;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		background: #fff 
 	}
 	.foot span{
 		position:relative;
@@ -171,6 +178,7 @@
 	}
 	.bm3{
 		width:56%;
+		background: #43B7B5;
 	}
 	.bm3 img{
 		width: 100%;
@@ -192,5 +200,15 @@
 		top:35%;
 		left:35%;
 		font-size:0.9rem;
+	}
+	.detail{
+		padding-bottom:10%; 
+	}
+	.family{
+		width: 16rem;
+		margin:0 auto;
+		position: fixed;
+		top: 20%;
+		background: #fff;
 	}
 </style>

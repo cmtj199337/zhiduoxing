@@ -184,6 +184,10 @@ const router = new Router({
 			path: '/volunteerTeam',
 			component:require('../components/volunte/volunteerTeam.vue')
 		},
+		{
+			path: '/familys',
+			component:require('../components/volunte/family.vue')
+		},
 		//补录时长
 		{
 			path: '/makeupTime',
@@ -374,6 +378,10 @@ const router = new Router({
 			path: '/insuranceDetails',
 			component:require('../components/insurance/insuranceDetails.vue')
 		},
+		{
+			path: '/perfact',
+			component:require('../components/insurance/perfect.vue')
+		},
 		//服务中心
 		{
 			path: '/service',
@@ -400,6 +408,7 @@ const router = new Router({
 			path: '/during',
 			component:require('../components/during/projectCycle.vue')
 		},
+		
 	]
 })
 
