@@ -4,7 +4,8 @@
 		<form action="" method="post">
 			<div class="usertext">
 				<i class="s-icon"><img src="./phone.png"></i>
-				<input type="tel" placeholder="用户名/手机号/身份证号" v-model="name" />
+				<input v-validate ="'required|mobile|min:11'"  type="text" placeholder="手机号/身份证号" v-model="name" name="userName" maxlength="18" />
+				<span class="toast" v-show="errors.has('userName')">{{ errors.first('userName')}}</span>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./lock.png"></i>
@@ -18,9 +19,9 @@
 			</div>
 		</form>
 		<div class="link">
-			<router-link to="register" class="regis">点此注册</router-link>
-			<span>|</span>
 			<router-link to="forgetpass" class="forget">忘记密码</router-link>
+			<span>|</span>
+			<router-link to="register" class="regis">点此注册</router-link>
 		</div>
 		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
@@ -58,12 +59,6 @@
 	  	},
 	  	methods:{
 	  		isLogin() {
-	  			//检测缓存，有则跳转到index，没有跳转到登录页
-	  			// if(!this.getCookie('access_token')){
-	  			// 	this.$router.push({ path: 'login' })
-	  			// }else{
-	  			// 	this.$router.push({ path: 'index' })
-	  			// }
 	  			if(!this.name || !this.pwd){
 	  				this.showAlert = true
                     this.alertText = '用户名密码不能为空'
@@ -79,12 +74,18 @@
 	  				let res = response.data
 	  				let verify = res.data
 	  				if(res.result == 0){
-	  					//设置缓存
-	  					let expireDays = 1000 * 60 * 60 * 24 * 15;
-               			this.setCookie('access_token', verify, expireDays);
+	  				
+	  					localStorage.setItem('access_token',verify.token)
+	  					localStorage.setItem('username',verify.username)
 
-                        this.$store.commit('isLogin',response.body[0]);
-                        this.$router.push({ path: 'index' })
+	  					if(verify.userType == 0){
+	  						this.$store.commit('isLogin',response.body[0])
+                        	this.$router.push({ path: 'index' })
+	  					}else if(verify.userType == 1){
+	  						this.$store.commit('isLogin',response.body[0])
+                        	this.$router.push({ path: 'teamIndex' })
+	  					}
+
 	  				}else{
 	  					this.showAlert = true
                         this.alertText = '用户名或密码错误'

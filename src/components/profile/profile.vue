@@ -96,12 +96,25 @@
 	  	name: 'profile',
 	 	data () {
 		    return {
-		    	
+		    	volunteerId:null,
+		    	voluInfo:[]
 		    }
 	  	},
 	  	methods:{
 	  		toAddress(path){
                 this.$router.push(path)
+            },
+            profile(){
+            	this.$http.get('/api/private/getVolunteerDetail',{
+            		params:{
+            			id:this.volunteerId
+            		}
+            	}).then(response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.voluInfo = res.data
+            		}
+            	})
             }
 	  	}
 	}

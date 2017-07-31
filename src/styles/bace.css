@@ -17,22 +17,7 @@ body{height: 100%;font-size: 0.85rem;font-family: Arial,"微软雅黑";position:
 *{-webkit-tap-highlight-color: transparent;margin:0;padding:0;}
 input:focus{outline: none;}
 input[type=button]{-webkit-appearance:none;}
-.btn[disabled], fieldset[disabled] .btn {
-    cursor: not-allowed;
-    filter: alpha(opacity=65);
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    opacity: .65;
-    border: 1px solid #666;
-    color: #666;
-}
-.overlay{
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,0.5);
-	z-index: 2;
-}
+.btn[disabled], fieldset[disabled] .btn {cursor: not-allowed;filter: alpha(opacity=65);-webkit-box-shadow: none;box-shadow: none;opacity: .65;border: 1px solid #666;color: #666;}
+.overlay{position: fixed;left: 0;top: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);z-index: 2;}
 li{margin: 0;padding: 0;display: block;}
+.toast{width: 16rem;margin: 0 auto;position: fixed;bottom: 20%;background: #000;opacity: 0.5;padding: 0.8rem 0;text-align: center;left: 0;right: 0;color: #fff;border-radius: 2rem;z-index: 10}

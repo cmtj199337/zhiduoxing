@@ -2,30 +2,30 @@
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
-		<form action="" method="post" @submit.prevent="submit" v-show="wrap" enctype="multipart/form-data">
-			<!-- <div>
-		        <label for="email">邮箱：</label>
-		        <input v-validate ="'required|email'" type="text" id="email" name="myEmail">
-		    </div>
-	    	<span v-show="errors.has('myEmail')">{{ errors.first('myEmail')}}</span> -->
+		<form action="" method="post" @submit.prevent="submit" v-show="wrap">
 			<div class="usertext userphoto">
 				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
 			</div>
 			<div class="usertext">
-				<input type="tel" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber"/>
+				<input type="tel" v-validate ="'required|mobile'" name="mobile" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber"/>
+				<span class="toast" v-show="errors.has('mobile')">{{ errors.first('mobile')}}</span>
 			</div>
 			<div class="usertext">
 				<input type="number" placeholder="请输入验证码" maxlength="6" v-model="userinfo.verify" />
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
+
 			</div>
 			<div class="usertext">
-				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" v-model="userinfo.newPassword" /><br />
+				<input type="password" name="password" v-validate="'required'" style="width:100%" placeholder="请输入密码(6~12位数字或字母)" v-model="userinfo.newPassword" />
+				<span class="toast" v-show="errors.has('password')">{{ errors.first('password')}}</span>
 			</div>
 			<div class="usertext">
-				<input type="password" placeholder="请确认新密码" v-model="userinfo.reNewPassword" /><br />
+				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" v-model="userinfo.reNewPassword" />
+				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
 			<div class="usertext">
-				<input type="text" placeholder="请输入昵称" v-model="userinfo.nickName" /><br />
+				<input type="text" v-validate="'required'" name="nickname" placeholder="请输入昵称" v-model="userinfo.nickName" /><br />
+				<span class="toast" v-show="errors.has('nickname')">请输入昵称</span>
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
@@ -33,7 +33,8 @@
 				</a>
 			</div>
 			<div class="usertext">
-				<input type="text" placeholder="请输入志愿口号" v-model="userinfo.slogan" /><br />
+				<input type="text" v-validate="'required'" name="slogan" placeholder="请输入志愿口号" v-model="userinfo.slogan" /><br />
+				<span class="toast" v-show="errors.has('slogan')">请输入志愿口号</span>
 			</div>
 			<div class="read">
 				<span v-for="item in items">
@@ -75,7 +76,6 @@
 				</ul>
 			</form>
 		</div>
-		<toast :toastshow.sync="toastshow" :toasttext="toasttext"></toast>	
 	</div>
 </template>
 
@@ -83,14 +83,12 @@
 	import headerTip from '../../components/common/header/header.vue'
 	import TimerBtn from '../common/tools/countdown.vue'
 	import UploadImg from '../../components/common/tools/uploadImg.vue'
-	import Toast from '../../components/common/tools/toast.vue'
 	export default {
 	  	name: 'iRegister',
 	  	components:{
 	  		headerTip,
 	  		TimerBtn,
-	  		UploadImg,
-	  		Toast
+	  		UploadImg
 	  	},
 	 	data () {
 		    return {
