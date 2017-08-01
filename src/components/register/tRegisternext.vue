@@ -202,7 +202,7 @@
 	}
 	.ee p{
 		text-align: center;
-		font-size:0.4rem;
+		font-size:0.6rem;
 		color:#43B7B5;
 		padding:0.4rem 0;
 	}

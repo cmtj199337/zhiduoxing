@@ -2,33 +2,33 @@
 	<div class="personalData">
 		<headerTip message="个人资料" goBack="true"></headerTip>
 		<div class="kong"></div>
-		<div class="usertext right">
-			<p>昵称</p><router-link to="goodlist"><span>小鱼干<img src="./you@2x.png"></span></router-link>
+		<div class="usertext right" style="margin-top:0.3rem">
+			<p>昵称</p><span><input type="text" placeholder="小鱼干"><img src="./you@2x.png"></span>
 		</div>
 		<div class="usertext right">
-			<p>擅长</p><router-link to="goodlist"><span>关爱服务<img src="./you@2x.png"></span></router-link>
+			<p>擅长</p><span><input type="text" placeholder="关爱服务"><img src="./you@2x.png"></span>
 		</div>
 		<div class="usertext right">
-			<p>邮箱</p><router-link to="goodlist"><span>12345678901@qq.com<img src="./you@2x.png"></span></router-link>
+			<p>邮箱</p><span><input type="text" placeholder="12345678901@qq.com"><img src="./you@2x.png"></span>
 		</div>
 		<div class="usertext right">
-			<p>志愿口号</p><router-link to="goodlist"><span>志愿改变人生<img src="./you@2x.png"></span></router-link>
+			<p>志愿口号</p><span><input type="text" placeholder="志愿改变人生"><img src="./you@2x.png"></span>
 		</div>
-		<div class="usertext right" style="border:none;margin-bottom:0;">
-			<p>密码修改</p><router-link to="goodlist"><span><img src="./you@2x.png"></span></router-link>
+		<div class="usertext right" @click="toAddress({path: '/modifypassword'})">
+			<p>密码修改</p><span><img src="./you@2x.png"></span>
 		</div>
 		<div class="kong"></div>
 		<div class="usertext right">
 			<span><img src="./xingming@2x.png" class="toux"></span>
-           <p>真实姓名</p><router-link to="goodlist"><span>吴彦祖</span></router-link>
+           <p>真实姓名</p><span><input type="text" placeholder="吴彦祖"></span>
         </div>
         <div class="usertext right">
         	<span><img src="./xignbie@2x.png" class="toux"></span>
-         <p> 性别</p><router-link to="goodlist"><span>男</span></router-link>
+         <p> 性别</p><span><input type="text" placeholder="男"></span>
         </div>
         <div class="usertext right" style="margin-bottom:0;border:none;">
         	<span><img src="./zhengjian@2x.png" class="toux"></span>
-            <p>身份证号</p><router-link to="goodlist"><span>12345678901</span></router-link>
+            <p>身份证号</p><span><input type="text" placeholder="12345678901"></span>
         </div>
         <div class="tijiao"><p>提交</p></div>
 	</div>
@@ -46,23 +46,32 @@
 				
 			}
 		},
-
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            },
+            showInfo(){
+            	this.$http.get('',)
+            }
+		}
 	}
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
 .usertext input{
-		margin: 0;
-		width: 100%;
-	}
+	margin: 0;
+	width: 100%;
+}
 .usertext{
-	margin: 0 1rem 1.2rem 1rem;
+	margin: 0 1rem 0.5rem 1rem;
 }
 .usertext img{
-		position: absolute;
-		right: 0;
-	}
-
+	position: absolute;
+	right: 0;
+}
+.usertext input{
+	text-align: right;
+}
 .header2{
     border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
 }
@@ -74,11 +83,11 @@
 		font-size: 1.2rem;
 	}
 .right img{
-		width:0.8rem;
-		display: inline-block;
-		vertical-align: middle;
-		top: 25%;
-	}
+	width:0.6rem;
+	display: inline-block;
+	vertical-align: middle;
+	top: 25%;
+}
 .tlo{
 	margin: 0.8rem;
 }
@@ -98,7 +107,7 @@
 	display:flex;
 }
 .right p{
-	width:40%;
+	width:35%;
 	font-size:0.9rem;
 	line-height:2.5rem;
 	margin-left:1.2rem;

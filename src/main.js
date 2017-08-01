@@ -10,6 +10,12 @@ Vue.use(VueResource)
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+Vue.use(ElementUI)
+
+
+
 import './config/validate.js'
 
 import Base from './styles/bace.css'

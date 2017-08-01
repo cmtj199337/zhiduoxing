@@ -17,7 +17,7 @@
 		</div>
 	</div>	
 	<div class="jieshu">
-		<p>确认</p>
+		<p>提交</p>
 		</div>
   </div>  
 </template>
@@ -101,6 +101,7 @@
 	font-size:1rem;
 	padding: 0.6rem 5rem;
 	border-radius: 0.4rem;
-	display: inline-block;
+	margin:0 auto; 
+	width:20%;
 }
 </style> 

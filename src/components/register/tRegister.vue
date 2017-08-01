@@ -21,23 +21,28 @@
 				<a href="javascript:;"><span>团队logo</span><upload-img v-model="teamInfo.teamPhoto"></upload-img></a>
 			</div>
 	        <div class="usertext">
-	       		 <input type="text" v-model="teamInfo.teamName" placeholder="请输入团队名称">
+	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队名称">
+	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
 	        </div>
 	        <div class="usertext">
-				<input type="tel" v-model="teamInfo.teamPhone" placeholder="请输入手机号" maxlength="11" />
+				<input type="tel" name="mobile" v-validate="'required|mobile'" v-model="teamInfo.teamPhone" placeholder="请输入手机号" maxlength="11" />
+				<span class="toast" v-show="errors.has('mobile')">请输入手机号</span>
 			</div>
 	        <div class="usertext">
 				<input type="number" v-model="teamInfo.verify" placeholder="请输入验证" maxlength="11"  style="width:60%" />
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
-				<input type="password" v-model="teamInfo.password" style="width:100%" placeholder="请输入密码" /><br />
+				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
+				<span class="toast" v-show="errors.has('password')">请输入密码</span>
 			</div>
 			<div class="usertext">
-				<input type="password" v-model="teamInfo.rePassword" placeholder="请确认密码" /><br />
+				<input type="password" v-validate="'confirmed:password'" v-model="teamInfo.rePassword" name="pwdagain" placeholder="请确认密码" /><br />
+				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
 			<div class="usertext">
-				<input type="password" v-model="teamInfo.teamSlogan" placeholder="请输入团队口号" /><br />
+				<input type="password" v-validate="'required'" v-model="teamInfo.teamSlogan" name="slogan" placeholder="请输入团队口号" /><br />
+				<span class="toast" v-show="errors.has('slogan')">请输入团队口号</span>
 			</div>
 			<div class="usertext right">
 				<router-link to="liaisonGroup"><span>联络团队：志愿者服务联合会<img src="./right.png"></span></router-link>
@@ -99,7 +104,7 @@
 			<form action="" method="post">
 				<ul>
 					<li v-for="item in list">
-						<span>{{item.name}}</span>
+						<span>{{item.value}}</span>
 						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
 							<svg class="icon icon-ok"></svg>
 						</span>
@@ -150,7 +155,21 @@
 		        wrap:true,
 		        arr:'',
 		        listSelected:[],
-		        list:{}
+		         list:[
+		        	{value:'在线志愿服务'},
+		        	{value:'应急救援'},
+		        	{value:'城市运行'},
+		        	{value:'文化教育'},
+		        	{value:'关爱服务'},
+		        	{value:'社区服务'},
+		        	{value:'医疗卫生'},
+		        	{value:'绿色环保'},
+		        	{value:'赛会服务'},
+		        	{value:'京外服务'},
+		        	{value:'国际服务'},
+		        	{value:'其他'}
+		        	
+		        ]			
             }
         },
         mounted(){
@@ -189,7 +208,7 @@
             checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
-	  				this.arr += item.name+','
+	  				this.arr += item.value+','
 
 		            this.listSelected = this.arr.split(',').slice(0,-1)
 

@@ -4,7 +4,8 @@
 		<form action="" method="post">
 			<div class="usertext">
 				<i class="s-icon"><img src="./phone.png"></i>
-				<input type="tel" placeholder="请输入手机号" maxlength="11" />
+				<input type="tel" placeholder="请输入手机号" name="mobile" v-validate ="'required|mobile'" maxlength="11"   />
+				<span class="toast" v-show="errors.has('mobile')">{{ errors.first('mobile')}}</span>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./yanzheng.png"></i>
@@ -14,11 +15,13 @@
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./lock.png"></i>
-				<input type="password" style="width:100%" placeholder="请输入新密码(6~12位数字或字母)" /><br />
+				<input type="password" style="width:100%" name="password" v-validate="'required'" placeholder="请输入新密码(6~12位数字或字母)" v-model="newPassword" /><br />
+				<span class="toast" v-show="errors.has('password')">{{ errors.first('password')}}</span>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./lock.png"></i>
-				<input type="password" placeholder="再次确认密码" /><br />
+				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="再次确认密码" v-model="reNewPassword"/><br />
+				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
 			<div class="sub">
 				<input type="button" value="确认提交"/>
@@ -35,7 +38,18 @@
 	  	name: 'forgetpass',
 	 	 data () {
 		    return {
-		      	disabled: false
+		      	disabled: false,
+		      	toastshow:false,
+		        toasttext:'',
+		        
+		         verify:'',				//验证码
+		        reNewPassword:'' ,      //确认新密码	
+		        userinfo:{
+				phoneNumber:'',			//手机号
+		        newPassword:'',			//新密码
+		        }
+		        
+		      		
 		    }
 	  	},
 	  	components:{
@@ -52,7 +66,26 @@
 	                    this.$refs.timerbtn.stop(); //停止倒计时
 	                }
 	            });
-     		}
+     		},
+     		isRegister(mobile){
+	  			this.$http.post('/api/public/checkMobileNo',{mobileNo:mobile}).then(response =>{
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					//已注册过，可以修改密码
+	  					
+	  				}
+	  			})
+	  		},
+	  		mbRegister(){
+	  			this.$http.post('/api/public/modifyPassword',{
+	  				'mobileNo':this.phoneNumber,
+	  				'newPwd':this.newPassword}).then(response =>{
+	  				let res = response.data
+	  				if(res.result == 0){
+	  				
+	  				}
+	  			})
+	  		}
 	  	}
 	}
 </script>

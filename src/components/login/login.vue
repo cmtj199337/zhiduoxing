@@ -50,7 +50,7 @@
 		    }
 	  	},
 	  	mounted(){
-	  		// this.isLogin()
+	  		//this.isLogin()
 	  	},
 	  	computed:{
 	  		user () {
@@ -66,8 +66,7 @@
 	  			}
 	  			this.$http.post('/api/public/login',{
 	  				'userId':this.name,
-	  				'password':this.pwd,
-	  				'userType':0 
+	  				'password':this.pwd
 	  			},{
 	  				emulateJSON:true
 	  			}).then(response => {
@@ -76,6 +75,7 @@
 	  				if(res.result == 0){
 	  				
 	  					localStorage.setItem('access_token',verify.token)
+	  					localStorage.setItem('userId',verify.userId)
 	  					localStorage.setItem('username',verify.username)
 
 	  					if(verify.userType == 0){

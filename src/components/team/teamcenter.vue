@@ -124,6 +124,7 @@ hr{
 	/*position: relative;*/
 	width: 100%;
 	/*height: 1000px;*/
+	padding-bottom: 10%;
 }
 .topview{
 	width: 90%;

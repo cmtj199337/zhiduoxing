@@ -2,7 +2,7 @@
 	<div class="publishProject">
 		<headerTip message="发布项目" goBack="true"></headerTip>
 		<div class="header">
-            <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
+            <h4 class="texttitle"><span><img src="./zil@2x.png"></span>项目信息</h4>
         </div>
         <div class="usertext tlo">
 			<a href="javascript:;"><span>项目图片<img src="./tlogo1.png"></span></a>
@@ -31,9 +31,6 @@
 		<div class="kong">
 		</div>
 
-		 <div class="header1">
-            <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>项目地址</h4>
-        </div>
         <my-area @select="haha"></my-area>
 		<div class="usertext">
        		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字">
@@ -48,10 +45,10 @@
 		</div>
 
 		<div class="header2">
-            <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>项目介绍</h4>
+            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>项目介绍</h4>
         </div>
         <div class="usertextend">
-       		 <textarea name="" class="jianjie"></textarea>
+       		 <textarea name=""></textarea>
         </div>
         <div class="end">
         不超过100字
@@ -72,13 +69,13 @@
 			<a href="javascript:;"><span>不购买</span></a>
 		</div>
 		<div class="eee">
-        	<input type="button" name=""  class="next" value="确定">
+        	<p>发布</p>
         </div>
 	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
-	import MyArea from '../../components/common/tools/area.vue'
+	import MyArea from '../../components/common/tools/area2.vue'
 	export default{
 
 		name:'publishProject',
@@ -170,7 +167,7 @@
 	
 .usertextend textarea{
 	border: none; 
-	padding: 2.5rem 0;
+	padding: 2.2rem 0;
 	width: 100%;
 
 	}
@@ -184,6 +181,14 @@
 	margin:0; 
 	background:#f6f6f9;
 	text-align: center;
+	}
+	.eee p{
+	padding:0.8rem 0;
+	width:60%;
+	color:white;
+	background:#43B7B5;
+	border-radius:5px;
+	margin:0 auto; 
 	}
 .next{
 	border:none;

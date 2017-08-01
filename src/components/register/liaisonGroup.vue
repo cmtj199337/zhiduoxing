@@ -22,7 +22,7 @@
     	
     	</div>
     	<div class="neirong">
-    		<span class="tuanti">北京市智多星团队</span>
+    		<span class="tuanti">北京市志多星团队</span>
     	</div>
     	
 	</div>

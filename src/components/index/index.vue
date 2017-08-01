@@ -3,6 +3,7 @@
 		<div class="headerBar">
 			<div class="number"><img src="./logo.png">5000人</div>
 			<div class="denglu" @click="toAddress({path: '/login'})">登录</div>
+			
 		</div>
 		<swipe v-model="index" style="text-align: center;">
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>

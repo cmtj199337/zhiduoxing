@@ -160,7 +160,7 @@
           }
           /**
            * TODO
-           * 未来打算支持多文件
+           * 
            * Intend to support muti-file
            */
           if (fileList.length > 1) {

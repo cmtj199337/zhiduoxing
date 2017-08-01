@@ -79,16 +79,17 @@
 }
 
 .t{
-	padding: 0.5rem 0 0.5rem 3rem;
+	padding: 0.2rem 0 0.1rem 3rem;
 	display:flex;
 	margin: 0.6rem 0.6rem 0.6rem 3.5rem;
 	background: #FFFFFF;
 	position:relative;
+	border-radius:5px;
 }
 .t img{
 	width:20%; 
 	position:absolute;
- 	top:14%; 
+ 	top:15%; 
 	left:-9%;
 }
 .t1{
@@ -97,11 +98,12 @@
 	margin: 0.6rem 0.6rem 0.6rem 3.5rem;
 	background: #FFFFFF;
 	position:relative;
+	border-radius:5px;
 }
 .t1 img{
 	width:20%; 
 	position:absolute;
-	top:14%; 
+	top:15%; 
 	left:-9%; 
 }
 .t2{
@@ -110,11 +112,12 @@
 	margin: 0.6rem 0.6rem 0.6rem 3.5rem;
 	background: #FFFFFF;
 	position:relative;
+	border-radius:5px;
 }
 .t2 img{
 	width:20%; 
 	position:absolute;
-	top:14%; 
+	top:15%; 
 	left:-9%; 
 }
 .t p{
@@ -127,15 +130,15 @@
 	margin: 0.5rem 0;
 }
 .t3{
-	margin: 4rem 0 0 0;
+	margin: 2.5rem 0 0 0;
 	text-align: center;
 }
 
 .t3 p{
-	width: 12rem;
+	width: 14rem;
 	color: #fff;
 	background: #43B7B6;
-	padding: 0.5rem 0;
+	padding: 0.8rem 0;
 	margin: 0 auto;
 	border-radius: 0.4rem;
 	border:none;

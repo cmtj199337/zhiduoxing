@@ -2,25 +2,38 @@
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
         <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
-		<form action="" method="post" @submit.prevent="submit" v-show="wrap">
+		<form method="post" v-show="wrap" enctype="multipart/form-data">
 			<div class="usertext userphoto">
-				<a href="javascript:;"><span>头像上传</span><upload-img v-model="userinfo.userPhoto"></upload-img></a>
+				<a href="javascript:;"><span>头像上传</span>
+					<!-- <upload-img v-model="picture"></upload-img> -->
+					<el-upload
+					  class="avatar-uploader"
+					  action="/api/public/upload"
+					  :show-file-list="false"
+					  :on-success="handleAvatarSuccess"
+					  :before-upload="beforeAvatarUpload">
+					  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+					  <i v-else class="avatar-uploader-icon">
+					  	<img src="./picture.png" alt="">
+					  </i>
+					</el-upload>
+				</a>
 			</div>
 			<div class="usertext">
-				<input type="tel" v-validate ="'required|mobile'" name="mobile" placeholder="请输入手机号" maxlength="11" v-model="userinfo.phoneNumber"/>
-				<span class="toast" v-show="errors.has('mobile')">{{ errors.first('mobile')}}</span>
+				<input type="tel" v-validate ="'required|mobile'" name="mobile" placeholder="请输入手机号" maxlength="11" v-model="userinfo.mobileNo" @blur="isRegister" />
+				<span class="toast" v-show="errors.has('mobile')">请输入正确手机号</span>
 			</div>
 			<div class="usertext">
-				<input type="number" placeholder="请输入验证码" maxlength="6" v-model="userinfo.verify" />
+				<input type="number" placeholder="请输入验证码" maxlength="6" />
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
 
 			</div>
 			<div class="usertext">
-				<input type="password" name="password" v-validate="'required'" style="width:100%" placeholder="请输入密码(6~12位数字或字母)" v-model="userinfo.newPassword" />
+				<input type="password" name="password" v-validate="'required'" style="width:100%" placeholder="请输入密码(6~12位数字或字母)" v-model="userinfo.password" />
 				<span class="toast" v-show="errors.has('password')">{{ errors.first('password')}}</span>
 			</div>
 			<div class="usertext">
-				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" v-model="userinfo.reNewPassword" />
+				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" />
 				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
 			<div class="usertext">
@@ -29,16 +42,16 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
-					<span class="good">擅长<span v-for="item in userinfo.goodSelect">{{item}}</span><img src="./right.png"></span>
+					<span class="good">擅长<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="usertext">
-				<input type="text" v-validate="'required'" name="slogan" placeholder="请输入志愿口号" v-model="userinfo.slogan" /><br />
+				<input type="text" v-validate="'required'" name="slogan" placeholder="请输入志愿口号" v-model="userinfo.volunteerSlogan" /><br />
 				<span class="toast" v-show="errors.has('slogan')">请输入志愿口号</span>
 			</div>
 			<div class="read">
-				<span v-for="item in items">
-					<span class="item-check-btn" :class="{'check':item.state}" @click="alocked(item)">
+				<span>
+					<span class="item-check-btn" :class="{'check':items}" @click="alocked">
 						<svg class="icon icon-ok"></svg>
 					</span>
 				</span>
@@ -76,63 +89,58 @@
 				</ul>
 			</form>
 		</div>
+		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	import TimerBtn from '../common/tools/countdown.vue'
-	import UploadImg from '../../components/common/tools/uploadImg.vue'
+	import alertTip from '../../components/common/tools/alertTip.vue'
 	export default {
 	  	name: 'iRegister',
 	  	components:{
 	  		headerTip,
 	  		TimerBtn,
-	  		UploadImg
+	  		alertTip
 	  	},
 	 	data () {
 		    return {
+		    	showAlert:false,
+		    	alertText:'',
 		    	isConfirm:false,
-		    	items:[{
-		            state: false
-		        }],
+		    	items:false,
 		        toastshow:false,
 		        toasttext:'',
-		        list:[
-		        	{value:'保险服务'},
-		        	{value:'保险服务'},
-		        	{value:'保险服务'},
-		        	{value:'保险服务'},
-		        	{value:'保险服务'},
-		        	{value:'保险服务'}
-		        ],					//擅长选项
+		        imageUrl:'',
+		        list:[],
 		        userinfo:{
-		        	userPhoto:[],			//用户头像
-		        	phoneNumber:'',			//手机号
-		        	verify:'',				//验证码
-		        	newPassword:'',			//新密码
-		        	reNewPassword:'',		//重复新密码
-		        	nickName:'',			//昵称
-		        	goodSelect:[],			//擅长
-		        	slogan:''				//口号
+		        	headIcon:'',
+		        	mobileNo:'',					//手机号
+		        	password:'',					//新密码
+		        	nickName:'',					//昵称
+		        	goodAt:'',						//擅长字符串
+		        	volunteerSlogan:''				//口号
 		        },
+		        goodSelect:[],
 		        isShow:false,
 		        wrap:true,
 		        arr:'',
-		        type:'GOOD_AT'
+		        type:'GOOD_AT',
 		    }
 	  	},
 	  	mounted(){
 	  		this.goodList()
+
 	  	},
 	  	computed:{
-	  		rightPhoneNumber: function (){
-                return /^1\d{10}$/gi.test(this.phoneNumber)
-            }
 	  	},
 	  	methods:{
+	  		closeTip(){
+                this.showAlert = false;
+            },
 	  		confirm() {
-	  			this.$http.post('/api/upload',this.userinfo).then(response => {
+	  			this.$http.post('/api/public/addVolunteer',this.userinfo).then(response => {
 	  				let res = response.data
 	  				
 	  				if(res.result == 0){
@@ -154,8 +162,8 @@
 	                }
 	            });
      		},
-     		alocked(item) {
-                item.state = !item.state;
+     		alocked() {
+                this.items = !this.items
             },
             showToggle(){
             	this.isShow = !this.isShow
@@ -182,36 +190,58 @@
             checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
-
-	  				if(item.checked == true){
-	  					this.arr += item.value+','
-	  					this.userinfo.goodSelect = this.arr.split(',').slice(0,-1)
-
-	  					let count = 0
-		  				this.list.forEach((item,index)=>{
-		  					if(item.checked == true){
-		  						count++
-		  					}
-		  				})
-		  				if(count>=3){
-		  					this.isShow = false;
-		  					this.wrap = true;
-		  				}
+	  				let count = 0
+	  				this.userinfo.goodAt += item.key+','
+	  				//this.userinfo.goodAt = this.userinfo.goodAt.slice(0,-1)
+	  				this.arr += item.value+','
+	  				this.goodSelect = this.arr.split(',').slice(0,-1)
+	  				this.list.forEach((item,index)=>{
+	  					if(item.checked == true){
+	  						count++
+	  					}
+	  				})
+	  				if(count>=3){
+	  					this.isShow = false;
+	  					this.wrap = true;
 	  				}
 	  			}else{
-	  				item.checked = !item.checked
-	  				this.arr += item.value+','
-	  				this.userinfo.goodSelect = this.arr.split(',').slice(0,-1)
+
+	  				item.checked = !item.checked	
 	  			}
 	  		},
-	  		isRegister(mobile){
-	  			this.$http.post('/api/public/checkIdNo',{mobileNo:mobile}).then(response =>{
+	  		handleAvatarSuccess(res, file) {
+	  			let result = res.data
+	  			console.log(result)
+		        // this.imageUrl = URL.createObjectURL(file.raw);
+		        this.imageUrl = result
+		        this.userinfo.headIcon = result
+		    },
+		    beforeAvatarUpload(file) {
+		        const isJPG = file.type === 'image/jpeg';
+		        const isLt2M = file.size / 1024 / 1024 < 2;
+
+		        if (!isJPG) {
+		          this.$message.error('上传头像图片只能是 JPG 格式!');
+		        }
+		        if (!isLt2M) {
+		          this.$message.error('上传头像图片大小不能超过 2MB!');
+		        }
+		        return isJPG && isLt2M;
+		    },
+		    isRegister(){
+		    	if(this.userinfo.mobileNo)
+
+	  			this.$http.post('/api/public/checkIdNo',{mobileNo:this.userinfo.mobileNo}).then(response =>{
 	  				let res = response.data
 	  				if(res.result == 0){
-	  					//可以注册
+	  					//号码已存在，不可注册
+	  					this.showAlert = true
+	  					this.alertTip = '该号码已经注册'
+	  				}else{
+
 	  				}
 	  			})
-	  		}
+	  		},
 	  	}
 	}
 </script>
@@ -382,5 +412,24 @@
 	.tip p{
 	    vertical-align: middle;
 	    line-height: 1;
+	}
+	.avatar-uploader{
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.avatar-uploader-icon {
+	    width: 4rem;
+	    height: 4rem;
+	    line-height: 4rem;
+	    display: inline-block;
+	}
+	.avatar {
+	    width: 4rem;
+	    height: 4rem;
+	    display: block;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
 	}
 </style>
