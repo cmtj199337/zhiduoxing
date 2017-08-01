@@ -42,7 +42,7 @@
         <div class="kong">
 		</div>
 		<div class="header2">
-            <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>团队简介</h4>
+            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>团队简介</h4>
         </div>
         <div class="usertextend">
        		 <textarea name="" class="jianjie"></textarea>

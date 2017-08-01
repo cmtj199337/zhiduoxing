@@ -16,6 +16,8 @@
 		</div>
 		<div class="header2">
 		<img src="./xiangm.png">
+		<p class="hd1"><b>志多星</b></p>
+		<p class="hd2">志愿服务与社会创新研究院</p>
 		<div class="jindu">
 			<img src="./jindu.png">
 			<img src="./bq.png" class="bq"><p class="j1">65%</p>
@@ -35,6 +37,8 @@
 		</div>
 		<div class="header2">
 		<img src="./xiangm.png">
+		<p class="hd1"><b>志多星</b></p>
+		<p class="hd2">志愿服务与社会创新研究院</p>
 		<div class="jindu">
 			<img src="./jindu.png">
 			<img src="./bq.png" class="bq2"><p class="j2">40%</p>
@@ -87,7 +91,23 @@ p{
 	border-radius:5px;
 	background:white;
 	margin:0 0.6rem;
+	position:relative;
 }
+.header2 .hd1{
+	position:absolute;
+	font-size:1.5rem;
+	top:10%;
+	color:white;
+	left:40%;
+}
+.header2 .hd2{
+	position:absolute;
+	top:25%;
+	color:white;
+	left:28%;
+
+}
+
 .header ul {
 	display:flex;
 	padding:0 0.8rem ;

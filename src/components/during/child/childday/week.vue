@@ -4,17 +4,16 @@
 	<div class="time">
 		<ul>
 			<li><img src="../../gou.png"><span>星期一</span></li>
-			<li><img src="../../gou.png"><span>星期一</span></li>
-			<li><img src="../../gou.png"><span>星期一</span></li>
+			<li><img src="../../gou.png"><span>星期二</span></li>
+			<li><img src="../../gou.png"><span>星期三</span></li>
 		</ul>
 		<ul>
-			<li><img src="../../gou.png"><span>星期一</span></li>
-			<li><img src="../../gou.png"><span>星期一</span></li>
-			<li><img src="../../xuanze.png"><span>星期一</span></li>
+			<li><img src="../../gou.png"><span>星期四</span></li>
+			<li><img src="../../gou.png"><span>星期五</span></li>
+			<li><img src="../../xuanze.png"><span>星期六</span></li>
 		</ul>
 		<ul>
-			<li><img src="../../xuanze.png"><span>星期一</span></li>
-			<li><img src="../../xuanze.png"><span>星期一</span></li>
+			<li><img src="../../xuanze.png"><span>星期日</span></li>
 			<li></li>
 		</ul>
 		

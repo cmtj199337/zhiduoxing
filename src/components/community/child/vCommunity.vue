@@ -15,13 +15,11 @@
 				<img src="../tu22.png">
 				<img src="../tu11.png">
 			</div>
-			<div class="usertext">
-				<span style="color:#43B7B5">#志愿项目#</span>
-			</div>
+	
 			<div class="pl">
-				<span><img src="../zan.png">50</span>
-				<span><img src="../pinglun.png">42</span>
-				<span><img src="../jubao.png">举报</span>
+				<p><img src="../zan.png"><span>50</span></p>
+				<p><img src="../pinglun.png"><span>42</span></p>
+				<p><img src="../jubao.png"><span>举报</span></p>
 			</div>
 			<div class="kong"></div>
 			<div class="fb"><img src="../fabiao.png"></div>
@@ -160,18 +158,22 @@ margin:0 1.2%;
 .pl{
 	display:flex;
 	text-align: center;
-	color: #999
+	color: #999;
+	padding:0.2rem 0;
 }
-.pl span{
-	width:32%;
+.pl p{
+	width:33.3%;
 	margin-left:5%; 
 	margin:0.5rem 0;
-
+}
+.pl p span{
+	margin-left:0.4rem;
 }
 .pl img{
 	width:13%;
 	display:inline;
-	vertical-align: middle;	
+	vertical-align:middle;	
+	padding-bottom:0.15rem;
 }
 .fb img{
 	width:15%;

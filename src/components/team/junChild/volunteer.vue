@@ -64,8 +64,8 @@
 		<div class="end">
 			<ul>
 				<li>全选</li>
-				<li><span><img src="../butongg@2x.png" >不通过</span></li>
-				<li><span><img src="../tongg@2x.png" >通过</span></li>
+				<li><span><img src="../butongg@2x.png" >禁用</span></li>
+				<li><span><img src="../tongg@2x.png" >解禁</span></li>
 			</ul>
 			<span style="top:28%" class="item-check-btn list-btn">
 		        <svg class="icon icon-ok"></svg>
@@ -182,5 +182,9 @@
 	display:inline;
 	vertical-align:middle;
 	margin-right:0.2rem;
+}
+.zz1{
+	border-radius:5px;
+	border:1px #ECECEC solid;  
 }
 </style>

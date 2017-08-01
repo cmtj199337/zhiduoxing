@@ -13,6 +13,9 @@
 			<span>团队口号：倡导无私奉献新风尚。</span>
 		</div>
 		<div class="usertext">
+			<span>上级团队：志愿者联合会</span>
+		</div>
+		<div class="usertext">
 			<span>团队总志愿时长：720小时</span>
 		</div>
 		<div class="usertext">

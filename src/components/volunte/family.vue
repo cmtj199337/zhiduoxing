@@ -1,6 +1,7 @@
 <template>
   <div class="family">
-   <headerTip message="志愿家庭" goBack="true" style="background: #FFFFFF"></headerTip><span class="h" @click="toAddress({path: '/addFamily'})">添加成员</span>
+   <headerTip message="志愿家庭" goBack="true" style="background: #FFFFFF"></headerTip>
+   <!-- <span class="h" @click="toAddress({path: '/addFamily'})">添加成员</span> -->
 
 	<div class="t">
 		<img src="./toux.png" alt="">

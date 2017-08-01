@@ -1,6 +1,5 @@
 <template>
-	<div class="
-	">
+	<div class="servicesDetails">
 		<headerTip message="志愿攻略详情" goBack="true"></headerTip>
 		<div class="kong"></div>
 		<div class="main">

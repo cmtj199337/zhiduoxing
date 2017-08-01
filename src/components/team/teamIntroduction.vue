@@ -12,7 +12,10 @@
             <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
         	</div>
 			<div class="usertext">
-			<span>名称：志多星团队 团队编号：123</span>
+			<span>名称：志多星团队</span>
+			</div>
+			<div class="usertext">
+			<span>团队编号：123</span>
 			</div>
 			<div class="usertext">
 			<span>团队口号：倡导无私奉献新风尚</span>
@@ -38,19 +41,15 @@
 			<div class="usertext">
 			<span>联系电话：12345678912</span>
 			</div>
-
-			<div class="header2">
-            	<h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>团队地址</h4>
-				<div class="usertext">
-				<span>北京市朝阳区四惠东</span>
-				</div>
+			<div class="usertext">
+			<span>团队地址：北京市朝阳区四惠东</span>
 			</div>
 			
 	        <div class="end">
-			<ul>
-			<li><span><img src="./tongg@2x.png">审核通过</span></li>
-			<li><span><img src="./butongg@2x.png">审核不通过</span></li>
-			</ul>
+				<ul>
+					<li><span><img src="./tongg@2x.png">审核通过</span></li>
+					<li><span><img src="./butongg@2x.png">审核不通过</span></li>
+				</ul>
 			</div>
 	</div>
 </template>
@@ -76,12 +75,17 @@ import{ Swipe,SwipeItem}from'c-swipe';
 <style scoped>
 @import '../../styles/usertext.css';
 @import '../../styles/swipe.css';
+span{
+	font-size:0.85rem;
+}
 .usertext input{
 		margin: 0;
 		width: 100%;
 	}
 .usertext{
-	margin: 0 1rem 1.2rem 1rem;
+	margin:0 0.6rem;
+	padding:0.6rem 0;
+	line-height:1.8rem;
 }
 .header1{
     border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
@@ -106,7 +110,6 @@ import{ Swipe,SwipeItem}from'c-swipe';
 .kong{
 	background:#f6f6f9;
 	padding: 0.4rem;
-	margin: 0.4rem 0;
 	}
 	
 .usertextend textarea{
@@ -144,9 +147,9 @@ import{ Swipe,SwipeItem}from'c-swipe';
 
 }
 .end ul li span img{
-	width:15%;
+	width:13%;
 	display:inline;
 	vertical-align:middle;
-	margin-right:0.2rem;
+	margin-right:0.3rem;
 }
 </style>

@@ -82,7 +82,7 @@ width:20%;
 }
 .m1 ul li h3{
 	margin-bottom: 0.8rem;
-	width:12rem;
+	width:14rem;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -128,7 +128,7 @@ width:20%;
 }
 .being{
 	position: absolute;
-    right: 15%;
+    right:2%;
     top: 40%;
     font-size: 0.5rem;
     color: rgb(70, 184, 183);
@@ -138,7 +138,7 @@ width:20%;
 }
 .passed{
 	position: absolute;
-    right: 15%;
+    right:2%;
     top: 40%;
     font-size: 0.5rem;
     color: #e5e5e5;

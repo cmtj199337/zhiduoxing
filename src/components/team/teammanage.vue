@@ -5,19 +5,18 @@
 		<div class="main">
 			<div class="header1">
 			<ul>
-				<li>
-				<img src="./a@2x.png"><b>1</b><p>团队总数（个）</p>
-				</li>
+
 				<li @click="toAddress({path: '/teammanage/project'})">
 					<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
+				</li>
+				<li @click="toAddress({path: '/teammanage/volunteer'})">
+				<img src="./c@2x.png" class="zhiyuan" style="width:15%;"><b>2000</b><p>志愿者总人数（人）</p>
 				</li>
 				</ul>
 			</div>
 			<div class="header2">
 			<ul>
-				<li @click="toAddress({path: '/teammanage/volunteer'})">
-				<img src="./c@2x.png" class="zhiyuan"><b>2000</b><p>志愿者总人数（人）</p>
-				</li>
+				
 				<li>
 				<img src="./d@2x.png"><b>2200</b><p>志愿时长（小时）</p>
 				</li>

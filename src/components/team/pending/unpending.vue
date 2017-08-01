@@ -2,52 +2,44 @@
 	<div class="unpending">
 		<div class="header1">
 			<ul>
-				<li>姓名</li>
-				<li class="bulu">补录时长</li>	
-				<li><p class="cc2">申请日期</p></li>		
+				<li style="text-align:center">姓名</li>
+				<li class="bulu">申请日期</li>	
+						
 			</ul>
 		</div>
 		<div class="kong"></div>
 		<div class="header2">
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../tongg@2x.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../xuanze.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../xuanze.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../xuanze.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../xuanze.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../xuanze.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../xuanze.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 			<ul @click="toAddress({path: '/personalData'})">
 				<li class="cc1"><img src="../xuanze.png" class="t1"><p><img src="../tou1@2x.png" ><span>联系人</span></p></li>
-				<li><p>3小时</p></li>
-				<li><p class="zz1">2017/05/21</p></li>
+				<li><p>2017/05/21</p></li>
 			</ul>	
 		</div>
 		<div class="end">
@@ -88,7 +80,7 @@
 	margin-left:4%;
 }
 .header1 ul li{
-	width:30%;
+	width:45%;
 	text-align:right;
 	padding:0.5rem 0;
 
@@ -115,9 +107,9 @@
 	width:40%;
 }
 .header2 ul li{
-	width:30%;
-	text-align:center;
-	padding:0.5rem 0;
+    width: 55%;
+    text-align: right;
+    padding: 0.5rem 0;
 
 }
 

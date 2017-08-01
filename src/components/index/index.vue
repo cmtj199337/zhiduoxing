@@ -1,8 +1,8 @@
 <template>
 	<div class="index">
 		<div class="headerBar">
-			<div class="location"><img src="./location.png">{{guessCity}}</div>
 			<div class="number"><img src="./logo.png">5000人</div>
+			<div class="denglu" @click="toAddress({path: '/login'})">登录</div>
 		</div>
 		<swipe v-model="index" style="text-align: center;">
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
@@ -10,7 +10,7 @@
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
 		</swipe>
 		<div class="classify clearfix">
-			<input class="search" type="search" placeholder="搜索" align="center">
+			<div class="location"><img src="./weizhi.png">{{guessCity}}</div><input class="search" type="search" placeholder="搜索" align="center">
 			<ul>
 				<!-- <li v-for="item in filtIcon">
 					<router-link :to="item.url">
@@ -225,7 +225,7 @@
 		color: #fff;
 	}
 	.number{
-		text-align: right;
+		text-align: left;
 	}
 	.number img{
 		width: 1rem;
@@ -233,11 +233,22 @@
 	    vertical-align: text-top;
 	    padding-right: 0.5rem;
 	}
+	.denglu{
+		text-align: right;
+	}
+	.location{
+		display:inline;
+		margin-left:-1.6rem;
+		padding-right:0.8rem;
+		 
+		left:0; 
+	}
 	.location img{
-		width: 0.8rem;
+		width: 0.9rem;
 	    display: inline-block;
-	    vertical-align: middle;
-	    padding-right: 0.5rem;
+	    vertical-align:middle;
+	    padding-right: 0.3rem;
+	    padding-bottom:0.2rem;
 	}
 	.classify{
 		width: 88%;
@@ -261,7 +272,7 @@
 		margin: 0.2rem auto;
 	}
 	.search{
-	    width: 80%;
+	    width: 70%;
 	    border: 0; 
 	    margin: 1rem auto;
 	    height: 2rem;

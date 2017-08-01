@@ -7,18 +7,8 @@
 		<p style="font-size:1rem;">【中国资根】数据管理新思路，唤醒沉睡动员力</p>
 		<p class="time">2017/02/05</p>
 		</div>
-		<div class="header2"><span class="left"><img src="./bofang1.png"></span>
-		<span class="right">
-		<p >新数据思路</p>
-		<p><img src="./jindu.png"></p>
-		<p>
-		<span>0:00</span>
-		<span class="all">6:28</span>
-		</p>
-		</span>
-		</div>
 		<div class="text">
-		<img src="./image.png"><img src="./bofang2.png" class="bofang">
+		<img src="./image.png">
 		<p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
 		<img src="./image2.png">
 		<p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
@@ -107,11 +97,5 @@ p{
 .text img{
 	margin:0.6rem 0;
 }
-.text .bofang{
-	position:absolute;
-	width:15%;
-	top:11%;
-	left:42%;
 
-}
 </style>

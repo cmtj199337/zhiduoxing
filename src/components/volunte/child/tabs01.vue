@@ -18,13 +18,6 @@
 			</ul>
 		</div>
 		<div class="main2">
-			<div class="tou">
-				<ul>
-					<li >基础知识<img src="../bottom.png" style="top:35%;left:24%;"></li>
-					<li>管理培训<img src="../bottom.png" style="top:35%;left:57%;"></li>
-					<li>技能培训<img src="../bottom.png" style="top:35%;left:89%;"></li>
-				</ul>
-			</div>
 			<div class="text">
 				<ul>
 					<li @click="toAddress({path: '/servicesDetails'})">
@@ -129,26 +122,6 @@ width:50%;
 .main{
 	display:none;
 }
-.tou{
-	margin-bottom:0.6rem;
-}
-
-.tou ul{
-	display:flex;
-	margin:0.1rem 0;
-	padding:0.5rem 0;
-	text-align: center;
-	position:relative;
-	background:white;
-		}
-.tou ul li{
-	width:33%;
-}
-.tou ul li img{
-	width:4%;
-	position:absolute;
-
-}
 .main2{
 	background:#F5F5F5;
 }
@@ -165,6 +138,12 @@ margin:0.4rem;
 .main ul li span p{
 	margin:0.6rem 0;
 	color:#D4D4D4;
+}
+.main ul li span img{
+	padding-top:0.3rem;
+}
+.main2 ul li span img{
+	padding-top:0.3rem;
 }
 
 .text ul li{

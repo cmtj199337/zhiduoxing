@@ -24,6 +24,10 @@ const router = new Router({
 			component:require('../components/login/login.vue')
 		},
 		{
+			path: '/modifyPassword',
+			component:require('../components/login/modifyPassword.vue')
+		},
+		{
 			path: '/hello',
 			component:require('../components/Hello.vue')
 		},
@@ -73,6 +77,10 @@ const router = new Router({
 		{
 			path: '/index',
 			component:require('../components/index/index.vue')
+		},
+		{
+			path: '/teamIndex',
+			component:require('../components/index/indexItem.vue')
 		},
 		//签到打卡
 		{
@@ -248,6 +256,10 @@ const router = new Router({
 			path: '/junior/team',
 			component:require('../components/team/junChild/team.vue')
 		},
+		{
+			path: '/modifiteam',
+			component:require('../components/team/junChild/team/modifiteam.vue')
+		},
 		//项目-下级
 		{
 			path: '/junior/project',
@@ -262,6 +274,10 @@ const router = new Router({
 		{
 			path: '/juniorTeamProject',
 			component:require('../components/team/juniorTeamProject.vue')
+		},
+		{
+			path: '/pDetail',
+			component:require('../components/team/projectDetail/projectDetail.vue')
 		},
 		{
 			path: '/myPolicy',

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
 	<div class="teamRegistration">
 		<div v-show="wrap">
 			<headerTip message="团队注册" goBack="true"></headerTip>
@@ -18,7 +18,7 @@
 	            <h4 class="texttitle"><span><img src="./t1.png"></span>团队信息</h4>
 	        </div>
 	        <div class="usertext tlo">
-				<a href="javascript:;"><span>头像上传</span><upload-img v-model="teamInfo.teamPhoto"></upload-img></a>
+				<a href="javascript:;"><span>团队logo</span><upload-img v-model="teamInfo.teamPhoto"></upload-img></a>
 			</div>
 	        <div class="usertext">
 	       		 <input type="text" v-model="teamInfo.teamName" placeholder="请输入团队名称">
@@ -77,7 +77,7 @@
 	        <div class="kong">
 			</div>
 			<div class="header2">
-	            <h4 class="texttitle"><span><img src="./dizhi.png"></span>团队简介</h4>
+	            <h4 class="texttitle"><span><img src="./jianjie.png"></span>团队简介</h4>
 	        </div>
 	        <div class="usertextend">
 	       		 <textarea v-model="teamInfo.teamProfile" class="jianjie" rows="10"></textarea>

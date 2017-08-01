@@ -80,8 +80,8 @@
 
 }
 .header ul li .touxiang{
-	width:5rem;
-	height:5rem;
+	width:4rem;
+	height:4rem;
 	position:absolute;
 	left: -11%;
 	top:8%;
@@ -149,7 +149,7 @@
 .btn{
 	position: absolute;
     top: 40%;
-    right: 6%;
+    right:1%;
     font-size: 0.5rem;
     color: white;
     background: rgb(70, 184, 183);

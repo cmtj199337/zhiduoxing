@@ -2,7 +2,7 @@
 	<div class="passed">
 		<div class="main2">
 			<ul>
-				<li @click="toAddress({path: '/teamPresentation'})">
+				<li @click="toAddress({path: '/modifiteam'})">
 					<img src="./logo.png">
 					<h3>北京西站地区志愿服务</h3>
 					<div class="m1">
@@ -10,7 +10,7 @@
 						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
 					</div>
 				</li>
-				<li @click="toAddress({path: '/teamPresentation'})">
+				<li @click="toAddress({path: '/modifiteam'})">
 					<img src="./logo.png">
 					<h3>北京西站地区志愿服务</h3>
 					<div class="m1">
@@ -18,7 +18,7 @@
 						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
 					</div>
 				</li>
-				<li @click="toAddress({path: '/teamPresentation'})">
+				<li @click="toAddress({path: '/modifiteam'})">
 					<img src="./logo.png">
 					<h3>北京西站地区志愿服务</h3>
 					<div class="m1">
@@ -26,7 +26,7 @@
 						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
 					</div>
 				</li>
-				<li @click="toAddress({path: '/teamPresentation'})">
+				<li @click="toAddress({path: '/modifiteam'})">
 					<img src="./logo.png">
 					<h3>北京西站地区志愿服务</h3>
 					<div class="m1">

@@ -17,11 +17,12 @@
 			<span>#志愿项目#</span>
 		</div>
 		<div class="pl">
-			<span><img src="../zan.png">50</span>
-			<span><img src="../pinglun.png">42</span>
-			<span><img src="../jubao.png"></span>
+			<p><img src="../zan.png"><span>50</span></p>
+			<p><img src="../pinglun.png"><span>42</span></p>
+			<p><img src="../jubao.png"><span>举报</span></p>
 		</div>
 		<div class="kong"></div>
+		<div class="fb"><img src="../fabiao.png"></div>
 	</div>
 </template>
 <script >
@@ -158,16 +159,20 @@ margin:0 1.2%;
 	text-align: center;
 	color: #999
 }
-.pl span{
-	width:32%;
+.pl p{
+	width:33%;
 	margin-left:5%; 
-	margin:0.5rem 0;
-
+	padding:0.3rem 0;
+	
 }
-.pl img{
+.pl p span{
+	margin-left:0.4rem;
+}
+.pl p img{
 	width:13%;
 	display:inline;
 	vertical-align: middle;	
+	padding-bottom:0.2rem;
 }
 .fb img{
 	width:15%;

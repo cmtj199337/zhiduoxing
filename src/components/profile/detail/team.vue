@@ -7,7 +7,7 @@
 				<h3>北京西站地区志愿服务</h3>
 				<div class="m1">
 					<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-					<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
+					<div class="mm1"><span>志多星</span><p>团队管理员</p></div>
 				</div>
 			</li>
 		</ul>
@@ -168,14 +168,15 @@ margin-left:1rem;
 }
 .main2 ul li .mm1{
 	width:50%;
-	margin-left:10%
+	margin:0 5%;
+
 }
 .mm1 p{
 	color:#BCBCBC;
 }
 .main2 ul li h3{
 	margin-bottom: 0.8rem;
-	margin-left:4rem;
+	margin-left:3rem;
 }
 
 </style>

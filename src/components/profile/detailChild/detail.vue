@@ -13,6 +13,9 @@
 			<span>发布人：{{data.projectStatus}}</span>
 		</div>
 		<div class="usertext">
+			<span>服务类别：{{data.serverObject}}</span>
+		</div>
+		<div class="usertext">
 			<span>服务对象：{{data.serverObject}}</span>
 		</div>
 		<div class="usertext">
@@ -40,10 +43,10 @@
         <div class="usertext">
         	<p>本项目包含<span>“志愿者意外伤害险”</span></p>
         </div>
-        <div class="header3">
+        <div class="header3" @click="toAddress({path: '/signList'})">
         已报名列表<span>20/200<img src="../right.png"></span>
         </div>
-		<div class="touxiang">
+		<div class="touxiang" @click="toAddress({path: '/signList'})">
 			<router-link to="/signList">
 				<img src="../touxiang1.png" class="img1">
 				<img src="../touxiang2.png">

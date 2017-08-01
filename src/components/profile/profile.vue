@@ -71,7 +71,13 @@
 						<span>服务中心</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
+					<li @click="toAddress({path: '/modifypassword'})">
+						<img class="icon" src="./lock.png">
+						<span>修改密码</span>
+						<img class="arrow" src="./you@2x.png">
+					</li>
 				</ul>
+				<input class="logout" type="button" value="退出登录">
 			</section>
 		</div>
 		<footer class="foot">
@@ -262,5 +268,16 @@
     }
     .check{
         color: #43B7B6 !important;
+    }
+    .logout{
+    	border: 0;
+	    margin: 1rem auto 0;
+	    color: #FFFFFF;
+	    font-size: 1rem;
+	    font-family: "\5FAE\8F6F\96C5\9ED1";
+	    background: #43B7B6;
+	    padding: 0.5rem 4rem;
+	    border-radius: 4px;
+		display: block;
     }
 </style>

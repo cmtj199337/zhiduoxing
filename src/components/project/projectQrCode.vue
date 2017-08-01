@@ -52,9 +52,11 @@
     	
 		p{ 
 			text-align:left;
-			font-size:16px;
-			padding:1px 12px 31px;
+			font-size:0.85rem;
+			margin:0 0.6rem; 
+			padding:0.8rem 0;
 			border-bottom:1px solid rgba(235,234,234,0.48);
+			line-height:1.5rem;
 		}
 
 

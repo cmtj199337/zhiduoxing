@@ -21,7 +21,7 @@
 		<div class="link">
 			<router-link to="forgetpass" class="forget">忘记密码</router-link>
 			<span>|</span>
-			<router-link to="register" class="regis">点此注册</router-link>
+			<router-link to="register" class="regis">注册账号</router-link>
 		</div>
 		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>

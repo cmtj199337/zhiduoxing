@@ -3,7 +3,6 @@
 		<headerTip message="社区互动" goBack="true"></headerTip><span class="message" @click="toAddress({path: '/mymessage'})">我的消息</span>
 		<div class="sousuo">
 			<input name="" placeholder="搜索">
-		<img src="./sou.png"><span style="color: rgb(67, 183, 181);">筛选<img src="./shaixuan.png"></span>
 		</div>
 		<div class="header">
 			<ul>
@@ -83,7 +82,7 @@ import myCommunity from '../../components/community/child/myCommunity.vue'
 	background:rgba(238, 238, 244, 0.5);
 	margin-left:2%;
 	margin-right: 2%;
-	width:80%;
+	width:95%;
 	text-indent: 2em
 }
 .sousuo p{

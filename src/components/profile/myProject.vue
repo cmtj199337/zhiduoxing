@@ -8,7 +8,6 @@
 		<div class="header">
 			<ul>
 				<li>全部</li>
-				<li>待启动</li>
 				<li>招募中</li>
 				<li>进行中</li>
 				<li>已结束</li>
@@ -107,7 +106,7 @@
 	display:flex;
 }
 .header ul li{
-	width:20%;
+	width:25%;
 	text-align:center;
 	padding-bottom:0.5rem;
 }

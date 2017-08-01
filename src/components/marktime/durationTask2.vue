@@ -78,15 +78,15 @@
 }
 .header ul li{
 	background:white;
-	padding:0.8rem 0;
+	padding:0.9rem 0;
 	border-radius:7px;
 	margin:0.6rem 0.6rem 0 2.4rem;
 	position:relative;
 
 }
 .header ul li .touxiang{
-	width:5rem;
-	height:5rem;
+	width:4rem;
+	height:4rem;
 	position:absolute;
 	left: -11%;
 	top:8%;
@@ -94,7 +94,6 @@
 .header ul li .m11{
 	display:flex;
 	margin-left:12%;
-	padding:0.2rem;
 }
 .header ul li .mm1{
 	width:70%;
@@ -106,7 +105,7 @@
 	display:relative;
 
 }
-.header ul li h3{.mm1 p{
+.mm1 p{
 	text-align:left;
 	margin-left:0;
 	color:#AFAFAF;
@@ -115,7 +114,8 @@
 .mm2 img{
 	position:absolute;
 }
-	margin-bottom: 0.8rem;
+.header ul li h3{
+	margin-bottom: 0.6rem;
 	width:200px;
 	text-align:left;
 	overflow: hidden;
@@ -153,7 +153,7 @@
 }
 .nos{
 	position: absolute;
-  	right:5%;
+  	right:3%;
 	bottom:65%;
     font-size: 0.5rem;
     color: #FFAE41;
@@ -164,7 +164,7 @@
 .being{
 	position: absolute;
     top: 19%;
-    right: 6%;
+    right: 3%;
     font-size: 0.5rem;
     color: rgb(70, 184, 183);
     border: 1px solid rgb(70, 184, 183);
@@ -173,7 +173,7 @@
 }
 .passed{
 	position: absolute;
-	right:5%;
+	right:3%;
 	bottom:65%;
     font-size: 0.5rem;
     color: #e5e5e5;
@@ -184,7 +184,7 @@
 .btn{
 	position: absolute;
     top: 40%;
-    right: 6%;
+    right: 1%;
     font-size: 0.5rem;
     color: white;
     background: rgb(70, 184, 183);

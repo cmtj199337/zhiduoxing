@@ -1,7 +1,7 @@
 <template>
   <div class="checkLogistics">
    <headerTip message="我的回馈" goBack="true" style="background: #FFFFFF"></headerTip>
-
+<div class="kong"></div>
 	<div class="header">
 		<div class="t">
 			<img src="./list.png" alt="">
@@ -12,6 +12,7 @@
 			<p class="t2"><span><img src="./xingbi.png" alt=""></span> <span class="t4">300</span><span class="t5">x1</span></p>
 		</div>
 	</div>
+	<div class="kong"></div>
 	<div class="text">
 		<p class="t6">物流信息</p>		
 		<div class="t7"><p>快递已签收：感谢您使用中通快递</p><p>2017/05/29 22:07:12</p></div>
@@ -51,6 +52,10 @@
 .feedback{
 	background: #F5F5F5;
 }
+.kong{
+	padding:0.3rem 0;
+	background:#F5F5F5
+}
 .header{
 	background: #FFFFFF;
 	margin: 0.5rem 0;
@@ -64,7 +69,6 @@
 	height: 5.5rem;
 }
 .t1{
-	margin: 0.7rem 0;
 	padding: 0.05rem 0 0.05rem 6.5rem;
 	position:relative;
 }
@@ -90,7 +94,7 @@
 	color: #4ABAB8;
 }
 .t5{
-	margin-left: 13rem;
+	margin-left: 12rem;
 }
 .t6{
 	padding: 0.9rem 0 0.9rem 0.7rem;

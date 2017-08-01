@@ -69,15 +69,29 @@
 				</li>
 			</ul>
 		</div>
-
-			<div class="column" style="">
+		<div class="column" style="padding-bottom:10%">
 			<ul>
+				<li style="border:none;" @click="toAddress({path: '/modifyPassword'})">
+					<img class="icon" src="./lock.png">
+					<span>修改密码</span>
+				</li>
 				<li style="border:none;" @click="toAddress({path: '/useHelp'})">
 					<img class="icon" src="./sybz.png">
 					<span>使用帮助</span>
 				</li>
 			</ul>
+			<input class="logout" type="button" value="退出登录">
 		</div>
+		<footer class="foot">
+	        <section @click="toAddress({path: '/teamIndex'})">
+	            <img src="/static/footicon/shouye1.png">
+	            <p>首页</p>
+	        </section>
+	        <section class="check" >
+	            <img src="/static/footicon/team01.png">
+	            <p>团队中心</p>
+	        </section>
+	    </footer>
 	</div>
 </template>
 
@@ -176,4 +190,39 @@ hr{
 .column img{
 		vertical-align: middle;
 }
+	.foot{
+        width: 100%;
+        height: 2.5rem;
+        max-width: 720px;
+        padding: 0.3rem 0;
+        position: fixed;
+        bottom: 0;
+        background: #fff;
+        box-shadow: 0px 5px 10px #000;
+        z-index: 10;
+    }
+    .foot section{
+        width: 50%;
+        text-align: center;
+        color: #cbcbcb;
+        float: left;
+    }
+    .foot section img{
+        width: 18%;
+        margin: 0 auto;
+    }
+    .check{
+        color: #43B7B6 !important;
+    }
+    .logout{
+		border: 0;
+	    margin: 1rem auto 0;
+	    color: #FFFFFF;
+	    font-size: 1rem;
+	    font-family: "\5FAE\8F6F\96C5\9ED1";
+	    background: #43B7B6;
+	    padding: 0.5rem 4rem;
+	    border-radius: 4px;
+		display: block;
+    }
 </style>

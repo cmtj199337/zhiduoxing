@@ -118,11 +118,11 @@
 	width:6%;
 	display:inline;
 	vertical-align:middle;
-	margin-left:25%;
+	margin-left:20%;
 }
 .main ul li p .bj{
 	color:#FF9E14;
-	margin-left:70%;
+	margin-left:68%;
 }
 .h{
 	top:2.5%;

@@ -33,11 +33,14 @@
         </div>
         <div class=" usertext leixing">
 		<form action="" method="post">
-		 <span><img src="./lx.png"><label>身份证</label></span>
-		 <span><img src="./lx.png"><label>身份证</label></span>
-		 <span><img src="./lx.png"><label>身份证</label></span>
-		 <span><img src="./lx.png"><label>身份证</label></span>
-		 <span><img src="./lx.png"><label>身份证</label></span>
+		<ul>
+		 <li><span><img src="./xuanze.png">身份证</span>
+		<span><img src="./lx.png">护照</span>
+		 <span><img src="./lx.png">军官证</span>
+		 </li>
+		 <li><span><img src="./lx.png">学生证</span>
+		 <span><img src="./lx.png">港澳通行证</span></li>
+		 </ul>
 		</form>
         </div>
 
@@ -60,8 +63,9 @@
 			<p>上传资质照片</p>
 			</div>
 		</div>
+		<div class="ee"><p>亲，提交资质证明，可以提升团队级别噢</p></div>
 		<div class="eee">
-        	<input type="button" name=""  class="next" value="完成">
+        	<input type="button" @click="toAddress({path: '/teamcenter'})" class="next" value="完成">
         </div>
     </div>
 </template>
@@ -75,7 +79,9 @@
 	  	},
 		data(){
 			return {
-				
+				toAddress(path){
+	                this.$router.push(path)
+	            }
 			}
 		}
 
@@ -137,16 +143,23 @@
 	
 	border-bottom:1px #dfdfdf solid;
 }
-.leixing span{
-	    border: 0;
-	    font-size: 1rem;
-	    color: #333;
-	    display: inline;
-	    margin:1.5rem;
-
+.leixing ul{
+	
+}
+	.leixing ul li{
+		display:flex;
+		text-align:center;
+		margin:0.4rem 0; 
 	}
-.leixing span img{
-		width: 5%;
+.leixing ul li  img{
+		width: 16%;
+		display:inline;
+		vertical-align:middle;
+		margin-right:0.4rem;
+	}
+	.leixing ul li span{
+		width:33%;
+		margin-left:0.2rem;
 	}
 .end{
 	margin: 0.2rem 0;
@@ -186,6 +199,12 @@
 		font-size: 1.2rem;
 		width:60%;
 		height:3rem;
+	}
+	.ee p{
+		text-align: center;
+		font-size:0.4rem;
+		color:#43B7B5;
+		padding:0.4rem 0;
 	}
 
 </style>

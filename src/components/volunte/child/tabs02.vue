@@ -1,6 +1,55 @@
 <template>
 	<div class="tabs02">
-		tab02
+		<swipe v-model="index" style="text-align: center;">
+		  <swipe-item><img src="../tup1.png" alt=""></swipe-item>
+		  <swipe-item><img src="../tup1.png" alt=""></swipe-item>
+		  <swipe-item><img src="../tup1.png" alt=""></swipe-item>
+		</swipe>
+		<div class="kong"></div>
+		<div class="main">
+			<ul>
+				<li>
+					<span style="width:40%"><img src="../tup2.png"></span>
+						<span><h3>高原上的藏区小学</h3>
+						<p>2017/02/05</p>
+						<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
+					</span>
+				</li>	
+			</ul>
+		</div>
+		<div class="main2">
+			<div class="tou">
+				<ul>
+					<li >基础知识<img src="../bottom.png" style="top:35%;left:24%;"></li>
+					<li>管理培训<img src="../bottom.png" style="top:35%;left:57%;"></li>
+					<li>技能培训<img src="../bottom.png" style="top:35%;left:89%;"></li>
+				</ul>
+			</div>
+			<div class="text">
+				<ul>
+					<li @click="toAddress({path: '/servicesDetails'})">
+						<span style="width:40%"><img src="../tup3.png"></span>
+						<span>
+							<h3>高原上的藏区小学</h3>
+							<p>2017/02/05</p>
+							<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
+						</span>
+					</li>	
+				</ul>
+			</div>
+		</div>
+		<div class="main3">
+			<ul>
+				<li>
+					<span style="width:40%"><img src="../tup3.png"></span>
+					<span>
+						<h3>高原上的藏区小学</h3>
+						<p>2017/02/05</p>
+						<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
+					</span>
+				</li>	
+			</ul>
+		</div>
 	</div>
 </template>
 <script>
@@ -79,6 +128,12 @@ width:50%;
 }
 .main{
 	display:none;
+}
+.main ul li span img{
+	padding-top:0.3rem;
+}
+.main2 ul li span img{
+	padding-top:0.3rem;
 }
 .tou{
 	margin-bottom:0.6rem;

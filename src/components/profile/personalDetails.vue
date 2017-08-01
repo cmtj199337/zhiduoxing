@@ -10,7 +10,7 @@
 				<span class="ziliao1">
 					<p style="font-size:0.9rem;">彭笑笑</p>
 					<p style="color:#666;">志愿口号</p>
-					<p style="color:#666;">擅长</p>
+					<p style="color:#666;">擅            长</p>
 				</span>
 				<span class="ziliao2">
 					<p class="xx"><img src="./xingxing.png"><img src="./xingxing.png"><img src="./xingxing.png"><img src="./xingxing.png"><img src="./xingxing.png"></p>
@@ -149,29 +149,7 @@ margin-left:1rem;
 	display:inline-block;
 	position:relative;
 }
-.te{
-	display:flex;
-	position:absolute;
-	width:100%;
-	bottom:23%;
 
-}
-.te li{
-	text-align:center;
-	width: 33%;
-	color:white
-}
-.te2{
-	display:flex;
-	position:absolute;
-	width:100%;
-	bottom:5%;
-
-}
-.te2 li{
-	width: 40%;
-	margin-left: 5%
-}
 .main2{
 	background:#F5F5F5;
 	padding: 0.6rem 0;

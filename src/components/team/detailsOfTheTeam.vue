@@ -23,11 +23,10 @@
 				<select name="" id="">
 					<option value="">初级团队</option>
 					<option value="">中级团队</option>
-					<option value="">高级团队</option>
 				</select>
 			</div>
 			<div class="usertext">
-			<span>组织管理员：</span><input type="text" value="吴彦祖">
+			<span>组织管理员:</span><input type="text" value=" 吴彦祖">
 			</div>
 			<div class="usertext">
 			<span>联系电话：</span><input type="text" value="1371293819">
@@ -49,7 +48,7 @@
 			</div>
 
 			<div class="header3">
-	            <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>团队简介</h4>
+	            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>团队简介</h4>
 	        </div>
 	        <div class="usertextend">
 	       		 <textarea name="" class="jianjie"></textarea>
@@ -108,6 +107,7 @@
 		margin: 0;
 		width: 100%;
 		text-indent: 5rem;
+		margin-left:0.5rem;
 	}
 	.usertext select{
 		border: 0;
@@ -131,7 +131,7 @@
 	
 .usertextend textarea{
 	border: none; 
-	padding: 2.5rem 0;
+	padding: 2.2rem 0;
 	width: 100%;
 
 	}

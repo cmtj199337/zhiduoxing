@@ -157,7 +157,7 @@ p{
 .btn{
 	position: absolute;
     top: 61%;
-    right: 6%;
+    right:3%;
     font-size: 0.5rem;
     color: white;
     background: rgb(70, 184, 183);
@@ -167,7 +167,7 @@ p{
 .being{
 	position: absolute;
     top: 19%;
-    right: 6%;
+    right: 3%;
     font-size: 0.5rem;
     color: rgb(70, 184, 183);
     border: 1px solid rgb(70, 184, 183);
@@ -177,7 +177,7 @@ p{
 .passed{
 	position: absolute;
     top: 19%;
-    right: 6%;
+    right:3%;
     font-size: 0.5rem;
     color: #e5e5e5;
     border: 1px solid #e5e5e5;

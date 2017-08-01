@@ -1,6 +1,6 @@
 <template>
 <div class="pass">
-	<div class="main" @click="toAddress({path: '/myprojectDetails'})">
+	<div class="main" @click="toAddress({path: '/pDetail'})">
 			<span>
 			<img src="./banner@2x.png" >
 			<img src="./teb2.png" >

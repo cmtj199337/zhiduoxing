@@ -10,7 +10,7 @@
 			<ul class="te1">
 			<li class="cc1">北京市朝阳区</li>
 			<li class="cc2">40/100</li>
-			<li class="cc3">招募中</li>
+			<li class="cc3"></li>
 			</ul>
 			<ul class="te2">
 			<li class="cc1">项目时间</li>
@@ -28,7 +28,7 @@
 			<ul class="te1">
 			<li class="cc1">北京市朝阳区</li>
 			<li class="cc2">40/100</li>
-			<li class="cc3">进行中</li>
+			<li class="cc3"></li>
 			</ul>
 			<ul class="te2">
 			<li class="cc1">项目时间</li>
@@ -46,7 +46,7 @@
 			<ul class="te1">
 			<li class="cc1">北京市朝阳区</li>
 			<li class="cc2">40/100</li>
-			<li class="cc3">已结束</li>
+			<li class="cc3"></li>
 			</ul>
 			<ul class="te2">
 			<li class="cc1">项目时间</li>

@@ -10,7 +10,7 @@
 			<ul class="te">
 				<li>北京市朝阳区</li>
 				<li>50/100</li>
-				<li style="text-align:right.png">待启动</li>
+				<li style="text-align:right;">待启动</li>
 			</ul>
 			<ul class="te2">
 				<li>智多星项目名称</li>
@@ -27,7 +27,7 @@
 			<ul class="te">
 				<li>北京市朝阳区</li>
 				<li>50/100</li>
-				<li style="text-align:right.png">待启动</li>
+				<li style="text-align:right;">待启动</li>
 			</ul>
 			<ul class="te2">
 				<li>智多星项目名称</li>
@@ -143,7 +143,7 @@ margin-left:1rem;
 }
 .te li{
 	text-align:center;
-	width: 33%;
+	width: 32%;
 	color:white
 }
 .te2{
@@ -154,7 +154,7 @@ margin-left:1rem;
 
 }
 .te2 li{
-	width: 40%;
+	width: 45%;
 	margin-left: 5%
 }
 .main2{

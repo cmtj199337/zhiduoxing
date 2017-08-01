@@ -37,13 +37,14 @@ p{
 	margin-left:15%;
 	margin-right: 2%;
 	top: 5%;
+	position:relative;
 }
 .team  ul li img{
-	width:5rem;
-	height:5rem;
+	width:5.1rem;
+	height:5.1rem;
 	position:absolute;
-	left: 2%;
-	top:14%;
+	left: -12%;
+	top:9%;
 }
 .team ul li .m1{
 	display:flex;

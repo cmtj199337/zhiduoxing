@@ -5,35 +5,27 @@
 			<ul>
 				<li @click="toAddress({path: '/teamDetails'})">
 					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
+			<p class="hd">北京西站地区志愿服务</p>
+			<p class="two"><span class="s1"><b>120</b>小时</span><span class="s2"><b>200</b>人</span><span class="s3">志多星</span></p>
+			<p class="three"><span>志愿总时长</span><span>团队人数</span><span>团队管理员</span></p>
 				</li>
 				<li @click="toAddress({path: '/teamDetails'})">
 					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
+			<p class="hd">北京西站地区志愿服务</p>
+			<p class="two"><span class="s1"><b>120</b>小时</span><span class="s2"><b>200</b>人</span><span class="s3">志多星</span></p>
+			<p class="three"><span>志愿总时长</span><span>团队人数</span><span>团队管理员</span></p>
 				</li>
 				<li @click="toAddress({path: '/teamDetails'})">
 					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
+			<p class="hd">北京西站地区志愿服务</p>
+			<p class="two"><span class="s1"><b>120</b>小时</span><span class="s2"><b>200</b>人</span><span class="s3">志多星</span></p>
+			<p class="three"><span>志愿总时长</span><span>团队人数</span><span>团队管理员</span></p>
 				</li>
 				<li @click="toAddress({path: '/teamDetails'})">
 					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
+			<p class="hd">北京西站地区志愿服务</p>
+			<p class="two"><span class="s1"><b>120</b>小时</span><span class="s2"><b>200</b>人</span><span class="s3">志多星</span></p>
+			<p class="three"><span>志愿总时长</span><span>团队人数</span><span>团队管理员</span></p>
 				</li>
 			</ul>
 		</div>
@@ -54,42 +46,7 @@
 	}
 </script>
 <style scoped>
-.main2{
-	background:#F5F5F5;
-	padding: 0.6rem 0;
-	position:relative;
-}
-.main2 ul{
-	margin:0.2rem 0;
-}
-.main2 ul li{
-	background:white;
-	padding:0.5rem 0;
-	border-radius:7px;
-	margin-left:15%;
-	margin-right: 2%;
-	top: 5%;
-	position: relative;
-	margin-bottom:0.6rem; 
-}
-.main2 ul li:last-child{
-	margin-bottom:0; 
-}
-.main2 ul li img{
-    width: 5rem;
-    height: 5rem;
-    position: absolute;
-    left: -2.5rem;
-    top: 5%;
-}
-.main2 ul li .m1{
-	display:flex;
-	margin-left:12%;
-}
-.main2 ul li .mm1{
-	width:50%;
-	margin-left:10%
-}
+
 .mm1 p{
 	color:#BCBCBC;
 }
@@ -97,4 +54,70 @@
 	margin-bottom: 0.8rem;
 	margin-left:4rem;
 }
+.main2{
+	background:#F1F1F1;
+	padding: 0.2rem 0;
+	position:relative;
+}
+.main2 ul li .hd{
+	margin-bottom:0.5rem;
+	font-size:1rem;
+	margin-left:15%;
+}
+.main2 ul li p{
+	margin:0.2rem 0;
+	
+}
+.main2 ul li p span{
+	margin-left:12%;
+}
+.main2 ul li{
+	background:white;
+	padding:0.5rem 0;
+	border-radius:7px;
+	top: 5%;
+	position:relative;
+	margin:0.6rem 3% 0.2rem 12%;  
+}
+.main2  ul li img{
+	width:5.1rem;
+	height:5.1rem;
+	position:absolute;
+	left: -13%;
+	top:9%;
+}
+.main2 ul li .m1{
+	display:flex;
+	margin-left:12%;
+}
+.main2 ul li .mm1{
+	width:33%;
+	text-align: center;
+}
+.main2 ul li h3{
+margin-bottom: 0.8rem;
+margin-left:4rem;
+}
+	.three{
+		color:#999999;
+	}
+.two .s1{
+		margin-left:15%;
+		
+
+	}
+	.two .s2{
+		margin-left:18%;
+		
+	}
+	.two .s1 b{
+		color:#4FBAB9;
+	}
+	.two .s2 b{
+		color:#4FBAB9;
+	}
+
+	.two .s3{
+		margin-left:18%;
+	}
 </style>

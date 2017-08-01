@@ -9,7 +9,7 @@
 			<div class="m11">
 			<div class="mm1"><h3>智多星项目</h3>
 			<p style="width:100%;display:flex;">
-			<span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span><span style="width:30%;">报名人数<b style="color:#43B7B5">52人</b></span></p>
+			<span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span><span style="width:40%;">报名人数<b style="color:#43B7B5">52人</b></span></p>
 			</div>
 			<div class="mm2">
 			<span>
@@ -24,29 +24,29 @@
 		</div>
 		<div class="header2">
 		<ul>
-		<li style="	margin-left:8%;">姓名</li>
+		<li style="	margin-left:12%;">姓名</li>
 		<li>补录时长</li>
-		<li style="text-align:right;margin-right:2%">申请日期</li>
+		<li style="text-align:center;margin-right:1%">申请日期</li>
 		</ul>
 		<ul>
-		<li style="display:flex;"><img src="./tongg.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
+		<li class="hd"><img src="./tongg.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
 		<li>3小时</li>
-		<li style="text-align:right;">2017/05/12</li>
+		<li style="text-align:center;">2017/05/12</li>
 		</ul>
 		<ul>
-		<li style="display:flex;"><img src="./quan.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
+		<li class="hd"><img src="./quan.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
 		<li>3小时</li>
-		<li style="text-align:right;">2017/05/12</li>
+		<li style="text-align:center;">2017/05/12</li>
 		</ul>
 		<ul>
-		<li style="display:flex;"><img src="./tongg.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
+		<li class="hd"><img src="./tongg.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
 		<li>3小时</li>
-		<li style="text-align:right;">2017/05/12</li>
+		<li style="text-align:center;">2017/05/12</li>
 		</ul>
 		<ul>
-		<li style="display:flex;"><img src="./quan.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
+		<li class="hd"><img src="./quan.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
 		<li>3小时</li>
-		<li style="text-align:right;">2017/05/12</li>
+		<li style="text-align:center;">2017/05/12</li>
 		</ul>
 		</div>
 		<div class="jieshu">
@@ -90,16 +90,16 @@
 
 }
 .header ul li .touxiang{
-	width:5rem;
-	height:5rem;
+	width:4rem;
+	height:4rem;
 	position:absolute;
 	left: -11%;
-	top:7%;
+	top:12%;
 }
 .header ul li .m11{
 	display:flex;
 	margin-left:12%;
-	padding:0.2rem;
+
 }
 .header ul li .mm1{
 	width:100%;
@@ -132,10 +132,14 @@
 	border-radius:5px;
 	border:1px #E0E0E0 solid;
 	color:#E0E0E0;text-align:center;
-	width:12%;
+	width:14%;
 	font-size:0.6rem;
 	right:5%;
-	bottom:60%;
+	bottom:63%;
+}
+.header2 ul .hd{
+	display:flex;
+	width:40%;
 }
 .header2{
 	background:white;

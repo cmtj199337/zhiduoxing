@@ -135,10 +135,11 @@
 	position:absolute;
 	border-radius:5px;
 	border:1px #E0E0E0 solid;
-	color:#E0E0E0;text-align:center;
-	width:12%;
+	color:#E0E0E0;
+	text-align:center;
+	width:14%;
 	font-size:0.6rem;
-	right:5%;
+	right:3%;
 	bottom:60%;
 }
 .header2 ul {

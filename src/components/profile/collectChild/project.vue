@@ -8,8 +8,8 @@
 		<img src="../quan.png" class="p3">
 		<img src="../baoxian.png" class="p4">
 		<ul class="te">
-		<li>北京市朝阳区</li>
-		<li style="text-align:center;">50/100</li>
+		<li class="hd">北京市朝阳区</li>
+		<li style="margin-left:0.5rem;">50/100</li>
 		<li style="text-align:right;">待启动</li>
 		</ul>
 		<ul class="te2">
@@ -26,8 +26,8 @@
 		<img src="../baoxian.png" class="p4">
 		<ul class="te">
 		<li>北京市朝阳区</li>
-		<li style="text-align:center;">50/100</li>
-		<li style="text-align:right;">待启动</li>
+		<li style="margin-left:0.5rem;">50/100</li>
+		<li style="text-align:right;" >待启动</li>
 		</ul>
 		<ul class="te2">
 		<li>智多星项目名称</li>
@@ -52,12 +52,16 @@
 	position:absolute;
 	width:100%;
 	bottom:23%;
-	margin:0 0.5rem;
+	margin:0rem;
 
 }
+.te .hd{
+	text-align:center;
+}
 .te li{
-	width: 32%;
-	color:white
+	width:32%;
+	color:white;
+	text-align:center;
 }
 .te2{
 	display:flex;
@@ -67,8 +71,8 @@
 
 }
 .te2 li{
-	width: 44%;
-	margin-left: 5%
+	width: 45%;
+	margin-left:3%
 
 }
 .xm1{

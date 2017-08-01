@@ -8,7 +8,7 @@
 			<img src="./toux1.png"  class="touxiang">
 			<div class="m11">
 			<div class="mm1"><h3>智多星项目</h3>
-			<p style="width:100%;display:flex;"><span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span><span style="width:30%;">报名人数<b style="color:#43B7B5">52人</b></span></p></div>
+			<p style="width:100%;display:flex;"><span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span><span style="width:40%;">报名人数<b style="color:#43B7B5">52人</b></span></p></div>
 			<div class="mm2">
 			<span>
 			<p class="end">已结束</p>
@@ -138,10 +138,10 @@
 	border-radius:5px;
 	border:1px #E0E0E0 solid;
 	color:#E0E0E0;text-align:center;
-	width:12%;
+	width:14%;
 	font-size:0.6rem;
-	right:5%;
-	bottom:60%;
+	right:3%;
+	bottom:63%;
 }
 .header2 ul{
 	display:flex;
@@ -173,12 +173,12 @@
 
 }
 .header3 p{
-	width:15%;
+	width:20%;
 	margin-left:0.5rem;
 	line-height:2rem;
 }
 .header3 input{
-	width:80%;
+	width:70%;
 	padding:0.5rem 0;
 	
 }
