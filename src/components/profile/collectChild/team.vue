@@ -17,6 +17,8 @@ p{
 	background:#F1F1F1;
 	padding: 0.6rem 0;
 	position:relative;
+	height:100%;
+
 }
 .team ul li .hd{
 	margin-bottom:0.5rem;

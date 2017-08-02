@@ -12,20 +12,33 @@
 					<img src="./t2.png" >
 					<p style="font-size:1rem;padding:0.4rem">团队法人/负责人信息</p>
 				</span>
-	        </div>
+	        </div> 
 	        
 	        <div class="header2">
 	            <h4 class="texttitle"><span><img src="./t1.png"></span>团队信息</h4>
 	        </div>
 	        <div class="usertext tlo">
-				<a href="javascript:;"><span>团队logo</span><upload-img v-model="teamInfo.teamPhoto"></upload-img></a>
+				<a href="javascript:;">
+					<span>团队logo</span>
+					<el-upload
+					  class="avatar-uploader"
+					  action="/api/public/upload"
+					  :show-file-list="false"
+					  :on-success="handleAvatarSuccess"
+					  :before-upload="beforeAvatarUpload">
+					  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+					  <i v-else class="avatar-uploader-icon">
+					  	<img src="./tlogo1.png" alt="">
+					  </i>
+					</el-upload>
+				</a>
 			</div>
 	        <div class="usertext">
 	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队名称">
 	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
 	        </div>
 	        <div class="usertext">
-				<input type="tel" name="mobile" v-validate="'required|mobile'" v-model="teamInfo.teamPhone" placeholder="请输入手机号" maxlength="11" />
+				<input type="tel" name="mobile" v-validate="'required|mobile'" v-model="teamInfo.mobileNumber" placeholder="请输入手机号" maxlength="11" />
 				<span class="toast" v-show="errors.has('mobile')">请输入手机号</span>
 			</div>
 	        <div class="usertext">
@@ -44,33 +57,29 @@
 				<input type="password" v-validate="'required'" v-model="teamInfo.teamSlogan" name="slogan" placeholder="请输入团队口号" /><br />
 				<span class="toast" v-show="errors.has('slogan')">请输入团队口号</span>
 			</div>
-			<div class="usertext right">
-				<router-link to="liaisonGroup"><span>联络团队：志愿者服务联合会<img src="./right.png"></span></router-link>
+			<div class="usertext right" @click="lianluoToggle()">
+				<a href="javascript:;"><span>联络团队：志愿者服务联合会<img src="./right.png"></span></a>
 			</div>
 			<div class="usertext right">
-				<a href="javascript:;" @click="showToggle">
+				<a href="javascript:;" @click="showToggle()">
 					<span class="good">服务类型<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="usertext right">
-				<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamType">
-					<option value="党政机关" selected>党政机关</option>
-					<option value="党政机关">党政机关</option>
-					<option value="党政机关">党政机关</option>
+				<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamCategory">
+					<option v-for="item in teamclist" value="item.key">{{item.value}}</option>
 				</select><img src="./right.png"></span>
 			</div>
 			<div class="usertext bottom">
-				<span>团队种类：<select class="select" v-model="teamInfo.teamSub">
-					<option value="初级团队" selected>初级团队</option>
-					<option value="中级团队">中级团队</option>
-					<option value="高级团队">高级团队</option>
+				<span>团队种类：<select class="select" v-model="teamInfo.teamKind">
+					<option v-for="item in teamKlist" value="item.key">{{item.value}}</option>
 				</select><img src="./bottom.png"></span>
 			</div>
 			<div class="usertext">
-	        	<input type="text" v-model="teamInfo.teamAdmin" placeholder="请输入团队管理员">
+	        	<input type="text" v-model="teamInfo.teamManager" placeholder="请输入团队管理员">
 	        </div>
 	        <div class="usertext">
-				<input type="tel" v-model="teamInfo.adminPhone" placeholder="请输入联系电话" maxlength="11" />
+				<input type="tel" v-model="teamInfo.contactNumber" placeholder="请输入联系电话" maxlength="11" />
 			</div>
 			<div class="kong">
 			</div>
@@ -85,7 +94,8 @@
 	            <h4 class="texttitle"><span><img src="./jianjie.png"></span>团队简介</h4>
 	        </div>
 	        <div class="usertextend">
-	       		 <textarea v-model="teamInfo.teamProfile" class="jianjie" rows="10"></textarea>
+	       		<textarea v-model="teamInfo.teamIntro" v-validate="'required'" class="jianjie" name="teamIntro" rows="10"></textarea>
+	       		<span class="toast" v-show="errors.has('teamIntro')">请输入团队简介</span>
 	        </div>
 	        <div class="end">
 	        不超过100字
@@ -95,10 +105,10 @@
 	        </div>
         </div>
 		<!-- 服务类型 -->
-		<div class="goodlist" v-show="isShow">
+		<div class="type" v-show="isShow">
 			<div class="head_top">
 				<div class='tip'>
-	            	<p><span @click="showToggle"><img src="./back.png"></span>服务类型</p>
+	            	<p><span @click="showToggle()"><img src="./back.png"></span>服务类型</p>
 	        	</div>
         	</div>
 			<form action="" method="post">
@@ -113,7 +123,36 @@
 			</form>
 		</div>
 		<!-- 联络团体 -->
+		<div class="liaisonGroup" v-show="lisnluoShow">
+			<div class="head_top">
+				<div class='tip'>
+	            	<p><span @click="lianluoToggle()"><img src="./back.png"></span>联络团体</p>
+	        	</div>
+        	</div>
 
+			<div class="Sousuo">
+	        <!--<a href="javascript:;" class="weui-btn weui-btn_primary">点击展现searchBar</a>-->
+	        <div class="sousuo1" id="searchBar">
+	            <form class="weui-search-bar__form">
+	                <div class="weui-search-bar__box">
+	                    <i class="weui-icon-search"></i>
+	                    <input type="search" class="sousuokuang" id="searchInput" placeholder="搜索" required="">
+	                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+	                </div>
+	                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+	                    <i class="weui-icon-search"></i>
+	                    <span></span>
+	                </label>
+	            </form>
+	        </div>
+	        </div>
+	    	<div class="header5">
+	    	
+	    	</div>
+	    	<div class="neirong">
+	    		<span class="tuanti">北京市志多星团队</span>
+	    	</div>	    	
+		</div>
     </div>
 		
 </template>
@@ -134,63 +173,58 @@
         data(){
             return {
             	teamInfo:{
-            		teamPhoto:[],		//团队头像
-            		teamName:null,		//团队名
-            		teamPhone:'',		//电话
-            		verify:'',			//验证码
-		        	password:'',		//密码
-		        	rePassword:'',		//确认密码
-		        	teamSlogan:null,	//团队口号
-		        	liaisonTeam:null,	//联系团队
-		        	serviceType:null,	//服务类型
-		        	teamType:'党政机关',		//团队类别
-		        	teamSub:'中级团队',		//团队种类（大小）
-		        	teamAdmin:null,		//团队管理员
-		        	adminPhone:null,	//联系人电话
-		        	address:'',			//地址
-		        	teamProfile:null,	//团队简介
-		        	area:[]
+            		teamIcon:'',			//团队头像
+            		teamName:'',			//团队名
+            		mobileNumber:'',		//电话
+            		password:'',			//密码
+		        	teamSlogan:'',			//团队口号
+		        	contactTeamId:'',		//联系团队
+		        	serverType:'',			//服务类型
+		        	teamCategory:'党政机关',		//团队类别
+		        	teamKind:'中级团队',		//团队种类（大小）
+		        	teamManager:null,			//团队管理员
+		        	contactNumber:null,			//联系人电话
+		        	province:'',					//地址
+		        	city:'',				//团队简介
+		        	address:'',
+		        	teamIntro:''
             	},
             	isShow:false,
+            	lisnluoShow:false,
 		        wrap:true,
 		        arr:'',
+		        imageUrl:'',
 		        listSelected:[],
-		         list:[
-		        	{value:'在线志愿服务'},
-		        	{value:'应急救援'},
-		        	{value:'城市运行'},
-		        	{value:'文化教育'},
-		        	{value:'关爱服务'},
-		        	{value:'社区服务'},
-		        	{value:'医疗卫生'},
-		        	{value:'绿色环保'},
-		        	{value:'赛会服务'},
-		        	{value:'京外服务'},
-		        	{value:'国际服务'},
-		        	{value:'其他'}
-		        	
-		        ]			
+		        list:[],
+		        teamclist:[],
+		        teamKlist:[]
             }
         },
         mounted(){
-        	this.showList()
+        	this.$nextTick(function(){
+            	this.showList();
+        	})
         },
         methods:{
 	  		send(){
-     			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
-	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
-	                if(data.status){
-	                    this.$refs.timerbtn.start(); //启动倒计时
+     			this.$refs.timerbtn.setDisabled(true); 
+	            this.$http.post('/api/public/sendShortMessage',{
+	            	mobileNo:this.teamInfo.mobileNumber
+            	}).then(response => {
+            		let res = response.data
+            		if(res.result){
+	                    this.$refs.timerbtn.start();
 	                }else{
-	                    this.$refs.timerbtn.stop(); //停止倒计时
+	                    this.$refs.timerbtn.stop();
 	                }
-	            });
+            	}) 
      		},
      		toAddress(path){
                 this.$router.push(path)
             },
             haha(d){
-            	this.teamInfo.area = d
+            	this.teamInfo.province = d.pro.id
+            	this.teamInfo.city = d.city.id
 			},
 			showToggle(){
             	this.isShow = !this.isShow
@@ -200,14 +234,48 @@
                     this.wrap = !this.wrap   
                 }  
             },
+            lianluoToggle(){
+            	this.lisnluoShow = !this.lisnluoShow
+                if(this.lisnluoShow){
+                    this.wrap = false  
+                }else{  
+                    this.wrap = !this.wrap   
+                }  
+            },
             showList(){
-            	this.$http.get('http://localhost:3000/list').then(response => {
-            		this.list = response.data
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'SERVER_TYPE'
+            		}
+            	}).then(response => {
+            		this.list = response.data.data
+            	})
+            	this.teamcatlist();
+            	this.showteamKlist()
+            },
+            teamcatlist(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'TEAM_CATEGORY'
+            		}
+            	}).then(response => {
+            		this.teamclist = response.data.data
+            	})
+            },
+            showteamKlist(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'TEAM_TYPE'
+            		}
+            	}).then(response => {
+            		this.teamKlist = response.data.data
             	})
             },
             checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
+
+	  				this.teamInfo.serverType += item.key+','
 	  				this.arr += item.value+','
 
 		            this.listSelected = this.arr.split(',').slice(0,-1)
@@ -226,103 +294,118 @@
 	  			}else{
 	  				item.checked = !item.checked
 	  			}
-	  		}
+	  		},
+	  		handleAvatarSuccess(res, file) {
+	  			let result = res.data
+	  			
+		        this.imageUrl = URL.createObjectURL(file.raw);
+
+		        //this.imageUrl = result
+		        this.teamInfo.teamIcon = result
+		    },
+		    beforeAvatarUpload(file) {
+		        const isJPG = file.type === 'image/jpeg';
+		        const isLt2M = file.size / 1024 / 1024 < 2;
+
+		        if (!isJPG) {
+		          this.$message.error('上传头像图片只能是 JPG 格式!');
+		        }
+		        if (!isLt2M) {
+		          this.$message.error('上传头像图片大小不能超过 2MB!');
+		        }
+		        return isJPG && isLt2M;
+		    },
 	  	}
 
     }
 
 </script>
 <style scoped>
-@import '../../styles/usertext.css';
-.header{
-    margin: auto;
-    background-color:rgba(238, 238, 244, 0.5);
-    display:flex;
-    position: relative;
-}
-.header span{
-	width:50%;
-	display: inline-block;
-	text-align: center;
-	margin-top: 2rem;
-	margin-bottom : 2rem;
-	position:relative;
+	@import '../../styles/usertext.css';
+	.header{
+	    margin: auto;
+	    background-color:rgba(238, 238, 244, 0.5);
+	    display:flex;
+	    position: relative;
 	}
-.header  span img{
-	width: 30%;
-	margin: 0 auto;
-}
-
-.usertext input{
-		margin: 0;
-		width: 100%;
-	}
-.usertext{
-	margin: 0 1rem 1.2rem 1rem;
-}
-.usertext img{
-		position: absolute;
-		right: 0;
-	}
-.hx{
-	width: 47%;
-	position: absolute;
-	left: 5.2rem;
-	top:43%;
-	height: 2px;
-	z-index: -1;
-}
-.header2{
-    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-}
-.header3{
-    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-   margin: 1rem 0;
-}
-.header  span p{
-		font-size: 1.2rem;
-	}
-.tlogo{
-		width: 95%;
-		border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
+	.header span{
+		width:50%;
+		display: inline-block;
+		text-align: center;
+		margin-top: 2rem;
+		margin-bottom : 2rem;
+		position:relative;
+		}
+	.header  span img{
+		width: 30%;
 		margin: 0 auto;
 	}
-.tlogo img{
-	width: 200%;
-	right:0;
-}
-.right img{
-		width:0.8rem;
-		display: inline-block;
-		vertical-align: middle;
-		top: 25%;
+
+	.usertext input{
+			margin: 0;
+			width: 100%;
+		}
+	.usertext{
+		margin: 0 1rem 1.2rem 1rem;
 	}
-.tlo{
-	margin: 0.8rem;
-}
-.tlo img{
-	width:2.5rem;
-		display: inline-block;
-		vertical-align: middle;
-}
-.tlo a{
-	border: 0;
-    width: 100%;
-    height: 4rem !important;
-	line-height: 4rem !important;
-    font-size: 1rem;
-    display: inline-block;
-    color: #333;
-    text-indent: 0;
-    position: relative;
-}
-.bottom img{
-		width:1rem;
-		display: inline-block;
-		vertical-align: middle;
-		left: 46%;
-		top:38%;
-}
+	.usertext img{
+			position: absolute;
+			right: 0;
+		}
+	.hx{
+		width: 47%;
+		position: absolute;
+		left: 5.2rem;
+		top:43%;
+		height: 2px;
+		z-index: -1;
+	}
+	.header2{
+	    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
+	}
+	.header3{
+	    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
+	   margin: 1rem 0;
+	}
+	.header  span p{
+			font-size: 1.2rem;
+		}
+	.tlogo{
+			width: 95%;
+			border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
+			margin: 0 auto;
+		}
+	.tlogo img{
+		width: 200%;
+		right:0;
+	}
+	.right img{
+			width:0.8rem;
+			display: inline-block;
+			vertical-align: middle;
+			top: 25%;
+		}
+	.tlo{
+		margin: 0.8rem;
+	}
+	.tlo a{
+		border: 0;
+	    width: 100%;
+	    height: 4rem !important;
+		line-height: 4rem !important;
+	    font-size: 1rem;
+	    display: inline-block;
+	    color: #333;
+	    text-indent: 0;
+	    position: relative;
+	}
+	.bottom img{
+			width:1rem;
+			display: inline-block;
+			vertical-align: middle;
+			left: 46%;
+			top:38%;
+	}
 	.usertext a{
 	    border: 0;
 	    width: 100%;
@@ -377,7 +460,7 @@
 	    position: relative;
 	}
 
-	.goodlist{
+	.type{
 		width: 100%;
 		font-size: 1rem;
 		position: absolute;
@@ -387,10 +470,11 @@
 		background: #fff;
 
 	}
-	.goodlist form{
-		margin-top:10%; 
+	.type form{
+		padding-top: 10%;
+    	border-top: 0.6rem solid #f5f5f5;
 	}
-	.goodlist li{ 
+	.type li{ 
 		width: 92%;
 		margin: 0 auto;
 	    border-bottom: 1px solid #dcdcdc;
@@ -401,10 +485,10 @@
 		line-height: 1;
 		display: block;
 	}
-	.goodlist li span{
+	.type li span{
 		vertical-align: middle;
 	}
-	.goodlist li input{
+	.type li input{
 		vertical-align: sub;
 		float: right;
 	}
@@ -441,5 +525,54 @@
 	}
 	.good span{
 		padding-left:1.5rem;
+	}
+
+	.sousuokuang{
+		width:95%;
+		text-align: center;
+		background-color:rgba(238, 238, 244, 0.5);
+		border: none;
+	    border-radius: 0.4rem;
+	    margin: 0.5rem 0;
+	    padding: 0.6rem;
+	}
+	.Sousuo{
+	width: 100%;
+	text-align: center;
+	}
+	.header5{
+		width:100%;
+		background-color:rgba(238, 238, 244, 0.5);
+		height: 0.7rem;
+		margin-top: 0.4rem;
+	}
+	.tuanti{
+		font-size: 1rem;
+
+	}
+	.neirong{
+		width: 98%;
+		padding: 0.8rem;
+		border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
+
+	}
+	.avatar-uploader{
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.avatar-uploader-icon {
+	    width: 4rem;
+	    height: 4rem;
+	    line-height: 4rem;
+	    display: inline-block;
+	}
+	.avatar {
+	    width: 4rem;
+	    height: 4rem;
+	    display: block;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
 	}
 </style>

@@ -4,7 +4,8 @@
 		<form action="" method="post">
 			<prove @sendData="getData"></prove>
 			<div class="usertext">
-				<input type="text" placeholder="请输入邮箱" v-model="email">
+				<input type="text" v-validate="'required|email'" placeholder="请输入邮箱" v-model="email" name="email">
+				<span class="toast" v-show="errors.has('email')">请输入正确邮箱</span>
 			</div>
 			<div class="sub">
 				<input type="button" value="提交" @click="submitReal"/>
@@ -25,16 +26,16 @@
 	  	},
 	 	data () {
 		    return {
+		    	volunteerId:'',
 		    	data:[],
 		    	email:''
 		    }
 	  	},
 	  	methods:{
 	  		submitReal(){
-	  			console.log(this.data)
-	  			this.$http.post('').then({
-
-	  			})
+	  			var data = this.data
+	  			
+	  			this.$http.post('/api/public/completeVolunteer',data).then()
 	  		},
 	  		getData(data){
 	  			this.data = data

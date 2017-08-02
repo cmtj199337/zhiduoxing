@@ -19,7 +19,7 @@
 					<img src="../toux2.png"  class="touxiang">
 					<div class="m11">
 						<div class="mm1">
-							<h3>团中央网络影视中心第五团支部</h3>
+							<p class="tou">团中央网络影视中心第五团支部</p>
 							<p>志愿总时长<b class="mark">120</b>小时</p>
 						</div>
 						<div class="mm2">
@@ -34,7 +34,7 @@
 					<img src="../toux1.png"  class="touxiang">
 					<div class="m11">
 						<div class="mm1">
-							<h3>团中央网络影视中心第五团支部</h3>
+							<p class="tou">团中央网络影视中心第五团支部</p>
 							<p>志愿总时长<b class="mark">120</b>小时</p>
 						</div>
 						<div class="mm2">
@@ -69,18 +69,7 @@
 	height: 40rem;
 
 }
-.header ul {
-	display:flex;
-	padding: 1rem 0;
-}
-.header ul li{
-	width:50%;
-	text-align: center;
-}
-.header ul li span{
-	display: inline-block;
-	padding-bottom: 0.4rem;
-}
+
 .active{
 	color:#43B7B5;
 	border-bottom: 3px solid #43B7B5;
@@ -106,7 +95,6 @@ p{
 	font-size:0.9rem;
 }
 .m2{
-	background:rgba(238, 238, 244, 0.5);
 	position:relative;
 }
 .m2 ul li{
@@ -139,17 +127,22 @@ p{
 	display:relative;
 
 }
-.m2 ul li h3{
+.m2 ul li .tou{
 	margin-bottom: 0.8rem;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-bottom:1.2rem;
+    color:black;
+    width:12rem;
 }
 .mm1 p{
 	text-align:left;
 	margin-left:0;
 	color:#AFAFAF;
-	margin-top:1.2rem;
+	margin-top:0rem;
+
+	font-size:0.7rem;
 }
 .mm2 img{
 	position:absolute;
@@ -158,17 +151,17 @@ p{
 	position: absolute;
     top: 61%;
     right:3%;
-    font-size: 0.5rem;
+    font-size: 0.65rem;
     color: white;
     background: rgb(70, 184, 183);
     padding: 0.3rem 0.6rem;
-    border-radius: 0.2rem;
+    border-radius: 0.4rem;
 }
 .being{
 	position: absolute;
     top: 19%;
     right: 3%;
-    font-size: 0.5rem;
+    font-size: 0.6rem;
     color: rgb(70, 184, 183);
     border: 1px solid rgb(70, 184, 183);
     border-radius: 0.2rem;
@@ -178,7 +171,7 @@ p{
 	position: absolute;
     top: 19%;
     right:3%;
-    font-size: 0.5rem;
+    font-size: 0.6rem;
     color: #e5e5e5;
     border: 1px solid #e5e5e5;
     border-radius: 0.2rem;

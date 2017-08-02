@@ -5,7 +5,7 @@
 			<input class="search" name="" placeholder="       搜索">
 			<img src="./sou.png"><span style="color:#43B7B6">筛选<img src="./shaixuan.png"></span>
 		</div>
-		<div class="header">
+		<div class="hh">
 		<ul>
 		<!-- 	<li><span class="active">全部</span></li>
 			<li><span>待启动</span></li>
@@ -19,7 +19,11 @@
 		</div>
 		<div class="main">
 			<span @click="toAddress({path: '/myprojectDetails'})">
-				<img src="./xiangm.png" >
+				<div class="maskwarp">
+					<img src="./xiangm.png" >
+					<p class="mask"></p>
+				</div>
+				
 				<img src="./teb2.png" >
 				<img src="./quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
 				<img src="./xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
@@ -28,7 +32,7 @@
 				<ul class="te">
 					<li>北京市朝阳区</li>
 					<li>50/100</li>
-					<li style="text-align:right.png">待启动</li>
+					<li style="text-align:right;margin-right:0.4rem;">待启动</li>
 				</ul>
 				<ul class="te2">
 					<li>智多星项目名称</li>
@@ -70,6 +74,9 @@
 	}
 </script>
 <style scoped>
+.voluntaryProjects{
+	height:100%;
+}
 .sousuo{
 	padding:0.8rem 0;
 	position:relative; 
@@ -104,15 +111,15 @@
 	top:38%;
 	left:93%;
 }
-.header ul{
+.hh ul{
 	display:flex;
+	padding:0;
 }
-.header ul li{
+.hh ul li{
 	width:25%;
 	text-align:center;
-	padding-bottom:0.5rem;
 }
-.header ul li span{
+.hh ul li span{
 	display: inline-block;
 	padding-bottom: 0.4rem;
 }
@@ -123,6 +130,7 @@
 .main{
 	background:#F5F5F5;
 	padding:0.2rem;
+	height:100%;
 	
 }
 .main span{
@@ -152,6 +160,17 @@
 .te2 li{
 	width: 44%;
 	margin-left: 5%
-
+}
+.maskwarp{
+	position: relative;
+}
+.mask{
+    position: absolute;
+    bottom: 0rem;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    opacity: 0.2;
+    background: linear-gradient(0deg, #060606, rgba(0, 0, 0, 0));
 }
 </style>

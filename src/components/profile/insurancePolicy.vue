@@ -56,11 +56,13 @@
 
 .header{
 	padding:0.4rem 0;
+	padding-bottom:0; 
 }
 .header ul{
 display:flex;
 margin:0.1rem 0;
 padding:0.2rem 0;
+padding-bottom:0; 
 background:white;
 text-align: center;
 }

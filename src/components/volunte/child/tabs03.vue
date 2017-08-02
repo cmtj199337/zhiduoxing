@@ -9,19 +9,20 @@
 		<div class="main">
 			<ul>
 				<li>
-					<span style="width:40%"><img src="../tup2.png"></span>
-						<span><h3>高原上的藏区小学</h3>
+					<span style="width:45%"><img src="../tup2.png"></span>
+						<span>
+						<h3>高原上的藏区小学</h3>
 						<p>2017/02/05</p>
 						<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
 					</span>
 				</li>	
 			</ul>
 		</div>
-		<div class="main2">
+		
 			<div class="text">
 				<ul>
 					<li @click="toAddress({path: '/servicesDetails'})">
-						<span style="width:40%"><img src="../tup3.png"></span>
+						<span style="width:45%"><img src="../tup3.png"></span>
 						<span>
 							<h3>高原上的藏区小学</h3>
 							<p>2017/02/05</p>
@@ -30,7 +31,7 @@
 					</li>	
 				</ul>
 			</div>
-		</div>
+		
 		<div class="main3">
 			<ul>
 				<li>
@@ -138,6 +139,9 @@ margin:0.4rem;
 }
 .main ul li span img{
 	padding-top:0.3rem;
+}
+.main ul li span h3{
+	margin-top:0.2rem;
 }
 .main ul li span p{
 	margin:0.6rem 0;

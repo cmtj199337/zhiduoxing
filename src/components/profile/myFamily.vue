@@ -20,19 +20,19 @@
 	<ul>
 	<li>
 	<img src="./toux.png" class="tt">
-	<p><span>张北影</span><span class="bj">编辑</span></p>
+	<p class="hd"><span>张北影</span><span class="bj">编辑</span></p>
 	<p><span>志愿时长</span>  <span>1200小时</span></p>
 	<p><span>身份证号</span>  <span>123123*******8901</span><img src="./shanchu.png"></p>
 	</li>
 	<li>
 	<img src="./toux.png" class="tt">
-	<p><span>张北影</span><span class="bj">编辑</span></p>
+	<p class="hd"><span>张北影</span><span class="bj">编辑</span></p>
 	<p><span>志愿时长</span>  <span>1200小时</span></p>
 	<p><span>身份证号</span>  <span>123123*******8901</span><img src="./shanchu.png"></p>
 	</li>
 	<li>
 	<img src="./toux.png" class="tt">
-	<p><span>张北影</span><span class="bj">编辑</span></p>
+	<p class="hd"><span>张北影</span><span class="bj">编辑</span></p>
 	<p><span>志愿时长</span>  <span>1200小时</span></p>
 	<p><span>身份证号</span>  <span>123123*******8901</span><img src="./shanchu.png"></p>
 	</li>
@@ -65,9 +65,13 @@
 </script>
 
 <style scoped>
+.myFamily{
+	height:100%;
+}
 .main{
 	background:#F5F5F5;
 	padding:0.2rem;
+	height:100%;
 }
 .main div{
 	border-radius:5px;
@@ -96,9 +100,13 @@
 .header ul li .left{
 	border-right:1px #F5F5F5 solid;
 }
+.main ul li .hd{
+	margin-top:0.2rem;
+	margin-bottom:0.8rem;
+}
 .main ul li{
 	background:white;
-	margin:0.6rem 0.6rem 0.6rem 3rem;
+	margin:0rem 0.6rem 0.6rem 3rem;
 	border-radius:5px;
 	padding:0.6rem 0;
 	position:relative;
@@ -118,7 +126,7 @@
 	width:6%;
 	display:inline;
 	vertical-align:middle;
-	margin-left:20%;
+	margin-left:23%;
 }
 .main ul li p .bj{
 	color:#FF9E14;

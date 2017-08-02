@@ -53,6 +53,9 @@ span{
 	color:#43B7B5 !important;
 	border-bottom: 3px solid #43B7B5;
 }
+.myCollection{
+	height:100%;
+}
 .header{
 	padding:0;
 }
@@ -63,7 +66,8 @@ span{
 .header ul li{
 	width:33%;
 	text-align: center;
-	padding:0.6rem 0;
+	padding:0.7rem 0;
+	padding-bottom:0; 
 }
 .header ul li a{
 	color:#333;

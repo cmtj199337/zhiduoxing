@@ -139,7 +139,7 @@ p{
 	margin:0.7rem 2%;
 }
 .header4 ul li p{
-
+	margin-top:0.3rem; 
 	text-align:center;
 }
 .header4 ul li p img{
@@ -149,5 +149,8 @@ p{
 }
 .header4 ul li .price{
 	display:flex;
+}
+.price img{
+	padding-right: 0.3rem;
 }
 </style>

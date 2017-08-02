@@ -2,7 +2,7 @@
 	<div class="index">
 		<div class="headerBar">
 			<div class="number"><img src="./logo.png">5000人</div>
-			<div class="denglu" @click="toAddress({path: '/login'})">登录</div>
+			<div class="denglu" @click="toAddress({path: '/login'})">登录</div>		
 		</div>
 		<swipe v-model="index" style="text-align: center;">
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
@@ -10,7 +10,7 @@
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
 		</swipe>
 		<div class="classify clearfix">
-			<div class="location"><img src="./weizhi.png">{{guessCity}}</div><input class="search" type="search" placeholder="搜索" align="center">
+			<div class="location"><img src="./weizhi.png">{{guessCity}}</div><input @click="toggle()" v-on:blur="changeCount()"class="search" type="search" placeholder="搜索" align="center"><img src="./sou.png" class="ss" v-show="isShow">
 			<ul>
 				<!-- <li v-for="item in filtIcon">
 					<router-link :to="item.url">
@@ -157,7 +157,8 @@
 		    	iconList:[],
 		    	shoplist:[],
 		    	article:[],
-		    	guessCity:'',				//当前定位城市
+		    	guessCity:'',
+		    	isShow:true,				//当前定位城市
 		    }
 	  	},
 	  	mounted(){
@@ -195,6 +196,12 @@
 	  		},
 	  		toAddress(path){
                 this.$router.push(path)
+            },
+            toggle(){
+            	this.isShow=false
+            },
+            changeCount(){
+            	this.isShow=true
             }
 	  	}
 	}
@@ -202,6 +209,12 @@
 
 <style scoped>
 	@import '../../styles/swipe.css';
+	.ss{
+		position:absolute;
+		width:5%;
+		top:11%;
+		left:42%;
+	}
 	.index{
 		position: relative;
 		padding-bottom: 15%;

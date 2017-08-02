@@ -1,8 +1,8 @@
 .usertext{
 	margin: 0rem 2.5rem;
-	border-bottom: 1px solid #dcdcdc;
-	padding-bottom: 0.3rem;
-	margin-bottom: 1.2rem;
+	border-bottom: 1px solid #F5F5F5;
+	padding-bottom: 0.1rem;
+	margin-bottom: 0.5rem;
 	text-align: left;
 	position: relative;
 }
@@ -11,7 +11,7 @@
     margin: 0 auto;
     margin-left: 1.5rem;
     height: 2.5rem;
-    font-size: 1rem;
+    font-size: 0.85rem;
 }
 .usertext input[type=password]{
 	border: 0;
@@ -38,7 +38,7 @@
 .usertext input::-webkit-input-placeholder{
 	color: #C9C9C9;
 	font-family: "微软雅黑";
-	font-size: 1rem;
+	font-size: 0.85rem;
 	line-height: 1;
 	padding-left: 0.2rem;
 }
@@ -87,7 +87,7 @@
     transform: scale(0.8);
 }
 .item-check-btn.check {
-    background: url(../images/check.png) no-repeat;
+    background: url(/static/check.png) no-repeat;
     background-size: 100% 100%;
     border-color: #43B7B6;
 }
@@ -110,4 +110,8 @@
 	display: inline-block;
 	vertical-align: middle;
 	margin-right: 0.5rem;
+}
+select{
+	appearance:none;
+	background: #fff;
 }

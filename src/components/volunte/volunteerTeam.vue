@@ -1,60 +1,122 @@
 <template>
 	<div class="volunteerTeam">
-		<headerTip message="志愿团队" goBack="true"></headerTip>
-		<div class="sousuo">
+		<form action="" method="post" v-show="wrap" class="tuandui">
+			<headerTip message="志愿团队" goBack="true"></headerTip>
+			<div class="sousuo">
+				<input class="search" name="" placeholder="       搜索">
+				<img src="./sou.png"><span style="color:#43B7B6" @click="showToggle">筛选<img src="./shaixuan.png"></span>
+			</div>
+			<div class="mm" @click="toAddress({path: '/teamPresentation'})">
+				<ul>
+					<li>
+						<img src="./zt.png">
+						<h3>北京西站地区志愿服务</h3>
+						<div class="m1">
+							<div class="mm1"><span><i>120</i>小时</span><p>志愿总时长</p></div>
+							<div class="mm1"><span><i>200</i>人</span><p>团队人数</p></div>
+							<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
+						</div>
+					</li>
+					<li>
+						<img src="./zt.png">
+						<h3>北京西站地区志愿服务</h3>
+						<div class="m1">
+							<div class="mm1"><span><i>120</i>小时</span><p>志愿总时长</p></div>
+							<div class="mm1"><span><i>200</i>人</span><p>团队人数</p></div>
+							<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</form>
+
+		<div class="goodlist" v-show="isShow">
+			<div class="head_top">
+				<div class='tip'>
+	            	<p><span @click="showToggle"><img src="./back.png"></span>团队列表</p>
+	        	</div>
+        	</div>
+        	<div class="sousuo">
 			<input class="search" name="" placeholder="       搜索">
-			<img src="./sou.png"><span style="color:#43B7B6">筛选<img src="./shaixuan.png"></span>
+			<img src="./sou.png"><span style="color:#43B7B6" >筛选<img src="./shaixuan.png"></span>
 		</div>
-		<div class="mm" @click="toAddress({path: '/teamPresentation'})">
+		<div class="kong"></div>
+			<div class="header">
+				<div class="header2">
 			<ul>
-				<li>
-					<img src="./zt.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span><i>120</i>小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span><i>200</i>人</span><p>团队人数</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
-				</li>
-				<li>
-					<img src="./zt.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span><i>120</i>小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span><i>200</i>人</span><p>团队人数</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
+				<li v-for="(item,index) in tabs">
+					<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
 				</li>
 			</ul>
+			</div>
+		<component :is='currentView' keep-alive></component>
+		</div>
+			
 		</div>
 	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import Servicetype from '../../components/volunte/vteamchild/Servicetype.vue'
+	import Teamtype from '../../components/volunte/vteamchild/Teamtype.vue'
+	import Area from'../../components/volunte/vteamchild/Area.vue'
 	export default{
 
 		name:'volunteerTeam',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		Servicetype,
+	  		Teamtype,
+	  		Area
+
+
 	  	},
 		data(){
 			return {
-				
+				wrap:true,
+				isShow:false,
+				iscur:0,
+                currentView:'Servicetype',
+                tabs:[
+				 	{type: '服务类型',view: 'Servicetype'},  
+				 	{type: '团体类型',view: 'Teamtype'},
+				 	{type: '区域',view: 'Area'}
+				],
+
 			}
 		},
 		methods:{
 			toAddress(path){
 			    this.$router.push(path)
-			}
+			},
+			showToggle(){
+            	this.isShow = !this.isShow
+                if(this.isShow){
+                    this.wrap = false  
+                }else{  
+                    this.wrap = !this.wrap   
+                }  
+            },
+            toggle(v,index) {
+		    	this.iscur = index;
+		    	this.currentView = v
+		    }
 		}
 
 	}
 </script>
 <style scoped>
-@import '../../styles/usertext.css';
+.tuandui{
+	background:#F5F5F5;
+	height:100%;
+}
+.volunteerTeam{
+	height:100%;
+}
 .sousuo{
 	padding:0.8rem 0;
 	position:relative; 
+	background:white;
 }
 .search{
 	text-indent: 1.5rem;
@@ -66,7 +128,7 @@
 	border:none;
 	border-radius:0.2rem;
 	padding: 0.4rem 0;
-	background:rgba(238, 238, 244, 0.5);
+	background:#F5F5F5;
 	margin-left:2%;
 	margin-right: 2%;
 	width:80%;
@@ -87,7 +149,6 @@
 	left:93%;
 }
 .mm{
-	background:rgba(238, 238, 244, 0.5);
 	padding: 0.6rem 0;
 	position:relative;
 }
@@ -95,8 +156,8 @@
 	background:white;
 	padding:0.5rem 0;
 	border-radius:7px;
-	margin-left:15%;
-	margin-right: 2%;
+	margin-left:12%;
+	width:85%;
 	position:relative;
 	margin-bottom: 0.6rem;
 }
@@ -128,5 +189,57 @@
 .mm ul li h3{
 margin-bottom: 0.8rem;
 margin-left:4rem;
+}
+.active{
+	color:#43B7B5;
+}
+.kong{
+	padding:0.3rem 0;
+	background:#F5F5F5; 
+}
+.head_top{
+	    width: 100%;
+	    font-size:1.2rem;
+	    font-family: arial,'microsoft yahei';
+	    color: #333;
+	    text-align: center;
+	    padding: 0.5rem 0;
+	    border-bottom: 0.5px solid #c9c9c9;
+	}
+	.tip{
+	    width: 96%;
+	    margin:0.5rem auto;
+	    position: relative;
+	}
+	.tip span{
+	    width: 0.7rem;
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: absolute;
+	    left: 0.5rem;
+	}
+	.tip span img{
+	    width: 100%;
+	}
+	.tip p{
+	    vertical-align: middle;
+	    line-height: 1;
+	}
+	.header{
+		width:100%;
+		display:flex;
+
+	}
+.header2 {
+	width:30%;
+	border-right:1px #E8E8E8 solid;
+	height:38rem;
+}
+.header ul li{
+	padding:0.8rem 0;
+	border-bottom:1px #E8E8E8 solid;
+	width:100%;
+	text-align:center;
+	margin:0; 
 }
 </style>

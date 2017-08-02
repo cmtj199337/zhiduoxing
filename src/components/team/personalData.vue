@@ -63,7 +63,7 @@
 	width: 100%;
 }
 .usertext{
-	margin: 0 1rem 0.5rem 1rem;
+	margin: 0 1rem 0.4rem 1rem;
 }
 .usertext img{
 	position: absolute;
@@ -128,7 +128,7 @@
 	text-align:right;
 	}
 .kong{
-	background:#f6f6f9;
+	background:#F5F5F5;
 	padding: 0.4rem;
 	}
 	
@@ -146,7 +146,7 @@
 .eee{
 	padding: 2rem 0;
 	margin:0; 
-	background:#f6f6f9;
+	background:#F5F5F5;
 	text-align: center;
 	}
 .next{
@@ -164,7 +164,7 @@
 }
 .tijiao{
 	background:#F5F5F5;
-	height:6rem;
+	height:12rem;
 	padding:2rem 0;
 }
 .tijiao p{

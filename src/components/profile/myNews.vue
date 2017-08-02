@@ -4,15 +4,15 @@
 		<div class="kong">			
 		</div>
 		<div class="message">
-		<p><span class="left"><b>系统消息</b></span><span class="right">2017/02/05</span></p>
+		<p><span class="left">系统消息</span><span class="right">2017/02/05</span></p>
 		<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
 		</div>
 		<div class="message">
-		<p><span class="left"><b>项目消息</b></span><span class="right">2017/02/05</span></p>
+		<p><span class="left">项目消息</span><span class="right">2017/02/05</span></p>
 		<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
 		</div>
 		<div class="message">
-		<p><span class="left"><b>团队消息</b></span><span class="right">2017/02/05</span></p>
+		<p><span class="left">团队消息</span><span class="right">2017/02/05</span></p>
 		<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
 		</div>
 		</div>

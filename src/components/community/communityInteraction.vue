@@ -2,7 +2,7 @@
 	<div class="communityInteraction">
 		<headerTip message="社区互动" goBack="true"></headerTip><span class="message" @click="toAddress({path: '/mymessage'})">我的消息</span>
 		<div class="sousuo">
-			<input name="" placeholder="搜索">
+			<input name="" placeholder="搜索"><img src="./sou.png">
 		</div>
 		<div class="header">
 			<ul>
@@ -89,7 +89,7 @@ import myCommunity from '../../components/community/child/myCommunity.vue'
 	margin-right:5%; 
 }
 .sousuo img{
-	width: 4%;
+	width:4%;
 	position: absolute;
 	top:38%;
 	left:3%;
@@ -104,7 +104,7 @@ import myCommunity from '../../components/community/child/myCommunity.vue'
 .header ul{
 	display:flex;
 	margin:0.1rem 0;
-	padding:0.5rem 0;
+	padding:0.5rem 0 0 0;
 	text-align: center;
 	width: 90%;
     margin: 0 auto;

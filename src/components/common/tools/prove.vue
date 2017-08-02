@@ -2,94 +2,63 @@
 	<div class="improve">
 		<div class="usertext">
 			<i class="s-icon"><img src="./name.png"></i><span>姓名</span>
-			<input type="text" placeholder="请输入真实姓名" v-model="info.realName"/>
+			<input type="text" v-validate="'required'" placeholder="请输入真实姓名" v-model="info.name" name="name"/>
+			<em class="toast" v-show="errors.has('name')">请输入真实姓名</em>
 		</div>
 		<div class="usertext" style="margin-bottom:0;border:0">
 			<i class="s-icon"><img src="./sex.png"></i>
 			<span>姓别</span>
-			<span class="radio-btn nan" :class="{'active':sexFlag==0}" @click="changeSex" v-model="info.sex">
-				<img src="./nan@2x.png"><i>男</i>
-			</span>
-			<span class="radio-btn nv" :class="{'active':sexFlag==1}" @click="changeSex" v-model="info.sex">
-				<img src="./nv@2x.png"><i>女</i>
-			</span>
+			<el-radio-group v-model="info.sex">
+				<el-radio :label="1">男</el-radio>
+				<el-radio :label="2">女</el-radio>
+			</el-radio-group>
 		</div>
 		<div class="borderBottom"></div>
 		<h4 class="texttitle"><span><img src="./type.png"></span>证件类型</h4>
 		<ul>
-			<li v-for="item in typeList">
-				<span class="item-check-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
-					<svg class="icon icon-ok"></svg>
-				</span>
-				<span>身份证</span>
-			</li>
-			<li>
-				<span class="item-check-btn">
-					<svg class="icon icon-ok"></svg>
-				</span>
-				<span>护照</span>
-			</li>
-			<li>
-				<span class="item-check-btn">
-					<svg class="icon icon-ok"></svg>
-				</span>
-				<span>军官证</span>
-			</li>
-			<li>
-				<span class="item-check-btn">
-					<svg class="icon icon-ok"></svg>
-				</span>
-				<span>学生证</span>
-				</li>
-			<li>
-				<span class="item-check-btn">
-					<svg class="icon icon-ok"></svg>
-				</span>
-				<span>港澳通行证</span>
-			</li>
+			<el-radio-group v-model="info.idType">
+			<li><el-radio :label="1">身份证</el-radio></li>
+			<li><el-radio :label="2">护照</el-radio></li>
+			<li><el-radio :label="3">军官证</el-radio></li>   
+			<li><el-radio :label="4">学生证</el-radio></li>    
+			<li><el-radio :label="5">港澳通行证</el-radio></li>	
+			</el-radio-group>
 		</ul>
 		<div class="usertext">
-			<input type="text" placeholder="请输入证件号码" maxlength="18" v-model="info.certificatesNum">
+			<input type="text" v-validate="'required'" placeholder="请输入证件号码" maxlength="18" v-model="info.idNo" name="idNo">
+			<em class="toast" v-show="errors.has('idNo')">请输入正确证件号</em>
 		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-	  	name: 'improve',
+	  	name: 'prove',
 	 	data () {
 		    return {
-		    	typeList:[],
-		    	sexFlag:0,
-		    	checkFlag:false,
 		    	info:{
-		    		realName:'',
-			    	sex:'',
-			    	certificatesType:'',
-					certificatesNum:''	
-		    	}
+		    		name:'',
+			    	sex:1,
+			    	idType:1,
+					idNo:''	
+		    	},
+		    	typelist:[]
 		    }
 	  	},
 	  	mounted(){
 	  		this.$emit('sendData',this.info)
+	  		this.getType()
 	  	},
 	  	methods:{
-	  		changeSex(){
-	  			this.sexFlag = !this.sexFlag
-	  		},
-	  		checkFlag(item){
-	  			if(typeof item.checked == 'undefined'){
-	  				this.$set(item,'checked',true);
-	  			}else{
-	  				item.checked = !item.checked
-	  			}
-	  		},
-	  		typeList(){
-	  			this.$http.get('').then({
-
+	  		getType(){
+	  			this.$http.get('/api/public/getCommonList',{
+	  				params:{
+	  					type:'ID_TYPE'
+	  				}
+	  			}).then(response => {
+	  				this.typelist = response.data.data
 	  			})
 	  		}
-
 	  	}
 	}
 </script>
@@ -146,5 +115,5 @@
 	.borderBottom{
 		background: #f5f5f5;
 		height: 0.8rem;
-	}	
+	}
 </style>

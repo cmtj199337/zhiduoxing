@@ -8,7 +8,7 @@
 		</div>
 		<div class="t1">
 			<p><span class="t3">志愿者短T简约宽松男女同款</span></p> 
-			<p ><span>兑换时间</span> <span>2017/06/02</span><span>12:00</span></p>
+			<p style="color:#B1B1B1"><span>兑换时间</span> <span>2017/06/02</span><span>12:00</span></p>
 			<p class="t2"><span><img src="./xingbi.png" alt=""></span> <span class="t4">300</span><span class="t5">x1</span></p>
 		</div>
 	</div>
@@ -58,7 +58,7 @@
 }
 .header{
 	background: #FFFFFF;
-	margin: 0.5rem 0;
+	margin: 0.1rem 0;
 
 }
 .t img{
@@ -100,30 +100,33 @@
 	padding: 0.9rem 0 0.9rem 0.7rem;
 	border-bottom:1px solid rgba(235,234,234,0.48);
 }
-.t7{	
-	color: #4ABAB8;
+.t7{
+	margin:0 0.5rem 0 3rem; 
 	border-bottom:1px solid rgba(235,234,234,0.48);
 }
-.t7 p{
-	padding: 0.4rem 0.1rem 0.4rem 3.5rem;
+.text .t7 p{
+	padding: 0.4rem 0.1rem 0.4rem 0rem;color: #4ABAB8;
 }
 .t8{	
+	margin:0 0.5rem 0 3rem; 
 	border-bottom:1px solid rgba(235,234,234,0.48);
 }
 .t8 p{
-	padding: 0.4rem 0.1rem 0.4rem 3.5rem;
+	padding: 0.4rem 0.1rem 0.4rem 0rem;color: #B1B1B1;
 }
 .t14{	
+	margin:0 0.5rem 0 3rem; 
 	border-bottom:1px solid rgba(235,234,234,0.48);
 }
 .t14 p{
-	padding: 0.4rem 0.1rem 0.4rem 3.5rem;
+	padding: 0.4rem 0.1rem 0.4rem 0rem;color: #B1B1B1;
 }
 .t15{	
+	margin:0 0.5rem 0 3rem; 
 	border-bottom:1px solid rgba(235,234,234,0.48);
 }
 .t15 p{
-	padding: 0.4rem 0.1rem 0.4rem 3.5rem;
+	padding: 0.4rem 0.1rem 0.4rem 0rem;color: #B1B1B1;
 }
 .t9 img{
 	top: 16rem;

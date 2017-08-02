@@ -48,7 +48,7 @@
 	position: absolute;
 	right: 0.6rem;
 	top: 25%;
-	padding: 0.2rem 0.8rem;
+	padding: 0.15rem 0.7rem;
 	border: 1px solid #43B7B5;
 	border-radius: 0.4rem;
 }

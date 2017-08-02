@@ -22,8 +22,7 @@ export default{
 	},
 	methods: {
   	run: function () {
-   		this.time = this.second
-          this.timer()
+      this.$emit('run')
   	},
     start: function(){
       this.time = this.second;
@@ -47,7 +46,7 @@ export default{
 	},
 	computed: {
   	text: function () {
-    		return this.time > 0 ? this.time + 's 后重新获取' : '获取验证码';
+    		return this.time > 0 ? this.time + 's 后重新获取' : '验证';
     	}
   } 
 }

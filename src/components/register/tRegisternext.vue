@@ -24,7 +24,7 @@
 		 <div class="usertext">
 			<input type="text" placeholder="请输入联系人邮箱" maxlength="11" />
 		</div>
-		 <div class="usertext">
+		 <div class="usertext" style="margin-bottom:0">
 			<input type="text" placeholder="请输入团队法人/负责人姓名"/>
 		</div>
 		<div class="kong"></div>
@@ -131,9 +131,7 @@
 	height: 2px;
 	z-index: -1;
 }
-.header2{
-    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-}
+
 .kong{
 	padding: 0.3rem 0;
 	background:#dcdcdc;
@@ -202,7 +200,7 @@
 	}
 	.ee p{
 		text-align: center;
-		font-size:0.6rem;
+		font-size:0.7rem;
 		color:#43B7B5;
 		padding:0.4rem 0;
 	}

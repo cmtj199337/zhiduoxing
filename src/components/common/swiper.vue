@@ -2,9 +2,9 @@
     <div>
       <!-- swiper -->
         <swiper :options="swiperOption">
-          <swiper-slide><img src="/static/banner01.png" alt=""></swiper-slide>
-          <swiper-slide><img src="/static/banner01.png" alt=""></swiper-slide>
-          <swiper-slide><img src="/static/banner01.png" alt=""></swiper-slide>
+          <swiper-slide><img src="/static/banner01.png" alt=""  @click="toAddress({path: '/offerLove'})"></swiper-slide>
+          <swiper-slide><img src="/static/banner01.png" alt=""  @click="toAddress({path: '/offerLove'})"></swiper-slide>
+          <swiper-slide><img src="/static/banner01.png" alt=""  @click="toAddress({path: '/offerLove'})"></swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
     </div>

@@ -14,6 +14,9 @@
 				</li>
 			</ul>
 		</div>
+		<div>
+			<img src="../rili.png">
+		</div>
 		<div class="ee">
 			<div class="end">
 				<span>
@@ -22,6 +25,7 @@
 				</span>
 			</div>
 		</div>
+		
   	</div>  
 </template>
 

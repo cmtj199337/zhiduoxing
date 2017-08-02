@@ -51,7 +51,7 @@
 }
 .header ul {
 	display:flex;
-	padding: 1rem 0;
+	padding: 0.8rem 0 0 0;
 }
 .header ul li{
 	width:50%;
@@ -59,7 +59,7 @@
 }
 .header ul li span{
 	display: inline-block;
-	padding-bottom: 0.4rem;
+	padding-bottom:0.4rem;
 }
 .active{
 	color:#43B7B5;

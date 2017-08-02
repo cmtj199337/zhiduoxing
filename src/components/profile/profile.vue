@@ -2,7 +2,9 @@
 	<div class="profile">
 		<div class="bg">
 			<img src="/static/bg@2x.png">
-			<section class="info">
+		</div>
+		<div class="mm">
+		<div class="info">
 				<div class="info-left">
 					<img class="photo" src="./toux@2x.png">
 					<img class="renz" src="./renzheng@2x.png">
@@ -11,29 +13,30 @@
 					<p class="name"><span>彭笑笑{{voluInfo.nickName}}</span><i></i><i></i><i></i><i></i><i></i></p>
 					<p class="kouhao"><span>志愿口号</span><i>将志愿服务进行到底。{{voluInfo.volunteSlogan}}</i></p>
 				</div>
-			</section>
-		</div>
-		<div class="main">
-			<section class="mine">
+				</div>
+				<div class="info2">
 				<ul class="clearfix">
 					<li @click="toAddress({path: '/bulletedList'})">
-						<p>20{{voluInfo.myTeam}}</p>
+						<p><b>20{{voluInfo.myTeam}}</b></p>
 						<span>我的团队</span>
 					</li>
 					<li @click="toAddress({path: '/myProject'})">
-						<p>100{{voluInfo.myProject}}</p>
+						<p><b>100{{voluInfo.myProject}}</b></p>
 						<span>我的项目</span>
 					</li>
 					<li>
-						<p>20{{voluInfo.serviceHour}}</p>
+						<p><b>20{{voluInfo.serviceHour}}</b></p>
 						<span>志愿时长</span>
 					</li>
 					<li @click="toAddress({path: '/myStarcoin'})">
-						<p>20{{voluInfo.eMoneyBalance}}</p>
+						<p><b>20{{voluInfo.eMoneyBalance}}</b></p>
 						<span>星币</span>
 					</li>
 				</ul>
-			</section>
+				</div>
+			</div>
+		<div class="kong"></div>
+		<div class="main">
 			<section class="project">
 				<ul>
 					<li @click="toAddress({path: '/personalData'})">
@@ -142,27 +145,54 @@
 	}
 	.bg{position: relative;}
 	.info{
-		width: 90%;
-		display: flex;
-		background: #fff;
-    	padding: 3% 0 3% 3%;
-		border-bottom: 1px solid #ececec;
-		position: absolute;
-		bottom: 0;
-		right: 0;left: 0;
-		margin: auto;
+		width: 100%;
+		display:flex;
+		margin-top:0.5rem;
+		padding-bottom:0.5rem;
+
 	}
-	.info .info-left{
+	.info2{
+		width:100%;
+		border-top:1px #F5F5F5 solid;
+		padding:0.5rem 0;
+	}
+	.info2 ul {
+		display:flex;
+
+		 
+	}
+	.info2 ul li{
+		width:25%;
+		text-align:center;
+		
+		margin-top:0.6rem;
+		border-right: 1px #F5F5F5 solid;
+	}
+	.info2 ul li p{
+		color:#43B7B5;
+	}
+	.info2 ul li span{
+		color:#666666;
+	}
+
+
+	.kong{
+		padding:2.8rem 0;
+		background:#F5F5F5;
+	}
+	.info-left{
 		width: 20%;
 		position: relative;
+		margin-left:5%;
 	}
 	.renz{
 	    width: 1.2rem;
 	    position: absolute;
 	    right: 0;
-	    bottom: 5%;
+	    bottom:12%;
 	}
 	.info-right{
+		width:65%;
 		padding: 0.5rem 0rem 0.5rem 1rem;
 	}
 	.name{
@@ -192,6 +222,16 @@
 	.kouhao span{
 		padding-right:0.5rem; 
 	}
+	.mm{
+		position:absolute;
+		background:white;
+		width:90%;
+		margin-left:5%;
+		margin-top:-26%;
+		padding:0.6rem 0;
+	
+	}
+	
 	.mine{
 		padding:6%;
 	}
@@ -223,7 +263,7 @@
 		margin-top: 1rem;
 	}
 	.project ul li{
-		padding: 1rem 0;
+		padding: 0.8rem 0;
 		border-bottom: 1px solid #ececec;
 		position: relative;
 	}

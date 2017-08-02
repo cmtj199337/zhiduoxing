@@ -243,6 +243,18 @@ const router = new Router({
 			component:require('../components/team/teamcenter.vue')
 		},
 		{
+			path: '/Servicetype',
+			component:require('../components/volunte/vteamchild/Servicetype.vue')
+		},
+		{
+			path: '/Teamtype',
+			component:require('../components/volunte/vteamchild/Teamtype.vue')
+		},
+		{
+			path: '/Area',
+			component:require('../components/volunte/vteamchild/Area.vue')
+		},
+		{
 			path: '/allTeam',
 			component:require('../components/team/allTeamChecked.vue')
 		},

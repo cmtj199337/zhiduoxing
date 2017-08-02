@@ -25,8 +25,7 @@
 			</div>
 			<div class="usertext">
 				<input type="number" placeholder="请输入验证码" maxlength="6" />
-				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
-
+				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
 				<input type="password" name="password" v-validate="'required'" style="width:100%" placeholder="请输入密码(6~12位数字或字母)" v-model="userinfo.password" />
@@ -131,7 +130,6 @@
 	  	},
 	  	mounted(){
 	  		this.goodList()
-
 	  	},
 	  	computed:{
 	  	},
@@ -140,6 +138,10 @@
                 this.showAlert = false;
             },
 	  		confirm() {
+	  			if(this.userinfo){
+	  				this.showAlert = true
+	  				this.alertText = '请填写基本信息'
+	  			}
 	  			this.$http.post('/api/public/addVolunteer',this.userinfo).then(response => {
 	  				let res = response.data
 	  				
@@ -153,14 +155,16 @@
 	  		},
 	  		//发送短信验证码
 	  		send(){
-     			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
-	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
-	                if(data.status){
-	                    this.$refs.timerbtn.start(); //启动倒计时
-	                }else{
-	                    this.$refs.timerbtn.stop(); //停止倒计时
-	                }
-	            });
+     			this.$refs.timerbtn.setDisabled(true);
+	            // this.$http.post('/api/public/sendShortMessage',{mobileNo:this.userinfo.mobileNo}).then( response =>{
+	            // 	let data = response.data
+	            // 	// if(data.result){
+	            //  //        this.$refs.timerbtn.start();
+	            //  //    }else{
+	            //  //        this.$refs.timerbtn.stop();
+	            //  //    }
+	            //  console.log(data)
+	            // })
      		},
      		alocked() {
                 this.items = !this.items
@@ -211,9 +215,8 @@
 	  		},
 	  		handleAvatarSuccess(res, file) {
 	  			let result = res.data
-	  			console.log(result)
-		        // this.imageUrl = URL.createObjectURL(file.raw);
-		        this.imageUrl = result
+		        this.imageUrl = URL.createObjectURL(file.raw);
+		        // this.imageUrl = result
 		        this.userinfo.headIcon = result
 		    },
 		    beforeAvatarUpload(file) {
@@ -237,6 +240,7 @@
 	  					//号码已存在，不可注册
 	  					this.showAlert = true
 	  					this.alertTip = '该号码已经注册'
+	  					// this.$refs.timerbtn.setDisabled(true);
 	  				}else{
 
 	  				}
@@ -362,7 +366,8 @@
 
 	}
 	.goodlist form{
-		margin-top:10%; 
+		padding-top: 10%;
+	    border-top: 0.6rem solid #f5f5f5;
 	}
 	.goodlist li{ 
 		width: 92%;
