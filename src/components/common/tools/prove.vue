@@ -17,11 +17,7 @@
 		<h4 class="texttitle"><span><img src="./type.png"></span>证件类型</h4>
 		<ul>
 			<el-radio-group v-model="info.idType">
-			<li><el-radio :label="1">身份证</el-radio></li>
-			<li><el-radio :label="2">护照</el-radio></li>
-			<li><el-radio :label="3">军官证</el-radio></li>   
-			<li><el-radio :label="4">学生证</el-radio></li>    
-			<li><el-radio :label="5">港澳通行证</el-radio></li>	
+				<li v-for="item in typelist"><el-radio :label="item.key">{{item.value}}</el-radio></li>
 			</el-radio-group>
 		</ul>
 		<div class="usertext">
@@ -46,8 +42,8 @@
 		    }
 	  	},
 	  	mounted(){
-	  		this.$emit('sendData',this.info)
 	  		this.getType()
+	  		this.$emit('sendData',this.info)
 	  	},
 	  	methods:{
 	  		getType(){

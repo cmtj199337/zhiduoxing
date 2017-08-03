@@ -26,19 +26,45 @@
 	  	},
 	 	data () {
 		    return {
-		    	volunteerId:'',
-		    	data:[],
-		    	email:''
+		    	list:{
+		    		idNo:'',
+		    		idType:'',
+		    		name:'',
+		    		sex:'',
+		    	},
+	    		volunteerId:'',
+	    		email:''
 		    }
+	  	},
+	  	mounted(){
+
+	  		// seesionStorage.getItem(this.volunteerId,volunteerId)
 	  	},
 	  	methods:{
 	  		submitReal(){
-	  			var data = this.data
-	  			
-	  			this.$http.post('/api/public/completeVolunteer',data).then()
+	  			if(this.list != null){
+
+	  				this.$http.post('/api/public/completeVolunteer',{
+	  					idNo:this.list.idNo,
+	  					idType:this.list.idType,
+	  					name:this.list.name,
+	  					sex:this.list.sex,
+	  					volunteerId:this.volunteerId,
+	  					email:this.email
+	  				}).then(response =>{
+	  					let res = response.data
+	  					if(res.result == 0){
+	  						this.$router.push({ path: 'index' })
+	  					}
+		  			}).catch(()=>{
+		  				this.$message.error('服务器异常');
+		  			})
+	  			}else{
+	  				this.$message.error('请填写信息');
+	  			}	
 	  		},
 	  		getData(data){
-	  			this.data = data
+	  			this.list = data;
 	  		}
 	  	}
 	}

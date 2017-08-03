@@ -1,14 +1,54 @@
 <template>
 <div class="team">
-			<ul>
-			<li><img src="../zt.png">
+	<ul>
+		<li>
+			<img src="../zt.png">
 			<p class="hd">北京西站地区志愿服务</p>
-			<p class="two"><span class="s1"><b>120</b>小时</span><span class="s2"><b>200</b>人</span><span class="s3">志多星</span></p>
-			<p class="three"><span>志愿总时长</span><span>团队人数</span><span>团队管理员</span></p>
-			</li>
-			</ul>
+			<p class="two">
+				<span class="s1"><b>120</b>小时</span>
+				<span class="s2"><b>200</b>人</span>
+				<span class="s3">志多星</span>
+			</p>
+			<p class="three">
+				<span>志愿总时长</span>
+				<span>团队人数</span>
+				<span>团队管理员</span>
+			</p>
+		</li>
+	</ul>
 </div>
 </template>
+<script>
+	export default{
+
+		name:'team',
+		data(){
+			return {
+				teamlist:[]
+			}
+		},
+		methods:{
+			getList(){
+				var token = localStorage.getItem('access_token',this.token),
+					userId = localStorage.getItem('userId',this.userId)
+				this.$http.get('/api/private/getTeamByCollect',{
+					params:{
+						id:userId
+					},
+					headers:{
+						authorization:'Bearer'+token
+					}
+				}).then(response =>{
+					let res = response.data
+					if(res.result == 0){
+						this.teamlist = res.data
+					}
+				})
+			}
+		}
+
+	}
+</script>
 <style scoped>
 p{
 	font-size:0.85rem;

@@ -37,7 +37,6 @@
 	  		headerTip,
 	  		alertTip
 	  	},
-
 	 	data () {
 		    return {
 		      	name:'',

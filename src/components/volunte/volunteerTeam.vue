@@ -59,7 +59,7 @@
 	import headerTip from '../../components/common/header/header.vue'
 	import Servicetype from '../../components/volunte/vteamchild/Servicetype.vue'
 	import Teamtype from '../../components/volunte/vteamchild/Teamtype.vue'
-	import Area from'../../components/volunte/vteamchild/Area.vue'
+	import myArea from'../../components/volunte/vteamchild/Area.vue'
 	export default{
 
 		name:'volunteerTeam',
@@ -67,7 +67,7 @@
 	  		headerTip,
 	  		Servicetype,
 	  		Teamtype,
-	  		Area
+	  		myArea
 
 
 	  	},
@@ -80,7 +80,7 @@
                 tabs:[
 				 	{type: '服务类型',view: 'Servicetype'},  
 				 	{type: '团体类型',view: 'Teamtype'},
-				 	{type: '区域',view: 'Area'}
+				 	{type: '区域',view: 'myArea'}
 				],
 
 			}

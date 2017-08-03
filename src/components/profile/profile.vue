@@ -105,7 +105,6 @@
 	  	name: 'profile',
 	 	data () {
 		    return {
-		    	volunteerId:null,
 		    	voluInfo:[],
 		    	username:null
 		    }
@@ -118,12 +117,16 @@
                 this.$router.push(path)
             },
             profile(){
-            	localStorage.getItem('access-token',this.token);
-            	localStorage.getItem('access-token',this.username);
+            	var token = localStorage.getItem('access_token'),
+            		userId = localStorage.getItem('userId')
 
             	this.$http.get('/api/private/getVolunteerDetail',{
             		params:{
-            			id:this.volunteerId
+            			id:userId
+            		},
+            		headers:{
+            			authorization:'Bearer '+token,
+            			userid:userId
             		}
             	}).then(response => {
             		let res = response.data

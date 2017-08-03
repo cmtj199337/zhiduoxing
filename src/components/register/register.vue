@@ -2,14 +2,14 @@
 	<div class="register">
 		<img src="/static/bg.png">
 		<div class="fix">
-			<router-link class="ire" to="iregister">
+			<a class="ire" href="javascript:;" @click="toAddress({path:'/iregister'})">
 				<img src="./ire.png">
 				<span>个人注册</span>
-			</router-link>
-			<router-link class="tre" to="tregister">
+			</a>
+			<a class="tre" href="javascript:;" @click="toAddress({path:'/tregister'})">
 				<img src="./tre.png">
 				<span>团队注册</span>
-			</router-link>
+			</a>
 		</div>
 		<p>欢迎加入志多星</p>
 	</div>
@@ -18,10 +18,15 @@
 <script>
 	export default {
 	  	name: 'register',
-	 	 data () {
+	 	data () {
 		    return {
 		      
 		    }
+	  	},
+	  	methods:{
+	  		toAddress(path){
+                this.$router.push(path)
+            }
 	  	}
 	}
 </script>

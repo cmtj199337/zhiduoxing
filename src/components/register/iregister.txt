@@ -125,7 +125,8 @@
 		        goodSelect:[],
 		        isShow:false,
 		        wrap:true,
-		        arr:''
+		        arr:'',
+		        type:'GOOD_AT'
 		    }
 	  	},
 	  	mounted(){

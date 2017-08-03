@@ -1,21 +1,20 @@
 <template>
 	<div class="myNews">
 		<headerTip message="我的消息" goBack="true"></headerTip>
-		<div class="kong">			
+		<div class="kong"></div>
+		<div class="message">
+			<p><span class="left">系统消息</span><span class="right">2017/02/05</span></p>
+			<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
 		</div>
 		<div class="message">
-		<p><span class="left">系统消息</span><span class="right">2017/02/05</span></p>
-		<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
+			<p><span class="left">项目消息</span><span class="right">2017/02/05</span></p>
+			<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
 		</div>
 		<div class="message">
-		<p><span class="left">项目消息</span><span class="right">2017/02/05</span></p>
-		<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
+			<p><span class="left">团队消息</span><span class="right">2017/02/05</span></p>
+			<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
 		</div>
-		<div class="message">
-		<p><span class="left">团队消息</span><span class="right">2017/02/05</span></p>
-		<p>消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息消息</p>
-		</div>
-		</div>
+	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
@@ -27,8 +26,28 @@
 	  	},
 		data(){
 			return {
+				message:[]
 			}
 		},
+		methods:{
+			getList(){
+				var token = localStorage.getItem('access_token',this.token),
+					userId = localStorage.getItem('userId',this.userId)
+				this.$http.get('/api/private/getMyMessage',{
+					params:{
+						id:userId
+					},
+					headers:{
+						authorization:'Bearer'+token
+					}
+				}).then(response =>{
+					let res = response.data
+					if(res.result == 0){
+						this.message = res.data
+					}
+				})
+			}
+		}
 
 	}
 </script>

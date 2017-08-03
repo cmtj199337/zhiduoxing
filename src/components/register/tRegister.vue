@@ -201,9 +201,9 @@
             }
         },
         mounted(){
-        	this.$nextTick(function(){
-            	this.showList();
-        	})
+        	// this.$nextTick(function(){
+         //    	this.showList();
+        	// })
         },
         methods:{
 	  		send(){
