@@ -437,7 +437,8 @@ const router = new Router({
 			component:require('../components/during/projectCycle.vue')
 		},
 		
-	]
+	],
+	mode:'history'
 })
 
 
