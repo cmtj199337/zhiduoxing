@@ -24,6 +24,19 @@ import './config/validate.js'
 import Base from './styles/bace.css'
 // import 'weui/dist/style/weui.min.css'
 
+//全局拦截器
+Vue.http.interceptors.push((request, next)  =>{
+    var token = localStorage.getItem('access_token'),
+        userId = localStorage.getItem('userId');
+
+    request.headers.set('Authorization','Bearer '+token);
+    request.headers.set('userid',userId);
+    
+    next((response) => {
+        return response
+    });
+});
+
 Vue.config.productionTip = false;
 
 // 全局导航钩子

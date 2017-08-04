@@ -6,30 +6,30 @@
 		<div class="mm">
 		<div class="info">
 				<div class="info-left">
-					<img class="photo" src="./toux@2x.png">
+					<img class="photo" :src="voluInfo.headIcon">
 					<img class="renz" src="./renzheng@2x.png">
 				</div>
 				<div class="info-right">
-					<p class="name"><span>彭笑笑{{voluInfo.nickName}}</span><i></i><i></i><i></i><i></i><i></i></p>
-					<p class="kouhao"><span>志愿口号</span><i>将志愿服务进行到底。{{voluInfo.volunteSlogan}}</i></p>
+					<p class="name"><span>{{voluInfo.nickName}}</span><i></i><i></i><i></i><i></i><i></i></p>
+					<p class="kouhao"><span>志愿口号</span><i>{{voluInfo.volunteSlogan}}</i></p>
 				</div>
 				</div>
 				<div class="info2">
 				<ul class="clearfix">
 					<li @click="toAddress({path: '/bulletedList'})">
-						<p><b>20{{voluInfo.myTeam}}</b></p>
+						<p><b>{{voluInfo.myTeam}}</b></p>
 						<span>我的团队</span>
 					</li>
 					<li @click="toAddress({path: '/myProject'})">
-						<p><b>100{{voluInfo.myProject}}</b></p>
+						<p><b>{{voluInfo.myProject}}</b></p>
 						<span>我的项目</span>
 					</li>
 					<li>
-						<p><b>20{{voluInfo.serviceHour}}</b></p>
+						<p><b>{{voluInfo.serviceHour}}</b></p>
 						<span>志愿时长</span>
 					</li>
 					<li @click="toAddress({path: '/myStarcoin'})">
-						<p><b>20{{voluInfo.eMoneyBalance}}</b></p>
+						<p><b>{{voluInfo.eMoneyBalance}}</b></p>
 						<span>星币</span>
 					</li>
 				</ul>
@@ -117,9 +117,6 @@
                 this.$router.push(path)
             },
             profile(){
-            	var token = localStorage.getItem('access_token'),
-            		userId = localStorage.getItem('userId')
-
             	this.$http.get('/api/private/getVolunteerDetail',{
             		params:{
             			id:userId

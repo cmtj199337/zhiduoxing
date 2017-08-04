@@ -1,12 +1,12 @@
 <template>
 <div class="team">
 	<ul>
-		<li>
-			<img src="../zt.png">
-			<p class="hd">北京西站地区志愿服务</p>
+		<li v-for="item in teamlist">
+			<img src="item.teamIcon">
+			<p class="hd">{{item.teamName}}</p>
 			<p class="two">
-				<span class="s1"><b>120</b>小时</span>
-				<span class="s2"><b>200</b>人</span>
+				<span class="s1"><b>{{item.serverDuration}}</b>小时</span>
+				<span class="s2"><b>{{item.teamMember}}</b>人</span>
 				<span class="s3">志多星</span>
 			</p>
 			<p class="three">
@@ -29,14 +29,9 @@
 		},
 		methods:{
 			getList(){
-				var token = localStorage.getItem('access_token',this.token),
-					userId = localStorage.getItem('userId',this.userId)
 				this.$http.get('/api/private/getTeamByCollect',{
 					params:{
-						id:userId
-					},
-					headers:{
-						authorization:'Bearer'+token
+						id:1
 					}
 				}).then(response =>{
 					let res = response.data
