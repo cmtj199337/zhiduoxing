@@ -436,6 +436,11 @@ const router = new Router({
 			path: '/during',
 			component:require('../components/during/projectCycle.vue')
 		},
+		//临时
+		{
+			path: '/ser1',
+			component:require('../components/aaaaaaa/ser.vue')
+		},
 		
 	],
 	mode:'history'

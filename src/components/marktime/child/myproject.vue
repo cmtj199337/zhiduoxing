@@ -26,7 +26,7 @@
 							<span>
 								<p class="being">进行中</p>
 							</span>
-							<p class="btn">补录时长</p>
+							<p class="btn"  @click="toAddress({path:'/personalLength'})">补录时长</p>
 						</div>
 					</div>
 				</li>
@@ -41,7 +41,7 @@
 							<span>
 								<p class="passed">已结束</p>
 							</span>
-							<p class="btn">补录时长</p>
+							<p class="btn"  @click="toAddress({path:'/personalLength'})">补录时长</p>
 						</div>
 					</div>
 				</li>
@@ -59,7 +59,11 @@
 				
 			}
 		},
-
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            },
+		}
 	}
 </script>
 <style scoped>
@@ -181,5 +185,9 @@ p{
 	color:#46B8B7;
 	font-weight:normal;
 	padding-left: 0.5rem;
+}
+b{
+	font-weight: 400;
+	font-size: 1.4rem;
 }
 </style>

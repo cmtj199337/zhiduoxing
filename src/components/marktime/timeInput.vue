@@ -94,7 +94,7 @@
 		<div class="foot">
 			<ul>
 			<li><p>共计：<span>30</span>人</p></li>
-			<li class="right"><p>团队补录</p></li>
+			<li class="right"><p @click="toAddress({path:'/informationFilling'})">团队补录</p></li>
 			</ul>
 		</div>
 			</div>
@@ -111,6 +111,11 @@
 			return {
 			}
 		},
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            },
+		}
 
 	}
 </script>

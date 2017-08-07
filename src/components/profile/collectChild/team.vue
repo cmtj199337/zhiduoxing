@@ -2,12 +2,12 @@
 <div class="team">
 	<ul>
 		<li v-for="item in teamlist">
-			<img src="item.teamIcon">
+			<img :src="item.teamIcon">
 			<p class="hd">{{item.teamName}}</p>
 			<p class="two">
 				<span class="s1"><b>{{item.serverDuration}}</b>小时</span>
 				<span class="s2"><b>{{item.teamMember}}</b>人</span>
-				<span class="s3">志多星</span>
+				<span class="s3">{{item.teamManager}}</span>
 			</p>
 			<p class="three">
 				<span>志愿总时长</span>
@@ -27,11 +27,16 @@
 				teamlist:[]
 			}
 		},
+		mounted(){
+			this.getList()
+		},
 		methods:{
 			getList(){
+				var userId = localStorage.getItem('userId')
+				
 				this.$http.get('/api/private/getTeamByCollect',{
 					params:{
-						id:1
+						id:userId
 					}
 				}).then(response =>{
 					let res = response.data

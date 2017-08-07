@@ -48,6 +48,7 @@
 <style scoped>
 p{
 	font-size:0.85rem;
+	color: rgb(175, 175, 175);
 }
 .router-link-active{
 	padding-bottom: 0.3rem;
@@ -88,8 +89,9 @@ p{
 	width: 50%;
 }
 .header ul li span p b{
-	font-size:1.2rem;
+	font-size:1.4rem;
 	color:#43B7B5;
+	font-weight: 400;
 }
 .header ul li .left{
 	border-right:1px #F5F5F5 solid;

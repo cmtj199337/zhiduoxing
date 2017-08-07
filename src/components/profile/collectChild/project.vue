@@ -1,41 +1,70 @@
 <template>
-<div class="project">
-		<span class="xm1">
-		<img src="../xiangm.png" >
-		<img src="../teb2.png" >
-		<img src="../quan.png" class="p1">
-		<img src="../xin.png" class="p2">
-		<img src="../quan.png" class="p3">
-		<img src="../baoxian.png" class="p4">
-		<ul class="te">
-		<li class="hd">北京市朝阳区</li>
-		<li style="margin-left:0.5rem;">50/100</li>
-		<li style="text-align:right;">待启动</li>
-		</ul>
-		<ul class="te2">
-		<li>智多星项目名称</li>
-		<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
-		</ul>
+	<div class="project">
+		<span class="xm1" v-for="item in projectList">
+			<img src="../xiangm.png" >
+			<img src="../teb2.png" >
+			<img src="../quan.png" class="p1">
+			<img src="../xin.png" class="p2">
+			<img src="../quan.png" class="p3">
+			<img src="../baoxian.png" class="p4">
+			<ul class="te">
+				<li class="hd">{{item.projectAddress}}</li>
+				<li style="margin-left:0.5rem;">50/100</li>
+				<li style="text-align:right;">待启动</li>
+			</ul>
+			<ul class="te2">
+				<li>{{item.projectName}}</li>
+				<li style="text-align:right;color:#666">{{item.projectTime}}</li>
+			</ul>
 		</span>
 		<span class="xm1">
-		<img src="../xiangm.png" >
-		<img src="../teb2.png" >
-		<img src="../quan.png" class="p1">
-		<img src="../xin2.png" class="p2">
-		<img src="../quan.png" class="p3">
-		<img src="../baoxian.png" class="p4">
-		<ul class="te">
-		<li>北京市朝阳区</li>
-		<li style="margin-left:0.5rem;">50/100</li>
-		<li style="text-align:right;" >待启动</li>
-		</ul>
-		<ul class="te2">
-		<li>智多星项目名称</li>
-		<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
-		</ul>
+			<img src="../xiangm.png" >
+			<img src="../teb2.png" >
+			<img src="../quan.png" class="p1">
+			<img src="../xin2.png" class="p2">
+			<img src="../quan.png" class="p3">
+			<img src="../baoxian.png" class="p4">
+			<ul class="te">
+				<li>北京市朝阳区</li>
+				<li style="margin-left:0.5rem;">50/100</li>
+				<li style="text-align:right;" >待启动</li>
+			</ul>
+			<ul class="te2">
+				<li>智多星项目名称</li>
+				<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
+			</ul>
 		</span>
-		</div>
+	</div>
 </template>
+<script>
+	export default{
+		name:'project',
+		data(){
+			return {
+				projectList:[]
+			}
+		},
+		mounted(){
+			this.getList();
+		},
+		methods:{
+			getList(){
+				var userId = localStorage.getItem('userId')
+				
+				this.$http.get('/api/private/getProjectByCollect',{
+					params:{
+						id:userId
+					}
+				}).then(response =>{
+					let res = response.data
+					if(res.result == 0){
+						this.projectList = res.data
+					}
+				})
+			}
+		}
+	}
+</script>
 <style scoped>
 .project{
 	background:#F5F5F5;

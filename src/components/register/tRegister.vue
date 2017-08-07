@@ -3,11 +3,11 @@
 		<div v-show="wrap">
 			<headerTip message="团队注册" goBack="true"></headerTip>
 	        <div class="header">
-	       		<span class="ire">
+	       		<span class="ire" style="z-index: 1">
 					<img src="./t3.png">
 					<p style="font-size:1rem;padding:0.4rem">团队信息</p>
 				</span>
-				<img src="./t4.png" class="hx">
+				<p class="hx"></p>
 				<span class="tre">
 					<img src="./t2.png" >
 					<p style="font-size:1rem;padding:0.4rem">团队法人/负责人信息</p>
@@ -17,7 +17,7 @@
 	        <div class="header2">
 	            <h4 class="texttitle"><span><img src="./t1.png"></span>团队信息</h4>
 	        </div>
-	        <div class="usertext tlo">
+	        <div class="usertext tlo" style="top:-0.5rem">
 				<a href="javascript:;">
 					<span>团队logo</span>
 					<el-upload
@@ -94,7 +94,7 @@
 	            <h4 class="texttitle"><span><img src="./jianjie.png"></span>团队简介</h4>
 	        </div>
 	        <div class="usertextend">
-	       		<textarea v-model="teamInfo.teamIntro" v-validate="'required'" class="jianjie" name="teamIntro" rows="10"></textarea>
+	       		<textarea v-model="teamInfo.teamIntro" v-validate="'required'" class="jianjie" name="teamIntro" rows="5"></textarea>
 	       		<span class="toast" v-show="errors.has('teamIntro')">请输入团队简介</span>
 	        </div>
 	        <div class="end">
@@ -324,7 +324,7 @@
 	@import '../../styles/usertext.css';
 	.header{
 	    margin: auto;
-	    background-color:rgba(238, 238, 244, 0.5);
+    	    background:#F5F5F5;
 	    display:flex;
 	    position: relative;
 	}
@@ -332,8 +332,7 @@
 		width:50%;
 		display: inline-block;
 		text-align: center;
-		margin-top: 2rem;
-		margin-bottom : 2rem;
+		margin:1rem 0;
 		position:relative;
 		}
 	.header  span img{
@@ -346,26 +345,21 @@
 			width: 100%;
 		}
 	.usertext{
-		margin: 0 1rem 1.2rem 1rem;
+		margin: 0 1rem;
+		font-size: 1rem;
+		padding: 0.5rem 0;
 	}
 	.usertext img{
 			position: absolute;
 			right: 0;
 		}
 	.hx{
-		width: 47%;
+		width: 10rem;
 		position: absolute;
-		left: 5.2rem;
-		top:43%;
-		height: 2px;
-		z-index: -1;
-	}
-	.header2{
-	    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-	}
-	.header3{
-	    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-	   margin: 1rem 0;
+		left: 7.3rem;
+		top:40%;
+		background:#43b7b6;
+		padding:0.1rem;
 	}
 	.header  span p{
 			font-size: 1.2rem;
@@ -380,19 +374,20 @@
 		right:0;
 	}
 	.right img{
-			width:0.8rem;
+			width:0.6rem;
 			display: inline-block;
 			vertical-align: middle;
-			top: 25%;
+			top: 32%;
 		}
 	.tlo{
-		margin: 0.8rem;
+		margin:0 1rem;
+		padding: 0.8rem 0 0 0;
 	}
 	.tlo a{
 		border: 0;
-	    width: 100%;
-	    height: 4rem !important;
-		line-height: 4rem !important;
+	    width: 3rem;
+	    height: 3rem !important;
+		line-height: 3rem !important;
 	    font-size: 1rem;
 	    display: inline-block;
 	    color: #333;
@@ -403,14 +398,14 @@
 			width:1rem;
 			display: inline-block;
 			vertical-align: middle;
-			left: 46%;
-			top:38%;
+		left: 45%;
+		top:40%;
 	}
 	.usertext a{
 	    border: 0;
 	    width: 100%;
-	    height: 2.5rem;
-		line-height: 2.5rem;
+	    height: 2rem;
+		line-height: 2rem;
 	    font-size: 1rem;
 	    display: inline-block;
 	    color: #333;
@@ -418,17 +413,16 @@
 	    position: relative;
 	}
 	.kong{
-		background:#f6f6f9;
-		 padding: 0.4rem;
-		 margin: 0.4rem 0;
+		background:#f5f5f5;
+		 padding: 0.3rem;
 	}
 	
 	.usertextend textarea{
-		border: none; 
-		padding: 0.5rem 2%;
-		text-indent: 2em;
+		border: none;
 		width: 96%;
-
+		padding: 2%;
+		text-indent: 2em;
+		font-size: 0.9rem;
 	}
 	.end{
 		margin-left: 67%;
@@ -438,7 +432,7 @@
 	.eee{
 		padding: 2rem 0;
 		margin:0; 
-		background:#f6f6f9;
+		background:#f5f5f5;
 		text-align: center;
 	}
 	.next{
@@ -454,7 +448,7 @@
 		width: 35%;
 		border: 0;
 	    margin: 0 auto;
-	    height: 2.5rem;
+	    height: 2rem;
 	    font-size: 1rem;
 	    appearance:none;
 	    position: relative;
@@ -562,14 +556,14 @@
 		top: 0;
 	}
 	.avatar-uploader-icon {
-	    width: 4rem;
-	    height: 4rem;
-	    line-height: 4rem;
+	    width: 3rem;
+	    height: 3rem;
+	    line-height: 3rem;
 	    display: inline-block;
 	}
 	.avatar {
-	    width: 4rem;
-	    height: 4rem;
+	    width: 3rem;
+	    height: 3rem;
 	    display: block;
 	    position: absolute;
 	    right: 0;

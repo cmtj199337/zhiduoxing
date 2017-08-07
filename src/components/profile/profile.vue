@@ -117,20 +117,18 @@
                 this.$router.push(path)
             },
             profile(){
+            	var userId = localStorage.getItem('userId')
+
             	this.$http.get('/api/private/getVolunteerDetail',{
             		params:{
             			id:userId
-            		},
-            		headers:{
-            			authorization:'Bearer '+token,
-            			userid:userId
             		}
             	}).then(response => {
             		let res = response.data
             		if(res.result == 0){
             			this.voluInfo = res.data
             		}
-            	})
+            	}) 
             }
 	  	}
 	}

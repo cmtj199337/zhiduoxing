@@ -69,19 +69,20 @@
 				</li>
 			</ul>
 		</div>
-		<div class="column" style="padding-bottom:10%">
+		<div class="column">
 			<ul>
 				<li style="border:none;" @click="toAddress({path: '/modifyPassword'})">
 					<img class="icon" src="./lock.png">
 					<span>修改密码</span>
 				</li>
+				<hr>
 				<li style="border:none;" @click="toAddress({path: '/useHelp'})">
 					<img class="icon" src="./sybz.png">
 					<span>使用帮助</span>
 				</li>
 			</ul>
-			<input class="logout" type="button" value="退出登录">
 		</div>
+		<input class="logout" type="button" value="退出登录">
 		<footer class="foot">
 	        <section @click="toAddress({path: '/teamIndex'})">
 	            <img src="/static/footicon/shouye1.png">
@@ -124,7 +125,7 @@ hr{
 	/*position: relative;*/
 	width: 100%;
 	/*height: 1000px;*/
-	padding-bottom: 10%;
+	padding-bottom: 20%;
 }
 .topview{
 	width: 90%;
@@ -171,11 +172,12 @@ hr{
 
 /*栏目列表*/
 .column{
-	margin:1rem 0;
+	margin:0.6rem 0;
 	background-color: #fff;
+	font-size: 1rem;
 }
 .icon{
-		width: 4%;
+		width: 5%;
 		display: inline-block;
 		padding:0 0.6rem 0 1.5rem;
 }

@@ -9,6 +9,7 @@ Vue.use(VueResource)
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
+require('swiper/dist/css/swiper.css')
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'

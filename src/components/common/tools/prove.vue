@@ -8,19 +8,19 @@
 		<div class="usertext" style="margin-bottom:0;border:0">
 			<i class="s-icon"><img src="./sex.png"></i>
 			<span>姓别</span>
-			<el-radio-group v-model="info.sex">
+			<el-radio-group v-model="info.sex" style="margin-left:1.8rem">
 				<el-radio :label="1">男</el-radio>
 				<el-radio :label="2">女</el-radio>
 			</el-radio-group>
 		</div>
-		<div class="borderBottom"></div>
-		<h4 class="texttitle"><span><img src="./type.png"></span>证件类型</h4>
+		<div class="kong"></div>
+		<h4 class="texttitle"><span style="margin-bottom:0.1rem"><img src="./type.png"></span>证件类型</h4>
 		<ul>
 			<el-radio-group v-model="info.idType">
 				<li v-for="item in typelist"><el-radio :label="item.key">{{item.value}}</el-radio></li>
 			</el-radio-group>
 		</ul>
-		<div class="usertext">
+		<div class="usertext zhengjian" style="border-top: 1px solid #f5f5f5;">
 			<input type="text" v-validate="'required'" placeholder="请输入证件号码" maxlength="18" v-model="info.idNo" name="idNo">
 			<em class="toast" v-show="errors.has('idNo')">请输入正确证件号</em>
 		</div>
@@ -60,22 +60,24 @@
 </script>
 
 <style scoped>
-	@import '/static/css/usertext.css';
+	@import '../../../styles/usertext.css';
 	.usertext span{
 		font-size: 1rem;
 		color: #333;
 		padding-left: 1.2rem;
-		height: 2.5rem;
-		line-height: 2.5rem;
+		height: 2rem;
+		line-height: 2rem;
 		display: inline-block;
 	}
 	.improve{
-		padding-top: 0.4rem;
-		border-top: 0.8rem solid #f5f5f5;
+		background: #fff;
+	}
+	.zhengjian input{
+		margin-left:0 !important;
+		width: 100%;
 	}
 	.improve ul{
-		margin-bottom: 0.5rem;
-		margin: 0 1rem 1.2rem 1rem;
+		margin: 1rem;
 	}
 	.improve ul li{
 	    width: 32%;
@@ -83,9 +85,10 @@
 	    text-align: left;
 	    font-size: 1rem;
 	    color: #666;
-	    padding-bottom: 0.5rem;
+	    height: 2rem;
+	    line-height: 2rem;
 	}
-	.usertext{margin: 0 1rem 1.2rem 1rem;}
+	.usertext{margin: 0 1rem 0rem 1rem;padding: 0.5rem 0;}
 	.radio-btn{
 	    width: 3rem !important;
 	    height: 1.4rem !important;
@@ -108,8 +111,8 @@
 	.active{
 		background: #43B7B6
 	}
-	.borderBottom{
+	.kong{
 		background: #f5f5f5;
-		height: 0.8rem;
+		padding: 0.3rem;
 	}
 </style>

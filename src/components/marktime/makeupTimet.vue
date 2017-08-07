@@ -15,8 +15,8 @@
 					
 					</div>
 					<div class="anniu">
-						<span><p class="btn">时长审批</p></span>
-						<span><p class="btn1">团队补录</p></span>
+						<span ><p class="btn" @click="toAddress({path:'/durationApproval'})">时长审批</p></span>
+						<span><p class="btn1" @click="toAddress({path:'/timeInput'})">团队补录</p></span>
 					</div>	
 				</li>
 				<li>
@@ -26,8 +26,8 @@
 				
 				</div>
 				<div class="anniu">
-					<span><p class="btn">时长审批</p></span>
-					<span><p class="btn1">团队补录</p></span>
+					<span @click="toAddress({path:'/durationApproval'})"><p class="btn">时长审批</p></span>
+					<span><p class="btn1" @click="toAddress({path:'/timeInput'})">团队补录</p></span>
 				</div>	
 				</li>
 			</ul>
@@ -49,6 +49,11 @@
 				
 			}
 		},
+		methods:{
+			toAddress(path){
+                this.$router.push(path)
+            },
+		}
 
 	}
 </script>

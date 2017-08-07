@@ -1,15 +1,15 @@
 <template>
 	<div class="register">
-		<img src="/static/bg.png">
+		<img src="/static/bg.png" class="bg">
 		<div class="fix">
-			<a class="ire" href="javascript:;" @click="toAddress({path:'/iregister'})">
+			<router-link class="ire" to="iregister">
 				<img src="./ire.png">
 				<span>个人注册</span>
-			</a>
-			<a class="tre" href="javascript:;" @click="toAddress({path:'/tregister'})">
+			</router-link>
+			<router-link class="tre" to="tregister">
 				<img src="./tre.png">
 				<span>团队注册</span>
-			</a>
+			</router-link>
 		</div>
 		<p>欢迎加入志多星</p>
 	</div>
@@ -22,11 +22,6 @@
 		    return {
 		      
 		    }
-	  	},
-	  	methods:{
-	  		toAddress(path){
-                this.$router.push(path)
-            }
 	  	}
 	}
 </script>
@@ -35,13 +30,18 @@
 	.fix{
 		width: 80%;
 		position: absolute;
-		top: 30%;
+		top: 35%;
 		right: 0;left: 0;
 		margin: auto;
 		display: flex;
 	}
 	.register{
 		position: relative;
+		width:100%;
+		height:100%;
+	}
+	.register .bg{
+		height:100%;
 	}
 	.register p{
 		position: absolute;

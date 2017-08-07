@@ -29,8 +29,8 @@
 				</ul>
 			</div>
 		</form>
-
-		<div class="goodlist" v-show="isShow">
+		<!-- 筛选 -->
+		<div v-show="isShow">
 			<div class="head_top">
 				<div class='tip'>
 	            	<p><span @click="showToggle"><img src="./back.png"></span>团队列表</p>
@@ -41,15 +41,15 @@
 			<img src="./sou.png"><span style="color:#43B7B6" >筛选<img src="./shaixuan.png"></span>
 		</div>
 		<div class="kong"></div>
-			<div class="header">
-				<div class="header2">
-			<ul>
-				<li v-for="(item,index) in tabs">
-					<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
-				</li>
-			</ul>
+		<div class="header">
+			<div class="header2">
+				<ul>
+					<li v-for="(item,index) in tabs">
+						<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
+					</li>
+				</ul>
 			</div>
-		<component :is='currentView' keep-alive></component>
+			<component :is='currentView' keep-alive></component>
 		</div>
 			
 		</div>
@@ -68,8 +68,6 @@
 	  		Servicetype,
 	  		Teamtype,
 	  		myArea
-
-
 	  	},
 		data(){
 			return {
@@ -100,6 +98,11 @@
             toggle(v,index) {
 		    	this.iscur = index;
 		    	this.currentView = v
+		    },
+		    showTeam(){
+		    	this.$http.get('/api/public/getTeamList',{
+		    		
+		    	})
 		    }
 		}
 

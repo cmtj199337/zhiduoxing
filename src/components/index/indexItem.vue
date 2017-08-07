@@ -1,8 +1,8 @@
 <template>
 	<div class="index">
 		<div class="headerBar">
-			<div class="number"><img src="./logo.png">5000人</div>
-			<div class="denglu" @click="toAddress({path: '/login'})">登录</div>		
+			<div class="number"><img src="./logo.png"><span>5000人</span></div>
+			<div class="denglu"><span @click="toAddress({path: '/login'})">登录</span></div>		
 		</div>
 		<swipe v-model="index" style="text-align: center;">
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
@@ -10,7 +10,7 @@
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
 		</swipe>
 		<div class="classify clearfix">
-			<div class="location"><img src="./weizhi.png">{{guessCity}}</div><input @click="toggle()" v-on:blur="changeCount()"class="search" type="search" placeholder="搜索" align="center"><img src="./sou.png" class="ss" v-show="isShow">
+			<div class="location"><p><img src="./weizhi.png">北京</p><input @click="toggle()" v-on:blur="changeCount()"class="search" type="text" placeholder="搜索" align="center"><img src="./sou.png" class="ss" v-show="isShow"></div>
 			<ul>
 				<!-- <li v-for="item in filtIcon">
 					<router-link :to="item.url">
@@ -37,7 +37,7 @@
 					</router-link>
 				</li>
 				<li>
-					<router-link to="makeupTime">
+					<router-link to="makeupTimet">
 						<img src="./6.png" alt="">
 						<span>补录时长</span>
 					</router-link>
@@ -211,9 +211,9 @@
 	@import '../../styles/swipe.css';
 	.ss{
 		position:absolute;
-		width:5%;
-		top:11%;
-		left:42%;
+		width:4.5%;
+		top:35%;
+		right:42%;
 	}
 	.index{
 		position: relative;
@@ -224,9 +224,16 @@
 		position: absolute;
 		top: 0;left: 0;right: 0;
 		background: rgba(255,255,255,0.2);
-		padding:0.3rem 1rem;
+		padding:0 1rem;
 		z-index: 10;
 		display: flex;
+		height: 2rem;
+		line-height: 2rem;
+	}
+	.headerBar div span{
+		font-size:1.1rem;
+		display: inline-block;
+		width: 4rem;
 	}
 	.headerBar div{
 		width: 50%;
@@ -246,18 +253,30 @@
 		text-align: right;
 	}
 	.location{
-		display:inline;
-		margin-left:-1.6rem;
-		padding-right:0.8rem;
-		 
-		left:0; 
+		display:flex;	
+		position:relative;
+
 	}
-	.location img{
-		width: 0.9rem;
-	    display: inline-block;
+	.location p{
+		width:32%;
+		margin: 0.5rem auto;
+	    height: 2rem;
+	    line-height:2rem;
+	    font-size: 0.85rem;
+	    margin-left:0.2rem;
+	    text-align:center;
+	    overflow:hidden;
+	    text-overflow: ellipsis;
+		white-space: nowrap;
+		color: #333;
+	}
+	.location p img{
+		width: 1rem;
+	    display: inline;
 	    vertical-align:middle;
-	    padding-right: 0.3rem;
-	    padding-bottom:0.2rem;
+	    padding-right: 0.2rem;
+	    margin-left:0.1rem;
+	    padding-bottom:0.4rem;
 	}
 	.classify{
 		width: 88%;
@@ -281,14 +300,16 @@
 		margin: 0.2rem auto;
 	}
 	.search{
-	    width: 70%;
+	    width:65%;
 	    border: 0; 
-	    margin: 1rem auto;
+	    margin: 0.5rem auto;
 	    height: 2rem;
 	    font-size: 1rem;
 	    text-align: center;
 	    color: #C9C9C9;
 	    background: #f5f5f5;
+	    margin-right:3%;
+	    border-radius: 0.3rem;
 	}
 	.search::-webkit-input-placeholder{
 		color: #C9C9C9;

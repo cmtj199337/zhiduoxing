@@ -10,7 +10,7 @@
 					<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
 				</li>
 				<li @click="toAddress({path: '/teammanage/volunteer'})">
-				<img src="./c@2x.png" class="zhiyuan" style="width:15%;"><b>2000</b><p>志愿者总人数（人）</p>
+				<img src="./c@2x.png" class="zhiyuan" style="width:12%;"><b>2000</b><p>志愿者总人数（人）</p>
 				</li>
 				</ul>
 			</div>
@@ -51,7 +51,7 @@
 	background:#f6f6f9;
 }
 .header1{
-	padding:0.3rem 0;
+	padding:0.3rem 0 0 0;
 }
 .header1 ul{
 display:flex;
@@ -70,7 +70,7 @@ border-radius:5px;
 
 }
 .header1 ul li img{
-	width:22%;
+	width:16%;
 	display:inline;
 }
 .header1 ul li b{
@@ -78,7 +78,7 @@ border-radius:5px;
 
 }
 .header2{
-	padding:0.3rem 0;
+	padding:0;
 }
 .header2 ul{
 display:flex;
@@ -97,7 +97,7 @@ border-radius:5px;
 
 }
 .header2 ul li img{
-	width:22%;
+	width:16%;
 	display:inline;
 }
 .header2 ul li b{
@@ -106,5 +106,11 @@ border-radius:5px;
 }
 .header2 ul li .zhiyuan{
 	width:13%;
+}
+b{
+	color: #555;
+	font-weight: 400;
+	font-size: 1.5rem;
+	padding-left: 0.2rem
 }
 </style>

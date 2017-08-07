@@ -27,7 +27,8 @@
 		width: 100%;
 	}
 	.usertext{
-		margin: 0 1rem 1.2rem 1rem;
+		margin: 0 1rem;
+		padding:0.5rem 0;
 	}
 	.usertext img{
 		position: absolute;
@@ -35,20 +36,19 @@
 	}
 	.header3{
 	    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-	    margin: 1rem 0;
 	}
 
 	.right img{
-		width:0.8rem;
+		width:0.6rem;
 		display: inline-block;
 		vertical-align: middle;
-		top: 25%;
+		top:32%;
 	}
 	select{
 		width: 100%;
 		border: 0;
 	    margin: 0 auto;
-	    height: 2.5rem;
+	    height: 2rem;
 	    font-size: 1rem;
 	    appearance:none;
 	    position: relative;

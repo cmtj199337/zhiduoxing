@@ -1,10 +1,11 @@
 <template>
 	<div class="iRegister">
 		<headerTip message="个人注册" goBack="true"></headerTip>
-        <h4 class="texttitle"><span><img src="./profile.png"></span>个人资料</h4>
+		<div class="kong"></div>
+        <h4 class="texttitle"><span><img src="./t1.png"></span>个人资料</h4>
 		<form method="post" v-show="wrap" enctype="multipart/form-data">
-			<div class="usertext userphoto">
-				<a href="javascript:;"><span>头像上传</span>
+			<div class="usertext userphoto" style="padding:0.8rem 0 0 0">
+				<a href="javascript:;" style="top:-0.5rem"><span>头像上传</span>
 					<!-- <upload-img v-model="picture"></upload-img> -->
 					<el-upload
 					  class="avatar-uploader"
@@ -24,7 +25,7 @@
 				<span class="toast" v-show="errors.has('mobile')">请输入正确手机号</span>
 			</div>
 			<div class="usertext">
-				<input type="number" placeholder="请输入验证码" maxlength="6" />
+				<input type="number" placeholder="请输入验证码" maxlength="6" style="width:60%" />
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" disabled="disabled" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
@@ -43,10 +44,6 @@
 				<a href="javascript:;" @click="showToggle">
 					<span class="good">擅长<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
 				</a>
-			</div>
-			<div class="usertext">
-				<input type="text" v-validate="'required'" name="slogan" placeholder="请输入志愿口号" v-model="userinfo.volunteerSlogan" /><br />
-				<span class="toast" v-show="errors.has('slogan')">请输入志愿口号</span>
 			</div>
 			<div class="read">
 				<span>
@@ -264,28 +261,37 @@
 <style scoped>
 	@import '../../styles/usertext.css';
 	.iRegister{padding:0 0 10% 0;}
-	.usertext{margin: 0 1rem 1.2rem 1rem;}
-	.usertext input{margin: 0;}
+	.usertext{margin: 0 1rem;padding: 0.5rem 0;}
+	.usertext input{
+		width:100%;
+		margin: 0;}
 	.usertext a{
 	    border: 0;
 	    width: 100%;
-	    height: 2.5rem;
-		line-height: 2.5rem;
+	    height: 2rem;
+		line-height: 2rem;
 	    font-size: 1rem;
 	    display: inline-block;
 	    color: #333;
 	    text-indent: 0;
 	    position: relative;
 	}
+	.kong{
+		background:#F5F5F5;
+		 padding: 0.3rem;
+	}
 	.usertext a img{
 		position: absolute;
 		right: 0;
 	}
+	.userphoto{
+		
+	}
 	.userphoto a{
 		border: 0;
 	    width: 100%;
-	    height: 4rem;
-		line-height: 4rem;
+	    height: 3rem;
+		line-height: 3rem;
 	    font-size: 1rem;
 	    display: inline-block;
 	    color: #333;
@@ -293,7 +299,7 @@
 	    position: relative;
 	}
 	.right img{
-		width:0.8rem;
+		width:0.6rem;
 		display: inline-block;
 		vertical-align: middle;
 		top: 25%;
@@ -302,7 +308,7 @@
 		margin-top: 1rem;
 	}
 	.read{
-		margin-top:2rem; 
+		margin-top:1rem; 
 		text-align: center;
 		font-size: 0.8rem;
 		color: #C9C9C9;
@@ -311,13 +317,21 @@
 		color: #43B7B6;
 	}
 	.read i{
-		width: 0.7rem;
-		height: 0.7rem;
+		width: 0.9rem;
+		height: 0.9rem;
 		display: inline-block;
 		border: 1px solid #E7E7E7;
 		border-radius: 1rem;
 		vertical-align: middle;
 		margin-right: 0.2rem;
+		margin-bottom:0.1rem;
+		position: relative;
+	}
+	.read .xuanze{
+		position:absolute;
+		width:0.9rem;
+		height:0.9rem;
+
 	}
 	.overlay{
 		width: 100%;
@@ -435,14 +449,14 @@
 		top: 0;
 	}
 	.avatar-uploader-icon {
-	    width: 4rem;
-	    height: 4rem;
-	    line-height: 4rem;
+	    width: 3rem;
+	    height: 3rem;
+	    line-height: 3rem;
 	    display: inline-block;
 	}
 	.avatar {
-	    width: 4rem;
-	    height: 4rem;
+	    width: 3rem;
+	    height: 3rem;
 	    display: block;
 	    position: absolute;
 	    right: 0;

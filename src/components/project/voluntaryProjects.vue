@@ -7,14 +7,9 @@
 		</div>
 		<div class="hh">
 		<ul>
-		<!-- 	<li><span class="active">全部</span></li>
-			<li><span>待启动</span></li>
-			<li><span>招募中</span></li>
-			<li><span>进行中</span></li>
-			<li><span>已结束</span></li> -->
 			<li v-for="(item,index) in tabs">
-					<span :class="{active: index == iscur }" @click="toggle(index)">{{item.type}}</span>
-				</li>
+				<span :class="{active: index == iscur }" @click="toggle(index)">{{item.type}}</span>
+			</li>
 		</ul>
 		</div>
 		<div class="main">
@@ -23,9 +18,8 @@
 					<img src="./xiangm.png" >
 					<p class="mask"></p>
 				</div>
-				
-				<img src="./teb2.png" >
-				<img src="./quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
+				<img src="./teb2.png" style="border-radius: 0.3rem;">
+				<img src="./quan.png" @click.stop="click" style="position:absolute;width:8%;top:8%;left:5%;">
 				<img src="./xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
 				<img src="./quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
 				<img src="./baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
@@ -39,7 +33,6 @@
 					<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
 				</ul>
 			</span>
-
 		</div>
 	</div>
 	</template>
@@ -66,8 +59,11 @@
 			toAddress(path){
 			    this.$router.push(path)
 			},
-			 toggle(index) {
+			toggle(index) {
 		    	this.iscur = index
+		    },
+		    projeckList(){
+		    	
 		    }
 		}
 
@@ -134,9 +130,11 @@
 	
 }
 .main span{
-	margin:0.4rem;
-	display:inline-block;
-	position:relative;
+    margin: 0.4rem;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0px 1px 3px #ccc;
+    border-radius: 0.4rem;
 }
 .te{
 	display:flex;

@@ -21,7 +21,7 @@
 		<div style="padding:1.5rem;"></div>
 
 	</div>
-	<div class="t"><p>补录时长</p></div>
+	<div class="t"><p @click="toAddress({path:'/informationFill'})">补录时长</p></div>
 
   
   <div class="overlay" v-show="isShow">
@@ -52,8 +52,10 @@
 		    }
 	  	},
 	  	methods:{
-	  		
-	  	}
+			toAddress(path){
+                this.$router.push(path)
+            },
+		}
 	}
 </script>
 
