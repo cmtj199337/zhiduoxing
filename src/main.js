@@ -25,6 +25,8 @@ import './config/validate.js'
 import Base from './styles/bace.css'
 // import 'weui/dist/style/weui.min.css'
 
+// Vue.http.options.emulateJSON = false;
+
 //全局拦截器
 Vue.http.interceptors.push((request, next)  =>{
     var token = localStorage.getItem('access_token'),

@@ -28,19 +28,18 @@
 	}
 	.usertext{
 		margin: 0 1rem;
+		padding: 0.5rem 0;
 	}
 	.usertext img{
 		position: absolute;
 		right: 0;
 	}
-	.header3{
-	    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-	}
 
 	.right img{
-		width:0.8rem;
+		width:0.6rem;
 		display: inline-block;
 		vertical-align: middle;
+		top: 32%;
 	}
 	select{
 		width: 100%;
@@ -56,8 +55,8 @@
 		font-size: 1rem;
 		position: absolute;
 		z-index: 1;
-	    height: 2.5rem;
-	    line-height: 2.5rem;
+	    height: 2rem;
+	    line-height: 2rem;
 	}
 </style>
 

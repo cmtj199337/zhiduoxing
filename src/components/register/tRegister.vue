@@ -38,12 +38,12 @@
 	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
 	        </div>
 	        <div class="usertext">
-				<input type="tel" name="mobile" v-validate="'required|mobile'" v-model="teamInfo.mobileNumber" placeholder="请输入手机号" maxlength="11" />
+				<input type="tel" name="mobile" v-validate="'required|mobile'" @change="checkMobile" v-model="teamInfo.mobileNumber" placeholder="请输入手机号" maxlength="11" />
 				<span class="toast" v-show="errors.has('mobile')">请输入手机号</span>
 			</div>
 	        <div class="usertext">
-				<input type="number" v-model="teamInfo.verify" placeholder="请输入验证" maxlength="11"  style="width:60%" />
-				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :second="60"></timer-btn>
+				<input type="number" @change="checkCode" v-model="verify" placeholder="请输入验证" maxlength="11" style="width:60%" />
+				<timer-btn ref="timerbtn" class="btn getcode" disabled v-on:run="send" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
 				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
@@ -189,6 +189,7 @@
 		        	address:'',
 		        	teamIntro:''
             	},
+            	verify:'',
             	isShow:false,
             	lisnluoShow:false,
 		        wrap:true,
@@ -197,13 +198,14 @@
 		        listSelected:[],
 		        list:[],
 		        teamclist:[],
-		        teamKlist:[]
+		        teamKlist:[],
+		        code:''
             }
         },
         mounted(){
-        	// this.$nextTick(function(){
-         //    	this.showList();
-        	// })
+        	this.$nextTick(function(){
+            	this.showList();
+        	})
         },
         methods:{
 	  		send(){
@@ -212,7 +214,7 @@
 	            	mobileNo:this.teamInfo.mobileNumber
             	}).then(response => {
             		let res = response.data
-            		if(res.result){
+            		if(res.result == 0){
 	                    this.$refs.timerbtn.start();
 	                }else{
 	                    this.$refs.timerbtn.stop();
@@ -315,6 +317,35 @@
 		        }
 		        return isJPG && isLt2M;
 		    },
+		    checkMobile(){
+		    	this.$http.post('/api/public/checkMobileNo',{
+		    		mobileNo:this.teamInfo.mobileNumber
+	    		}).then(response =>{
+	  				let res = response.data
+
+	  				if(res.result == 0){
+	  					
+	  					this.$refs.timerbtn.setDisabled(false);
+	  				}else{
+
+	  					this.$refs.timerbtn.setDisabled(true);
+						this.$message.error("该账号已注册过")
+	  				}
+	  			})
+		    },
+		    checkCode(){
+		    	this.$http.post('/api/public/checkVerification',{
+     				mobileNo:this.teamInfo.mobileNumber,
+     				verification:this.code
+     			}).then(response => {
+     				let res = response.data
+     				if(res.result == 0){
+     					this.$refs.timerbtn.setDisabled('true')
+     				}else{
+
+     				}
+     			})
+		    }
 	  	}
 
     }

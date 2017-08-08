@@ -25,8 +25,8 @@
 				<span class="toast" v-show="errors.has('mobile')">请输入正确手机号</span>
 			</div>
 			<div class="usertext">
-				<input type="number" placeholder="请输入验证码" maxlength="6" style="width:60%" />
-				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" disabled="disabled" :second="60"></timer-btn>
+				<input type="number" @change="checkCode" v-model="code" placeholder="请输入验证码" maxlength="6" style="width:56%" />
+				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
 				<input type="password" name="password" v-validate="'required'" style="width:100%" placeholder="请输入密码(6~12位数字或字母)" v-model="userinfo.password" />
@@ -55,8 +55,7 @@
 				<span>我已阅读并授权</span><router-link to="agreement">《志多星用户协议》</router-link>
 			</div>
 			<div class="sub">
-				<!-- <input type="button" value="确认提交" @click="confirm"/> -->
-				<input type="button" value="确认提交"/>
+				<input type="button" value="确认提交" @click="confirm"/>
 			</div>
 		</form>
 		<!-- 遮罩、弹框 -->
@@ -65,7 +64,7 @@
 			<p>马上去完善个人信息，可以获得10积分</p>
 			<div>
 				<router-link to="improve">是</router-link>
-				<a href="javascript:;" @click="isConfirm = false">否</a>
+				<a href="javascript:;" @click="registerGo">否</a>
 			</div>
 		</div>
 		<!-- goodlist选项 -->
@@ -112,17 +111,17 @@
 		        imageUrl:'',
 		        list:[],
 		        userinfo:{
-		        	headIcon:'',
+		        	headIcon:'',					//头像
 		        	mobileNo:'',					//手机号
 		        	password:'',					//新密码
 		        	nickName:'',					//昵称
-		        	goodAt:'',						//擅长字符串
-		        	volunteerSlogan:''				//口号
+		        	goodAt:''						//擅长字符串
 		        },
 		        goodSelect:[],
 		        isShow:false,
 		        wrap:true,
-		        arr:''
+		        arr:'',
+		        code:''
 		    }
 	  	},
 	  	mounted(){
@@ -136,6 +135,10 @@
 	  		closeTip(){
                 this.showAlert = false;
             },
+            registerGo(){
+            	this.isConfirm =false
+            	this.$router.push({ path: 'login' })
+            },
 	  		confirm() {
 	  			// if(this.userinfo){
 	  			// 	this.showAlert = true
@@ -145,7 +148,7 @@
 	  				let res = response.data
 	  				if(res.result == 0){
 	  					//将返回的volunteerId存入
-	  					//seesionStorage.setItem('volunteerId',res.volunteerId)
+	  					sessionStorage.setItem('volunteerId',res.data)
 						this.isConfirm = true;
 	  				}else{
 
@@ -160,13 +163,29 @@
 	            },{
 	            	emulateJSON:true
 	            }).then( response =>{
-	            	let data = response.data
-	            	if(data.result){
+	            	let res = response.data
+	            	if(res.result == 0){
 	                    this.$refs.timerbtn.start();
 	                }else{
 	                    this.$refs.timerbtn.stop();
 	                }
 	            })
+     		},
+     		checkCode(){
+     			this.$http.post('/api/public/checkVerification',{
+     				mobileNo:this.userinfo.mobileNo,
+     				verification:this.code
+     			},{
+     				emulateJSON:true
+     			}).then(response => {
+     				let res = response.data
+     				if(res.result == 0){
+     					this.$refs.timerbtn.stop();
+     					this.$refs.timerbtn.setDisabled(true)
+     				}else{
+
+     				}
+     			})
      		},
      		alocked() {
                 this.items = !this.items
@@ -238,16 +257,16 @@
 		    		this.$http.post('/api/public/checkMobileNo',{
 		    			mobileNo:this.userinfo.mobileNo
 		    		},{
-	  					emulateJSON:true
-	  				}).then(response =>{
+		    			emulateJSON:true
+		    		}).then(response =>{
 		  				let res = response.data
-		  				console.log(res)
+
 		  				if(res.result == 0){
 		  					
 		  					this.$refs.timerbtn.setDisabled(false);
 		  				}else{
-							this.showAlert = true
-		  					this.alertTip = '该号码已经注册'
+		  					this.$refs.timerbtn.setDisabled(true);
+							this.$message.error("该账号已注册过")
 		  				}
 		  			})
 		    	}else{

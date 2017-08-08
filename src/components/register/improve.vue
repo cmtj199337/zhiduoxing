@@ -38,32 +38,27 @@
 		    }
 	  	},
 	  	mounted(){
-
-	  		// seesionStorage.getItem(this.volunteerId,volunteerId)
+	  		this.volunteerId = sessionStorage.getItem('volunteerId')
 	  	},
 	  	methods:{
 	  		submitReal(){
-	  			if(this.list != null){
-
-	  				this.$http.post('/api/public/completeVolunteer',{
-	  					idNo:this.list.idNo,
-	  					idType:this.list.idType,
-	  					name:this.list.name,
-	  					sex:this.list.sex,
-	  					volunteerId:this.volunteerId,
-	  					email:this.email
-	  				}).then(response =>{
-	  					let res = response.data
-	  					if(res.result == 0){
-	  						this.$router.push({ path: 'index' })
-	  					}
-		  			}).catch(()=>{
-		  				this.$message.error('服务器异常');
-		  			})
-	  			}else{
-	  				this.$message.error('请填写信息');
-	  			}	
-	  		},
+  				var formData = {
+  					idNo:this.list.idNo,
+  					idType:this.list.idType,
+  					name:this.list.name,
+  					sex:this.list.sex,
+  					volunteerId:this.volunteerId,
+  					eMail:this.email
+  				}
+  				this.$http.post('/api/public/completeVolunteer',formData).then(response =>{
+  					let res = response.data
+  					if(res.result == 0){
+  						this.$router.push({ path: 'login' })
+  					}
+	  			}).catch(()=>{
+	  				this.$message.error('请填写完整信息');
+	  			})
+		  	},
 	  		getData(data){
 	  			this.list = data;
 	  		}
