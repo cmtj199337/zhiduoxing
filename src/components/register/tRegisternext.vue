@@ -28,21 +28,7 @@
 			<input type="text" placeholder="请输入团队法人/负责人姓名" v-model="dataList.managerName"/>
 		</div>
 		<div class="kong"></div>
-        <!-- <div class=" usertext leixing">
-			<form action="" method="post">
-			<ul>
-			<li>
-				<span><img src="./xuanze.png">身份证</span>
-				<span><img src="./lx.png">护照</span>
-			 	<span><img src="./lx.png">军官证</span>
-			</li>
-			<li>
-				<span><img src="./lx.png">学生证</span>
-				<span style="width:10rem;"><img src="./lx.png" style="margin-left:-0.5rem;width:11%;">港澳通行证</span>
-			</li>
-			</ul>
-			</form>
-        </div> -->
+
 		<h4 class="texttitle"><span style="margin-bottom:0.1rem"><img src="./type.png"></span>证件类型</h4>
 		<ul class="improve">
 			<el-radio-group v-model="dataList.managerIdType">
@@ -51,13 +37,13 @@
 		</ul>
 
         <div class="usertext">
-			<input type="tel" placeholder="请输入团队法人/负责人证件号" />
+			<input type="tel" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" />
 		</div>
 		 <div class="usertext">
-			<input type="text" placeholder="请输入团队法人/负责人手机号" maxlength="11" />
+			<input type="text" v-model="dataList.managerMobileNo" placeholder="请输入团队法人/负责人手机号" maxlength="11" />
 		</div>
 		 <div class="usertext">
-			<input type="text" placeholder="请输入团队法人/负责人邮箱"/>
+			<input type="text" v-model="dataList.managerMail" placeholder="请输入团队法人/负责人邮箱"/>
 		</div>
 		<div class="end">
 			<div class="chuan chuan1">
@@ -75,7 +61,6 @@
 				<p>上传资质照片</p>
 			</div>
 			<div class="chuan chuan2">
-				
 				<p>上传资质照片</p>
 			</div>
 		</div>
@@ -87,6 +72,7 @@
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+
 	export default{
 
 		name:'tRegisternext',
@@ -110,11 +96,12 @@
 				},
 				typelist:[],
 				imageUrl:'',
-				image:''
+				imageUr:''
 			}
 		},
 		mounted(){
 			this.getType();
+			this.teamId = sessionStorage.getItem('teamId')
 		},
 		methods:{
 			toAddress(path){

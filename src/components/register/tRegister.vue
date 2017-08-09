@@ -33,7 +33,7 @@
 					</el-upload>
 				</a>
 			</div>
-	        <div class="usertext">
+	        <div class="usertext" style="border-top:1px solid #f5f5f5">
 	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队名称">
 	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
 	        </div>
@@ -42,7 +42,7 @@
 				<span class="toast" v-show="errors.has('mobile')">请输入手机号</span>
 			</div>
 	        <div class="usertext">
-				<input type="number" @change="checkCode" v-model="verify" placeholder="请输入验证" maxlength="11" style="width:60%" />
+				<input type="number" @change="checkCode" v-model="verify" placeholder="请输入验证" maxlength="11" style="width:56%" />
 				<timer-btn ref="timerbtn" class="btn getcode" disabled v-on:run="send" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
@@ -54,11 +54,11 @@
 				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
 			<div class="usertext">
-				<input type="password" v-validate="'required'" v-model="teamInfo.teamSlogan" name="slogan" placeholder="请输入团队口号" /><br />
+				<input type="text" v-validate="'required'" v-model="teamInfo.teamSlogan" name="slogan" placeholder="请输入团队口号" /><br />
 				<span class="toast" v-show="errors.has('slogan')">请输入团队口号</span>
 			</div>
 			<div class="usertext right" @click="lianluoToggle()">
-				<a href="javascript:;"><span>联络团队：志愿者服务联合会<img src="./right.png"></span></a>
+				<a href="javascript:;"><span>联络团队<span>{{contactTeam.teamName}}</span><img src="./right.png"></span></a>
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle()">
@@ -67,12 +67,12 @@
 			</div>
 			<div class="usertext right">
 				<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamCategory">
-					<option v-for="item in teamclist" value="item.key">{{item.value}}</option>
+					<option v-for="item in teamclist" :value="item.key">{{item.value}}</option>
 				</select><img src="./right.png"></span>
 			</div>
 			<div class="usertext bottom">
 				<span>团队种类：<select class="select" v-model="teamInfo.teamKind">
-					<option v-for="item in teamKlist" value="item.key">{{item.value}}</option>
+					<option v-for="item in teamKlist" :value="item.key">{{item.value}}</option>
 				</select><img src="./bottom.png"></span>
 			</div>
 			<div class="usertext">
@@ -101,7 +101,7 @@
 	        不超过100字
 	        </div>
 	        <div class="eee">
-	        	<input type="button" name=""  class="next" value="下一步" @click="toAddress({path: '/tregisternext'})">
+	        	<input type="button" name=""  class="next" value="下一步" @click="formData()">
 	        </div>
         </div>
 		<!-- 服务类型 -->
@@ -115,7 +115,7 @@
 				<ul>
 					<li v-for="item in list">
 						<span>{{item.value}}</span>
-						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item,3)">
 							<svg class="icon icon-ok"></svg>
 						</span>
 					</li>
@@ -150,7 +150,13 @@
 	    	
 	    	</div>
 	    	<div class="neirong">
-	    		<span class="tuanti">北京市志多星团队</span>
+				<ul>
+					<el-radio-group v-model="teamInfo.contactTeamId" style="width:100%">
+						<li v-for="item in contactTeam">
+							<el-radio :label="item.teamId">{{item.teamName}}</el-radio>
+						</li>
+					</el-radio-group>
+				</ul>
 	    	</div>	    	
 		</div>
     </div>
@@ -180,8 +186,8 @@
 		        	teamSlogan:'',			//团队口号
 		        	contactTeamId:'',		//联系团队
 		        	serverType:'',			//服务类型
-		        	teamCategory:'党政机关',		//团队类别
-		        	teamKind:'中级团队',		//团队种类（大小）
+		        	teamCategory:'',		//团队类别
+		        	teamKind:'',		//团队种类（大小）
 		        	teamManager:null,			//团队管理员
 		        	contactNumber:null,			//联系人电话
 		        	province:'',					//地址
@@ -199,7 +205,7 @@
 		        list:[],
 		        teamclist:[],
 		        teamKlist:[],
-		        code:''
+		        contactTeam:[]
             }
         },
         mounted(){
@@ -212,6 +218,8 @@
      			this.$refs.timerbtn.setDisabled(true); 
 	            this.$http.post('/api/public/sendShortMessage',{
 	            	mobileNo:this.teamInfo.mobileNumber
+            	},{
+            		emulateJSON:true
             	}).then(response => {
             		let res = response.data
             		if(res.result == 0){
@@ -252,8 +260,9 @@
             	}).then(response => {
             		this.list = response.data.data
             	})
-            	this.teamcatlist();
+            	this.teamcatlist()
             	this.showteamKlist()
+				this.getContactTeam()
             },
             teamcatlist(){
             	this.$http.get('/api/public/getCommonList',{
@@ -273,23 +282,29 @@
             		this.teamKlist = response.data.data
             	})
             },
-            checkFlag(item){
+            getContactTeam(){
+            	this.$http.get('/api/public/getContactTeam').then(response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.contactTeam = res.data
+            		}
+            	})
+            },
+            checkFlag(item,way){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
 
 	  				this.teamInfo.serverType += item.key+','
 	  				this.arr += item.value+','
-
 		            this.listSelected = this.arr.split(',').slice(0,-1)
 
-		            console.log(this.arr)
 	  				let count = 0
 	  				this.list.forEach((item,index)=>{
 	  					if(item.checked == true){
 	  						count++
 	  					}
 	  				})
-	  				if(count>=3){
+	  				if(count>=way){
 	  					this.isShow = false;
 	  					this.wrap = true;
 	  				}
@@ -319,12 +334,12 @@
 		    },
 		    checkMobile(){
 		    	this.$http.post('/api/public/checkMobileNo',{
-		    		mobileNo:this.teamInfo.mobileNumber
+		    		mobileNo:this.teamInfo.mobileNumber,
+	    		},{
+	    			emulateJSON:true
 	    		}).then(response =>{
 	  				let res = response.data
-
 	  				if(res.result == 0){
-	  					
 	  					this.$refs.timerbtn.setDisabled(false);
 	  				}else{
 
@@ -336,16 +351,32 @@
 		    checkCode(){
 		    	this.$http.post('/api/public/checkVerification',{
      				mobileNo:this.teamInfo.mobileNumber,
-     				verification:this.code
+     				verification:this.verify
+     			},{
+     				emulateJSON:true
      			}).then(response => {
      				let res = response.data
      				if(res.result == 0){
-     					this.$refs.timerbtn.setDisabled('true')
+     					this.$refs.timerbtn.stop();
+     					this.$refs.timerbtn.setDisabled(true)
      				}else{
 
      				}
      			})
-		    }
+		    },
+		    formData(){
+		    	this.$http.post('/api/public/addTeam',this.teamInfo).then( response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					//将返回的volunteerId存入
+	  					sessionStorage.setItem('teamId',res.data)
+						this.isConfirm = true
+						this.$router.push('tregisternext')
+	  				}else{
+
+	  				}
+	  			})
+		    },
 	  	}
 
     }
@@ -413,6 +444,7 @@
 	.tlo{
 		margin:0 1rem;
 		padding: 0.8rem 0 0 0;
+		border:0;
 	}
 	.tlo a{
 		border: 0;
@@ -562,8 +594,8 @@
 	    padding: 0.6rem;
 	}
 	.Sousuo{
-	width: 100%;
-	text-align: center;
+		width: 100%;
+		text-align: center;
 	}
 	.header5{
 		width:100%;
@@ -576,10 +608,18 @@
 
 	}
 	.neirong{
-		width: 98%;
-		padding: 0.8rem;
-		border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-
+		width: 100%;
+		padding-top: 1rem;
+	}
+	.neirong ul li{
+	    width: 92%;
+	    margin: 0 auto;
+	    border-bottom: 1px solid #dcdcdc;
+	    padding-bottom: 1rem;
+	    margin-bottom: 1rem;
+	    text-align: left;
+	    color: #333;
+	    display: block;
 	}
 	.avatar-uploader{
 		position: absolute;
@@ -590,11 +630,13 @@
 	    width: 3rem;
 	    height: 3rem;
 	    line-height: 3rem;
+	    border-radius: 50%;
 	    display: inline-block;
 	}
 	.avatar {
 	    width: 3rem;
 	    height: 3rem;
+	    border-radius: 50%;
 	    display: block;
 	    position: absolute;
 	    right: 0;

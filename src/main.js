@@ -15,6 +15,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI)
 
+import calendar from 'vue-calendar'
+Vue.use(calendar)
 // Vue.http.options.emulateJSON = true;
 // Vue.http.options.headers={
 //     'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'

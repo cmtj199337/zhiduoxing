@@ -49,7 +49,7 @@
 		    }
 	  	},
 	  	mounted(){
-	  		//this.isLogin()
+	  		
 	  	},
 	  	computed:{
 	  		user () {
@@ -75,8 +75,7 @@
 	  				
 	  					localStorage.setItem('access_token',verify.token)
 	  					localStorage.setItem('userId',verify.userId)
-	  					localStorage.setItem('username',verify.username)
-
+	  					
 	  					if(verify.userType == 0){
 	  						this.$store.commit('isLogin',response.body[0])
                         	this.$router.push({ path: 'index' })

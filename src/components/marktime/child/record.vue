@@ -15,7 +15,17 @@
 			</ul>
 		</div>
 		<div>
-			<img src="../rili.png">
+			<!-- <img src="../rili.png"> -->
+			<template>
+			  <div class="block">
+			    <el-date-picker
+			      v-model="value1"
+			      type="date"
+			      placeholder="选择日期"
+			      :picker-options="pickerOptions0">
+			    </el-date-picker>
+			  </div>
+			</template>
 		</div>
 		<div class="ee">
 			<div class="end">
@@ -35,8 +45,16 @@
 	  	name: 'volunteerTime', 
 	 	data () {
 		    return {
-		    	
+		    	pickerOptions0: {
+		          disabledDate(time) {
+		            return time.getTime() < Date.now() - 8.64e7;
+		          }
+		        },
+		        value1: '',
 		    }
+	  	},
+	  	mounted(){
+	  		
 	  	},
 	  	methods:{
 	  		

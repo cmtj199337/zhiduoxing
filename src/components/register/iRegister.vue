@@ -471,11 +471,13 @@
 	    width: 3rem;
 	    height: 3rem;
 	    line-height: 3rem;
+	    border-radius: 50%;
 	    display: inline-block;
 	}
 	.avatar {
 	    width: 3rem;
 	    height: 3rem;
+	    border-radius: 50%;
 	    display: block;
 	    position: absolute;
 	    right: 0;

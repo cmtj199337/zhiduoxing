@@ -229,7 +229,11 @@
 		padding:0.6rem 0;
 	
 	}
-	
+	.photo{
+		width: 4.5rem;
+		height: 4.5rem;
+		border-radius: 50%;
+	}
 	.mine{
 		padding:6%;
 	}
@@ -258,7 +262,6 @@
 		margin: 0 auto;
 		font-size: 1rem;
 		color: #3B3B3B;
-		margin-top: 1rem;
 	}
 	.project ul li{
 		padding: 0.8rem 0;
