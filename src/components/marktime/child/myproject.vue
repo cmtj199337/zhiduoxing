@@ -4,44 +4,29 @@
 			<div class="m1">
 				<ul>
 					<li style="border-right:1px #F5F5F5 solid">
-						<p style="font-size:1.2rem;color:#49B9B7"><b>{{list.projectNum}}</b></p>
+						<p style="font-size:1.2rem;color:#49B9B7"><b>{{info.projectNum}}</b></p>
 						<p style="color:#AFAFAF;font-size:0.9rem">参加项目</p>
 					</li>
 					<li>
-						<p style="font-size:1.2rem;color:#49B9B7"><b>{{list.serverDuration}}</b></p>
+						<p style="font-size:1.2rem;color:#49B9B7"><b>{{info.serverDuration}}</b></p>
 						<p style="color:#AFAFAF;font-size:0.9rem">志愿者时长（小时）</p>
 					</li>
 				</ul>
 			</div>
 			<div class="m2">
 				<ul>
-					<li>
-						<img src="../toux2.png"  class="touxiang">
+					<li v-for="item in list">
+						<img :src="item.projectIcon" class="touxiang">
 						<div class="m11">
 							<div class="mm1">
-								<p class="tou">团中央网络影视中心第五团支部</p>
-								<p>志愿总时长<b class="mark">120</b>小时</p>
+								<p class="tou">{{item.projectName}}</p>
+								<p>志愿总时长<b class="mark">{{item.serverDuration}}</b>小时</p>
 							</div>
 							<div class="mm2">
 								<span>
-									<p class="being">进行中</p>
+									<p class="being">{{item.projectStatus}}</p>
 								</span>
-								<p class="btn"  @click="toAddress({path:'/personalLength'})">补录时长</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<img src="../toux1.png"  class="touxiang">
-						<div class="m11">
-							<div class="mm1">
-								<p class="tou">团中央网络影视中心第五团支部</p>
-								<p>志愿总时长<b class="mark">120</b>小时</p>
-							</div>
-							<div class="mm2">
-								<span>
-									<p class="passed">已结束</p>
-								</span>
-								<p class="btn"  @click="toAddress({path:'/personalLength'})">补录时长</p>
+								<p class="btn" @click="toAddress({path:'/personalLength'})">补录时长</p>
 							</div>
 						</div>
 					</li>
@@ -56,6 +41,7 @@
 		name:'myproject',
 		data(){
 			return {
+				info:[],
 				list:[]
 			}
 		},
@@ -70,7 +56,8 @@
             	this.$http.get('/api/private/getATProject').then( response => {
             		let res = response.data
             		if(res.result == 0){
-            			this.list = res.data;
+            			this.info = res.data;
+            			this.list = res.data.wxatProjectDetail
             		}
             	})
             }

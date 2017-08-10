@@ -46,15 +46,6 @@
 		    	list:[]
 		    }
 	  	},
-	  	computed:{
-	  		status(){
-	  			if(this.list.status == '1'){
-	  				console.log("不露市场")
-	  			}else if(this.list.status == '3'){
-	  				console.log('')
-	  			}
-	  		}
-	  	},
 	  	mounted(){
 	  		this.getList()
 	  	},
