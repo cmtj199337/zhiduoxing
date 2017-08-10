@@ -14,35 +14,17 @@
 				</li>
 			</ul>
 		</div>
-		<div>
-			<!-- <img src="../rili.png"> -->
-			<template>
-			  <div class="block">
-			    <el-date-picker
-			      v-model="value1"
-			      type="date"
-			      placeholder="选择日期"
-			      :picker-options="pickerOptions0">
-			    </el-date-picker>
-			  </div>
-			</template>
-		</div>
-		<div class="ee">
-			<div class="end">
-				<span>
-					<p>项目名称：<span>北京西站地区志愿服务</span></p>
-					<p>志愿支持：<span>3小时</span></p>
-				</span>
-			</div>
-		</div>
-		
+		<calendar></calendar>	
   	</div>  
 </template>
 
 <script>
-
+import Calendar from '../../common/tools/calendar.vue'
 	export default {
-	  	name: 'volunteerTime', 
+	  	name: 'volunteerTime',
+	  	components:{
+	  		Calendar
+	  	},
 	 	data () {
 		    return {
 		    	pickerOptions0: {

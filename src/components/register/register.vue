@@ -2,10 +2,10 @@
 	<div class="register">
 		<img src="/static/bg.png" class="bg">
 		<div class="fix">
-			<router-link class="ire" to="iregister">
+			<a class="ire" href="javascript:;" @click="toAddress({path: '/iregister'})">
 				<img src="./ire.png">
 				<span>个人注册</span>
-			</router-link>
+			</a>
 			<router-link class="tre" to="tregister">
 				<img src="./tre.png">
 				<span>团队注册</span>
@@ -22,6 +22,11 @@
 		    return {
 		      
 		    }
+	  	},
+	  	methods:{
+	  		toAddress(path){
+                this.$router.push(path)
+            },
 	  	}
 	}
 </script>

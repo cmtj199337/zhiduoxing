@@ -42,8 +42,8 @@
 				<span class="toast" v-show="errors.has('mobile')">请输入手机号</span>
 			</div>
 	        <div class="usertext">
-				<input type="number" @change="checkCode" v-model="verify" placeholder="请输入验证" maxlength="11" style="width:56%" />
-				<timer-btn ref="timerbtn" class="btn getcode" disabled v-on:run="send" :second="60"></timer-btn>
+				<input type="number" @change="checkCode" v-model="verify" placeholder="请输入验证" maxlength="6" style="width:56%" />
+				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
 				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
@@ -368,9 +368,8 @@
 		    	this.$http.post('/api/public/addTeam',this.teamInfo).then( response => {
 	  				let res = response.data
 	  				if(res.result == 0){
-	  					//将返回的volunteerId存入
+	  					//将返回的teamId存入
 	  					sessionStorage.setItem('teamId',res.data)
-						this.isConfirm = true
 						this.$router.push('tregisternext')
 	  				}else{
 

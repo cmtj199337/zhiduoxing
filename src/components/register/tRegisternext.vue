@@ -61,6 +61,17 @@
 				<p>上传资质照片</p>
 			</div>
 			<div class="chuan chuan2">
+				<el-upload
+				  class="avatar-uploader"
+				  action="/api/public/upload"
+				  :show-file-list="false"
+				  :on-success="handleAvatarSuccess"
+				  :before-upload="beforeAvatarUpload">
+				  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+				  <i v-else class="avatar-uploader-icon">
+				  	<img src="./tianjia.png" alt="">
+				  </i>
+				</el-upload>
 				<p>上传资质照片</p>
 			</div>
 		</div>

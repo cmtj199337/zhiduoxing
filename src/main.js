@@ -15,8 +15,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI)
 
-import calendar from 'vue-calendar'
-Vue.use(calendar)
+import 'vue-event-calendar/dist/style.css' //1.1.10之后的版本，css被放在了单独的文件中，方便替换
+import vueEventCalendar from 'vue-event-calendar'
+Vue.use(vueEventCalendar, {locale: 'en',color: '#43B7B5'}) //可以设置语言，支持中文和英文
 // Vue.http.options.emulateJSON = true;
 // Vue.http.options.headers={
 //     'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
