@@ -4,11 +4,11 @@
 			<ul>
 				<li>
 					<span class="left">
-						<p ><b>800</b></p> 
-						<p >本月志愿时长</p>
+						<p><b>{{list.serverTimeMonth}}</b></p> 
+						<p>本月志愿时长</p>
 					</span>
 					<span>
-						<p><b>500</b></p> 
+						<p><b>{{list.serverTimeAll}}</b></p> 
 						<p>志愿总时长</p>
 					</span>
 				</li>
@@ -27,19 +27,25 @@ import Calendar from '../../common/tools/calendar.vue'
 	  	},
 	 	data () {
 		    return {
-		    	pickerOptions0: {
-		          disabledDate(time) {
-		            return time.getTime() < Date.now() - 8.64e7;
-		          }
-		        },
-		        value1: '',
+		    	list:[]
 		    }
 	  	},
 	  	mounted(){
-	  		
+	  		this.getRecord()
 	  	},
 	  	methods:{
-	  		
+	  		getRecord(){
+	  			this.$http.get('/api/private/getHistory',{
+	  				params:{
+	  					yearMonth:'2017/8'
+	  				}
+	  			}).then(response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  				}
+	  			})
+	  		}
 	  	}
 	}
 </script>
@@ -95,6 +101,10 @@ p{
 }
 .header ul li .left{
 	border-right:1px #F5F5F5 solid;
+}
+.left p{
+	height: 1.6rem;
+	line-height: 1.6rem;
 }
 .head{
 	text-align:center;

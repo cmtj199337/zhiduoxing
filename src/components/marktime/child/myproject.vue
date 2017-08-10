@@ -98,13 +98,14 @@
 .m1 ul{
 	display:flex;
 	padding: 1.5rem 0;
-	
-
 }
 .m1 ul li{
 	width:50%;
 	text-align: center;
-	
+}
+.m1 p{
+	height: 1.6rem;
+	line-height: 1.6rem;
 }
 p{
 	font-size:0.9rem;
