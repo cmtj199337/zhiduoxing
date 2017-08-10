@@ -8,24 +8,16 @@
 			</div>
 			<div class="mm" @click="toAddress({path: '/teamPresentation'})">
 				<ul>
-					<li>
-						<img src="./zt.png">
-						<h3>北京西站地区志愿服务</h3>
+					<li v-for="item in teamList">
+						<img :src="item.teamIcon">
+						<h3>{{item.teamName}}</h3>
 						<div class="m1">
-							<div class="mm1"><span><i>120</i>小时</span><p>志愿总时长</p></div>
-							<div class="mm1"><span><i>200</i>人</span><p>团队人数</p></div>
-							<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
+							<div class="mm1"><span><i>{{item.serverDuration}}</i>小时</span><p>志愿总时长</p></div>
+							<div class="mm1"><span><i>{{item.teamMember}}</i>人</span><p>团队人数</p></div>
+							<div class="mm1"><span>{{item.teamManager}}</span><p>团队管理员</p></div>
 						</div>
 					</li>
-					<li>
-						<img src="./zt.png">
-						<h3>北京西站地区志愿服务</h3>
-						<div class="m1">
-							<div class="mm1"><span><i>120</i>小时</span><p>志愿总时长</p></div>
-							<div class="mm1"><span><i>200</i>人</span><p>团队人数</p></div>
-							<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-						</div>
-					</li>
+					<infinite-loading :on-infinite="onInfinite" ref="infiniteLoading"></infinite-loading>
 				</ul>
 			</div>
 		</form>
@@ -60,6 +52,8 @@
 	import Servicetype from '../../components/volunte/vteamchild/Servicetype.vue'
 	import Teamtype from '../../components/volunte/vteamchild/Teamtype.vue'
 	import myArea from'../../components/volunte/vteamchild/Area.vue'
+	import InfiniteLoading from 'vue-infinite-loading'
+
 	export default{
 
 		name:'volunteerTeam',
@@ -67,7 +61,8 @@
 	  		headerTip,
 	  		Servicetype,
 	  		Teamtype,
-	  		myArea
+	  		myArea,
+	  		InfiniteLoading
 	  	},
 		data(){
 			return {
@@ -80,8 +75,12 @@
 				 	{type: '团体类型',view: 'Teamtype'},
 				 	{type: '区域',view: 'myArea'}
 				],
+				teamList:[]
 
 			}
+		},
+		mounted(){
+			this.showTeam()
 		},
 		methods:{
 			toAddress(path){
@@ -99,9 +98,21 @@
 		    	this.iscur = index;
 		    	this.currentView = v
 		    },
-		    showTeam(){
-		    	this.$http.get('/api/public/getTeamList',{
-		    		
+		    onInfinite(){
+		    	this.$http.post('/api/public/getTeamList',{
+		    		//fs
+		    		nowPage:Math.ceil(this.teamList.length / 10) + 1,
+		    	}).then( response => {
+		    		let res = response.data
+		    		if(res.result == 0){
+		    			console.log(res.data.length)
+		    			if(res.data.length > 0){
+		    				this.teamList = this.teamList.concat(res.data);
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+		    			}else{
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+		    			}
+		    		}
 		    	})
 		    }
 		}

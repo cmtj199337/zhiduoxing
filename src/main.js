@@ -22,6 +22,8 @@ Vue.use(vueEventCalendar, {locale: 'en',color: '#43B7B5'}) //可以设置语言�
 // Vue.http.options.headers={
 //     'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
 // };
+import InfiniteLoading from 'vue-infinite-loading';
+Vue.use(InfiniteLoading)
 
 import './config/validate.js'
 
