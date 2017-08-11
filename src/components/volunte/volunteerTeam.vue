@@ -79,8 +79,7 @@
 				 	{type: '服务类型',view: 'Servicetype'},  
 				 	{type: '团体类型',view: 'Teamtype'},
 				 	{type: '区域',view: 'myArea'}
-				],
-
+				]
 			}
 		},
 		methods:{

@@ -1,14 +1,14 @@
 <template>
 	<div class="personalData">
-		<div v-show="wrap">
+		<div v-show="wrap" class="wrap">
 		<headerTip message="个人资料" goBack="true"></headerTip>
 		<div class="kong"></div>
 		<div class="usertext right" style="margin-top:0.3rem">
-			<p>昵称</p><span><input type="text" :placeholder="info.nickName"><img src="./you@2x.png"></span>
+			<p>昵称</p><span><input type="text" v-model="nickName" :placeholder="info.nickName"><img src="./you@2x.png"></span>
 		</div>
 		<div class="usertext right">
 			<a href="javascript:;" @click="showToggle">
-				<div style="text-align:left;text-indent:1.2rem;">服务类型<span v-for="li in good">{{li}}</span></div><span><img src="./you@2x.png"></span>
+				<div style="text-align:left;text-indent:1.2rem;">擅长<span v-for="li in good">{{li.value}}</span></div><span><img src="./you@2x.png"></span>
 			</a>	
 		</div>
 		<!-- <div class="usertext right">
@@ -19,8 +19,8 @@
 		<!-- <div class="usertext right">
 			<p>邮箱</p><span><input type="text" :placeholder="info.eMail"><img src="./you@2x.png"></span>
 		</div> -->
-		<div class="usertext right">
-			<p>志愿口号</p><span><input type="text" :placeholder="info.volunteerSlogan"><img src="./you@2x.png"></span>
+		<div class="usertext right" style="border:0;margin-bottom:0">
+			<p>志愿口号</p><span><input type="text" v-model="volunteerSlogan" :placeholder="info.volunteerSlogan"><img src="./you@2x.png"></span>
 		</div>
 		<!-- <div class="usertext right" @click="toAddress({path: '/modifypassword'})">
 			<p>密码修改</p><span><img src="./you@2x.png"></span>
@@ -38,13 +38,13 @@
         	<span><img src="./zhengjian@2x.png" class="toux"></span>
             <p>身份证号</p><span><input type="text" placeholder="12345678901"></span>
         </div> -->
-        <div class="tijiao"><p>提交</p></div>
+        <div class="tijiao"><p @click="commit">提交</p></div>
 		</div>
         <!-- goodlist选项 -->
 		<div class="goodlist" v-show="isShow">
 			<div class="head_top">
 				<div class='tip'>
-	            	<p><span @click="showToggle"><img src="../register/back.png"></span>服务类型</p>
+	            	<p><span @click="showToggle"><img src="../register/back.png"></span>擅长</p>
 	        	</div>
         	</div>
 			<form action="" method="post">
@@ -76,8 +76,9 @@
 				wrap:true,
 				arr:'',
 				good:[],
-				goodList:[]
-
+				goodList:[],
+				nickName:'',
+				volunteerSlogan:''
 			}
 		},
 		mounted(){
@@ -95,18 +96,21 @@
             		let res = response.data
             		if(res.result == 0){
             			this.info = res.data
-            			this.good = res.data.goodAt.split(',')
-            			var temp = {
-            				'key':'',
-            				'value':''
-            			}
-            			for(var i = 0;i < this.goodList.length;i++){
-            				for(var j = 0;j < this.good.length;j++){
-            					
+            			var num = res.data.goodAt.split(',')
+
+            			var temp = {}
+            			for(var i in this.goodList){
+            				temp = {
+            					'key':this.goodList[i].key,
+            					'value':this.goodList[i].value
             				}
-            				
+            				for(var j in num){
+            					if(temp.key == num[j]){
+            						this.good.push(temp)
+            					}
+            				}
             			}
-            			
+
             		}
             	})
             },
@@ -151,11 +155,32 @@
 	  				item.checked = !item.checked	
 	  			}
 	  		},
+	  		commit(){
+	  			this.$http.post('/api/private/updVolunteerInfo',{
+	  				nickName:this.nickName,
+	  				volunteerSlogan:this.volunteerSlogan,
+	  				goodAt:this.good.value
+	  			}).then( response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.$message.success('提交成功')
+	  				}else{
+	  					this.$message.error('提交错误')
+	  				}
+	  			})
+	  		}
 		}
 	}
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
+.personalData{
+	height: 100%;
+	background: #f5f5f5;
+}
+.personalData .wrap{
+	background: #fff;
+}
 .usertext input{
 	margin: 0;
 	width: 100%;
