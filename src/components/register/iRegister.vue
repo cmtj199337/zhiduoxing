@@ -42,7 +42,7 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
-					<span class="good">擅长<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
+					<span class="good">服务类型<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="read">
@@ -59,19 +59,19 @@
 			</div>
 		</form>
 		<!-- 遮罩、弹框 -->
-		<div class="overlay" v-show="isConfirm"></div>
+		<!-- <div class="overlay" v-show="isConfirm"></div>
 		<div class="popup" v-bind:class="{'show':isConfirm}">
 			<p>马上去完善个人信息，可以获得10积分</p>
 			<div>
 				<router-link to="improve">是</router-link>
 				<a href="javascript:;" @click="registerGo">否</a>
 			</div>
-		</div>
+		</div> -->
 		<!-- goodlist选项 -->
 		<div class="goodlist" v-show="isShow">
 			<div class="head_top">
 				<div class='tip'>
-	            	<p><span @click="showToggle"><img src="./back.png"></span>擅长</p>
+	            	<p><span @click="showToggle"><img src="./back.png"></span>服务类型</p>
 	        	</div>
         	</div>
 			<form action="" method="post">
@@ -85,29 +85,22 @@
 				</ul>
 			</form>
 		</div>
-		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	import TimerBtn from '../common/tools/countdown.vue'
-	import alertTip from '../../components/common/tools/alertTip.vue'
 	export default {
 	  	name: 'iRegister',
 	  	components:{
 	  		headerTip,
-	  		TimerBtn,
-	  		alertTip
+	  		TimerBtn
 	  	},
 	 	data () {
 		    return {
-		    	showAlert:false,
-		    	alertText:'',
 		    	isConfirm:false,
 		    	items:false,
-		        toastshow:false,
-		        toasttext:'',
 		        imageUrl:'',
 		        list:[],
 		        userinfo:{
@@ -129,8 +122,6 @@
 	  			this.goodList()
 	  		})
 	  	},
-	  	computed:{
-	  	},
 	  	methods:{
 	  		closeTip(){
                 this.showAlert = false;
@@ -148,8 +139,11 @@
 	  				let res = response.data
 	  				if(res.result == 0){
 	  					//将返回的volunteerId存入
-	  					sessionStorage.setItem('volunteerId',res.data)
-						this.isConfirm = true;
+	  					//sessionStorage.setItem('volunteerId',res.data)
+						//this.isConfirm = true;
+
+						//注册成功返回登录
+						this.$router.push('login')
 	  				}else{
 
 	  				}
@@ -207,8 +201,6 @@
             		let res = response.data;
             		if(res.result == 0){
             			this.list = res.data
-            		}else{
-            			//接口失败
             		}
             	})
             },

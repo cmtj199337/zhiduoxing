@@ -69,11 +69,11 @@
 						<span>我的保单</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li @click="toAddress({path: '/service'})">
+					<!-- <li @click="toAddress({path: '/service'})">
 						<img class="icon" src="./fuwu.png">
 						<span>服务中心</span>
 						<img class="arrow" src="./you@2x.png">
-					</li>
+					</li> -->
 					<li @click="toAddress({path: '/modifypassword'})">
 						<img class="icon" src="./lock.png">
 						<span>修改密码</span>

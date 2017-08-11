@@ -1,24 +1,32 @@
 <template>
 	<div class="personalData">
+		<div v-show="wrap">
 		<headerTip message="个人资料" goBack="true"></headerTip>
 		<div class="kong"></div>
 		<div class="usertext right" style="margin-top:0.3rem">
-			<p>昵称</p><span><input type="text" placeholder="小鱼干"><img src="./you@2x.png"></span>
+			<p>昵称</p><span><input type="text" :placeholder="info.nickName"><img src="./you@2x.png"></span>
 		</div>
 		<div class="usertext right">
-			<p>擅长</p><span><input type="text" placeholder="关爱服务"><img src="./you@2x.png"></span>
+			<a href="javascript:;" @click="showToggle">
+				<div style="text-align:left;text-indent:1.2rem;">服务类型<span v-for="li in good">{{li}}</span></div><span><img src="./you@2x.png"></span>
+			</a>	
 		</div>
+		<!-- <div class="usertext right">
+			<a href="javascript:;" @click="showToggle">
+				<span>服务类型<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
+			</a>
+		</div> -->
+		<!-- <div class="usertext right">
+			<p>邮箱</p><span><input type="text" :placeholder="info.eMail"><img src="./you@2x.png"></span>
+		</div> -->
 		<div class="usertext right">
-			<p>邮箱</p><span><input type="text" placeholder="12345678901@qq.com"><img src="./you@2x.png"></span>
+			<p>志愿口号</p><span><input type="text" :placeholder="info.volunteerSlogan"><img src="./you@2x.png"></span>
 		</div>
-		<div class="usertext right">
-			<p>志愿口号</p><span><input type="text" placeholder="志愿改变人生"><img src="./you@2x.png"></span>
-		</div>
-		<div class="usertext right" @click="toAddress({path: '/modifypassword'})">
+		<!-- <div class="usertext right" @click="toAddress({path: '/modifypassword'})">
 			<p>密码修改</p><span><img src="./you@2x.png"></span>
-		</div>
-		<div class="kong"></div>
-		<div class="usertext right">
+		</div> -->
+		<!-- <div class="kong"></div> -->
+		<!-- <div class="usertext right">
 			<span><img src="./xingming@2x.png" class="toux"></span>
            <p>真实姓名</p><span><input type="text" placeholder="吴彦祖"></span>
         </div>
@@ -29,8 +37,27 @@
         <div class="usertext right" style="margin-bottom:0;border:none;">
         	<span><img src="./zhengjian@2x.png" class="toux"></span>
             <p>身份证号</p><span><input type="text" placeholder="12345678901"></span>
-        </div>
+        </div> -->
         <div class="tijiao"><p>提交</p></div>
+		</div>
+        <!-- goodlist选项 -->
+		<div class="goodlist" v-show="isShow">
+			<div class="head_top">
+				<div class='tip'>
+	            	<p><span @click="showToggle"><img src="../register/back.png"></span>服务类型</p>
+	        	</div>
+        	</div>
+			<form action="" method="post">
+				<ul>
+					<li v-for="item in goodList">
+						<span>{{item.value}}</span>
+						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+							<svg class="icon icon-ok"></svg>
+						</span>
+					</li>
+				</ul>
+			</form>
+		</div>
 	</div>
 </template>
 <script>
@@ -43,16 +70,87 @@
 	  	},
 		data(){
 			return {
-				
+				isShow:false,
+				goodAt:[],
+				info:[],
+				wrap:true,
+				arr:'',
+				good:[],
+				goodList:[]
+
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.getGoodAt()
+				this.showInfo()
+			})
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
             },
             showInfo(){
-            	this.$http.get('',)
-            }
+            	this.$http.get('/api/private/getVolunteerInfo').then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.info = res.data
+            			this.good = res.data.goodAt.split(',')
+            			var temp = {
+            				'key':'',
+            				'value':''
+            			}
+            			for(var i = 0;i < this.goodList.length;i++){
+            				for(var j = 0;j < this.good.length;j++){
+            					
+            				}
+            				
+            			}
+            			
+            		}
+            	})
+            },
+            showToggle(){
+            	this.isShow = !this.isShow
+                if(this.isShow){
+                    this.wrap = false  
+                }else{  
+                    this.wrap = !this.wrap   
+                }  
+            },
+            getGoodAt(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'GOOD_AT'
+            		}
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.goodList = res.data
+            		}
+            	})
+            },
+            checkFlag(item){
+	  			if(typeof item.checked == 'undefined'){
+	  				this.$set(item,'checked',true);
+	  				let count = 0
+	  				this.goodAt += item.key+','
+	  				//this.userinfo.goodAt = this.userinfo.goodAt.slice(0,-1)
+	  				this.arr += item.value+','
+	  				this.good = this.arr.split(',').slice(0,-1)
+	  				this.goodList.forEach((item,index)=>{
+	  					if(item.checked == true){
+	  						count++
+	  					}
+	  				})
+	  				if(count>=3){
+	  					this.isShow = false;
+	  					this.wrap = true;
+	  				}
+	  			}else{
+	  				item.checked = !item.checked	
+	  			}
+	  		},
 		}
 	}
 </script>
@@ -72,16 +170,9 @@
 .usertext input{
 	text-align: right;
 }
-.header2{
-    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
+.header span p{
+	font-size: 1.2rem;
 }
-.header3{
-    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
-   margin: 1rem 0;
-}
-.header  span p{
-		font-size: 1.2rem;
-	}
 .right img{
 	width:0.6rem;
 	display: inline-block;
@@ -112,8 +203,8 @@
 	line-height:2.5rem;
 	margin-left:1.2rem;
 }
-.right  a span{
-	margin-right:0.9rem;
+.right a span{
+	margin-left:0.5rem;
 }
 .usertext a{
 	border: 0;
@@ -129,7 +220,7 @@
 	}
 .kong{
 	background:#F5F5F5;
-	padding: 0.4rem;
+	padding: 0.3rem;
 	}
 	
 .usertextend textarea{
@@ -164,7 +255,6 @@
 }
 .tijiao{
 	background:#F5F5F5;
-	height:12rem;
 	padding:2rem 0;
 }
 .tijiao p{
@@ -176,7 +266,69 @@
 	text-align:center;
 	color:white;
 	font-size:1rem;
-
 }
+/*goodlist*/
+	.goodlist{
+		width: 100%;
+		font-size: 1rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		background: #fff;
 
+	}
+	.goodlist form{
+		padding-top: 10%;
+	    border-top: 0.6rem solid #f5f5f5;
+	}
+	.goodlist li{ 
+		width: 92%;
+		margin: 0 auto;
+	    border-bottom: 1px solid #dcdcdc;
+	    padding-bottom: 1rem;
+	    margin-bottom: 1rem;
+	    text-align: left;
+	    color: #333;
+		line-height: 1;
+		display: block;
+	}
+	.goodlist li span{
+		vertical-align: middle;
+	}
+	.goodlist li input{
+		vertical-align: sub;
+		float: right;
+	}
+	.list-btn {
+	    float: right;
+	}
+	.head_top{
+	    width: 100%;
+	    font-size:1.2rem;
+	    font-family: arial,'microsoft yahei';
+	    color: #333;
+	    text-align: center;
+	    padding: 0.5rem 0;
+	    border-bottom: 0.5px solid #c9c9c9;
+	}
+	.tip{
+	    width: 96%;
+	    margin:0.5rem auto;
+	    position: relative;
+	}
+	.tip span{
+	    width: 0.7rem;
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: absolute;
+	    left: 0.5rem;
+	}
+	.tip span img{
+	    width: 100%;
+	}
+	.tip p{
+	    vertical-align: middle;
+	    line-height: 1;
+	}
 </style>

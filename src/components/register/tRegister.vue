@@ -34,17 +34,17 @@
 				</a>
 			</div>
 	        <div class="usertext" style="border-top:1px solid #f5f5f5">
-	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队名称">
-	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
+	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队账号">
+	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队账号</span>
 	        </div>
-	        <div class="usertext">
+	        <!-- <div class="usertext">
 				<input type="tel" name="mobile" v-validate="'required|mobile'" @change="checkMobile" v-model="teamInfo.mobileNumber" placeholder="请输入手机号" maxlength="11" />
 				<span class="toast" v-show="errors.has('mobile')">请输入手机号</span>
 			</div>
 	        <div class="usertext">
 				<input type="number" @change="checkCode" v-model="verify" placeholder="请输入验证" maxlength="6" style="width:56%" />
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" :second="60"></timer-btn>
-			</div>
+			</div> -->
 			<div class="usertext">
 				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
 				<span class="toast" v-show="errors.has('password')">请输入密码</span>
@@ -53,10 +53,10 @@
 				<input type="password" v-validate="'confirmed:password'" v-model="teamInfo.rePassword" name="pwdagain" placeholder="请确认密码" /><br />
 				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
-			<div class="usertext">
+			<!-- <div class="usertext">
 				<input type="text" v-validate="'required'" v-model="teamInfo.teamSlogan" name="slogan" placeholder="请输入团队口号" /><br />
 				<span class="toast" v-show="errors.has('slogan')">请输入团队口号</span>
-			</div>
+			</div> -->
 			<div class="usertext right" @click="lianluoToggle()">
 				<a href="javascript:;"><span>联络团队<span>{{contactTeam.teamName}}</span><img src="./right.png"></span></a>
 			</div>
