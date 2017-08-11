@@ -13,7 +13,7 @@
 		</ul>
 		</div>
 		<div class="main">
-			<span @click="toAddress({path: '/myprojectDetails'})">
+			<span @click="toAddress({path: '/myprojectDetails'})" v-for="item in proList">
 				<div class="maskwarp">
 					<img src="./xiangm.png" >
 					<p class="mask"></p>
@@ -24,25 +24,33 @@
 				<img src="./quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
 				<img src="./baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
 				<ul class="te">
-					<li>北京市朝阳区</li>
+					<li>{{item.projectAddress}}</li>
 					<li>50/100</li>
 					<li style="text-align:right;margin-right:0.4rem;">待启动</li>
 				</ul>
 				<ul class="te2">
-					<li>智多星项目名称</li>
-					<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
+					<li>{{item.projectName}}</li>
+					<li style="text-align:right;color:#666">{{item.projectTime}}</li>
 				</ul>
 			</span>
+			<infinite-loading :on-infinite="projeckList" ref="infiniteLoading">
+				<span slot="no-more">
+					没有更多了...
+				</span>
+			</infinite-loading>
 		</div>
 	</div>
 	</template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import InfiniteLoading from 'vue-infinite-loading'
+
 	export default{
 
 		name:'voluntaryProjects',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		InfiniteLoading
 	  	},
 		data(){
 			return {
@@ -53,6 +61,7 @@
 				 	{type: '进行中'},
 				 	{type: '已结束'}
 				],
+				proList:[]
 			}
 		},
 		methods:{
@@ -63,7 +72,20 @@
 		    	this.iscur = index
 		    },
 		    projeckList(){
-		    	
+		    	this.$http.post('/api/public/getProjectList',{
+		    		// nowPage:Math.ceil(this.proList.length / 10) + 1
+		    	}).then(response => {
+		    		let res = response.data
+		    		if(res.result == 0){
+		    			 console.log(res.data.length)
+		    			if(res.data.length > 0){
+		    				this.proList = this.proList.concat(res.data);
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+		    			}else{
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+		    			}
+		    		}
+		    	})
 		    }
 		}
 
