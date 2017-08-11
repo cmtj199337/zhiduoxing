@@ -1,57 +1,52 @@
 <template>
 	<div class="detail">
 		<div class="header2">
-	      <h4 class="texttitle"><span><img src="../t1.png"></span>团队信息</h4>
+	      <h4 class="texttitle">
+	      	<span>
+	      		<img src="../t1.png">
+	      	</span>团队信息
+	      </h4>
 	    </div>
 		<div class="usertext">
-			<span>名称：志多星团队</span>
+			<span>名称：{{list.teamName}}</span>
 		</div>
 		<div class="usertext">
-			<span>团队编号：123</span>
+			<span>团队编号：{{list.teamId}}</span>
 		</div>
 		<div class="usertext">
-			<span>团队口号：倡导无私奉献新风尚。</span>
+			<span>团队口号：{{list.teamSlogan}}</span>
 		</div>
 		<div class="usertext">
-			<span>上级团队：志愿者联合会</span>
+			<span>上级团队：{{list.parentTeamName}}</span>
 		</div>
 		<div class="usertext">
-			<span>团队总志愿时长：720小时</span>
+			<span>团队总志愿时长：{{list.serverDuration}}小时</span>
 		</div>
 		<div class="usertext">
-			<span>服务类别：关爱服务</span>
+			<span>服务类别：{{list.serverType}}</span>
 		</div>
 		<div class="usertext">
-			<span>团队类型：党政机关</span>
+			<span>团队类型：{{list.teamType}}</span>
 		</div>
 		<div class="usertext">
-			<span>注册日期：2017/5/10</span>
+			<span>注册日期：{{list.registrationDate}}</span>
 		</div>
 		<div class="usertext">
-			<span>团队管理员：吴彦祖</span>
+			<span>团队管理员：{{list.teamManager}}</span>
 		</div>
 		<div class="usertext">
-			<span>联系电话：12345678912</span>
+			<span>联系电话：{{list.contactNumber}}</span>
 		</div>
 		<div class="usertext">
-			<span>团队地址地址：北京朝阳市四惠东</span>
+			<span>团队地址地址：{{list.teamAddress}}</span>
 		</div>
 	    <div class="usertext">
-	    	<p>团队成员列表：<span style="color:#43B7B5">200人</span></p>
+	    	<p>团队成员列表：<span style="color:#43B7B5">{{list.volunteerNum}}人</span></p>
 	    </div>
 
 		<div class="touxiang">
-			<img src="../touxiang1.png" class="img1">
-			<img src="../touxiang2.png">
-			<img src="../touxiang3.png">
-			<img src="../touxiang4.png">
-			<img src="../touxiang1.png">
-			<img src="../touxiang2.png">
-			<img src="../touxiang3.png">
-			<img src="../touxiang4.png">
-			<img src="../touxiang2.png">
-			<img src="../touxiang3.png">
-			<img src="../touxiang4.png">
+			<img src="../touxiang1.png" class="img1" >
+			<img src="../touxiang2.png" v-for="item in list.wXTeamVolunteerList">
 		</div>
 		<div class="kong2">
 		</div>
@@ -72,9 +67,30 @@
 	  	},
 		data () {
 		    return {
-		    	
+		    	list:[]		    
 		    }
-	  	}  	
+	  	},
+	  	mounted(){
+	  		this.getInfo()
+	  	},
+	  	methods:{
+	  		getInfo(){
+	  			let teamId = localStorage.getItem("userId");
+	  			let userId = localStorage.getItem("userId");
+	  			this.$http.get('api/public/getTeamDetail',{
+	  				params:{
+	  					teamId:teamId,
+	  					userId:userId
+	  				}
+	  			}).then(response=>{
+	  				let res = response.data
+	  				console.log(res)
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  				}
+	  			})
+	  		}
+	  	}
 
 	}
 </script>

@@ -2,50 +2,20 @@
 	<div class="myStarcoin">
 		<headerTip message="我的星币" goBack="true"></headerTip>
 		<div class="header">
-		<ul>
-		<li>星币总数</li>
-		<li class="number">18</li>
-		</ul>
+			<ul>
+				<li>星币总数</li>
+				<li class="number">{{list.sumMoney}}</li>
+			</ul>
 		</div>
 		<div class="title">
-		<p>星币明细</p>
+			<p>星币明细</p>
 		</div>
 		<div class="main">
-		<ul>
-		<li>注册成功</li>
-		<li><img src="./xingbi.png" class="tu"><span class="nb">10</span></li>
-		<li>2017/07/01</li>
-		</ul>
-		<ul>
-		<li>首次登录</li>
-		<li><img src="./xingbi.png" class="tu"><span class="nb">1</span></li>
-		<li>2017/07/01</li>
-		</ul>
-		<ul>
-		<li>每日登录</li>
-		<li><img src="./xingbi.png" class="tu"><span class="nb">1</span></li>
-		<li>2017/07/01</li>
-		</ul>
-		<ul>
-		<li>分享/邀请</li>
-		<li><img src="./xingbi.png" class="tu"><span class="nb">3</span></li>
-		<li>2017/07/01</li>
-		</ul>
-		<ul>
-		<li>社区发布</li>
-		<li><img src="./xingbi.png" class="tu"><span class="nb">3</span></li>
-		<li>2017/07/01</li>
-		</ul>
-		<ul>
-		<li>时长兑换</li>
-		<li><img src="./xingbi.png" class="tu"><span class="nb">3</span></li>
-		<li>2017/07/01</li>
-		</ul>
-		<ul>
-		<li>生日福利</li>
-		<li><img src="./xingbi.png" class="tu"><span class="nb">20</span></li>
-		<li>2017/07/01</li>
-		</ul>
+			<ul v-for="item in list.wxPointDetailDtoList">
+				<li>{{item.moneyOrgin}}</li>
+				<li><img src="./xingbi.png" class="tu"><span class="nb">{{item.changeMoney}}</span></li>
+				<li>{{item.getTime}}</li>
+			</ul>
 		</div>
 	</div>
 </template>
@@ -59,8 +29,28 @@
 	  	},
 		data(){
 			return {
+				list:[]
 			}
 		},
+		mounted(){
+			this.getInfo()
+		},
+		methods:{
+			getInfo(){
+				let userid=localStorage.getItem("userId");
+				this.$http.get('/api/private/getPointDetail',{
+					params:{
+						id:userid
+					}
+				}).then(response=>{
+					let res = response.data
+	  				console.log(res)
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  				}
+	  			})
+			}
+		}
 
 	}
 </script>

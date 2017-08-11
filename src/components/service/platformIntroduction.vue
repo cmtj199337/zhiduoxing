@@ -6,9 +6,7 @@
 		</div>
 		<div class="text">
 		<img src="./image.png">
-		<p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-		<img src="./image1.png">
-		<p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+		<p>{{list}}</p>
 		</div>
 			
 		</div>
@@ -24,8 +22,23 @@
 	  	},
 		data(){
 			return {
+				list:[]
 			}
 		},
+		mounted(){
+			this.getInfo()
+		},
+		methods:{
+		getInfo(){
+			this.$http.get('/api/public/getPlatformIntro').then(response=>{
+				let res = response.data
+	  				console.log(res)
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  				}
+			})
+		}
+	}
 
 	}
 </script>

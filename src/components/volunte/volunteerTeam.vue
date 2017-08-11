@@ -76,10 +76,18 @@
 				 	{type: '区域',view: 'myArea'}
 				],
 				teamList:[]
+<<<<<<< HEAD
 			}
 		},
 		mounted(){
 		
+=======
+
+			}
+		},
+		mounted(){
+			this.showTeam()
+>>>>>>> 32b4048653f40fe787efa4e38397c541e9fe2261
 		},
 		methods:{
 			toAddress(path){
@@ -104,6 +112,10 @@
 		    	}).then( response => {
 		    		let res = response.data
 		    		if(res.result == 0){
+<<<<<<< HEAD
+=======
+		    			console.log(res.data.length)
+>>>>>>> 32b4048653f40fe787efa4e38397c541e9fe2261
 		    			if(res.data.length > 0){
 		    				this.teamList = this.teamList.concat(res.data);
 		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');

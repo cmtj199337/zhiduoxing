@@ -4,18 +4,18 @@
 		<form action="" method="post">
 			<div class="usertext">
 				<i class="s-icon"><img src="./phone.png"></i>
-				<input type="tel" placeholder="请输入手机号" name="mobile" v-validate ="'required|mobile'" maxlength="11"   />
+				<input type="tel" placeholder="请输入手机号" name="mobile" v-validate ="'required|mobile'" maxlength="11" v-model="mobileNo" @blur="isRegister"  />
 				<span class="toast" v-show="errors.has('mobile')">{{ errors.first('mobile')}}</span>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./yanzheng.png"></i>
-				<input type="number" placeholder="请输入验证码" maxlength="11" />
+				<input type="number" placeholder="请输入验证码" maxlength="11" v-model="verification" @blur="isYanzheng"/>
 				<!-- <count-down class="btn getcode" @click="aler" ref="btn" :disabled="disabled" v-ref:btn :second="5"></count-down> -->
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send" :disabled="disabled" :second="60"></timer-btn>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./lock.png"></i>
-				<input type="password" style="width:100%" name="password" v-validate="'required'" placeholder="请输入新密码(6~12位数字或字母)" v-model="newPassword" /><br />
+				<input type="password" style="width:100%" name="password" v-validate="'required'" placeholder="请输入新密码(6~12位数字或字母)" v-model="newPwd" /><br />
 				<span class="toast" v-show="errors.has('password')">{{ errors.first('password')}}</span>
 			</div>
 			<div class="usertext">
@@ -24,15 +24,17 @@
 				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
 			<div class="sub">
-				<input type="button" value="确认提交"/>
+				<input type="button" value="确认提交" @click="isTijiao"/>
 			</div>
 		</form>
+		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	import TimerBtn from '../common/tools/countdown.vue'
+	import alertTip from '../../components/common/tools/alertTip.vue'
 
 	export default {
 	  	name: 'forgetpass',
@@ -40,52 +42,106 @@
 		    return {
 		      	disabled: false,
 		      	toastshow:false,
-		        toasttext:'',
-		        
-		         verify:'',				//验证码
+		        toasttext:'',		        
+		        verification:'',		//验证码
 		        reNewPassword:'' ,      //确认新密码	
-		        userinfo:{
-				phoneNumber:'',			//手机号
-		        newPassword:'',			//新密码
-		        }
-		        
-		      		
+				mobileNo:'',			//手机号
+		        newPwd:'',			//新密码
+		        showAlert:false,
+			    		       		      		
 		    }
 	  	},
 	  	components:{
 	  		headerTip,
-	  		TimerBtn
+	  		TimerBtn,
+	  		alertTip,
 	  	},
 	  	methods:{
      		send(){
      			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
-	            hz.ajaxRequest("sys/sendCode?_"+$.now(),function(data){
-	                if(data.status){
-	                    this.$refs.timerbtn.start(); //启动倒计时
-	                }else{
-	                    this.$refs.timerbtn.stop(); //停止倒计时
-	                }
-	            });
+	            if(this.mobileNo){
+	            	this.$http.post('/api/public/sendShortMessage',{
+	            	mobileNo:this.mobileNo
+	            },{
+	            	emulateJSON:true
+	            }).then(response=>{
+	            	let res = response.data
+		  				console.log(res)
+		  				if(res.result == 0){
+
+		  				}
+		  				else{
+		  				this.$refs.timerbtn.start()		  				
+		  				}
+	            })
+	           
+	        }
      		},
-     		isRegister(mobile){
-	  			this.$http.post('/api/public/checkMobileNo',{mobileNo:mobile}).then(response =>{
-	  				let res = response.data
-	  				if(res.result == 0){
-	  					//已注册过，可以修改密码
-	  					
-	  				}
-	  			})
+     		isYanzheng(){
+     			if(this.verification,this.mobileNo){
+     				this.$http.post('/api/public/checkVerification',{
+     						verification:this.verification,
+     						mobileNo:this.mobileNo
+     					},{
+     						emulateJSON:true
+     					}).then(response=>{
+     						let res = response.data
+		  					console.log(res)
+		  					if(res.result==0){
+			  					
+		  					}
+		  					else{
+		  						this.$message.error('验证码错误')
+		  					}
+     					})
+     			}
+     		},
+     		
+	    		isTijiao(){
+	    			if(this.mobileNo,this.newPwd){
+	    				this.$http.post('/api/public/modifyPassword',{
+	    					mobileNo:this.mobileNo,
+	    					newPwd:this.newPwd
+	    				},{
+	    					emulateJSON:true
+	    				}).then(response=>{
+	    					let res = response.data
+	    					if(res.result ==0 ){
+								this.showAlert=true
+	  							this.alertText = '密码修改成功'
+	    					}
+	    					else if(res.result == 1){
+	    						this.showAlert=true
+	  							this.alertText = '密码修改失败'
+	    					}
+	    				}).error(()=>{
+	    						this.showAlert=true
+	  							this.alertText = '输入信息有误'
+	    				})}
 	  		},
-	  		mbRegister(){
-	  			this.$http.post('/api/public/modifyPassword',{
-	  				'mobileNo':this.phoneNumber,
-	  				'newPwd':this.newPassword}).then(response =>{
-	  				let res = response.data
-	  				if(res.result == 0){
-	  				
-	  				}
-	  			})
-	  		}
+	  		 isRegister(){
+		    	if(this.mobileNo){
+		    		this.$http.post('/api/public/checkMobileNo',{
+		    			mobileNo:this.mobileNo
+		    		},
+		    			{
+		    				emulateJSON:true
+		    			}).then(response =>{
+		  				let res = response.data
+		  				console.log(res)
+		  				if(res.result == 0){	
+		  					this.$message.error('手机号未注册')
+		  				}else{
+						
+		  				}
+		  			})
+		    	}else{
+		    		
+		    	}
+	  		},
+	  		closeTip(){
+                this.showAlert = false;
+            }
 	  	}
 	}
 </script>
