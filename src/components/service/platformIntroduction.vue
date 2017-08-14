@@ -29,17 +29,20 @@
 			this.getInfo()
 		},
 		methods:{
-		getInfo(){
-			this.$http.get('/api/public/getPlatformIntro').then(response=>{
-				let res = response.data
-	  				console.log(res)
-	  				if(res.result == 0){
-	  					this.list = res.data
-	  				}
-			})
+			getInfo(){
+				this.$http.get('/api/public/getPlatformIntro',{
+					params:{
+						type:'2'
+					}
+				}).then(response=>{
+					let res = response.data
+						console.log(res)
+						if(res.result == 0){
+							this.list = res.data
+						}
+				})
+			}
 		}
-	}
-
 	}
 </script>
 <style scoped>

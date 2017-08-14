@@ -73,7 +73,7 @@
 		    },
 		    projeckList(){
 		    	this.$http.post('/api/public/getProjectList',{
-		    		// nowPage:Math.ceil(this.proList.length / 10) + 1
+		    		nowPage:Math.ceil(this.proList.length / 10) + 1
 		    	}).then(response => {
 		    		let res = response.data
 		    		if(res.result == 0){

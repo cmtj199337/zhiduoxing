@@ -7,7 +7,7 @@
 			<span>项目编号：{{data.projectId}}</span>
 		</div>
 		<div class="usertext">
-			<span>活动状态：{{data.projectStatus}}</span>
+			<span>活动状态：{{status}}</span>
 		</div>
 		<div class="usertext">
 			<span>发布人：{{data.projectStatus}}</span>
@@ -48,14 +48,15 @@
         </div>
 		<div class="touxiang" @click="toAddress({path: '/signList'})">
 			<router-link to="/signList">
-				<img src="../touxiang1.png" class="img1">
+				<!--<img src="../touxiang1.png" class="img1">
 				<img src="../touxiang2.png">
 				<img src="../touxiang3.png">
 				<img src="../touxiang4.png">
 				<img src="../touxiang1.png">
 				<img src="../touxiang2.png">
 				<img src="../touxiang3.png">
-				<img src="../touxiang4.png">
+				<img src="../touxiang4.png"> -->
+				<img v-for="item in icon" :src="item.volunteerIcon" >
 			</router-link>
 		</div>
 		<div class="kong2">
@@ -77,30 +78,33 @@
 	  	},
 		data () {
 		    return {
-		    	id:1,
-		    	data:[]
+		    	data:[],
+				icon:[]
 		    }
 	  	},
 	  	mounted(){
 	  		this.showView()
 	  	},
 	  	computed:{
-	  		status(num){
-	  			return num+'招募中'
+	  		status(){
+	  			return this.data.projectStatus + '招募中'
 	  		}
 	  	},
 	  	methods:{
 	  		showView(){
-	  			this.$http.get('api/public/getProjectDetail/',{params:{id:this.id}}).then(response =>{
+	  			this.$http.get('api/public/getProjectDetail',{
+					  params:{id:1}
+				  }).then(response =>{
 	  				let res = response.data
 	  				if(res.result == 0){
 	  					this.data = res.data
+						this.icon = res.data.projectVolunteer
 	  				}
 	  			})
 	  		},
 	  		toAddress(path){
                 this.$router.push(path)
-            },
+            }
 	  	}
 
 	}

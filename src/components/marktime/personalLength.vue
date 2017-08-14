@@ -3,7 +3,7 @@
    <headerTip message="补录时长" goBack="true"></headerTip>
 	<div class="main">
 		<div class="header">
-			<img src="./logo.png">
+			<img :src="info.projectIcon">
 			<p><span class="tit">{{info.projectName}}</span><span class="ac">{{info.projectStatus}}</span></p> 
 			<p><span style="font-size:0.8rem;color:#CCCCCC">志愿总时长</span>
 				<span style="color:#77CBCA">{{info.serverDuration}}</span>小时</p>
@@ -19,7 +19,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="t"><p @click="toAddress({path:'/informationFill'})">补录时长</p></div>
+	<div class="t"><p><router-link :to="{path:'informationFill',query:{projectId:projectId}}">补录时长</router-link></p></div>
 	<!-- 弹框 -->
 	<div class="overlay" v-show="isShow"></div>
 	<div class="pop_up" v-show="isShow">
@@ -43,7 +43,8 @@
 		    return {
 		    	isShow:false,
 		    	info:[],
-		    	list:[]
+		    	list:[],
+				projectId:''
 		    }
 	  	},
 	  	mounted(){
@@ -56,13 +57,15 @@
             getList(){
             	this.$http.get('/api/private/getRecord',{
             		params:{
-            			projectId:'2'
+            			projectId:this.$route.query.projectId
             		}
             	}).then( response =>{
             		let res = response.data
             		if(res.result == 0){
             			this.info = res.data
             			this.list = res.data.wxatRecordDetailDtoList
+
+						this.projectId = res.data.projectId
             		}
             	})
             }
@@ -114,10 +117,12 @@ p{
 }
 h1 {text-align:center;}
 .header img{
-	width:24%; 
+	width:3.5rem;
+	height:3.5rem;
+	border-radius:50%; 
 	position:absolute;
-	top:1.5%; 
-	left:-10%; 
+	top:11.5%; 
+	left:-2rem; 
 }
 .texts{
 	background: #FFFFFF;
@@ -154,10 +159,11 @@ h1 {text-align:center;}
 .fail{color:#FFAA3D;}
 
 .t p{
-	color:#4CBAB8; 
-	font-size:16px;
 	text-align:center; 
-
+}
+.t a{
+	color:#4CBAB8; 
+	font-size:1rem;
 }
 .t{
 	background: #FFFFFF;	

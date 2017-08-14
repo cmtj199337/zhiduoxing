@@ -235,6 +235,7 @@ const router = new Router({
 		},
 		{
 			path: '/personalLength',
+			name:'personal',
 			component:require('../components/marktime/personalLength.vue')
 		},
 		// 团队中心

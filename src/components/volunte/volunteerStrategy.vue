@@ -8,12 +8,6 @@
 		</div>
 		<div class="header">
 			<ul>
-				<!-- <li @click="tabToggle(tab01Text)"><span :class="{'active':currentView=tabText}">行业政策</span></li>
-				<li @click="tabToggle(tab02Text)"><span>培训课程</span></li>
-				<li @click="tabToggle(tab03Text)"><span>经验分享</span></li> -->
-				<!-- <li v-for='item in tabs'  @click="iscur = $index">
-					<span :class="{active:iscur==$index}">{{item.type}}</span>
-				</li> -->
 				<li v-for='(item,index) in tabs'>
 					<span @click="toggle(item.view,index)" :class="{active: index == iscur }">{{item.type}}</span>
 				</li>
@@ -55,7 +49,7 @@
 			toAddress(path){
                 this.$router.push(path)
             },
-            toggle: function(v,index) {
+            toggle(v,index) {
 		    	this.iscur = index;
 		    	this.currentView = v
 		    }

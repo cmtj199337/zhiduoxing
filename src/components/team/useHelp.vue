@@ -27,9 +27,23 @@
 	  	},
 		data(){
 			return {
+				list:[]
 			}
 		},
-
+		methods:{
+			getInfo(){
+				this.$http.get('/api/public/getPlatformIntro',{
+					params:{
+						type:1
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data	
+					}
+				})
+			}
+		}
 	}
 </script>
 <style scoped>

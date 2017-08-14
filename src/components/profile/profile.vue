@@ -44,6 +44,11 @@
 						<span>个人资料</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
+					<li @click="toAddress({path: ''})">
+						<img class="icon" src="./renzheng2.png">
+						<span>我的证书</span>
+						<img class="arrow" src="./you@2x.png">
+					</li>
 					<li @click="toAddress({path: '/myFamily'})">
 						<img class="icon" src="./jiat.png">
 						<span>我的家庭</span>

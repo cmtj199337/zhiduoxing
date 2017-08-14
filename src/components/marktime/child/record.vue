@@ -7,7 +7,7 @@
 						<p><b>{{list.serverTimeMonth}}</b></p> 
 						<p>本月志愿时长</p>
 					</span>
-					<span>
+					<span class="right">
 						<p><b>{{list.serverTimeAll}}</b></p> 
 						<p>志愿总时长</p>
 					</span>
@@ -105,6 +105,10 @@ p{
 .left p{
 	height: 1.6rem;
 	line-height: 1.6rem;
+}
+.right p{
+	height:1.6rem;
+	line-height:1.6rem;
 }
 .head{
 	text-align:center;

@@ -3,16 +3,25 @@
    <headerTip message="补录时长" goBack="true"></headerTip>
  	<div class="main">
 		<div class="header">
-			<img src="./logo2.png">
-			<p>团中央网络影视中心第五团支部 <span class="ac">进行中</span></p> 
-			<p><span style="font-size:0.8rem;color:#CCCCCC">志愿总时长</span> <span style="color:#77CBCA">120</span>小时</p>
+			<img :src="list.projectIcon">
+			<p>{{list.projectName}}<span class="ac">{{list.projectStatus}}</span></p> 
+			<p><span style="font-size:0.8rem;color:#CCCCCC">志愿总时长</span> <span style="color:#77CBCA">{{list.serverDuration}}</span>小时</p>
 		</div>
 	</div>
 	<div class="texts">
-		<p>日期 <input type="text" name="" placeholder="/年    /月    /日"></p>
-		<p>补录时长 <input type="text" name="" placeholder="请输入小时数"></p>
+		<p>日期
+			<el-date-picker
+				v-model="date"
+				clearable
+				editable
+				type="date"
+				placeholder="/年    /月    /日"
+				:picker-options="pickerOptions0">
+			</el-date-picker>
+		</p>
+		<p>补录时长 <input type="text" v-model="time" name="" placeholder="请输入小时数"></p>
 	</div>
-	<div class="end"><p>确认</p></div>
+	<div class="end"><p @click="insertRecord()">确认</p></div>
   </div>  
 </template>
 
@@ -26,11 +35,53 @@
 	  	}, 
 	 	data () {
 		    return {
-		    	
+		    	date:'',
+				time:'',
+				pickerOptions0: {
+					disabledDate(time) {
+						return time.getTime() < Date.now() - 8.64e7;
+					}
+				},
+				list:[]
 		    }
 	  	},
+		mounted(){
+			this.$nextTick(function(){
+				this.showInfo();
+			})
+		},
 	  	methods:{
-	  		
+			showInfo(){
+				this.$http.get('/api/private/getATProjectSum',{
+					params:{
+						projectId:this.$route.query.projectId
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data
+					}
+				})
+			},
+	  		insertRecord(){
+				let userId = localStorage.getItem("userId")
+				if(!this.date || !this.time){
+					this.$message.error("请完善信息")
+				}else{
+					this.$http.post('/api/private/insertATRecord',{
+					addDate:this.date,
+					addTime:this.time,
+					projectId:this.$route.query.projectId,
+					volunteerId:userId,
+					}).then( response =>{
+						let res = response.data
+						if(res.result == 0){
+							this.$message.success("提交成功")
+						}
+					})
+				}
+				
+			}
 	  	}
 	}
 </script>
@@ -51,13 +102,15 @@ p{
 	padding:0.6rem 0;
 }
 .header img{
-	width:5.5rem; 
+	width:5.5rem;
+	height:5.5rem;
+	border-radius:50%;
 	position:absolute;
 	top:1.5%; 
 	left:-2.75rem; 
 }
 .header p .ac{
-	border:1px  #46B8B7 solid;
+	border:1px #46B8B7 solid;
 	border-radius:5px;
 	color:#46B8B7;
 	margin-left:0.5rem;

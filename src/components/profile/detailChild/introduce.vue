@@ -22,11 +22,22 @@
 	  	},
 		data () {
 		    return {
-		    	
+				intro:[]
 		    }
 	  	},
 	  	methods:{
-	  		
+	  		showIntro(){
+				  this.$http.get('/api/public/getProjectIntro',{
+					  params:{
+						  id:1
+					  }
+				  }).then( response => {
+					  let res = response.data
+					  if(res.result == 0){
+						  this.intro = res.data;
+					  }
+				  })
+			  }
 	  	}
 
 	}

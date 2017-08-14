@@ -56,10 +56,9 @@
 		  				}
 	  				})
 	  			}
-	  		
-	  	}
+	  		}
+		}
 	}
-}
 </script>
 
 <style scoped>

@@ -26,16 +26,18 @@
 								<span>
 									<p class="being">{{item.projectStatus}}</p>
 								</span>
-								<p class="btn" @click="toAddress({path:'/personalLength'})">补录时长</p>
+								<router-link :to="{path:'personalLength',query:{projectId:item.projectId}}"><p class="btn">补录时长</p></router-link>
 							</div>
 						</div>
 					</li>
+					<infinite-loading :on-infinite="getProject" ref="infiniteLoading"></infinite-loading>
 				</ul>
 			</div>
 		</div>	
 	</div>
 </template>
 <script>
+	import InfiniteLoading from 'vue-infinite-loading'
 	export default{
 
 		name:'myproject',
@@ -45,19 +47,24 @@
 				list:[]
 			}
 		},
-		mounted(){
-			this.getProject();
+		components:{
+			InfiniteLoading
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
             },
             getProject(){
-            	this.$http.get('/api/private/getATProject').then( response => {
+            	this.$http.get('/api/private/getATProject',{
+					params:{
+						nowPage:Math.ceil(this.info.length / 10) + 1,
+					}
+				}).then( response => {
             		let res = response.data
             		if(res.result == 0){
-            			this.info = res.data;
-            			this.list = res.data.wxatProjectDetail
+						// this.info = this.info.concat(res.data)
+						this.info = res.data
+						this.list = res.data.wxatProjectDetail
             		}
             	})
             }
@@ -111,6 +118,7 @@ p{
 .m2 ul li .touxiang{
 	width:5rem;
 	height:5rem;
+	border-radius:50%;
 	position:absolute;
 	left: -11%;
 	top:8%;
