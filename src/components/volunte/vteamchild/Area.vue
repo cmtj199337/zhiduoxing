@@ -1,31 +1,68 @@
 <template>
 	<div class="Area">
-	<ul>
-	<li><img src="../dizhi.png">北京市</li>
-	<li>朝阳区</li>
-	<li>东城区</li>
-	<li>还定去</li>
-	<li>西城区</li>
-	<li>丰台区</li>
-	</ul>
+		<p><img src="../dizhi.png" alt="">北京市</p>
+		<el-radio-group v-model="data">
+			<li v-for="item in city"><el-radio :label="item.id">{{item.name}}</el-radio></li>
+		</el-radio-group>
 	</div>
 </template>
-<style type="text/css">
-	.Area{
-	width:50%;
-	margin-left:15%;
-	}
-	.Area ul li{
-		padding:1rem 0;
-		margin-left:1rem; 
-	}
-	.Area ul li img{
-		width:10%;
-		display:inline;
-		vertical-align:middle;
-		margin-left:-1.2rem;
-	margin-right:0.2rem;
+<script>
+	export default{
+		name:'myarea',
+		data(){
+			return {
+				data:[],
+				pro:'',
+				city:'',
+				data:''
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.getList();
+			})
+		},
+		beforeUpdate(){
+			sessionStorage.setItem('area',this.data)
+		},
+		methods:{
+			getList(){
+				this.$http.get('/api/public/getAreaList').then(response =>{
+					let res = response.data
+					if(res.result == 0){
+						this.data = res.data
 
-
+						this.pro=this.data;
+						this.city=this.pro[0]['child'];
+					}
+				})
+			}
+		}
+	}
+</script>
+<style scoped>
+	.Area{
+		width:70%;
+		text-indent:25%;
+	}
+	.Area p{
+		padding: 1rem 0;
+	}
+	.Area p img{
+		width: 4%;
+		display: inline-block;
+		margin-left: -6%;
+		vertical-align: text-top;
+		padding-right: 2%;
+	}
+	.Area .el-radio-group li{
+		padding:1rem 0;
+	}
+	.el-radio-group{
+		width: 100%;
+		text-indent: 8%;
+	}
+	.el-radio-group .el-radio{
+		width: 0
+	}
 </style>

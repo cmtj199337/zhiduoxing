@@ -5,9 +5,9 @@
 			<p class="head"><span>姓名</span><span>加入时间</span><span>志愿时长</span></p>
 			<ul>
 				<li v-for="item in list">
-					<p><span><img :src="item.src" alt=""></span>{{item.name}}</p>
-					<p>{{item.date}}</p>
-					<p>{{item.total}}</p>
+					<p><span><img :src="item.volunteerIcon" alt=""></span>{{item.volunteerName}}</p>
+					<p>{{item.joinTime}}</p>
+					<p>{{item.serverTime}}</p>
 				</li>
 			</ul>
 		</div>
@@ -27,19 +27,22 @@
 		    	list:[]
 		    }
 	  	},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+			})
+		},
 	  	methods:{
 	  		listView(){
 	  			this.$http.get('/api/public/getVolunteers',{
 	  				params:{
-	  					id:this.id
+	  					id:this.$route.query.projectId
 	  				}
 	  			}).then(response => {
 	  				let res = response.data
-	  				if(res.result == 0){
-	  					this.list = result.data
-	  				}else{
-
-	  				}
+					if(res.result == 0){
+						this.list = res.data
+					}
 	  			})
 	  		}
 	  	}

@@ -1,9 +1,10 @@
 <template>
 	<div class="voluntaryProjects">
+		<form action="" method="post" v-show="wrap" class="tuandui">
 		<headerTip message="项目列表" goBack="true"></headerTip>
 		<div class="sousuo">
 			<input class="search" name="" placeholder="       搜索">
-			<img src="./sou.png"><span style="color:#43B7B6">筛选<img src="./shaixuan.png"></span>
+			<img src="./sou.png"><span style="color:#43B7B6" @click="showToggle">筛选<img src="./shaixuan.png"></span>
 		</div>
 		<div class="hh">
 		<ul>
@@ -13,7 +14,8 @@
 		</ul>
 		</div>
 		<div class="main">
-			<span @click="toAddress({path: '/myprojectDetails'})" v-for="item in proList">
+			<span v-for="item in proList">
+			<router-link :to="{path:'myprojectDetails',query:{projectId:item.projectId}}">
 				<div class="maskwarp">
 					<img src="./xiangm.png" >
 					<p class="mask"></p>
@@ -32,17 +34,46 @@
 					<li>{{item.projectName}}</li>
 					<li style="text-align:right;color:#666">{{item.projectTime}}</li>
 				</ul>
+			</router-link>
 			</span>
+
 			<infinite-loading :on-infinite="projeckList" ref="infiniteLoading">
 				<span slot="no-more">
 					没有更多了...
 				</span>
 			</infinite-loading>
 		</div>
+		</form>
+		<!-- 筛选 -->
+		<div v-show="isShow">
+			<div class="head_top">
+				<div class='tip'>
+	            	<p><span @click="showToggle"><img src="../common/header/back.png"></span>团队列表</p>
+	        	</div>
+        	</div>
+        	<div class="sousuo">
+				<input class="search" name="" placeholder="       搜索">
+				<img src="./sou.png"><span style="color:#43B7B6" >筛选<img src="./shaixuan.png"></span>
+			</div>
+			<div class="kong"></div>
+			<div class="header">
+				<div class="header2">
+					<ul>
+						<li v-for="(item,index) in nav">
+							<span :class="{current:index == current }" @click="toggle(index,item.view)">{{item.type}}</span>
+						</li>
+					</ul>
+				</div>
+				<component :is='currentView' keep-alive></component>
+			</div>	
+		</div>
 	</div>
-	</template>
+</template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import Servicetype from '../../components/volunte/vteamchild/Servicetype.vue'
+	import Teamtype from '../../components/volunte/vteamchild/Teamtype.vue'
+	import myArea from'../../components/volunte/vteamchild/Area.vue'
 	import InfiniteLoading from 'vue-infinite-loading'
 
 	export default{
@@ -50,16 +81,28 @@
 		name:'voluntaryProjects',
 		components:{
 	  		headerTip,
-	  		InfiniteLoading
+	  		InfiniteLoading,
+			Servicetype,
+			Teamtype,
+			myArea
 	  	},
 		data(){
 			return {
+				isShow:false,
+				wrap:true,
 				iscur:0,
+				current:0,
                 tabs:[
 				 	{type: '全部'},  
 				 	{type: '招募中'},
 				 	{type: '进行中'},
 				 	{type: '已结束'}
+				],
+				currentView:'Servicetype',
+				nav:[
+					{type: '服务类型',view: 'Servicetype'},  
+				 	{type: '团体类型',view: 'Teamtype'},
+				 	{type: '区域',view: 'myArea'}
 				],
 				proList:[]
 			}
@@ -68,16 +111,25 @@
 			toAddress(path){
 			    this.$router.push(path)
 			},
-			toggle(index) {
+			toggle(index,v) {
 		    	this.iscur = index
+				this.current = index
+				this.currentView = v
 		    },
+			showToggle(){
+            	this.isShow = !this.isShow
+                if(this.isShow){
+                    this.wrap = false  
+                }else{  
+                    this.wrap = !this.wrap   
+                }  
+            },
 		    projeckList(){
 		    	this.$http.post('/api/public/getProjectList',{
 		    		nowPage:Math.ceil(this.proList.length / 10) + 1
 		    	}).then(response => {
 		    		let res = response.data
 		    		if(res.result == 0){
-		    			 console.log(res.data.length)
 		    			if(res.data.length > 0){
 		    				this.proList = this.proList.concat(res.data);
 		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
@@ -93,6 +145,13 @@
 </script>
 <style scoped>
 .voluntaryProjects{
+	height:100%;
+}
+.current{
+	color:#43B7B5;
+}
+.tuandui{
+	background:#F5F5F5;
 	height:100%;
 }
 .sousuo{
@@ -149,7 +208,6 @@
 	background:#F5F5F5;
 	padding:0.2rem;
 	height:100%;
-	
 }
 .main span{
     margin: 0.4rem;
@@ -157,6 +215,9 @@
     position: relative;
     box-shadow: 0px 1px 3px #ccc;
     border-radius: 0.4rem;
+}
+.main a{
+	color:#000;
 }
 .te{
 	display:flex;
@@ -192,5 +253,50 @@
     height: 2rem;
     opacity: 0.2;
     background: linear-gradient(0deg, #060606, rgba(0, 0, 0, 0));
+}
+.head_top{
+	    width: 100%;
+	    font-size:1.2rem;
+	    font-family: arial,'microsoft yahei';
+	    color: #333;
+	    text-align: center;
+	    padding: 0.5rem 0;
+	    border-bottom: 0.5px solid #c9c9c9;
+	}
+	.tip{
+	    width: 96%;
+	    margin:0.5rem auto;
+	    position: relative;
+	}
+	.tip span{
+	    width: 0.7rem;
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: absolute;
+	    left: 0.5rem;
+	}
+	.tip span img{
+	    width: 100%;
+	}
+	.tip p{
+	    vertical-align: middle;
+	    line-height: 1;
+	}
+	.header{
+		width:100%;
+		display:flex;
+
+	}
+.header2 {
+	width:30%;
+	border-right:1px #E8E8E8 solid;
+	height:38rem;
+}
+.header ul li{
+	padding:0.8rem 0;
+	border-bottom:1px #E8E8E8 solid;
+	width:100%;
+	text-align:center;
+	margin:0; 
 }
 </style>

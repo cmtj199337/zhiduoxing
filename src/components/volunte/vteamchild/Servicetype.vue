@@ -1,23 +1,55 @@
 <template>
 	<div class="Servicetype">
-	<ul>
-	<li>关爱服务</li>
-	<li>国际服务</li>
-	<li>社区服务</li>
-	<li>教育</li>
-	<li>助残</li>
-	<li>助老</li>
-	<li>医疗卫生</li>
-	</ul>
+		<el-radio-group v-model="data">
+			<li v-for="item in list"><el-radio :label="item.key">{{item.value}}</el-radio></li>
+		</el-radio-group>
 	</div>
 </template>
-<style type="text/css">
-	.Servicetype{
-	width:50%;
-	margin-left:15%;
+<script>
+	export default{
+		name:'Servicetype',
+		data(){
+			return {
+				list:[],
+				data:''
+			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.getList()
+			})
+		},
+		beforeUpdate(){
+			sessionStorage.setItem('serverType',this.data)
+		},
+		methods:{
+			getList(){
+				this.$http.get('/api/public/getCommonList',{
+					params:{
+						type:'SERVER_TYPE'
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data
+					}
+				})
+			}
+		}
 	}
-	.Servicetype ul li{
+</script>
+<style scoped>
+	.Servicetype{
+		width:70%;
+	}
+	.el-radio-group{
+		width: 100%;
+		text-indent: 8%;
+	}
+	.el-radio-group .el-radio{
+		width: 0
+	}
+	.Servicetype .el-radio-group li{
 		padding:1rem 0;
 	}
-
 </style>

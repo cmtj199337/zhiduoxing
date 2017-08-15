@@ -9,27 +9,28 @@
 		<footer class="foot">
 			<span class="bm1"><img src="../shoucang.png">收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
-			<span class="bm3"><img src="../baoming.png"><p class="bm">我要报名</p></span>
+			<span class="bm3"><p class="bm">我要报名</p></span>
 		</footer>
 	</div>
 </template>
 <script>
 	export default{
-
 		name:'introduce',
-		components:{
-			
-	  	},
 		data () {
 		    return {
 				intro:[]
 		    }
 	  	},
+	  	mounted(){
+	  		this.$nextTick(function(){
+	  			this.showIntro()
+	  		})
+	  	},
 	  	methods:{
 	  		showIntro(){
 				  this.$http.get('/api/public/getProjectIntro',{
 					  params:{
-						  id:1
+						  id:this.$route.query.projectId
 					  }
 				  }).then( response => {
 					  let res = response.data
@@ -59,15 +60,14 @@
 	background:rgba(235, 234, 234, 0.48);
 }
 .header ul{
-display:flex;
-margin:0.1rem 0;
-padding:0.5rem 0;
-background:white;
-text-align: center;
+	display:flex;
+	margin:0.1rem 0;
+	padding:0.5rem 0;
+	background:white;
+	text-align: center;
 }
 .header ul li{
-width:33%;
-
+	width:33%;
 }
 .header ul li span{
 	display: inline-block;
@@ -77,24 +77,24 @@ width:33%;
 	color:#43B7B5;
 	border-bottom: 3px solid #43B7B5;
 }
-	.kong{
-		background:rgba(235, 234, 234, 0.48);
-		 padding: 0.4rem;
-	}
-	.header3{
+.kong{
+	background:rgba(235, 234, 234, 0.48);
+	 padding: 0.4rem;
+}
+.header3{
 	margin:0rem 1rem;
 	padding:0.8rem 0; 
 	border-bottom:1px #dcdcdc solid;
-	}
-	.header3 span{
+}
+.header3 span{
 	margin-left: 62%;
-	}
- 	.header3 span img{
+}
+.header3 span img{
 	width:0.8rem;
 	display:inline-block;
 	vertical-align: middle;	
 }
- 	.texttitle {
+.texttitle {
     font-size: 0.8rem;
     font-weight: normal;
     margin:0rem 1rem;
@@ -102,9 +102,9 @@ width:33%;
 	border-bottom:1px #dcdcdc solid;
 }
 .kong2{
-		background:rgba(235, 234, 234, 0.48);
-		padding: 0.8rem;
-	}
+	background:rgba(235, 234, 234, 0.48);
+	padding: 0.8rem;
+}
 .touxiang{
 	position:relative;
 	margin:0rem 1rem;
@@ -128,9 +128,9 @@ width:33%;
 	position:relative;
 }
 .bm1{
-width:23%;
-text-align: center;
-margin:0.3rem 0; 
+	width:23%;
+	text-align: center;
+	margin:0.3rem 0; 
 
 }
 .bm2{
@@ -139,6 +139,7 @@ margin:0.3rem 0;
 }
 .bm3{
 	width:56%;
+	background: #43B7B5;
 }
 .bm3 img{
 	width: 100%;
@@ -155,11 +156,11 @@ margin:0.3rem 0;
 	margin-left:38%;
 }
 .bm{
-	color:white;
-	position:absolute;
-	top:40%;
-	left:35%;
-	font-size:0.9rem;
+    color: white;
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    font-size: 0.9rem;
 }
 .jheader{
 	margin: 1rem 0.5rem;

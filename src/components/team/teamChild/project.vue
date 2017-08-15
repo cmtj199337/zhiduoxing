@@ -1,53 +1,54 @@
 <template>
 	<div class="main">
-		<span @click="toAddress({path: '/myprojectDetails'})">
-			<img src="../xiangm.png" >
-			<img src="../teb2.png" >
-			<img src="../quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
-			<img src="../xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
-			<img src="../quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
-			<img src="../baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
-			<ul class="te">
-				<li>北京市朝阳区</li>
-				<li>50/100</li>
-				<li style="text-align:right;margin-right:1rem;">待启动</li>
-			</ul>
-			<ul class="te2">
-				<li>智多星项目名称</li>
-				<li style="text-align:center;color:#666">2017/05/02-2017/05/02</li>
-			</ul>
-		</span>
-		<span @click="toAddress({path: '/myprojectDetails'})">
-			<img src="../xiangm.png" >
-			<img src="../teb2.png" >
-			<img src="../quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
-			<img src="../xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
-			<img src="../quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
-			<img src="../baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
-			<ul class="te">
-				<li>北京市朝阳区</li>
-				<li>50/100</li>
-				<li style="text-align:right;margin-right:1rem;">待启动</li>
-			</ul>
-			<ul class="te2">
-				<li>智多星项目名称</li>
-				<li style="text-align:center;color:#666">2017/05/02-2017/05/02</li>
-			</ul>
+		<span v-for="item in list">
+			<router-link :to="{path:'myprojectDetails',query:{projectId:item.projectId}}">
+				<img src="../xiangm.png" >
+				<img src="../teb2.png" >
+				<img src="../quan.png" style="position:absolute;width:8%;top:8%;left:5%;">
+				<img src="../xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
+				<img src="../quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
+				<img src="../baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
+				<ul class="te">
+					<li>{{item.projectAddress}}</li>
+					<li>50/100</li>
+					<li style="text-align:right;margin-right:1rem;">{{item.projectStatus}}</li>
+				</ul>
+				<ul class="te2">
+					<li>{{item.projectName}}</li>
+					<li style="text-align:center;color:#666">{{item.projectTime}}</li>
+				</ul>
+			</router-link>
 		</span>
 	</div>
 </template>
  <script>
 	export default{
-
 		name:'main',
 		data(){
 			return {
-				
+				list:[]
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView();
+			})
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
+            },
+            listView(){
+            	this.$http.get('/api/private/getTeamProject',{
+            		params:{
+            			id:this.$route.query.teamId
+            		}
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.list = res.data
+            		}
+            	})
             }
 		}
 	}
@@ -64,15 +65,14 @@
 }
 
 .header3 ul{
-display:flex;
-margin:0.1rem 0;
-padding:0.5rem 0;
-text-align: center;
-font-size: 0.85rem;
+	display:flex;
+	margin:0.1rem 0;
+	padding:0.5rem 0;
+	text-align: center;
+	font-size: 0.85rem;
 }
 .header3 ul li{
-width:50%;
-
+	width:50%;
 }
 .header3 ul li span{
 	display: inline-block;
@@ -89,7 +89,6 @@ width:50%;
 .per{
 	position:absolute;
 	top:42%;
-
 	width:96%;
 	margin:0 0.6rem;
 	border-bottom:1px #F5F5F5 solid;
@@ -133,6 +132,8 @@ margin-left:1rem;
 	margin:0.4rem;
 	display:inline-block;
 	position:relative;
+	box-shadow: 0px 1px 3px #ccc;
+    border-radius: 0.4rem;
 }
 .te{
 	display:flex;
@@ -151,11 +152,11 @@ margin-left:1rem;
 	position:absolute;
 	width:100%;
 	bottom:5%;
-
 }
 .te2 li{
 	width: 45%;
-	margin-left: 5%
+	margin-left: 5%;
+	color:#000;
 }
 .main2{
 	background:#F5F5F5;

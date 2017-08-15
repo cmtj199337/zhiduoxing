@@ -6,9 +6,10 @@
 				<input class="search" name="" placeholder="       搜索">
 				<img src="./sou.png"><span style="color:#43B7B6" @click="showToggle">筛选<img src="./shaixuan.png"></span>
 			</div>
-			<div class="mm" @click="toAddress({path: '/teamPresentation'})">
+			<div class="mm">
 				<ul>
 					<li v-for="item in teamList">
+						<router-link :to="{path:'teamPresentation',query:{teamId:item.teamId}}">
 						<img :src="item.teamIcon">
 						<h3>{{item.teamName}}</h3>
 						<div class="m1">
@@ -16,6 +17,7 @@
 							<div class="mm1"><span><i>{{item.teamMember}}</i>人</span><p>团队人数</p></div>
 							<div class="mm1"><span>{{item.teamManager}}</span><p>团队管理员</p></div>
 						</div>
+						</router-link>
 					</li>
 					<infinite-loading :on-infinite="onInfinite" ref="infiniteLoading"></infinite-loading>
 				</ul>
@@ -29,21 +31,20 @@
 	        	</div>
         	</div>
         	<div class="sousuo">
-			<input class="search" name="" placeholder="       搜索">
-			<img src="./sou.png"><span style="color:#43B7B6" >筛选<img src="./shaixuan.png"></span>
-		</div>
-		<div class="kong"></div>
-		<div class="header">
-			<div class="header2">
-				<ul>
-					<li v-for="(item,index) in tabs">
-						<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
-					</li>
-				</ul>
+				<input class="search" name="" placeholder="       搜索">
+				<img src="./sou.png"><span style="color:#43B7B6" >筛选<img src="./shaixuan.png"></span>
 			</div>
-			<component :is='currentView' keep-alive></component>
-		</div>
-			
+			<div class="kong"></div>
+			<div class="header">
+				<div class="header2">
+					<ul>
+						<li v-for="(item,index) in tabs">
+							<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
+						</li>
+					</ul>
+				</div>
+				<component :is='currentView' keep-alive></component>
+			</div>	
 		</div>
 	</div>
 </template>
@@ -55,7 +56,6 @@
 	import InfiniteLoading from 'vue-infinite-loading'
 
 	export default{
-
 		name:'volunteerTeam',
 		components:{
 	  		headerTip,
@@ -75,10 +75,14 @@
 				 	{type: '团体类型',view: 'Teamtype'},
 				 	{type: '区域',view: 'myArea'}
 				],
-				teamList:[]
+				teamList:[],
+				serverType:'',
+				teamType:'',
+				area:''
 			}
 		},
 		mounted(){
+			
 		},
 		methods:{
 			toAddress(path){
@@ -89,21 +93,28 @@
                 if(this.isShow){
                     this.wrap = false  
                 }else{  
-                    this.wrap = !this.wrap   
-                }  
+                    this.wrap = !this.wrap 
+                }
+				this.serverType=sessionStorage.getItem('serverType')
+	    		this.teamType=sessionStorage.getItem('teamType')
+	    		this.area=sessionStorage.getItem('area')
+				this.onInfinite()
             },
             toggle(v,index) {
 		    	this.iscur = index;
 		    	this.currentView = v
 		    },
 		    onInfinite(){
-		    	this.$http.post('/api/public/getTeamList',{
-		    		//fs
-		    		nowPage:Math.ceil(this.teamList.length / 10) + 1
+		    	let pages = Math.ceil(this.teamList.length/10)+1;
+		    	console.log(this.condition)
+		    	this.$http.post('/api/public/getTeamList?nowPage='+pages,{
+		    		province:0,
+		    		serverType:this.serverType,
+		    		teamType:this.teamType,
+		    		city:this.area
 		    	}).then( response => {
 		    		let res = response.data
 		    		if(res.result == 0){
-		    			console.log(res.data.length)
 		    			if(res.data.length > 0){
 		    				this.teamList = this.teamList.concat(res.data);
 		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
@@ -172,6 +183,9 @@
 	width:85%;
 	position:relative;
 	margin-bottom: 0.6rem;
+}
+.mm ul li a{
+	color: #000;
 }
 .mm ul li:last-child{
 	margin-bottom: 0;

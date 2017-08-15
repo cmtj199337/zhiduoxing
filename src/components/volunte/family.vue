@@ -3,43 +3,19 @@
    <headerTip message="志愿家庭" goBack="true" style="background: #FFFFFF"></headerTip>
    <!-- <span class="h" @click="toAddress({path: '/addFamily'})">添加成员</span> -->
 
-	<div class="t">
-		<img src="./toux.png" alt="">
+	<div class="t" v-for="item in list">
+		<img :src="item.headIcon" alt="">
 		<span class="text">
-			<p><span style="font-size:16px">张北影</span></p> 
-			<p ><span style="font-size:0.8rem;color:#CCCCCC">志愿时长</span> <span style="color:#77CBCA">1200</span><span>小时</span></p>
-			<p><span style="font-size:0.8rem;color:#CCCCCC">身份证号</span><span>123125********8901</span></p>
+			<p><span style="font-size:16px">{{item.trueName}}</span></p> 
+			<p ><span style="font-size:0.8rem;color:#CCCCCC">志愿时长</span> <span style="color:#77CBCA">{{item.serverDuration}}</span><span>小时</span></p>
+			<p><span style="font-size:0.8rem;color:#CCCCCC">身份证号</span><span>{{item.memberId}}</span></p>
 		</span>
-		<span class="item-check-btn list-btn">
-			<svg class="icon icon-ok"></svg>
-		</span>
-	</div>
-
-	<div class="t1">
-		<img src="./toux1.png" alt="">
-		<span class="text">
-		<p><span style="font-size:16px">刘影</span></p> 
-		<p ><span style="font-size:0.8rem;color:#CCCCCC">志愿时长</span> <span style="color:#77CBCA">1200</span><span>小时</span></p>
-		<p><span style="font-size:0.8rem;color:#CCCCCC">身份证号</span><span>123125********8901</span></p>
-		</span>
-		<span class="item-check-btn list-btn">
-			<svg class="icon icon-ok"></svg>
-		</span>
-	</div>
-
-	<div class="t2">
-		<img src="./toux1.png" alt="">
-		<span class="text">
-		<p><span style="font-size:16px">李桐</span></p> 
-		<p ><span style="font-size:0.8rem;color:#CCCCCC">志愿时长</span> <span style="color:#77CBCA">1200</span><span>小时</span></p>
-		<p><span style="font-size:0.8rem;color:#CCCCCC">身份证号</span><span>123125********8901</span></p>
-		</span>
-		<span class="item-check-btn list-btn">
+		<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
 			<svg class="icon icon-ok"></svg>
 		</span>
 	</div>
 	<div class="t3">
-		<p>确定</p>
+		<p @click="comfirm()">确定</p>
 	</div>
 
   </div>  
@@ -55,13 +31,36 @@
 	  	}, 
 	 	data () {
 		    return {
-		    	
+		    	list:[]
 		    }
 	  	},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+			})
+		},
 	  	methods:{
 	  		toAddress(path){
                 this.$router.push(path)
-            }
+            },
+			listView(){
+				this.$http.get('/api/private/getMyFamily').then( response =>{
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data.wxFamilyDtoList
+					}
+				})
+			},
+			checkFlag(item){
+				if(typeof item.checked == 'undefined'){
+					this.$set(item,'checked',true)
+				}else{
+					item.checked = !item.checked
+				}
+			},
+			comfirm(){
+				
+			}
 	  	}
 	}
 </script>
@@ -92,48 +91,15 @@
  	top:15%; 
 	left:-9%;
 }
-.t1{
-	padding: 0.5rem 0 0.5rem 3rem;
-	display:flex;
-	margin: 0.6rem 0.6rem 0.6rem 3.5rem;
-	background: #FFFFFF;
-	position:relative;
-	border-radius:5px;
-}
-.t1 img{
-	width:20%; 
-	position:absolute;
-	top:15%; 
-	left:-9%; 
-}
-.t2{
-	padding: 0.5rem 0 0.5rem 3rem;
-	display:flex;
-	margin: 0.6rem 0.6rem 0.6rem 3.5rem;
-	background: #FFFFFF;
-	position:relative;
-	border-radius:5px;
-}
-.t2 img{
-	width:20%; 
-	position:absolute;
-	top:15%; 
-	left:-9%; 
-}
 .t p{
 	margin: 0.5rem 0;
-}
-.t1 p{
-	margin: 0.5rem 0;
-}
-.t2 p{
-	margin: 0.5rem 0;
+	height:1.4rem;
+	line-height:1.4rem;
 }
 .t3{
 	margin: 2.5rem 0 0 0;
 	text-align: center;
 }
-
 .t3 p{
 	width: 14rem;
 	color: #fff;

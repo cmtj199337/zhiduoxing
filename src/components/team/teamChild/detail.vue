@@ -1,11 +1,9 @@
 <template>
 	<div class="detail">
 		<div class="header2">
-	      <h4 class="texttitle">
-	      	<span>
-	      		<img src="../t1.png">
-	      	</span>团队信息
-	      </h4>
+		    <h4 class="texttitle">
+		      	<span><img src="../t1.png"></span>团队信息
+		    </h4>
 	    </div>
 		<div class="usertext">
 			<span>名称：{{list.teamName}}</span>
@@ -53,7 +51,7 @@
 		<footer class="foot">
 			<span class="bm1"><img src="../shoucang.png">收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
-			<span class="bm3"><img src="../baoming.png"><p class="bm">我要加入</p></span>
+			<span class="bm3"><p class="bm">我要加入</p></span>
 		</footer>
 	</div>
 </template>
@@ -75,12 +73,9 @@
 	  	},
 	  	methods:{
 	  		getInfo(){
-	  			let teamId = localStorage.getItem("userId");
-	  			let userId = localStorage.getItem("userId");
 	  			this.$http.get('api/public/getTeamDetail',{
 	  				params:{
-	  					teamId:teamId,
-	  					userId:userId
+	  					teamId:this.$route.query.teamId
 	  				}
 	  			}).then(response=>{
 	  				let res = response.data
@@ -122,18 +117,17 @@ width:33%;
 .header ul p{
 	color:#43B7B5;
 }
-	
- 	.texttitle {
-    font-size: 0.8rem;
-    font-weight: normal;
-    margin:0rem 1rem;
+.texttitle {
+	font-size: 0.8rem;
+	font-weight: normal;
+	margin:0rem 1rem;
 	padding:0.8rem 0; 
 	border-bottom:1px #EAEAEA solid;
 }
 .kong2{
-		background:#EAEAEA;
-		padding: 0.3rem;
-	}
+	background:#EAEAEA;
+	padding: 0.3rem;
+}
 .touxiang{
 	position:relative;
 	margin:0rem 1rem;
@@ -172,6 +166,7 @@ margin:0.3rem 0;
 }
 .bm3{
 	width:56%;
+	background:#43B7B5;
 }
 .bm3 img{
 	width: 100%;
@@ -190,7 +185,7 @@ margin:0.3rem 0;
 .bm{
 	color:white;
 	position:absolute;
-	top:39%;
+	top:35%;
 	left:35%;
 	font-size:0.9rem;
 }
