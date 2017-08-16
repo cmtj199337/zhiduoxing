@@ -3,11 +3,11 @@
 		<headerTip message="2016年6月1日" goBack="true"></headerTip>
 		<div class="header">
 			<ul>
-				<li v-for="item in projectList">
-					<img :src="item.projectIcon"  class="touxiang">
+				<li>
+					<img :src="projectList.projectIcon"  class="touxiang">
 
-					<p>{{item.projectName}}<span class="end">{{item.projectStatus}}</span></p>
-					<p style="width:90%;display:flex;"><span style="width:50%">志愿总时长<b style="color:#43B7B5">{{item.serverDuration}}小时</b></span><span style="width:40%;margin-left:20%;">报名人数<b style="color:#43B7B5">52人</b></span></p>
+					<p>{{projectList.projectName}}<span class="end">{{projectList.projectStatus}}</span></p>
+					<p style="width:90%;display:flex;"><span style="width:50%">志愿总时长<b style="color:#43B7B5">{{projectList.serverDuration}}小时</b></span><span style="width:40%;margin-left:20%;">报名人数<b style="color:#43B7B5">{{projectList.joinNumber}}人</b></span></p>
 				</li>
 			</ul>
 		</div>
@@ -35,7 +35,7 @@
 		<div class="foot">
 			<ul>
 			<li><p>共计：<span>{{list.length}}</span>人</p></li>
-			<li class="right"><router-link to="informationFilling">团队补录</router-link></li>
+			<li class="right"><router-link :to="{path:'informationFilling',query:{projectId:projectId}}">团队补录</router-link></li>
 			</ul>
 		</div>
 			</div>
@@ -52,12 +52,19 @@
 			return {
 				projectList:[],
 				list:[],
-				volutors:''
+				volutors:'',
+				projectId:'',
+				volutorName:''
 			}
 		},
 		mounted(){
+			this.projectId = this.$route.query.projectId
 			//取得项目
-			this.$http.get('/api/private/getATTProject').then( response => {
+			this.$http.get('/api/private/getATProjectSum',{
+				params:{
+					projectId:this.$route.query.projectId
+				}
+			}).then( response => {
         		let res = response.data
         		if(res.result == 0){
         			this.projectList = res.data
@@ -98,9 +105,14 @@
 	        },
 	        addvolutors(){
 	        	this.volutors = ''
+	        	this.volutorName = ''
 	        	this.list.forEach((item,index)=>{
 	        		if(item.checked){
 	        			this.volutors += item.volunteerId+','
+	        			this.volutorName += item.volunteerName+','
+
+	        			sessionStorage.setItem('volunteerId',this.volutors)
+	        			sessionStorage.setItem('volunteerName',this.volutorName)
 	        		}
 	        	})
 	        }

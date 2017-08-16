@@ -2,18 +2,22 @@
 	<div class="unpend">
 		<div class="main2">
 			<ul>
-				<li @click="toAddress({path: '/teamIntroduction'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
+				<li v-for="item in list">
+					<router-link :to="{path:'teamIntroduction',query:{teamId:item.teamId}}">
+					<img :src="item.logo">
+					<h3>{{item.name}}</h3>
 					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
+						<div class="mm1"><span>{{item.serHour}}小时</span><p>志愿总时长</p></div>
+						<div class="mm1"><span>{{item.mamager}}</span><p>团队管理员</p></div>
 					</div>
 					<span class="item-check-btn list-btn check">
 				        <svg class="icon icon-ok"></svg>
 				    </span>
+				    </router-link>
 				</li>
-				<li @click="toAddress({path: '/teamIntroduction'})">
+				
+				
+			<!-- 	<li @click="toAddress({path: '/teamIntroduction'})">
 					<img src="./logo.png">
 					<h3>北京西站地区志愿服务</h3>
 					<div class="m1">
@@ -23,29 +27,7 @@
 					<span class="item-check-btn list-btn">
 				        <svg class="icon icon-ok"></svg>
 				    </span>
-				</li>
-				<li @click="toAddress({path: '/teamIntroduction'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
-					<span class="item-check-btn list-btn">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
-				</li>
-				<li @click="toAddress({path: '/teamIntroduction'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
-					<span class="item-check-btn list-btn">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		<div class="end">
@@ -65,11 +47,29 @@
 		name:'unpend',
 		data(){
 			return {
+				list:[]
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+			})
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
+            },
+            listView(){
+            	this.$http.get('/api/private/lowerTeamDetailList',{
+            		params:{
+            			status:1
+            		}
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.list = res.data
+            		}
+            	})
             }
 		}
 

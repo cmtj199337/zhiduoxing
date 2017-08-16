@@ -4,61 +4,48 @@
 		<div class="main">
 		<div class="header">
 			<ul>
-			<li>
-			<img src="./toux1.png"  class="touxiang">
-			<div class="m11">
-			<div class="mm1"><h3>智多星项目</h3>
-			<p style="width:100%;display:flex;"><span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span><span style="width:40%;">报名人数<b style="color:#43B7B5">52人</b></span></p></div>
-			<div class="mm2">
-			<span>
-			<p class="end">已结束</p>
-			</span>
-			</div>
-			</div>
-			</li>
+				<li>
+					<img :src="projectList.projectIcon" class="touxiang">
+					<div class="m11">
+						<div class="mm1">
+							<h3>{{projectList.projectName}}</h3>
+							<p style="width:100%;display:flex;">
+								<span style="width:70%">志愿总时长<b style="color:#43B7B5">{{projectList.serverDuration}}小时</b></span>
+								<span style="width:40%;">报名人数<b style="color:#43B7B5">{{projectList.joinNumber}}人</b></span>
+							</p>
+						</div>
+						<div class="mm2">
+							<span><p :class="projectList.style">{{projectList.projectStatus}}</p></span>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</div>
 		<div class="header2">
 			<ul>
-			<li><img src="./jia.png"><p style="position:absolute;left:41%;color:white;top:34%">加时长</p></li>
-			<li><img src="./jian.png">减时长</li>
+				<!-- <li><span :class="{'current':current}">加时长</span></li> -->
+				<li v-for="(item,index) in way">
+					<span :class="{'current':isCur == index}" @click="toggle(index)">{{item.type}}</span>
+				</li>
 			</ul>
 		</div>
 		<div class="main2">
 		<div class="header3">
-		<p>补录时长</p><input type="text" name="" style="border:none;" placeholder="请输入小时数">
+		<p>补录时长</p><input type="text" @change="limitTime()" v-model="time" style="border:none;" placeholder="请输入小时数">
 		</div>
 		<div class="header4">
 		<ul>
-		<li>张里三</li>
-		<li>马晓明</li>
-		<li>张里三</li>
-		<li>张里三</li>
-		<li>马晓华</li>
-		</ul>
-		<ul>
-		<li>张里三</li>
-		<li>马晓明</li>
-		<li>张里三</li>
-		<li>张里三</li>
-		<li>马晓华</li>
-		</ul>
-		<ul>
-		<li>张里三</li>
-		<li>马晓明</li>
-		<li>张里三</li>
-		<li>张里三</li>
-		<li>马晓华</li>
+			<li v-for="item in volutorName">{{item}}</li>
 		</ul>
 
 		</div>
 		</div>
 		<div class="header5">
-			<p>补录时长人员列表：<span style="color:#43B7B5">共计15人</span></p>
+			<p>补录时长人员列表：<span style="color:#43B7B5">共计{{volutorName.length}}人</span></p>
 		</div>
 		</div>
 		<div class="jieshu">
-		<p>确认</p>
+			<p @click="comform()">确认</p>
 		</div>
 		</div>
 	</template>
@@ -72,10 +59,61 @@
 	  	},
 		data(){
 			return {
-				
+				projectList:[],
+				current:true,
+				isCur:0,
+				way:[
+					{type:'加时长'},
+					{type:'减时长'}
+				],
+				volutorId:'',
+				volutorName:[],
+				time:''
 			}
 		},
-
+		mounted(){
+			this.volutorId = sessionStorage.getItem('volunteerId')
+			this.volutorName = sessionStorage.getItem('volunteerName')
+			//取得项目
+			this.$http.get('/api/private/getATProjectSum',{
+				params:{
+					projectId:this.$route.query.projectId
+				}
+			}).then( response => {
+        		let res = response.data
+        		if(res.result == 0){
+        			this.projectList = res.data
+        			if(res.data.projectStatus == '进行中'){
+        				this.$set(this.projectList,'style','being')
+        			}else if(res.data.projectStatus == '已结束'){
+        				this.$set(this.projectList,'style','end')
+        			}
+        		}
+        	})
+        	this.volutorInfo()
+		},
+		methods:{
+			toggle(index){
+				this.isCur = index
+			},
+			volutorInfo(){
+				this.volutorName = this.volutorName.split(',').slice(0,-1)
+			},
+			comform(){
+				this.$http.post('/api/private/insertATRecords',{
+					addDate:'2017/8/15',
+					addTime:this.time,
+					projectId:this.$route.query.projectId,
+					volunteerId:this.volutorId
+				})
+			},
+			limitTime(){
+				if(this.time > 12){
+					this.$message.error("必须小于12小时")
+					this.time = ''
+				}
+			}
+		}
 	}
 </script>
 <style scoped>
@@ -98,6 +136,7 @@
 .header ul li .touxiang{
 	width:5rem;
 	height:5rem;
+	border-radius: 50%;
 	position:absolute;
 	left: -11%;
 	top:7%;
@@ -143,10 +182,19 @@
 	right:3%;
 	bottom:63%;
 }
+.being{
+	position:absolute;
+	border-radius:5px;
+	border:1px #43B7B6 solid;
+	color:#43B7B6;text-align:center;
+	width:14%;
+	font-size:0.6rem;
+	right:3%;
+	bottom:63%;
+}
 .header2 ul{
 	display:flex;
 	margin:0.6rem 0;
-
 }
 .header2 ul li{
 	width:50%;
@@ -155,11 +203,15 @@
 	padding:0.9rem 0;
 	position:relative;
 }
-.header2 ul li img{
-	position:absolute;
-	width:38%;
-	top:26%;
-	left:32%;
+.header2 span{
+	border:1px solid #000;
+	padding:0.2rem 1rem;
+	border-radius: 0.4rem; 
+}
+.current{
+	border: 1px solid #43B7B6 !important;
+	background: #43B7B6;
+	color: #fff;
 }
 .main2{
 	background:white;
@@ -170,7 +222,6 @@
 	padding:0.4rem 0;
 	margin:0 0.5rem;
 	border-bottom:1px #F5F5F5 solid;
-
 }
 .header3 p{
 	width:20%;
@@ -186,12 +237,15 @@
 	padding:0.5rem 0;
 }
 .header4 ul{
-display:flex;
-padding:0.6rem 0;
+	padding:0.6rem 0;
+	clear: both;
+	overflow: hidden;
 }
 .header4 ul li{
-width:20%;
-text-align:center;
+	width:25%;
+	text-align:center;
+	float: left;
+	padding:0.6rem 0;
 }
 .header5{
 	padding:0.6rem 0;
