@@ -4,35 +4,34 @@
 		<div class="main">
 		<div class="header">
 			<ul>
-			<li>
-			<img src="./toux.png"  class="touxiang">
-			<div class="m11">
-			<div class="mm1"><h3>智多星项目</h3>
-			<p style="width:100%;display:flex;">
-			<span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span><span style="width:40%;">报名人数<b style="color:#43B7B5">52人</b></span></p>
-			</div>
-			<div class="mm2">
-			<span>
-			<p class="end">已结束</p>
-			</span>
-			</div>
-			</div>
-			</li>
+				<li>
+				<img src="./toux.png"  class="touxiang">
+					<div class="m11">
+						<div class="mm1"><h3>智多星项目</h3>
+							<p style="width:100%;display:flex;">
+							<span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span>
+							<span style="width:40%;">报名人数<b style="color:#43B7B5">52人</b></span></p>
+						</div>
+						<div class="mm2">
+							<span><p class="end">已结束</p></span>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</div>
 		
 		</div>
 		<div class="header2">
-		<ul>
-		<li style="	margin-left:12%;">姓名</li>
-		<li>补录时长</li>
-		<li style="text-align:center;margin-right:1%">申请日期</li>
-		</ul>
-		<ul>
-		<li class="hd"><img src="./tongg.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
-		<li>3小时</li>
-		<li style="text-align:center;">2017/05/12</li>
-		</ul>
+			<ul>
+				<li style="	margin-left:12%;">姓名</li>
+				<li>补录时长</li>
+				<li style="text-align:center;margin-right:1%">申请日期</li>
+			</ul>
+			<ul>
+				<li class="hd"><img src="./tongg.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
+				<li>3小时</li>
+				<li style="text-align:center;">2017/05/12</li>
+			</ul>
 		<ul>
 		<li class="hd"><img src="./quan.png" class="tg"><img src="./toux1.png" class="tx"><p>联系人</p></li>
 		<li>3小时</li>
@@ -56,8 +55,8 @@
 		</ul>
 		</div>
 		</div>
-		</template>
-		<script>
+</template>
+<script>
 	import headerTip from '../../components/common/header/header.vue'
 	export default{
 
@@ -67,9 +66,25 @@
 	  	},
 		data(){
 			return {
-				
+				list:[]
 			}
 		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+			})
+		},
+		methods:{
+			listView(){
+				let projectId = this.$route.query.projectId
+				this.$http.post('/api/private/getAppList?projectId='+projectId).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data
+					}
+				})
+			}
+		}
 
 	}
 </script>

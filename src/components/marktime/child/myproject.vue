@@ -55,11 +55,7 @@
                 this.$router.push(path)
             },
             getProject(){
-            	this.$http.get('/api/private/getATProject',{
-					params:{
-						nowPage:Math.ceil(this.info.length / 10) + 1,
-					}
-				}).then( response => {
+            	this.$http.get('/api/private/getATProject').then( response => {
             		let res = response.data
             		if(res.result == 0){
 						// this.info = this.info.concat(res.data)

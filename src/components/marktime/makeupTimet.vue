@@ -2,40 +2,32 @@
 	<div class="makeupTimet">
 		<headerTip message="补录时长" goBack="true"></headerTip>
 		<div class="header">
-		<span style="width:10%;margin-left:0.5rem"><img src="./td.png"></span><span style="text-align:left">团队项目</span>
+			<span style="width:10%;margin-left:0.5rem"><img src="./td.png"></span><span style="text-align:left">团队项目</span>
 		</div>	
 		<div class="main">
-		<div class="m1">
-			<ul>
-				<li>
-					<img src="./toux1.png" class="touxiang">
-					<div class="text">
-						<h3>团中央网络影视中心第五团支部</h3>
-						<p class="passed">已结束</p>
-					
-					</div>
-					<div class="anniu">
-						<span ><p class="btn" @click="toAddress({path:'/durationApproval'})">时长审批</p></span>
-						<span><p class="btn1" @click="toAddress({path:'/timeInput'})">团队补录</p></span>
-					</div>	
-				</li>
-				<li>
-				<img src="./toux2.png" class="touxiang">
-				<div class="text"><h3>团中央网络影视中心第五团支部</h3>
-				<p class="being">进行中</p>
-				
-				</div>
-				<div class="anniu">
-					<span @click="toAddress({path:'/durationApproval'})"><p class="btn">时长审批</p></span>
-					<span><p class="btn1" @click="toAddress({path:'/timeInput'})">团队补录</p></span>
-				</div>	
-				</li>
-			</ul>
-		</div>
+			<div class="m1">
+				<ul>
+					<li v-for="item in list">
+						<img :src="item.projectIcon" class="touxiang">
+						<div class="text">
+							<h3>{{item.projectName}}</h3>
+							<p class="being">{{item.projectStatus}}</p>
+						</div>
+						<div class="anniu">
+							<span><p class="btn">
+								<router-link :to="{path:'durationApproval',query:{projectId:item.projectId}}">时长审批</router-link>
+							</p></span>
+							<span><p class="btn1">
+								<router-link :to="{path:'timeInput',query:{projectId:item.projectId}}">团队补录</router-link>
+							</p></span>
+						</div>	
+					</li>
+				</ul>
+			</div>
 		</div>
 	
-		</div>
-	</template>
+	</div>
+</template>
 	<script>
 	import headerTip from '../../components/common/header/header.vue'
 	export default{
@@ -46,15 +38,28 @@
 	  	},
 		data(){
 			return {
-				
+				list:[],
+
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+			})
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
             },
+            listView(){
+            	this.$http.get('/api/private/getATTProject').then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.list = res.data
+            		}
+            	})
+            }
 		}
-
 	}
 </script>
 <style scoped>
@@ -101,9 +106,13 @@ width:20%;
 	position:relative;
 	padding:1.2rem 0;
 }
+.anniu a{
+	color:rgb(70, 184, 183);
+}
 .m1 ul li .touxiang{
 	width:5rem;
 	height:5rem;
+	border-radius: 50%;
 	position:absolute;
 	left: -11%;
 	top:8%;
