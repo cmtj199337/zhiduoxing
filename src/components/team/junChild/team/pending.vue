@@ -2,37 +2,15 @@
 	<div class="pending">
 		<div class="main2">
 			<ul>
-				<li @click="toAddress({path: '/teamPresentation'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
-				</li>
-				<li @click="toAddress({path: '/teamPresentation'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
-				</li>
-				<li @click="toAddress({path: '/teamPresentation'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
-				</li>
-				<li @click="toAddress({path: '/teamPresentation'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
+				<li v-for="item in list">
+					<router-link :to="{path:'teamPresentation',query:{teamId:item.teamId}}">
+						<img :src="item.logo">
+						<h3>{{item.name}}</h3>
+						<div class="m1">
+							<div class="mm1"><span>{{item.serHour}}小时</span><p>志愿总时长</p></div>
+							<div class="mm1"><span>{{item.mamager}}</span><p>团队管理员</p></div>
+						</div>
+					</router-link>
 				</li>
 			</ul>
 		</div>
@@ -43,12 +21,27 @@
 		name:'pending',
 		data(){
 			return {
+				list:[]
 			}
 		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+			})
+		},
 		methods:{
-			toAddress(path){
-                this.$router.push(path)
-            }
+			listView(){
+            	this.$http.get('/api/private/lowerTeamDetailList',{
+            		params:{
+            			status:3
+            		}
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.list = res.data
+            		}
+            	})
+            },
 		}
 	}
 </script>
@@ -70,6 +63,9 @@
 	top: 5%;
 	position: relative;
 	margin-bottom:0.6rem; 
+}
+.main2 a{
+	color: #000;
 }
 .main2 ul li:last-child{
 	margin-bottom:0; 

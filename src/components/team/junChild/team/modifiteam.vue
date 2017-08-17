@@ -10,29 +10,28 @@
             <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
         	</div>
 			<div class="usertext">
-			<span>团队名称：</span><input type="text" value="志多星团队">
+			<span>团队名称：</span><input type="text" :value="info.teamName">
 			</div>
 			<div class="usertext">
-			<span>团队口号：</span><input type="text" value="志愿改变人生">
+			<span>团队口号：</span><input type="text" :value="info.teamSlogan">
 			</div>
 			<div class="usertext">
 			<span>联络团队：</span><input type="text" value="志愿服务联合会">
 			</div>
 			<div class="usertext">
 				<span>服务类别：</span>
-				<select name="" id="">
-					<option value="">初级团队</option>
-					<option value="">中级团队</option>
+				<select>
+					<option v-for="item in serverTypeList" :value="info.serverType">{{item.value}}</option>
 				</select>
 			</div>
 			<div class="usertext">
-			<span>组织管理员:</span><input type="text" value=" 吴彦祖">
+			<span>组织管理员:</span><input type="text" :value="info.teamManager">
 			</div>
 			<div class="usertext">
-			<span>联系电话：</span><input type="text" value="1371293819">
+			<span>联系电话：</span><input type="text" :value="info.contactNumber">
 			</div>
 
-			<div class="header2">
+			<!-- <div class="header2">
             <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>团队地址</h4>
         	</div>
         	<div class="usertext">
@@ -42,9 +41,10 @@
 			<div class="usertext">
 				<span>所在区县：</span>
 				<input type="text" value="顺义区">
-			</div>
+			</div> -->
+			<my-area @select="haha"></my-area>
 			<div class="usertext">
-				<input style="text-indent:0" type="text" value="组北京市顺义区二十里堡">
+				<input style="text-indent:0" type="text" :value="info.teamAddress">
 			</div>
 
 			<div class="header3">
@@ -63,17 +63,56 @@
 </template>
 <script>
 	import headerTip from '../../../../components/common/header/header.vue'
+	import MyArea from '../../../../components/common/tools/area.vue'
 	export default{
 
 		name:'modifiteam',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		MyArea
 	  	},
 		data(){
 			return {
-				
+				info:[],
+				serverTypeList:[]
 			}
 		},
+		mounted(){
+			this.$nextTick(function(){
+				this.getServerType()
+				this.getInfo()
+			})
+		},
+		methods:{
+			getInfo(){
+				this.$http.get('/api/public/getTeamDetail',{
+					params:{
+						teamId:this.$route.query.teamId
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.info = res.data
+					}
+				})
+			},
+			getServerType(){
+				this.$http.get('/api/public/getCommonList',{
+					params:{
+						type:'SERVER_TYPE'
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.serverTypeList = res.data
+					}
+				})
+			},
+			haha(d){
+            	this.province = d.pro.id
+            	this.city = d.city.id
+			},
+		}
 
 	}
 </script>
@@ -115,6 +154,7 @@
 	    margin-left: 5.5rem;
 	    height: 2.5rem;
 	    font-size: 1rem;
+	    appearance:none;
 	}
 	.usertext span{
 		position: absolute;

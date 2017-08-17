@@ -1,86 +1,53 @@
 <template>
-<div class="uncheckPend">
-	<div class="main" @click="toAddress({path: '/pDetail'})">
+	<div class="uncheckPend">
+		<div class="main" v-for="item in list">
+			<router-link :to="{path:'pDetail',query:{projectId:item.projectId}}">
 			<span>
 			<img src="./banner@2x.png" >
 			<img src="./teb2.png" >
 			<ul class="te">
-				<li class="cc1">志多星项目</li>
+				<li class="cc1">{{item.projectName}}</li>
 			</ul>
 			<ul class="te1">
-				<li class="cc1">北京市朝阳区</li>
-				<li class="cc2">40/100</li>
+				<li class="cc1">{{item.projectAddress}}</li>
+				<li class="cc2">{{item.yotNum}}/{{item.honNum}}</li>
 				<li class="cc3"></li>
 			</ul>
 			<ul class="te2">
 				<li class="cc1">项目时间</li>
-				<li class="cc4">2017/05/02-2017/05/02</li>
+				<li class="cc4">{{item.projectTime}}</li>
 			</ul>
 			</span>
+			</router-link>
+		</div>
 	</div>
-	<div class="main">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3"></li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-	</div>
-	<div class="main">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3"></li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-	</div>
-	<div class="main">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3"></li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-	</div>
-</div>
 </template>
 <script>
 	export default{
 		name:'uncheckPend',
+		data(){
+			return {
+				list:[]
+			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView(0)
+			})
+		},
 		methods:{
-			toAddress(path){
-                this.$router.push(path)
-            }
+			listView(status){
+				this.$http.get('/api/private/getLowTeamPList',{
+					params:{
+						projectStatus:status
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -89,6 +56,9 @@
 	background:#F5F5F5;
 	padding:0.2rem;
 	
+}
+.main a{
+	color:#000;
 }
 .main span{
 	margin:0.4rem;

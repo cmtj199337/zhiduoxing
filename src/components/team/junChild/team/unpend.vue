@@ -10,33 +10,20 @@
 						<div class="mm1"><span>{{item.serHour}}小时</span><p>志愿总时长</p></div>
 						<div class="mm1"><span>{{item.mamager}}</span><p>团队管理员</p></div>
 					</div>
-					<span class="item-check-btn list-btn check">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
 				    </router-link>
-				</li>
-				
-				
-			<!-- 	<li @click="toAddress({path: '/teamIntroduction'})">
-					<img src="./logo.png">
-					<h3>北京西站地区志愿服务</h3>
-					<div class="m1">
-						<div class="mm1"><span>120小时</span><p>志愿总时长</p></div>
-						<div class="mm1"><span>智多星</span><p>团队管理员</p></div>
-					</div>
-					<span class="item-check-btn list-btn">
+				    <span class="item-check-btn list-btn" :class="{'check':item.checked}" @click.stop="toggle(item)">
 				        <svg class="icon icon-ok"></svg>
 				    </span>
-				</li> -->
+				</li>
 			</ul>
 		</div>
 		<div class="end">
 			<ul>
 				<li>全选</li>
-				<li><span><img src="./butongg@2x.png" >不通过</span></li>
-				<li><span><img src="./tongg@2x.png" >通过</span></li>
+				<li @click="assess(3)"><span><img src="./butongg@2x.png" >不通过</span></li>
+				<li @click="assess(2)"><span><img src="./tongg@2x.png" >通过</span></li>
 			</ul>
-			<span style="top:28%" class="item-check-btn list-btn">
+			<span style="top:28%" class="item-check-btn list-btn" :class="{'check':checkFlag}" @click="checkAll()">
 		        <svg class="icon icon-ok"></svg>
 		    </span>		
 		</div>
@@ -47,7 +34,9 @@
 		name:'unpend',
 		data(){
 			return {
-				list:[]
+				list:[],
+				checkFlag:false,
+				teamId:''
 			}
 		},
 		mounted(){
@@ -70,7 +59,47 @@
             			this.list = res.data
             		}
             	})
-            }
+            },
+            toggle(item){
+            	if(typeof item.checked == 'undefined'){
+            		this.$set(item,'checked',true)
+            	}else{
+            		item.checked = !item.checked
+            	}
+            	this.caleTeamId()
+            },
+            checkAll(){
+            	this.checkFlag = !this.checkFlag
+            	this.list.forEach((item,index) => {
+            		if(typeof item.checked == 'undefined'){
+            			this.$set(item,'checked',this.checkFlag)
+            		}else{
+            			item.checked = this.checkFlag;
+            		}
+            	})
+            	this.caleTeamId()
+            },
+            caleTeamId(){
+            	this.teamId = ''
+            	this.list.forEach((item,index) => {
+            		if(item.checked){
+            			this.teamId += item.teamId+','
+            		}
+            	})
+            },
+            assess(way){
+				this.$http.get('/api/private/updateTeamStatus',{
+					params:{
+						status:way,
+						teamIds:this.teamId
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.$message.success("审核成功")
+					}
+				})
+			}
 		}
 
 	}
@@ -94,6 +123,9 @@
 	top: 5%;
 	position: relative;
 	margin-bottom:0.6rem; 
+}
+.main2 ul li a{
+	color: #000;
 }
 .main2 ul li:last-child{
 	margin-bottom:0; 

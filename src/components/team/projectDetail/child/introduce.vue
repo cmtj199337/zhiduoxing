@@ -4,17 +4,12 @@
 			<img src="./jieshaotu.png">
 		</div>
 		<div class="jtext">
-			<p>据《报告》数据披露，蚂蚁金服旗下网商银行已成功为650万小微经营者提供超过8000亿贷款，更多蓝领、大学生、进城务工人员开启了精彩人生;2000万人通过芝麻信用获得了金融机构的授信，累计总额1000亿元</p>
+			<p>{{info}}</p>
 		</div>
-		<!-- <footer class="foot">
-			<span class="bm1"><img src="./shoucang.png">收藏</span>
-			<span class="bm2"><img src="./fenxiang.png">分享</span>
-			<span class="bm3"><img src="./baoming.png"><p class="bm">我要报名</p></span>
-		</footer> -->
 		<div class="end">
 			<ul>
-				<li><span><img src="./tongg@2x.png">审核通过</span></li>
-				<li><span><img src="./butongg@2x.png">审核不通过</span></li>
+				<li @click="assess(pass)"><span><img src="./tongg@2x.png">审核通过</span></li>
+				<li @click="assess(unps)"><span><img src="./butongg@2x.png">审核不通过</span></li>
 			</ul>
 		</div>
 	</div>
@@ -28,11 +23,45 @@
 	  	},
 		data () {
 		    return {
-		    	
+		    	info:[],
+		    	pass:'/api/private/getLowPApprove',
+	  			unps:'/api/private/getLowPRefuse'
 		    }
 	  	},
+	  	mounted(){
+	  		this.$nextTick(function(){
+	  			this.showInfo()
+	  		})
+	  	},
 	  	methods:{
-	  		
+	  		showInfo(){
+	  			this.$http.get('/api/public/getProjectIntro',{
+	  				params:{
+	  					id:this.$route.query.projectId
+	  				}
+	  			}).then( response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.info = res.data
+	  					if(this.info.regularType == '0'){
+	  						this.serverTimeFlag = true
+	  					}
+	  				}
+	  			})
+	  		},
+	  		assess(way){
+	  			this.$http.get(way,{
+					params:{
+						projectId:this.$route.query.projectId
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.$message.success("审核成功")
+						this.$router.go(-1)
+					}
+				})
+			},
 	  	}
 
 	}

@@ -1,48 +1,32 @@
 <template>
 	<div class="checkpend">
-			<div class="kong"></div>
-			<div class="header">
-				<ul>
-					<li v-for="(item,index) in tabs">
-					<span :class="{active: index == iscur }" @click="toggle(index)">{{item.type}}</span>
-					</li>
-				</ul>
-			</div>
-			<div class="main" @click="toAddress({path: '/myprojectDetails'})">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<img class="zz1" src="./quan@2x.png">
-			<img class="zz2" src="./shouc@2x.png">
-			<img class="zz3" src="./quan@2x.png">
-			<ul class="te">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
+		<div class="kong"></div>
+		<div class="header">
+			<ul>
+				<li v-for="(item,index) in tabs">
+				<span :class="{active: index == iscur }" @click="toggle(index)">{{item.type}}</span>
+				</li>
 			</ul>
-			<ul class="te2">
-			<li class="cc1">智多星项目名称</li>
-			<li class="cc3">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-			</div>
-
-			<div class="main1">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<img class="zz1" src="./quan@2x.png">
-			<img class="zz4" src="./wdsc@2x.png">
-			<img class="zz3" src="./quan@2x.png">
-			<ul class="te">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">智多星项目名称</li>
-			<li class="cc3">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-			</div>
+		</div>
+		<div class="main" v-for="item in list">
+			<router-link :to="{path:'myprojectDetails',query:{projectId:item.projectId}}">
+				<span>
+					<img src="./banner@2x.png" >
+					<img src="./teb2.png" >
+					<img class="zz1" src="./quan@2x.png">
+					<img class="zz2" src="./shouc@2x.png">
+					<img class="zz3" src="./quan@2x.png">
+					<ul class="te">
+						<li class="cc1">北京市朝阳区</li>
+						<li class="cc2">40/100</li>
+					</ul>
+					<ul class="te2">
+						<li class="cc1">智多星项目名称</li>
+						<li class="cc3">2017/05/02-2017/05/02</li>
+					</ul>
+				</span>
+			</router-link>
+		</div>
 	</div>
 </template>
 <script>
@@ -57,15 +41,34 @@
 				 	{type: '进行中'},
 				 	{type: '已结束'}
 				],
+				list:[],
+				page:1
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView(this.page)
+			})
 		},
 		methods:{
 			toggle(index) {
 		    	this.iscur = index;
+		    	//根据项目的6个状态。待启动以后
+		    	this.page = index + 1
+		    	this.listView(this.page)
 		    },
-		    toAddress(path){
-                this.$router.push(path)
-            }
+		    listView(status){
+		    	this.$http.get('/api/private/getLowTeamPList',{
+		    		params:{
+		    			projectStatus:status
+		    		}
+		    	}).then( response => {
+		    		let res = response.data
+		    		if(res.result == 0){
+		    			this.list = res.data
+		    		}
+		    	})
+		    }
 		}
 	}
 </script>

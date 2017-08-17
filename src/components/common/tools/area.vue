@@ -5,7 +5,7 @@
         </div>
         <div class="usertext right">
         	<span>所在地区</span>
-			<select v-model="f.p" @change="selpro" placehoder="fasdf">
+			<select v-model="f.p" @change="selpro">
 				<option :value="i" v-for="(v,i) in pro">{{v.name}}</option>
 			</select>
 			<img src="./right.png">
@@ -61,8 +61,9 @@
 </style>
 
 <script>
-// import data from "./data";
+
 export default {
+	props:['province','citites'],
 	data(){
 		return {
            data:[],

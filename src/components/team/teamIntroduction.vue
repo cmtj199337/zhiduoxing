@@ -6,51 +6,51 @@
 		 	<swipe-item><img src="./banner@2x.png" alt=""></swipe-item>
 		 	<swipe-item><img src="./banner@2x.png" alt=""></swipe-item>
 		</swipe>
-			<div class="kong"></div>
+		<div class="kong"></div>
 
-			<div class="header1">
-            <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
-        	</div>
-			<div class="usertext">
-			<span>名称：志多星团队</span>
-			</div>
-			<div class="usertext">
-			<span>团队编号：123</span>
-			</div>
-			<div class="usertext">
-			<span>团队口号：倡导无私奉献新风尚</span>
-			</div>
-			<div class="usertext">
-			<span>上级团队：志愿者联合会</span>
-			</div>
-			<div class="usertext">
-			<span>团队总志愿时长：720小时</span>
-			</div>
-			<div class="usertext">
-			<span>服务类别：关爱服务</span>
-			</div>
-			<div class="usertext">
-			<span>团队类型：党政机关</span>
-			</div>
-			<div class="usertext">
-			<span>注册日期：2017-05-10</span>
-			</div>
-			<div class="usertext">
-			<span>团队管理员：吴彦祖</span>
-			</div>
-			<div class="usertext">
-			<span>联系电话：12345678912</span>
-			</div>
-			<div class="usertext">
-			<span>团队地址：北京市朝阳区四惠东</span>
-			</div>
-			
-	        <div class="end">
-				<ul>
-					<li><span><img src="./tongg@2x.png">审核通过</span></li>
-					<li><span><img src="./butongg@2x.png">审核不通过</span></li>
-				</ul>
-			</div>
+		<div class="header1">
+        	<h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
+    	</div>
+		<div class="usertext">
+			<span>名称：{{info.teamName}}</span>
+		</div>
+		<div class="usertext">
+			<span>团队编号：{{info.teamId}}</span>
+		</div>
+		<div class="usertext">
+			<span>团队口号：{{info.teamSlogan}}</span>
+		</div>
+		<div class="usertext">
+			<span>上级团队：{{info.parentTeamName}}</span>
+		</div>
+		<div class="usertext">
+			<span>团队总志愿时长：{{info.serverDuration}}</span>
+		</div>
+		<div class="usertext">
+			<span>服务类别：{{info.serverType}}</span>
+		</div>
+		<div class="usertext">
+			<span>团队类型：{{info.teamType}}</span>
+		</div>
+		<div class="usertext">
+			<span>注册日期：{{info.registrationDate}}</span>
+		</div>
+		<div class="usertext">
+			<span>团队管理员：{{info.teamManager}}</span>
+		</div>
+		<div class="usertext">
+			<span>联系电话：{{info.contactNumber}}</span>
+		</div>
+		<div class="usertext">
+			<span>团队地址：{{info.teamAddress}}</span>
+		</div>
+		
+        <div class="end">
+			<ul>
+				<li @click="assess(2)"><span><img src="./tongg@2x.png">审核通过</span></li>
+				<li @click="assess(3)"><span><img src="./butongg@2x.png">审核不通过</span></li>
+			</ul>
+		</div>
 	</div>
 </template>
 <script>
@@ -67,9 +67,41 @@ import{ Swipe,SwipeItem}from'c-swipe';
 		data(){
 			return {
 				index:0,
+				info:[]
 			}
 		},
-
+		mounted(){
+			this.$nextTick(function(){
+				this.getInfo()
+			})
+		},
+		methods:{
+			getInfo(){
+				this.$http.get('/api/public/getTeamDetail',{
+					params:{
+						teamId:this.$route.query.teamId
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.info = res.data
+					}
+				})
+			},
+			assess(way){
+				this.$http.get('/api/private/updateTeamStatus',{
+					params:{
+						status:way,
+						teamIds:this.info.teamId
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.$message.success("审核成功")
+					}
+				})
+			}
+		}
 	}
 </script>
 <style scoped>
@@ -151,5 +183,8 @@ span{
 	display:inline;
 	vertical-align:middle;
 	margin-right:0.3rem;
+}
+.teamIntroduction{
+	padding-bottom:20%;
 }
 </style>

@@ -266,7 +266,7 @@ const router = new Router({
 		},
 		//团队-下级
 		{
-			path: '/junior/team',
+			path: '/juniorteam',
 			component:require('../components/team/junChild/team.vue')
 		},
 		{
@@ -275,7 +275,7 @@ const router = new Router({
 		},
 		//项目-下级
 		{
-			path: '/junior/project',
+			path: '/juniorproject',
 			component:require('../components/team/junChild/project.vue')
 		},
 		//志愿者-下级
