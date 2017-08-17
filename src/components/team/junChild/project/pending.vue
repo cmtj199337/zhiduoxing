@@ -17,12 +17,12 @@
 					<img class="zz2" src="./shouc@2x.png">
 					<img class="zz3" src="./quan@2x.png">
 					<ul class="te">
-						<li class="cc1">北京市朝阳区</li>
-						<li class="cc2">40/100</li>
+						<li class="cc1">{{item.projectAddress}}</li>
+						<li class="cc2">{{item.yotNum}}/{{item.honNum}}</li>
 					</ul>
 					<ul class="te2">
-						<li class="cc1">智多星项目名称</li>
-						<li class="cc3">2017/05/02-2017/05/02</li>
+						<li class="cc1">{{item.projectName}}</li>
+						<li class="cc3">{{item.projectTime}}</li>
 					</ul>
 				</span>
 			</router-link>
@@ -42,7 +42,7 @@
 				 	{type: '已结束'}
 				],
 				list:[],
-				page:1
+				page:3
 			}
 		},
 		mounted(){
@@ -54,7 +54,7 @@
 			toggle(index) {
 		    	this.iscur = index;
 		    	//根据项目的6个状态。待启动以后
-		    	this.page = index + 1
+		    	this.page = index + 3
 		    	this.listView(this.page)
 		    },
 		    listView(status){
@@ -93,6 +93,9 @@
 	background:#F5F5F5;
 	padding:0.2rem;
 	
+}
+.main a{
+	color:#000;
 }
 .main span{
 	margin:0.4rem;

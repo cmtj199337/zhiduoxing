@@ -27,6 +27,10 @@ Vue.use(Infiniteloading)
 
 import './config/validate.js'
 
+// import Easemob from 'easemob-websdk'
+// // Vue.use(Easemob)
+// require('easemob-websdk'); 
+
 import Base from './styles/bace.css'
 // import 'weui/dist/style/weui.min.css'
 

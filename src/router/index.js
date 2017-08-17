@@ -280,7 +280,7 @@ const router = new Router({
 		},
 		//志愿者-下级
 		{
-			path: '/junior/volunteer',
+			path: '/juniorvolunteer',
 			component:require('../components/team/junChild/volunteer.vue')
 		},
 		//下级团队项目
@@ -442,7 +442,10 @@ const router = new Router({
 			path: '/ser1',
 			component:require('../components/aaaaaaa/ser.vue')
 		},
-		
+		{
+			path: '/im',
+			component:require('../components/Im/im.vue')
+		},
 	],
 	mode:'hash'
 })

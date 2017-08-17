@@ -11,57 +11,19 @@
 			</div>
 			<div class="kong"></div>
 			<div class="header2">
-				<ul @click="toAddress({path: '/personalData'})">
-					<span class="item-check-btn list-btn">
+				<ul >
+<!-- 					<span class="item-check-btn list-btn">
 				        <svg class="icon icon-ok"></svg>
-				    </span>
-					<li style="display:flex;"><img src="../tou1@2x.png" ><p>利好</p></li>
-					<li><p>200小时</p></li>
-					<li><p class="zz1">禁用</p></li>
-				</ul>	
-				<ul @click="toAddress({path: '/personalData'})">
-					<span class="item-check-btn list-btn">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
-					<li style="display:flex;"><img src="../tou2@2x.png" ><p>张晓明</p></li>
-					<li><p>200小时</p></li>
-					<li><p class="zz2">解禁</p></li>
-				</ul>	
-				<ul @click="toAddress({path: '/personalData'})">
-					<span class="item-check-btn list-btn check">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
-					<li style="display:flex;"><img src="../tou1@2x.png" ><p>张大大</p></li>
-					<li><p>200小时</p></li>
-					<li><p class="zz1">禁用</p></li>
-				</ul>	
-				<ul @click="toAddress({path: '/personalData'})">
-					<span class="item-check-btn list-btn">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
-					<li style="display:flex;"><img src="../tou2@2x.png"><p>李太白</p></li>
-					<li><p>200小时</p></li>
-					<li><p class="zz2">解禁</p></li>
-				</ul>	
-				<ul @click="toAddress({path: '/personalData'})">
-					<span class="item-check-btn list-btn">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
-					<li style="display:flex;"><img src="../tou1@2x.png" ><p>张大大</p></li>
-					<li><p>200小时</p></li>
-					<li><p class="zz1">禁用</p></li>
-				</ul>	
-				<ul @click="toAddress({path: '/personalData'})">
-					<span class="item-check-btn list-btn">
-				        <svg class="icon icon-ok"></svg>
-				    </span>
-					<li style="display:flex;"><img src="../tou2@2x.png" ><p>李太白</p></li>
-					<li><p>200小时</p></li>
-					<li><p class="zz2">解禁</p></li>
-				</ul>	
+				    </span> -->
+				    <!-- <router-link :to="{path:'personalData',query:{volunteerId:1}}"> -->
+						<li style="display:flex;"><img src="../tou1@2x.png" ><p>利好</p></li>
+						<li><p>200小时</p></li>
+						<li><p class="zz1">禁用</p></li>
+					<!-- </router-link> -->
+				</ul>
 			</div>
 		</div>
-		<div class="end">
+<!-- 		<div class="end">
 			<ul>
 				<li>全选</li>
 				<li><span><img src="../butongg@2x.png" >禁用</span></li>
@@ -70,7 +32,7 @@
 			<span style="top:28%" class="item-check-btn list-btn">
 		        <svg class="icon icon-ok"></svg>
 		    </span>		
-		</div>
+		</div> -->
 	</div>
 </template>
 <script>

@@ -15,7 +15,7 @@
 			</div>
 			<div class="header2">
 				<ul>
-					<li @click="toAddress({path: '/junior/volunteer'})">
+					<li @click="toAddress({path: '/juniorvolunteer'})">
 						<img src="./c@2x.png" class="zhiyuan"><b>{{info.voNum}}</b><p>志愿者总人数（人）</p>
 					</li>
 					<li>
