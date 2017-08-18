@@ -9,36 +9,12 @@
 			</ul>
 		</div>
 		<div class="header2">
-			<ul>
-				<li class="zz1"><img src="./tou1@2x.png" ><p>利好</p></li>
-				<li><p>200小时</p></li>
-				<li><p class="zz2">2017/06/06</p></li>
+			<ul v-for="item in list">
+				<li class="zz1"><img :src="item.icon" ><p>{{item.name}}</p></li>
+				<li><p>{{item.serHour}}</p></li>
+				<li><p class="zz2">{{item.crtDate}}</p></li>
 			</ul>	
-			<ul>
-				<li class="zz1"><img src="./tou2@2x.png" ><p>张晓明</p></li>
-				<li><p>2017/06/06</p></li>
-				<li><p class="zz2">2017/06/06</p></li>
-			</ul>	
-			<ul>
-				<li class="zz1"><img src="./tou1@2x.png" ><p>利好</p></li>
-				<li><p>200小时</p></li>
-				<li><p class="zz2">2017/06/06</p></li>
-			</ul>	
-			<ul>
-				<li class="zz1"><img src="./tou2@2x.png"><p>张晓明</p></li>
-				<li><p>200小时</p></li>
-				<li><p class="zz2">2017/06/06</p></li>
-			</ul>	
-			<ul>
-				<li class="zz1"><img src="./tou1@2x.png" ><p>利好</p></li>
-				<li><p>200小时</p></li>
-				<li><p class="zz2">2017/06/06</p></li>
-			</ul>	
-			<ul>
-				<li class="zz1"><img src="./tou2@2x.png" ><p>张晓明</p></li>
-				<li><p>200小时</p></li>
-				<li><p class="zz2">2017/06/06</p></li>
-			</ul>	
+			
 		</div>
 	</div>
 </template>
@@ -53,9 +29,27 @@
 	  	},
 		data(){
 			return {
-				
+				list:[]
 			}
 		},
+		mounted(){
+			this.getInfo()
+		},
+		methods:{
+			getInfo(){
+				let userId=localStorage.getItem('userId')
+				this.$http.get('/api/private/allVoDetailList',{
+					params:{
+						id:userId
+					}
+				}).then(response=>{
+					let res=response.data
+					if(res.result==0){
+						this.list=res.data
+					}
+				})
+			}
+		}
 
 	}
 </script>
@@ -72,6 +66,11 @@
 }
 .zz1{
 	display:flex;
+}
+.zz1 img{
+	width:2rem;
+	height:2rem;
+	border-radius:1.1rem;
 }
 .zz2{
 	text-align:right;

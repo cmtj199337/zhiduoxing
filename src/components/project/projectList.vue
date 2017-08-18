@@ -1,78 +1,25 @@
 <template>
 	<div class="projectList">
 		<headerTip message="项目列表" goBack="true"></headerTip>
-		<div class="main">
+		<div class="main" v-for="item in list">
 			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
+			<img :src="item.picUrl" class="bg">
+			<img src="./teb2.png" class="bg2">
 			<ul class="te">
-			<li class="cc1">志多星项目</li>
+			<li class="cc1">{{item.proName}}</li>
 			</ul>
 			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
+			<li class="cc1">{{item.provinceName}}{{item.cityName}}</li>
+			<li class="cc2">{{item.actualNum}}/{{item.planNum}}</li>
 			<li class="cc3">招募中</li>
 			</ul>
 			<ul class="te2">
 			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
+			<li class="cc4">{{item.startDate}}-{{item.endDate}}</li>
 			</ul>
 			</span>
 		</div>
-		<div class="main">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3">进行中</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-		</div>
-		<div class="main">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3">已结束</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-		</div>
-		<div class="main">
-			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3">待启动</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-		</div>
+		
 	</div>
 </template>
 <script>
@@ -84,12 +31,40 @@
 	  	},
 		data(){
 			return {
+				list:[]
 			}
 		},
+		mounted(){
+			this.getInfo()
+		},
+		methods:{
+			getInfo(){
+				let userId=localStorage.getItem('userId')
+				this.$http.get('/api/private/allProjectDetailList',{
+					params:{
+						id:userId
+					}
+				}).then(response=>{
+					let res=response.data
+					if(res.result==0){
+						this.list=res.data
+					}
+				})
+			}
+		}
 
 	}
 </script>
 <style scoped>
+.bg{
+	height:8rem;
+	border-top-left-radius:0.3rem;
+	border-top-right-radius:0.3rem;
+}
+.bg2{
+	border-bottom-left-radius:0.3rem;
+	border-bottom-right-radius:0.3rem;
+}
 .main{
 	background:#F5F5F5;
 	padding:0.2rem;

@@ -5,19 +5,19 @@
 	<div class="header">
 		<div class="t1">
 			<img src="./name.png" alt="">
-			<p>真实姓名</p><input type="text" name="" placeholder="吴彦祖" style="border:none">
+			<p>真实姓名</p><input type="text" name="" placeholder="吴彦祖" style="border:none" v-model="trueName">
 		</div>
 		<div class="t1">
 			<img src="./sex.png" alt="">
-			<p>性别</p><input type="text" name="" placeholder="男" style="border:none">
+			<p>性别</p><input type="text" name="" placeholder="男" style="border:none" >
 		</div>
 		<div class="t1">
 			<img src="./type.png" alt="">
-			<p>身份证号</p><input type="text" name="" placeholder="12345678901" style="border:none">
+			<p>身份证号</p><input type="text" name="" placeholder="12345678901" style="border:none" v-model="idNo" >
 		</div>
 	</div>	
 	<div class="jieshu">
-		<p>提交</p>
+		<p @click="isTijiao">提交</p>
 		</div>
   </div>  
 </template>
@@ -32,11 +32,28 @@
 	  	}, 
 	 	data () {
 		    return {
-		    	
+		    	trueName:'',
+		    	idNo:''
 		    }
 	  	},
 	  	methods:{
-	  		
+	  		isTijiao(){
+	  			this.$http.post('/api/private/checkFamilyMember',{
+	  				trueName:this.trueName,
+	  				idNo:this.idNo
+	  			},{
+	  				emulateJSON:true
+	  			}).then(response=>{
+	  				let res=response.data
+	  				console.log(res)
+	  				if(res.result == 0){
+	  				this.$message.success('添加成功')
+	  				}else{
+	  					this.$message.error('查无此人')
+	  				}
+
+	  			})
+	  		}
 	  	}
 	}
 </script>
@@ -71,8 +88,8 @@
 }
 .t1 img{
 	margin-top: 0.8rem;
-	height: 1.3rem;
 	width: 1.3rem;
+	height: 1.6rem;
 }
 .t2{
 	background: #F5F5F5;

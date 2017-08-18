@@ -22,20 +22,20 @@
 		</div>
 		<div class="header4">
 		<ul>
-			<li><span>
+			<li @click="toAddress({path: '/shopDetail'})"><span>
 				<img src="./a1.png">
 			</span>
 			<p>志愿者短T</p>
 			<p class="price"><img src="./xingbi.png">300</p>
 			</li>
-			<li class="cen">
+			<li class="cen" @click="toAddress({path: '/shopDetail'})">
 			<span>
 				<img src="./a2.png">
 			</span>
 			<p>环保帆布包</p>
 			<p class="price"><img src="./xingbi.png">300</p>
 			</li>
-			<li><span>
+			<li @click="toAddress({path: '/shopDetail'})"><span>
 				<img src="./a3.png">
 			</span>
 			<p>手账本</p>
@@ -56,17 +56,17 @@
 			Swipe,
 	  		SwipeItem,
 	  		headerTip
-
 	  	},
 		data () {
 		    return {
-		    index:0,
+		    	index:0,
 		    }
-	  	} 
-        
-   
-
-
+	  	},
+	  	methods:{
+	  		toAddress(path){
+                this.$router.push(path)
+            }
+	  	}
 	}
 </script>
 <style scoped>

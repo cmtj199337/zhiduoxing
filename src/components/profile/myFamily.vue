@@ -6,11 +6,11 @@
 	<ul>
 	<li>
 	<span class="left">
-	<p ><b>3</b></p> 
+	<p ><b>{{list.familyNum}}</b></p> 
 	<p >家庭成员（人）</p>
 	</span>
 	<span>
-	<p><b>500</b></p> 
+	<p><b>{{list.serverTime}}</b></p> 
 	<p>志愿总时长（小时）</p>
 	</span>
 	</li>
@@ -18,24 +18,12 @@
 	</div>
 	<div class="main">
 	<ul>
-	<li>
-	<img src="./toux.png" class="tt">
-	<p class="hd"><span>张北影</span><span class="bj">编辑</span></p>
-	<p><span>志愿时长</span>  <span>1200小时</span></p>
-	<p><span>身份证号</span>  <span>123123*******8901</span><img src="./shanchu.png"></p>
-	</li>
-	<li>
-	<img src="./toux.png" class="tt">
-	<p class="hd"><span>张北影</span><span class="bj">编辑</span></p>
-	<p><span>志愿时长</span>  <span>1200小时</span></p>
-	<p><span>身份证号</span>  <span>123123*******8901</span><img src="./shanchu.png"></p>
-	</li>
-	<li>
-	<img src="./toux.png" class="tt">
-	<p class="hd"><span>张北影</span><span class="bj">编辑</span></p>
-	<p><span>志愿时长</span>  <span>1200小时</span></p>
-	<p><span>身份证号</span>  <span>123123*******8901</span><img src="./shanchu.png"></p>
-	</li>
+		<li v-for="item in list.wxFamilyDtoList">
+			<img src="./toux.png" class="tt">
+			<p class="hd"><span>{{item.trueName}}</span><span class="bj">编辑</span></p>
+			<p><span>志愿时长</span>  <span>{{item.serverDuration}}</span></p>
+			<p><span>身份证号</span>  <span>{{item.idNo}}</span><img src="./shanchu.png" class="shanchu"></p>
+		</li>
 	</ul>
 	</div>
 
@@ -53,12 +41,24 @@
 	  	}, 
 	 	data () {
 		    return {
-		    	
+		    	list:[]
 		    }
+	  	},
+	  	mounted(){
+	  		this.getInfo()
 	  	},
 	  	methods:{
 	  		toAddress(path){
                 this.$router.push(path)
+            },
+            getInfo(){
+            this.$http.get('/api/private/getMyFamily').then(response=>{
+            	let res=response.data
+            	console.log(res)
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  				}
+            })
             }
 	  	}
 	}
@@ -83,10 +83,11 @@
 .header ul li{
 	margin:0.2rem 0.6rem;
 	text-align:center;
-	padding: 1.3rem 0rem;		
+	padding: 1.1rem 0rem;		
 	background: #FFFFFF;
 	display:flex;
-	border-radius:5px;
+	border-radius:0.3rem;
+	position:relative;
 	
 }
 .header ul li span{
@@ -94,48 +95,51 @@
 	width: 50%;
 }
 .header ul li span p b{
-	font-size:1.2rem;
+	font-size:1.4rem;
 	color:#43B7B5;
+	font-weight: 400;
 }
 .header ul li .left{
 	border-right:1px #F5F5F5 solid;
 }
 .main ul li .hd{
-	margin-top:0.2rem;
-	margin-bottom:0.8rem;
+	margin-bottom:0.4rem;
 }
 .main ul li{
 	background:white;
-	margin:0rem 0.6rem 0.6rem 3rem;
-	border-radius:5px;
-	padding:0.6rem 0;
+	margin:0rem 0.6rem 0.6rem 2.5rem;
+	border-radius:0.4rem;
+	padding:0.55rem 0;
 	position:relative;
 }
 .main ul li p{
 
-	margin:0.4rem 0 0.4rem 2.5rem;
+	margin:0.3rem 0 0.3rem 2.5rem;
 
 }
 .main ul li .tt{
 	position:absolute;
-	width:20%;
-	left: -10%;
-	top:15%;
-}
-.main ul li p img{
-	width:6%;
-	display:inline;
-	vertical-align:middle;
-	margin-left:23%;
+	width:19%;
+	left: -9%;
+	top:0;
+	bottom: 0;
+	margin: auto;
 }
 .main ul li p .bj{
 	color:#FF9E14;
-	margin-left:68%;
+	right:5%;
+	position:absolute;
 }
 .h{
 	top:2.5%;
 	right:2%;
 	position:absolute;
+}
+.shanchu{
+	position:absolute;
+	right:5%;
+	width:4.5%;
+	bottom:20%;
 }
 
 </style>

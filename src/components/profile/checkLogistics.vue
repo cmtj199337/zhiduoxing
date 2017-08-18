@@ -8,8 +8,14 @@
 		</div>
 		<div class="t1">
 			<p><span class="t3">志愿者短T简约宽松男女同款</span></p> 
-			<p style="color:#B1B1B1"><span>兑换时间</span> <span>2017/06/02</span><span>12:00</span></p>
-			<p class="t2"><span><img src="./xingbi.png" alt=""></span> <span class="t4">300</span><span class="t5">x1</span></p>
+			<p style="color:#B1B1B1">
+				<span>兑换时间</span>
+				<span style="padding-left:0.3rem">2017/06/02</span>
+				<span style="padding-left:0.3rem">12:00</span></p>
+			<p class="t2">
+				<span><img src="./xingbi.png" alt=""></span>
+				<span class="t4">300</span><span class="t5">x1</span>
+			</p>
 		</div>
 	</div>
 	<div class="kong"></div>
@@ -92,6 +98,7 @@
 }
 .t4{
 	color: #4ABAB8;
+	text-indent: 0.2rem;
 }
 .t5{
 	margin-left: 12rem;

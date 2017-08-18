@@ -70,9 +70,11 @@
 		  					console.log(res)
 		  					if(res.result==0){
 			  					this.$message.success('已发送')
+			  					this.$refs.timerbtn.start()
 		  					}
 		  					else{
 		  						this.$message.error('未发送')
+		  						this.$refs.timerbtn.stop()
 		  					}
      					})
      		},
@@ -94,6 +96,7 @@
      					})
      		},
      		isTijiao(){
+     			if(this.newPwd==this.reNewPassword){
      			this.$http.post('/api/public/checkVerification',{
      						verification:this.verification,
      						mobileNo:this.mobileNo
@@ -117,9 +120,12 @@
 			  					
 		  					}
      				})}else{
-     					this.$message.error('验证码错误,无法修改')
+     					this.$message.error('验证码错误')
      				}
 		  				})
+     		}else{
+     			this.$message.error('两次密码不一致')
+     		}
      					
      		},
      		closeTip(){

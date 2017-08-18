@@ -6,20 +6,20 @@
 			<div class="header1">
 			<ul>
 				<li @click="toAddress({path: '/bulletedList'})">
-					<img src="./a@2x.png"><b>27</b><p>团队总数（个）</p>
+					<img src="./a@2x.png" style="width:20%"><b>{{list.teamNum}}</b><p>团队总数（个）</p>
 				</li>
 				<li @click="toAddress({path: '/projectList'})">
-					<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
+					<img src="./b@2x.png"><b>{{list.proNum}}</b><p>项目总数（个）</p>
 				</li>
 				</ul>
 			</div>
 			<div class="header2">
 			<ul>
 				<li @click="toAddress({path: '/personnelList'})">
-					<img src="./c@2x.png" class="zhiyuan"><b>2000</b><p>志愿者总人数（人）</p>
+					<img src="./c@2x.png" class="zhiyuan"><b>{{list.voNum}}</b><p>志愿者总人数（人）</p>
 				</li>
 				<li>
-					<img src="./d@2x.png"><b>2200</b><p>志愿时长（小时）</p>
+					<img src="./d@2x.png"><b>{{list.serHour}}</b><p>志愿时长（小时）</p>
 				</li>
 				</ul>
 			</div>
@@ -36,12 +36,28 @@
 	  	},
 		data(){
 			return {
-				
+				list:[]
 			}
+		},
+		mounted(){
+			this.getInfo()
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
+            },
+            getInfo(){
+            	let userId=localStorage.getItem('userId')
+            	this.$http.get('/api/private/allTeamDetail',{
+            		params:{
+            			id:userId
+            		}
+            	}).then(response=>{
+            		let res=response.data
+            		if(res.result == 0){
+            			this.list = res.data
+            		}
+            	})
             }
 		}
 
@@ -49,7 +65,7 @@
 </script>
 <style scoped>
 .main{
-	background:#0000001a;
+	background:#f5f5f5;
 }
 .header1{
 	padding:0.3rem 0 0 0;
@@ -71,7 +87,7 @@ border-radius:5px;
 
 }
 .header1 ul li img{
-	width:22%;
+	width:16%;
 	display:inline;
 	padding-right: 0.5rem;
 }
@@ -99,7 +115,7 @@ border-radius:5px;
 
 }
 .header2 ul li img{
-	width:22%;
+	width:16%;
 	display:inline;
 	padding-right: 0.5rem;
 }
@@ -108,9 +124,15 @@ border-radius:5px;
 	color: #555
 }
 .header2 ul li .zhiyuan{
-	width:13%;
+	width:11%;
 }
 .main li p{
 	padding-top: 0.3rem;
+}
+b{
+	color: #555;
+	font-weight: 400;
+	font-size: 1.5rem;
+	padding-left: 0.2rem
 }
 </style>

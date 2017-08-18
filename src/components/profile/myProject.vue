@@ -7,16 +7,15 @@
 		</div>
 		<div class="header">
 			<ul>
-				<li>全部</li>
-				<li>招募中</li>
-				<li>进行中</li>
-				<li>已结束</li>
+				<li v-for="(item,index) in tabs">
+					<span :class="{active: index == iscur }" @click="toggle(index)">{{item.type}}</span>
+				</li>
 			</ul>
 		</div>
 		<div class="project">
 			<span class="xm1" @click="toAddress({path: '/myprojectDetails'})">
 				<img src="./xiangm.png" >
-				<img src="./teb2.png" >
+				<img src="./teb2.png" style="border-radius:0.3rem">
 				<img src="./quan.png" class="p1">
 				<img src="./xin.png" class="p2">
 				<img src="./quan.png" class="p3">
@@ -27,7 +26,7 @@
 					<li style="text-align:right;">待启动</li>
 				</ul>
 				<ul class="te2">
-					<li>智多星项目名称</li>
+					<li>志多星项目名称</li>
 					<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
 				</ul>
 			</span>
@@ -44,7 +43,7 @@
 					<li style="text-align:right;">待启动</li>
 				</ul>
 				<ul class="te2">
-					<li>智多星项目名称</li>
+					<li>志多星项目名称</li>
 					<li style="text-align:right;color:#666">2017/05/02-2017/05/02</li>
 				</ul>
 			</span>
@@ -61,12 +60,22 @@
 	  	},
 		data(){
 			return {
+				iscur:0,
+                tabs:[
+				 	{type: '全部'},  
+				 	{type: '招募中'},
+				 	{type: '进行中'},
+				 	{type: '已结束'}
+				],
 			}
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
-            }
+            },
+            toggle(index) {
+		    	this.iscur = index
+		    }
 		}
 	}
 </script>
@@ -108,7 +117,10 @@
 .header ul li{
 	width:25%;
 	text-align:center;
-	padding-bottom:0.5rem;
+}
+.header ul li span{
+	display: inline-block;
+	padding-bottom:0.4rem;
 }
 
 .project{
@@ -117,9 +129,11 @@
 	
 }
 .project span{
-	margin:0.4rem;
-	display:inline-block;
-	position:relative;
+    margin: 0.4rem;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0px 1px 3px #ccc;
+    border-radius: 0.4rem;
 }
 .te{
 	display:flex;
@@ -172,5 +186,9 @@
 	position:absolute;
 	top:10%;
 	right:5%;
+}
+.active{
+	color: #43B7B5;
+    border-bottom: 3px solid #43B7B5;
 }
 </style>

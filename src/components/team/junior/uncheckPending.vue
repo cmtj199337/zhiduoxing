@@ -2,8 +2,9 @@
 <div class="uncheckPend">
 	<div class="main" @click="toAddress({path: '/myprojectDetails'})">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="../banner@2x.png" style="border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem" >
+			<img src="../teb2.png" style="border-radius: 0.3rem;">
 			<ul class="te">
 				<li class="cc1">志多星项目</li>
 			</ul>
@@ -20,8 +21,9 @@
 	</div>
 	<div class="main">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="../banner@2x.png" style="border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem"  >
+			<img src="../teb2.png" style="border-radius: 0.3rem;">
 			<ul class="te">
 			<li class="cc1">志多星项目</li>
 			</ul>
@@ -38,8 +40,9 @@
 	</div>
 	<div class="main">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="../banner@2x.png"  style="border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem">
+			<img src="../teb2.png" style="border-radius: 0.3rem;">
 			<ul class="te">
 			<li class="cc1">志多星项目</li>
 			</ul>
@@ -56,8 +59,9 @@
 	</div>
 	<div class="main">
 			<span>
-			<img src="../banner@2x.png" >
-			<img src="../teb2.png" >
+			<img src="../banner@2x.png" style="border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem" >
+			<img src="../teb2.png" style="border-radius: 0.3rem;">
 			<ul class="te">
 			<li class="cc1">志多星项目</li>
 			</ul>
@@ -91,9 +95,11 @@
 	
 }
 .main span{
-	margin:0.4rem;
-	display:inline-block;
-	position:relative;
+	margin: 0.4rem;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0px 1px 3px #ccc;
+    border-radius: 0.4rem;
 }
 .te{
 	position:absolute;

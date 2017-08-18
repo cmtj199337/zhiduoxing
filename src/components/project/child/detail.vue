@@ -10,7 +10,7 @@
 			<span>活动状态：招募中</span>
 		</div>
 		<div class="usertext">
-			<span>发布人：智多星</span>
+			<span>发布人：志多星</span>
 		</div>
 		<div class="usertext">
 			<span>服务对象：儿童</span>

@@ -7,10 +7,10 @@
 			<ul>
 
 				<li @click="toAddress({path: '/teammanage/project'})">
-					<img src="./b@2x.png"><b>100</b><p>项目总数（个）</p>
+					<img src="./b@2x.png"><b>{{list.proNum}}</b><p>项目总数（个）</p>
 				</li>
 				<li @click="toAddress({path: '/teammanage/volunteer'})">
-				<img src="./c@2x.png" class="zhiyuan" style="width:12%;"><b>2000</b><p>志愿者总人数（人）</p>
+				<img src="./c@2x.png" class="zhiyuan" style="width:12%;"><b>{{list.voNum}}</b><p>志愿者总人数（人）</p>
 				</li>
 				</ul>
 			</div>
@@ -18,7 +18,7 @@
 			<ul>
 				
 				<li>
-				<img src="./d@2x.png"><b>2200</b><p>志愿时长（小时）</p>
+				<img src="./d@2x.png"><b>{{list.serHour}}</b><p>志愿时长（小时）</p>
 				</li>
 				</ul>
 			</div>
@@ -35,12 +35,28 @@
 	  	},
 		data(){
 			return {
-				
+				list:[]
 			}
+		},
+		mounted(){
+			this.getInfo()
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
+            },
+            getInfo(){
+            	let userId=localStorage.getItem('userId')
+            	this.$http.get('/api/private/detail',{
+            		params:{
+            			id:userId
+            		}
+            	}).then(response=>{
+            		let res=response.data
+            		if(res.result==0){
+            			this.list=res.data
+            		}
+            	})
             }
 		}
 

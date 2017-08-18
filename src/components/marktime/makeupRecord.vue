@@ -7,7 +7,7 @@
 			<li>
 			<img src="./toux1.png"  class="touxiang">
 			<div class="m11">
-			<div class="mm1"><h3>智多星项目</h3>
+			<div class="mm1"><h3>志多星项目</h3>
 			<p>2017/05/20-2017/5/20</p></div>
 			<div class="mm2">
 			<span>

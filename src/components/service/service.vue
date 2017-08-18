@@ -48,7 +48,7 @@
 </script>
 <style scoped>
 .main{
-	background:#0000001a;
+	background:#f5f5f5;
 }
 .header1{
 	padding:0.3rem 0 0 0;

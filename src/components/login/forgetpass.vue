@@ -48,7 +48,7 @@
 				mobileNo:'',			//手机号
 		        newPwd:'',			//新密码
 		        showAlert:false,
-			    		       		      		
+			    flag:1,	       		      		
 		    }
 	  	},
 	  	components:{
@@ -60,25 +60,42 @@
      		send(){
      			this.$refs.timerbtn.setDisabled(true); //设置按钮不可用
 	            if(this.mobileNo){
-	            	this.$http.post('/api/public/sendShortMessage',{
-	            	mobileNo:this.mobileNo
-	            },{
-	            	emulateJSON:true
-	            }).then(response=>{
-	            	let res = response.data
+						this.$http.post('/api/public/checkMobileNo',{
+			    			mobileNo:this.mobileNo
+			    		},
+		    			{
+		    				emulateJSON:true
+		    			}).then(response =>{
+		  				let res = response.data
 		  				console.log(res)
-		  				if(res.result == 0){
+		  				if(res.result == 0){	
+		  					this.$message.error('请输入正确手机号')
+		  					return
+		  				}else{
+		  					this.$http.post('/api/public/sendShortMessage',{
+				            	mobileNo:this.mobileNo
+				            },{
+				            	emulateJSON:true
+				            }).then(response=>{
+				            	let res = response.data
+					  				console.log(res)
+				  				if(res.result == 0){
+									this.$refs.timerbtn.start()
+				  				}
+				  				else{
+				  					this.$refs.timerbtn.setDisabled(true);  				
+				  				}
+				            })
+		  				}
+		  			})	
+		        }else{
+					this.$message.error('请输入手机号')
+		    		return
+		        }
 
-		  				}
-		  				else{
-		  				this.$refs.timerbtn.start()		  				
-		  				}
-	            })
-	           
-	        }
      		},
      		isYanzheng(){
-     			if(this.verification,this.mobileNo){
+     			if(this.reNewPassword,this.mobileNo){
      				this.$http.post('/api/public/checkVerification',{
      						verification:this.verification,
      						mobileNo:this.mobileNo
@@ -97,50 +114,86 @@
      			}
      		},
      		
-	    		isTijiao(){
-	    			if(this.mobileNo,this.newPwd){
-	    				this.$http.post('/api/public/modifyPassword',{
-	    					mobileNo:this.mobileNo,
-	    					newPwd:this.newPwd
-	    				},{
-	    					emulateJSON:true
-	    				}).then(response=>{
-	    					let res = response.data
-	    					if(res.result ==0 ){
-								this.showAlert=true
-	  							this.alertText = '密码修改成功'
-	    					}
-	    					else if(res.result == 1){
-	    						this.showAlert=true
-	  							this.alertText = '密码修改失败'
-	    					}
-	    				}).error(()=>{
-	    						this.showAlert=true
-	  							this.alertText = '输入信息有误'
-	    				})}
-	  		},
-	  		 isRegister(){
-		    	if(this.mobileNo){
+    		isTijiao(){
+		    	if(!this.mobileNo){
+		    		this.$message.error('请输入手机号')
+		    		return
+		    	}else{
 		    		this.$http.post('/api/public/checkMobileNo',{
-		    			mobileNo:this.mobileNo
-		    		},
+			    			mobileNo:this.mobileNo
+			    		},
 		    			{
 		    				emulateJSON:true
 		    			}).then(response =>{
 		  				let res = response.data
 		  				console.log(res)
 		  				if(res.result == 0){	
-		  					this.$message.error('手机号未注册')
-		  				}else{
-						
+		  					this.$message.error('请输入正确手机号')
+		  					return
 		  				}
+		  				
 		  			})
-		    	}else{
-		    		
 		    	}
+
+		    	if(!this.verification){
+		    		this.$message.error('请输入验证码')
+		    		return
+		    	}
+
+		    	//验证码
+     			if(this.verification){
+     				this.$http.post('/api/public/checkVerification',{
+     						verification:this.verification,
+     						mobileNo:this.mobileNo
+     					},{
+     						emulateJSON:true
+     					}).then(response=>{
+     						let res = response.data
+		  					console.log(res)
+		  					if(res.result==0){
+			  					
+		  					}
+		  					else{
+		  						this.$message.error('验证码错误')
+		  						return
+		  					}
+     					})
+     			}
+
+     			if(!this.newPwd){
+		    		this.$message.error('请输入新密码')
+		    		return
+		    	}		    	
+		    	if(!this.reNewPassword){
+		    		this.$message.error('请输入确认密码')
+		    		return
+		    	}
+
+                //密码
+    			if(this.reNewPassword==this.newPwd){
+    				this.$http.post('/api/public/modifyPassword',{
+    					mobileNo:this.mobileNo,
+    					newPwd:this.newPwd
+    				},{
+    					emulateJSON:true
+    				}).then(response=>{
+    					let res = response.data
+    					if(res.result ==0 ){
+							this.showAlert=true
+  							this.alertText = '密码修改成功'
+    					}
+    					else{
+    						this.showAlert=true
+  							this.alertText = '密码修改失败'
+    					}
+    				})
+    			}else{
+					this.$message.error('两次密码输入不一致')
+				}
 	  		},
 	  		closeTip(){
                 this.showAlert = false;
+                this.$router.push('login')
             }
 	  	}
 	}

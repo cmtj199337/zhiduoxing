@@ -2,27 +2,27 @@
 	<div class="teamcenter">
 	<div style="height:2rem;"></div>
 	<!-- 头部 -->
-	<img class="topimge" src="./logo.png" >
+	<img class="topimge" :src="list.logo" >
 		<div class="topview">
 		<div>xxx</div>
 			<!-- <img src="./logo.png" > -->
-			<p style="font-size: 1rem">北京西站地区志愿服务</p>
+			<p style="font-size: 1rem">{{list.name}}</p>
 			<div>
-				<p><span class="count">120</span>小时</p>
+				<p><span class="count">{{list.serHour}}</span>小时</p>
 				<p class="title">志愿总时长</p>
 			</div>
 			<div>
-				<p><span class="count">200</span>人</p>
+				<p><span class="count">{{list.voNum}}</span>人</p>
 				<p class="title">团队人数</p>
 			</div>
 			<div>
-				<p>志多星</p>
+				<p>{{list.manager}}</p>
 				<p class="title">团队管理</p>
 			</div>
 			<hr>
 			<div style="width: 80%;text-align:left;">
 				<span>团队口号:</span>
-				<span>将志愿服务进行到底</span>
+				<span>{{list.slogan}}</span>
 			</div>
 		</div>
 
@@ -30,7 +30,7 @@
 		<div class="column">
 			<ul>
 				<li @click="toAddress({path: '/detailsOfTheTeam'})">
-					<img class="icon" src="./jbxx.png">
+					<img class="icon" src="/static/067/jbxx.png">
 					<span>基本信息</span>
 				</li>
 				<hr>
@@ -48,8 +48,8 @@
 
 		<div class="column">
 			<ul>
-				<li @click="toAddress({path: '/juniorTeamManagement'})">
-					<img class="icon" src="./xjtdgl.png">
+				<li @click="toAddress({path:'./juniorTeamManagement'})">
+					<img class="icon" src="./gl.png">
 					<span>下级团队管理</span>
 				</li>
 				<hr>
@@ -101,12 +101,30 @@
 	  	name: 'teamcenter',
 	 	data () {
 		    return {
-
+		    	list:[]
 		    }
-	  	},
+	  	}, 
+	  	mounted(){
+            	this.getInfo()
+	        },
 	  	methods: {
         	toAddress(path){
                 this.$router.push(path)
+            },
+           
+            getInfo(){
+            	let teamId = localStorage.getItem('userId')
+            	this.$http.get('/api/private/detail',{
+            		params:{
+            			id:teamId
+            		}
+            	}).then(response=>{
+            		let res=response.data
+            		if(res.result == 0){
+            			this.list = res.data
+            		}
+            	})
+
             }
         }
 	  
@@ -144,6 +162,7 @@ hr{
 	/*top: 50px;*/
 	margin:auto;
 	position: relative;
+	border-radius:3rem;
 }
 /*.topview img{
 	width: 6rem;

@@ -13,7 +13,7 @@
 				<li style="text-align:right;">待启动</li>
 			</ul>
 			<ul class="te2">
-				<li>智多星项目名称</li>
+				<li>志多星项目名称</li>
 				<li style="text-align:center;color:#666">2017/05/02-2017/05/02</li>
 			</ul>
 		</span>
@@ -30,7 +30,7 @@
 				<li style="text-align:right;">待启动</li>
 			</ul>
 			<ul class="te2">
-				<li>智多星项目名称</li>
+				<li>志多星项目名称</li>
 				<li style="text-align:center;color:#666">2017/05/02-2017/05/02</li>
 			</ul>
 		</span>

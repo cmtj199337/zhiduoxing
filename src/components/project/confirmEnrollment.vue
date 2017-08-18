@@ -7,7 +7,7 @@
 			<li>
 			<img src="./toux1.png"  class="touxiang">
 			<div class="m11">
-			<div class="mm1"><h3>智多星项目</h3>
+			<div class="mm1"><h3>志多星项目</h3>
 			<p style="width:100%;display:flex;"><span style="width:70%">志愿总时长<b style="color:#43B7B5">120小时</b></span><span style="width:30%;">报名人数<b style="color:#43B7B5">52人</b></span></p></div>
 			<div class="mm2">
 			<span>

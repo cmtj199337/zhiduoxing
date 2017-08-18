@@ -10,17 +10,20 @@
 			</div>
 			<div class="main" @click="toAddress({path: '/myprojectDetails'})">
 			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
+			<img src="./banner@2x.png" style="border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem"   >
+			<img src="./teb2.png" style="border-radius: 0.3rem;" >
 			<img class="zz1" src="./quan@2x.png">
 			<img class="zz2" src="./shouc@2x.png">
 			<img class="zz3" src="./quan@2x.png">
+			<img src="./erwei.png" style="position:absolute;width:4.5%;top:12%;right:6.8%;">
+			
 			<ul class="te">
 			<li class="cc1">北京市朝阳区</li>
 			<li class="cc2">40/100</li>
 			</ul>
 			<ul class="te2">
-			<li class="cc1">智多星项目名称</li>
+			<li class="cc1">志多星项目名称</li>
 			<li class="cc3">2017/05/02-2017/05/02</li>
 			</ul>
 			</span>
@@ -28,17 +31,19 @@
 
 			<div class="main1">
 			<span>
-			<img src="./banner@2x.png" >
-			<img src="./teb2.png" >
+			<img src="./banner@2x.png" style="border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem">
+			<img src="./teb2.png" style="border-radius: 0.3rem;" >
 			<img class="zz1" src="./quan@2x.png">
 			<img class="zz4" src="./wdsc@2x.png">
 			<img class="zz3" src="./quan@2x.png">
+			<img src="./erwei.png" style="position:absolute;width:4.5%;top:12%;right:6.8%;">
 			<ul class="te">
 			<li class="cc1">北京市朝阳区</li>
 			<li class="cc2">40/100</li>
 			</ul>
 			<ul class="te2">
-			<li class="cc1">智多星项目名称</li>
+			<li class="cc1">志多星项目名称</li>
 			<li class="cc3">2017/05/02-2017/05/02</li>
 			</ul>
 			</span>
@@ -92,9 +97,11 @@
 	
 }
 .main span{
-	margin:0.4rem;
-	display:inline-block;
-	position:relative;
+	margin: 0.4rem;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0px 1px 3px #ccc;
+    border-radius: 0.4rem;
 }
 .main1{
 	background:#F5F5F5;

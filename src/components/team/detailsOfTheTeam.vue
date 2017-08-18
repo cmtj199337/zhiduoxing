@@ -10,26 +10,24 @@
             <h4 class="texttitle"><span><img src="./zil@2x.png"></span>团队信息</h4>
         	</div>
 			<div class="usertext">
-			<span>团队名称：</span><input type="text" value="志多星团队">
+			<span>团队名称：</span><input type="text"  :placeholder="list.teamName" v-model="check.teamName">
 			</div>
 			<div class="usertext">
-			<span>团队口号：</span><input type="text" value="志愿改变人生">
+			<span>团队口号：</span><input type="text" :placeholder="list.teamIntro" v-model="check.teamIntro">
 			</div>
 			<div class="usertext">
-			<span>联络团队：</span><input type="text" value="志愿服务联合会">
+			<span>联络团队：</span><input type="text" :placeholder="list.conTeam" v-model="check.conTeam">
+			</div>
+			<div class="usertext bottom">
+				<span>团队种类：</span><select class="select" v-model="check.serType" :value="list.serType">
+					<option v-for="item in list.serList" :value="item.key" selected = "selected">{{item.value}}</option>
+				</select><img src="./bottom.png">
 			</div>
 			<div class="usertext">
-				<span>服务类别：</span>
-				<select name="" id="">
-					<option value="">初级团队</option>
-					<option value="">中级团队</option>
-				</select>
+			<span>组织管理员:</span><input type="text" :placeholder="list.teamManager" v-model="check.teamManager">
 			</div>
 			<div class="usertext">
-			<span>组织管理员:</span><input type="text" value=" 吴彦祖">
-			</div>
-			<div class="usertext">
-			<span>联系电话：</span><input type="text" value="1371293819">
+			<span>联系电话：</span><input type="text" :placeholder="list.conMob" v-model="check.conMob">
 			</div>
 
 			<div class="header2">
@@ -37,27 +35,27 @@
         	</div>
         	<div class="usertext">
 				<span>所在地区：</span>
-				<input type="text" value="北京市">
+				<input type="text" :placeholder="list.province" v-model="check.province">
 			</div>
 			<div class="usertext">
 				<span>所在区县：</span>
-				<input type="text" value="顺义区">
+				<input type="text" :placeholder="list.city" v-model="check.city">
 			</div>
 			<div class="usertext">
-				<input style="text-indent:0" type="text" value="组北京市顺义区二十里堡">
+				<input style="text-indent:0; margin-left:0;" type="text" :placeholder="list.address" v-model="check.address"> 
 			</div>
 
 			<div class="header3">
 	            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>团队简介</h4>
 	        </div>
 	        <div class="usertextend">
-	       		 <textarea name="" class="jianjie"></textarea>
+	       		 <textarea name="" class="jianjie" :placeholder="list.teamIntro" v-model="check.teamIntro"></textarea>
 	        </div>
 	        <div class="end">
 	        不超过100字
 	        </div>
 	        <div class="eee">
-        	<input type="button" name=""  class="next" value="确定">
+        	<p @click="isTijiao">确定</p>
         </div>
 	</div>
 </template>
@@ -71,9 +69,55 @@
 	  	},
 		data(){
 			return {
-				
+				list:[],
+				check:{
+					teamName:'',
+					teamIntro:'',
+					conTeam:'',
+					serType:'',
+					teamManager:'',
+					conMob:'',
+					province:'',
+					city:'',
+					address:'',
+					teamIntro:''
+				},
+				serList:[]
 			}
 		},
+		mounted(){
+			this.getInfo()
+		},
+		methods:{
+			getInfo(){
+				let userId=localStorage.getItem('userId')
+				this.$http.get('/api/private/teamDetail',{
+					params:{
+						id:userId
+
+					}
+				}).then(response=>{
+					let res =response.data
+					if(res.result==0){
+						this.list=res.data
+					}
+				})
+			},
+			isTijiao(){
+				if(!this.check){
+				this.$message.error('信息未填完整')
+			}else{
+				this.$http.post('/api/private/updateTeamInfo',this.check).then(response=>{
+					let res=response.data
+					console.log(res)
+					if(res.result==1){
+						this.$message.success('修改成功')
+					}
+
+				})
+			}
+			}
+		}
 
 	}
 </script>
@@ -88,24 +132,45 @@
 .header  span p{
 		font-size: 1.2rem;
 	}
+.bottom img{
+			width:1rem;
+			display: inline-block;
+			vertical-align: middle;
+		left: 45%;
+		top:40%;
+	}
+	.select{
+		width: 35%;
+		border: 0;
+	    margin: 0 auto;
+	    height: 2rem;
+	    font-size: 1rem;
+	    appearance:none;
+	    position: relative;
+	}
 .usertext a{
-	border: 0;
-	width: 100%;
-	height: 2.5rem;
-	line-height: 2.5rem;
-	font-size: 1rem;
-	display: inline-block;
-	color: #333;
-	text-indent: 0;
-	position: relative;
+	    border: 0;
+	    width: 100%;
+	    height: 2rem;
+		line-height: 2rem;
+	    font-size: 1rem;
+	    display: inline-block;
+	    color: #333;
+	    text-indent: 0;
+	    position: relative;
 	}
-	.usertext{
-		margin: 0 1rem 1.2rem 1rem;
-		position: relative;
+		.usertext{
+		margin: 0 1rem;
+		font-size: 1rem;
+		padding: 0.5rem 0;
 	}
+	.usertext img{
+			position: absolute;
+			right: 0;
+		}
 	.usertext input{
-		margin: 0;
-		width: 100%;
+		margin-top:0.2rem;
+		width:100%;
 		text-indent: 5rem;
 		margin-left:0.5rem;
 	}
@@ -126,13 +191,15 @@
 .kong{
 	background:#f6f6f9;
 	padding: 0.4rem;
-	margin: 0.4rem 0;
 	}
 	
 .usertextend textarea{
 	border: none; 
-	padding: 2.2rem 0;
-	width: 100%;
+	height:6rem;
+	width:100%;
+	margin:0.5rem 0; 
+	font-size:1rem;
+	text-indent:1rem;
 
 	}
 .end{
@@ -145,6 +212,15 @@
 	margin:0; 
 	background:#f6f6f9;
 	text-align: center;
+	}
+	.eee p{
+		width:55%;
+		padding:1rem 0;
+		margin: 0 auto;
+		background:#43B7B5;
+		border-radius:0.3rem;
+		text-align: center;
+		color:white;
 	}
 .next{
 	border:none;
@@ -161,4 +237,20 @@
 	top:2.5%;
 	font-size:1rem;
 	}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #000; opacity:1; 
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #000;opacity:1;
+}
+
+input:-ms-input-placeholder{
+    color: #000;opacity:1;
+}
+
+input::-webkit-input-placeholder{
+    color: #000;opacity:1;
+}
+.jianjie::-webkit-input-placeholder{color:#000;}
 </style>

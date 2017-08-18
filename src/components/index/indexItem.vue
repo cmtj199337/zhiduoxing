@@ -9,6 +9,7 @@
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
 		</swipe>
+		<img src="./zi.png" class="zi">
 		<div class="classify clearfix">
 			<div class="location"><p><img src="./weizhi.png">北京</p><input @click="toggle()" v-on:blur="changeCount()"class="search" type="text" placeholder="搜索" align="center"><img src="./sou.png" class="ss" v-show="isShow"></div>
 			<ul>
@@ -209,6 +210,14 @@
 
 <style scoped>
 	@import '../../styles/swipe.css';
+	.zi{
+		position:absolute;
+		top:7.8%;
+		width:62%;
+		left:0;
+		right: 0;
+		margin: auto;
+	}
 	.ss{
 		position:absolute;
 		width:4.5%;

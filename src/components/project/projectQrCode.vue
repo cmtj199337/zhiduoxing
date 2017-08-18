@@ -6,7 +6,7 @@
 	<div class="erwei"><img src="./weweima.png" alt=""></div>
 	<p >【中国滋根】数据管理新思路，唤醒沉睡动员力</p>	
        
-	<p >发布人：智多星</p>
+	<p >发布人：志多星</p>
 	  
 	<p >项目类型：应急救援</p>	
       

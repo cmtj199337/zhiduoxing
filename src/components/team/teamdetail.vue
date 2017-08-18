@@ -9,7 +9,7 @@
 		<div class="detail" style="background-color: #fff;">
 			<ul>
 				<li><img class="icon" src="./jbxx.png"><span style="font-size: 1rem;">团队介绍</span></li>
-				<li><span>名称:</span><span>智多星团队</span></li>
+				<li><span>名称:</span><span>志多星团队</span></li>
 				<li><span>团队编号:</span><span>123</span></li>
 				<li><span>团队口号:</span><span>倡导无私奉献新风尚</span></li>
 				<li><span>上级团队:</span><span>志愿者联合会</span></li>

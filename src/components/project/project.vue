@@ -22,7 +22,7 @@
 			<li class="cc2">40/100</li>
 			</ul>
 			<ul class="te2">
-			<li class="cc1">智多星项目名称</li>
+			<li class="cc1">志多星项目名称</li>
 			<li class="cc3">2017/05/02-2017/05/02</li>
 			</ul>
 			</span>
@@ -40,7 +40,7 @@
 			<li class="cc2">40/100</li>
 			</ul>
 			<ul class="te2">
-			<li class="cc1">智多星项目名称</li>
+			<li class="cc1">志多星项目名称</li>
 			<li class="cc3">2017/05/02-2017/05/02</li>
 			</ul>
 			</span>

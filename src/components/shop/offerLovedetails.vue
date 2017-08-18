@@ -7,7 +7,7 @@
 
 		<img src="./xiangm.png">
 		<div class="jindu">
-			<img src="./jindu.png">
+			<p><span></span></p>
 			<img src="./bq.png" class="bq"><p class="j1">65%</p>
 		</div>
 		<div class="jindu2">
@@ -78,20 +78,47 @@ p{
 	margin-bottom:1rem;
 	position:relative;
 }
+.jindu p span{
+	width:59%;
+	background:#43B7B6;
+	padding:0.15rem 0;
+	position:absolute;
+	border-radius:5px;
+	top:0;
+}
+.jindu p .s2{
+	width:38%;
+	background:#43B7B6;
+	padding:0.15rem 0;
+	position:absolute;
+	border-radius:5px;
+	top:0;
+}
+.jindu p{
+	width:95%;
+	background:#E6E6E6;
+	padding:0.15rem 0;
+	margin:0 auto; 
+	border-radius:5px;
+	position:relative;
+}
 .jindu .j1{
 	position: absolute;
-	bottom:180%;
 	left:55.5%;
+	top:-1.35rem;
+	font-size:0.8rem;
 	color:white;
-	font-size:0.6rem;
+	width:2rem;
+	background:none;
 }
 .jindu .j2{
 	position: absolute;
-	bottom:180%;
+	top:-1.37rem;
 	left:35.5%;
 	color:white;
-	
-	font-size:0.6rem;
+	font-size:0.8rem;
+	width:2rem;
+	background:none;
 }
 .bq{
 	position:absolute;

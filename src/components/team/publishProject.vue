@@ -5,17 +5,30 @@
 		<div class="header">
             <h4 class="texttitle"><span><img src="./zil@2x.png"></span>项目信息</h4>
         </div>
-        <div class="usertext tlo">
-			<a href="javascript:;"><span style="font-size:1rem;">项目图片<img src="./tlogo1.png" style="top:-0.5rem"></span></a>
+            <div class="usertext tlo" style="top:-0.5rem">
+				<a href="javascript:;">
+					<span>团队logo</span>
+					<el-upload
+					  class="avatar-uploader"
+					  action="/api/public/upload"
+					  :show-file-list="false"
+					  :on-success="handleAvatarSuccess"
+					  :before-upload="beforeAvatarUpload">
+					  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+					  <i v-else class="avatar-uploader-icon">
+					  	<img src="./tlogo1.png" alt="">
+					  </i>
+					</el-upload>
+				</a>
+			</div>
+		<div class="usertext">
+			<input type="password" placeholder="请输入项目名称" v-model="projectInfo.proNum" /><br />
 		</div>
 		<div class="usertext">
-			<input type="password" placeholder="请输入项目名称" /><br />
-		</div>
-		<div class="usertext">
-        	<input type="text" name="" placeholder="请输入联系人姓名">
+        	<input type="text" name="" placeholder="请输入联系人姓名"  v-model="projectInfo.contactName">
         </div>
         <div class="usertext">
-			<input type="tel" placeholder="请输入联系手机号" maxlength="11" />
+			<input type="tel" placeholder="请输入联系手机号" maxlength="11"  v-model="projectInfo.contactNumber" />
 		</div>
 		<div class="usertext right">
 			<a href="javascript:;"><span>服务类别:关爱服务<img src="./you@2x.png"></span></a>
@@ -27,14 +40,14 @@
 			<a href="javascript:;"><span>项目时间<img src="./you@2x.png"></span></a>
 		</div>
 		<div class="usertext">
-        	<input type="text" name="" placeholder="计划招募人数">
+        	<input type="text" name="" placeholder="计划招募人数"  v-model="projectInfo.jnumber">
         </div>
 		<div class="kong">
 		</div>
 
         <my-area @select="haha"></my-area>
 		<div class="usertext">
-       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字">
+       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字"  v-model="projectInfo.address">
         </div>
         <div class="usertext right">
 			<a href="javascript:;"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;">马哥波罗大厦<img src="./you@2x.png"></span></a>
@@ -49,12 +62,12 @@
             <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>项目介绍</h4>
         </div>
         <div class="usertextend">
-       		 <textarea name="" rows="5"></textarea>
+       		 <textarea name="" rows="5"  v-model="projectInfo.teamIntro"></textarea>
         </div>
         <div class="end">
         不超过100字
         </div>
-        <div class="kong">
+        <div class="kong">`
 		</div>
 
 		<div class="header3">
@@ -70,31 +83,44 @@
 			<a href="javascript:;"><span>不购买</span></a>
 		</div>
 		<div class="eee">
-        	<p>发布</p>
+        	<p @click="isTijiao">发布</p>
         </div>
 	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	import MyArea from '../../components/common/tools/area2.vue'
+	import UploadImg from '../../components/common/tools/uploadImg.vue'
 	export default{
 
 		name:'publishProject',
 		components:{
 	  		headerTip,
-	  		MyArea
+	  		MyArea,
+	  		UploadImg,
 	  	},
 		data(){
 			return {
 				projectInfo:{
 					area:'',
-				}
+					contactNumber:null,			//联系人电话
+					address:'',
+					teamIntro:'',
+					jnumber:'',
+					contactName:'',
+					proNum:'',
+
+				},
+				imageUrl:'',
 			}
 		},
 		methods:{
 			haha(d){
             	this.teamInfo.area = d
 			},
+			isTijiao(){
+				
+			}
 		}
 
 	}
@@ -116,7 +142,44 @@ span{
 		position: absolute;
 		right: 0;
 	}
-
+.tlo{
+		margin:0 1rem;
+		padding:0.9rem 0 0 0;
+		border:0;
+		border-bottom:1px #F5F5F5 solid;
+	}
+.tlo a{
+		border: 0;
+	    width: 3rem;
+	    height: 3rem !important;
+		line-height: 3rem !important;
+	    font-size: 1rem;
+	    display: inline-block;
+	    color: #333;
+	    text-indent: 0;
+	    position: relative;
+	}
+	.avatar-uploader{
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.avatar-uploader-icon {
+	    width: 3rem;
+	    height: 3rem;
+	    line-height: 3rem;
+	    border-radius: 50%;
+	    display: inline-block;
+	}
+	.avatar {
+	    width: 3rem;
+	    height: 3rem;
+	    border-radius: 50%;
+	    display: block;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	}
 .header1{
     border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
 }
@@ -142,14 +205,7 @@ span{
 		vertical-align: middle;
 		top: 32%;
 	}
-.tlo{
-	padding: 1rem 0;
-}
-.tlo img{
-	width:3rem;
-	display: inline-block;
-	vertical-align: middle;
-}
+
 .usertext a{
 	border: 0;
 	width: 100%;
