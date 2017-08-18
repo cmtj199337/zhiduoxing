@@ -13,34 +13,35 @@
 			</li>
 		</ul>
 		</div>
-		<div class="main">
+		<div class="project">
 			<span v-for="item in proList">
-			<router-link :to="{path:'myprojectDetails',query:{projectId:item.projectId}}">
-				<div class="maskwarp">
-					<img src="./xiangm.png" >
-					<p class="mask"></p>
+			<a href="javascript:;" @click="toAddress('myprojectDetails',item.projectId)">
+				<div class="bg">
+					<img src="./xiangm.png">
+					<ul class="info">
+						<li>{{item.projectAddress}}</li>
+						<li>{{item.yotNum}}/{{item.honNum}}</li>
+						<li>{{item.projectStatus}}</li>
+					</ul>
+					<dl class="icon">
+						<dd @click.stop="collect()">
+							<img v-if="item.collectionFlg == 1" src="./xin.png" style="margin-top:0.5rem">
+							<img v-else="item.collectionFlg == 0" src="./xin2.png" style="margin-top:0.5rem">
+						</dd>
+						<dd v-show="item.safeFlg == 1"><img src="./baoxian.png"></dd>
+					</dl>
 				</div>
-				<img src="./teb2.png" style="border-radius: 0.3rem;">
-				<img src="./quan.png" @click.stop="click" style="position:absolute;width:8%;top:8%;left:5%;">
-				<img src="./xin.png" style="position:absolute;width:5%;top:12%;left:6.5%;">
-				<img src="./quan.png" style="position:absolute;width:8%;top:8%;right:5%;">
-				<img src="./baoxian.png" style="position:absolute;width:5%;top:11%;right:6.5%;">
-				<ul class="te">
-					<li>{{item.projectAddress}}</li>
-					<li>50/100</li>
-					<li style="text-align:right;margin-right:0.4rem;">待启动</li>
-				</ul>
-				<ul class="te2">
+				<ul class="te2 clearfix">
 					<li>{{item.projectName}}</li>
 					<li style="text-align:right;color:#666">{{item.projectTime}}</li>
 				</ul>
-			</router-link>
+			</a>
 			</span>
 
-			<infinite-loading :on-infinite="projeckList" ref="infiniteLoading">
-				<span slot="no-more">
+			<infinite-loading :on-infinite="projeckList(current)" ref="infiniteLoading">
+				<i slot="no-more">
 					没有更多了...
-				</span>
+				</i>
 			</infinite-loading>
 		</div>
 		</form>
@@ -108,13 +109,15 @@
 			}
 		},
 		methods:{
-			toAddress(path){
-			    this.$router.push(path)
-			},
+			toAddress(url,item){
+		    	this.$router.push({path:url,query:{projectId:item}})
+		    },
 			toggle(index,v) {
 		    	this.iscur = index
-				this.current = index
 				this.currentView = v
+
+				this.current = index+3
+				this.projeckList(this.current)
 		    },
 			showToggle(){
             	this.isShow = !this.isShow
@@ -124,9 +127,10 @@
                     this.wrap = !this.wrap   
                 }  
             },
-		    projeckList(){
-		    	this.$http.post('/api/public/getProjectList',{
-		    		nowPage:Math.ceil(this.proList.length / 10) + 1
+		    projeckList(status){
+		    	let pages = Math.ceil(this.proList.length/10)+1;
+		    	this.$http.post('/api/public/getProjectList?nowPage='+pages,{
+		    		projectStatus:status
 		    	}).then(response => {
 		    		let res = response.data
 		    		if(res.result == 0){
@@ -156,7 +160,8 @@
 }
 .sousuo{
 	padding:0.8rem 0;
-	position:relative; 
+	position:relative;
+	background: #fff;
 }
 .search{
 	text-indent: 1.5rem;
@@ -188,6 +193,9 @@
 	top:38%;
 	left:93%;
 }
+.hh{
+	background: #fff;
+}
 .hh ul{
 	display:flex;
 	padding:0;
@@ -204,89 +212,55 @@
 	color: #43B7B5;
     border-bottom: 3px solid #43B7B5;
 }
-.main{
+.project{
 	background:#F5F5F5;
 	padding:0.2rem;
-	height:100%;
 }
-.main span{
-    margin: 0.4rem;
+.project a{
+	color:#000;
+}
+.project span{
+    width: 96%;
+    margin: 2%;
     display: inline-block;
     position: relative;
     box-shadow: 0px 1px 3px #ccc;
     border-radius: 0.4rem;
 }
-.main a{
-	color:#000;
-}
-.te{
-	display:flex;
-	position:absolute;
-	width:100%;
-	bottom:23%;
 
-}
-.te li{
-	text-align:center;
-	width: 33%;
-	color:white
-}
-.te2{
-	display:flex;
-	position:absolute;
-	width:100%;
-	bottom:5%;
-
-}
-.te2 li{
-	width: 44%;
-	margin-left: 5%
-}
-.maskwarp{
-	position: relative;
-}
-.mask{
-    position: absolute;
-    bottom: 0rem;
-    left: 0;
-    width: 100%;
-    height: 2rem;
-    opacity: 0.2;
-    background: linear-gradient(0deg, #060606, rgba(0, 0, 0, 0));
-}
 .head_top{
-	    width: 100%;
-	    font-size:1.2rem;
-	    font-family: arial,'microsoft yahei';
-	    color: #333;
-	    text-align: center;
-	    padding: 0.5rem 0;
-	    border-bottom: 0.5px solid #c9c9c9;
-	}
-	.tip{
-	    width: 96%;
-	    margin:0.5rem auto;
-	    position: relative;
-	}
-	.tip span{
-	    width: 0.7rem;
-	    display: inline-block;
-	    vertical-align: middle;
-	    position: absolute;
-	    left: 0.5rem;
-	}
-	.tip span img{
-	    width: 100%;
-	}
-	.tip p{
-	    vertical-align: middle;
-	    line-height: 1;
-	}
-	.header{
-		width:100%;
-		display:flex;
+    width: 100%;
+    font-size:1.2rem;
+    font-family: arial,'microsoft yahei';
+    color: #333;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-bottom: 0.5px solid #c9c9c9;
+}
+.tip{
+    width: 96%;
+    margin:0.5rem auto;
+    position: relative;
+}
+.tip span{
+    width: 0.7rem;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    left: 0.5rem;
+}
+.tip span img{
+    width: 100%;
+}
+.tip p{
+    vertical-align: middle;
+    line-height: 1;
+}
+.header{
+	width:100%;
+	display:flex;
 
-	}
+}
 .header2 {
 	width:30%;
 	border-right:1px #E8E8E8 solid;
@@ -298,5 +272,57 @@
 	width:100%;
 	text-align:center;
 	margin:0; 
+}
+/*新*/
+.bg{
+	width: 100%;
+	height: 8.6rem;
+	position: relative;
+}
+.xm1 a{color: #000;}
+.info{
+	width: 96%;
+	position: absolute;
+	bottom: 0.2rem;
+	color: #fff;
+	display: flex;
+	padding: 0 2%;
+	justify-content:space-between;
+}
+.te2{
+	padding:0.6rem 2%;
+	background: #fff;
+	border-radius: 0.3rem
+}
+.te2 li{
+	width: 50%;
+	float: left;
+	line-height: 1;
+}
+.icon{
+	width: 100%;
+	position: absolute;
+	top: 9%;
+}
+.icon dd:first-child{
+	position: absolute;
+	left:3%;
+	width: 2rem;
+	height:2rem;
+	border-radius: 50%;
+	background: rgba(0,0,0,0.3)
+}
+.icon dd:last-child{
+	position: absolute;
+	right:3%;
+	width: 2rem;
+	height:2rem;
+	border-radius: 50%;
+	background: rgba(0,0,0,0.3)
+}
+.icon dd img{
+	width: 1.2rem;
+    margin: 0 auto;
+    margin-top: 0.4rem;
 }
 </style>
