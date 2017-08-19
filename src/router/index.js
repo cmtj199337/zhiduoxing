@@ -140,6 +140,10 @@ const router = new Router({
 			path: '/myFeedback',
 			component:require('../components/profile/myFeedback.vue')
 		},
+		{
+			path: '/myCertificate',
+			component:require('../components/profile/myCertificate.vue')
+		},
 		//社区
 		{
 			path: '/communityInteraction',

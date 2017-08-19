@@ -22,26 +22,30 @@
 			<img src="./toux.png" class="tt">
 			<p class="hd"><span>{{item.trueName}}</span><span class="bj">编辑</span></p>
 			<p><span>志愿时长</span>  <span>{{item.serverDuration}}</span></p>
-			<p><span>身份证号</span>  <span>{{item.idNo}}</span><img src="./shanchu.png" class="shanchu"></p>
+			<p><span>身份证号</span>  <span>{{item.idNo}}</span><img src="./shanchu.png" class="shanchu" @click="shanChu(item.memberId)"></p>
 		</li>
 	</ul>
 	</div>
-
+	<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 
   </div>  
 </template>
 
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import alertTip from '../../components/common/tools/alertTip.vue'
 
 	export default {
 	  	name: 'myFamily',
 	  	components:{
-	  		headerTip
+	  		headerTip,
+	  		alertTip
 	  	}, 
 	 	data () {
 		    return {
-		    	list:[]
+		    	list:[],
+		    	showAlert:false,
+		    	alertText:''
 		    }
 	  	},
 	  	mounted(){
@@ -59,6 +63,24 @@
 	  					this.list = res.data
 	  				}
             })
+            },
+            shanChu(id){
+            	this.$http.post('/api/private/delFamilyMember',{
+            			memberId:id
+            	},{
+            		emulateJSON:true
+            	}).then(response=>{
+            		let res=response.data
+            		if(res.result==0){
+            			this.showAlert=true
+  						this.alertText = '删除成功'
+            			
+            		}
+            	})
+            },
+            closeTip(){
+            	this.showAlert=false
+            	this.$router.go(0)
             }
 	  	}
 	}

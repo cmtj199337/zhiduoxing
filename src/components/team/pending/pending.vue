@@ -1,44 +1,24 @@
 <template>
 	<div class="pending">
+
 		<div class="header1">
-			<ul>
-				<li>姓名</li>
-				<li>加入时间</li>	
-				<li style="text-align:right">操作</li>		
-			</ul>
+			<p>
+				<span>姓名</span>
+				<span>加入时间</span>	
+				<span style="width:28%;text-align:right">操作</span>		
+			</p>
 		</div>
 		<div class="kong"></div>
 		<div class="header2">
-			<ul @click="toAddress({path: '/personalData'})">
-				<li style="display:flex;"><img src="../tou1@2x.png" ><p>利好</p></li>
-				<li><p>2017/06/06</p></li>
-				<li><p class="zz1">禁用</p></li>
+			<ul v-for="item in list">
+				<li style="display:flex;">
+					<router-link :to="{path:'../personalData',query:{voId:item.voId}}">
+					<img :src="item.icon" >
+				</router-link><p>{{item.nickName}}</p></li>
+				<li><p>{{item.crtDate}}</p></li>
+				<li><p class="zz1">{{item.forStatusName}}</p></li>
 			</ul>	
-			<ul @click="toAddress({path: '/personalData'})">
-				<li style="display:flex;"><img src="../tou2@2x.png" ><p>张晓明</p></li>
-				<li><p>2017/06/06</p></li>
-				<li><p class="zz2">解禁</p></li>
-			</ul>	
-			<ul @click="toAddress({path: '/personalData'})">
-				<li style="display:flex;"><img src="../tou1@2x.png" ><p>张大大</p></li>
-				<li><p>2017/06/06</p></li>
-				<li><p class="zz1">禁用</p></li>
-			</ul>	
-			<ul @click="toAddress({path: '/personalData'})">
-				<li style="display:flex;"><img src="../tou2@2x.png"><p>李太白</p></li>
-				<li><p>2017/06/06</p></li>
-				<li><p class="zz2">解禁</p></li>
-			</ul>	
-			<ul @click="toAddress({path: '/personalData'})">
-				<li style="display:flex;"><img src="../tou1@2x.png" ><p>张大大</p></li>
-				<li><p>2017/06/06</p></li>
-				<li><p class="zz1">禁用</p></li>
-			</ul>	
-			<ul @click="toAddress({path: '/personalData'})">
-				<li style="display:flex;"><img src="../tou2@2x.png" ><p>李太白</p></li>
-				<li><p>2017/06/06</p></li>
-				<li><p class="zz2">解禁</p></li>
-			</ul>	
+		
 		</div>
 	</div>
 </template>
@@ -48,22 +28,64 @@
 		name:'pending',
 		data(){
 			return {
-				
+				list:[]
 			}
 		},
+		mounted(){
+			this.getInfo()
+		},
 		methods:{
-			toAddress(path){
-                this.$router.push(path)
+			getInfo(){
+            	this.$http.get('/api/teamHub/private/selectVoByTeamId',{
+            		params:{
+            			status:4
+            		}
+            	}).then(response=>{
+            		let res= response.data
+            		if(res.result==0){
+            			this.list=res.data
+            		}
+            	})
+            },
+            jyong(id,forStatus){
+            	if(forStatus=='0'){
+            		this.$http.get('/api/teamHub/private/unForbiddenVo',{
+            		params:{
+            			voId:id,
+            			status:1
+            		}
+            	}).then(response=>{
+            		let res= response.data
+            		if(res.result==0){
+        				this.$router.go(0)
+            		}
+            	})
+            	return
+            	}else{
+            		this.$http.get('/api/teamHub/private/unForbiddenVo',{
+            		params:{
+            			voId:id,
+            			status:0
+            		}
+            	}).then(response=>{
+            		let res= response.data
+            		if(res.result==0){
+        				this.$router.go(0)
+            		}
+            	})
+            	return
+            	}
+            	
             }
 		}
 
 	}
 </script>
 <style scoped>
-.header1 ul{
+.header1 p{
 	display: flex;
 }
-.header1 ul li{
+.header1 p span{
 	width:32%;
 	text-align:center;
 	padding:0.5rem 0;

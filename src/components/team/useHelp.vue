@@ -1,19 +1,8 @@
 <template>
 	<div class="useHelp">
-		<headerTip message="使用帮助" goBack="true"></headerTip>
+		<headerTip message="使用帮助(团队)" goBack="true"></headerTip>
 		<div class="kong"></div>
-		<div class="main">
-		<div class="title">
-		<p style="font-size:1rem;">【中国资根】数据管理新思路，唤醒沉睡动员力</p>
-		<p class="time">2017/02/05</p>
-		</div>
-		<div class="text">
-		<img src="./image.png">
-		<p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-		<img src="./image2.png">
-		<p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-		</div>
-			
+		<div class="main" v-html="list">
 		</div>
 	</div>
 </template>
@@ -30,21 +19,27 @@
 				list:[]
 			}
 		},
+		mounted(){
+			this.$nextTick(function(){
+				this.getInfo(2)
+			})
+		},
 		methods:{
-			getInfo(){
-				this.$http.get('/api/public/getPlatformIntro',{
-					params:{
-						type:1
-					}
-				}).then( response => {
-					let res = response.data
-					if(res.result == 0){
-						this.list = res.data	
-					}
-				})
-			}
-		}
+			getInfo(type){								
+			this.$http.get('/api/public/getPlatformIntro',{
+				params:{
+				type:type
+			}}).then(response=>{
+				let res = response.data
+	  				console.log(res)
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  				}
+			})
+		},
 	}
+
+}
 </script>
 <style scoped>
 p{
@@ -54,62 +49,12 @@ p{
 	padding:0.3rem 0;
 	background:#F5F5F5;
 }
-.title{
-	padding:0.6rem 0;
-	margin:0 0.8rem;
-	line-height:1.4rem;
+.main{
+	text-align: center;
+	font-size:1rem;
 }
-.title .time{
-	font-size:0.5rem;
-	margin-left:0.5rem;
-	color:#AEAEAE;
-}
-.header2{
-	padding:0.8rem 0;
-	margin:0 0.6rem;
-	border:1px #F5F5F5 solid;
-	border-radius:5px;
-}
-.header2 .mus{
-	width:100%;
-	height:4rem;
-	
-}
-.header2 {
-	display:flex;
-}
-.header2 .left{
-	width:25%;
-}
-.header2 .left img{
-	width:60%;
-	margin-left:20%;
-
-}
-.header2 .right{
-	width:70%;
-}
-.header2 .right p .all{
-	margin-left:75%;
-}
-.header2 .right p  span{
-	color:#AEAEAE;
-}
-
-.header2 .right p{
-	line-height:1.8rem;
-}
-.text{
-	padding:0 0.8rem;
-	position:relative;
-
-}
-.text p{
-	line-height:1.4rem;
-	color:#AEAEAE;
-}
-.text img{
-	margin:0.6rem 0;
+.main img{
+	margin:0.2rem auto;
 }
 
 </style>

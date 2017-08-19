@@ -8,46 +8,32 @@
 					</li>
 				</ul>
 			</div>
-			<div class="main" @click="toAddress({path: '/myprojectDetails'})">
+			<div class="main" v-for="item in list" >
+			
 			<span>
+			<router-link :to="{path:'../pDetail',query:{projectId:item.proId}}">
 			<img src="./banner@2x.png" style="border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem"   >
-			<img src="./teb2.png" style="border-radius: 0.3rem;" >
+    border-top-right-radius: 0.3rem;height:8.2rem;"   >
+			<img src="./teb2.png" style="border-radius: 0.3rem;height:2.5rem" >
+			</router-link>
 			<img class="zz1" src="./quan@2x.png">
 			<img class="zz2" src="./shouc@2x.png">
+			<router-link :to="{path:'../projectQrCode',query:{projectId:item.proId}}">
 			<img class="zz3" src="./quan@2x.png">
-			<img src="./erwei.png" style="position:absolute;width:4.5%;top:12%;right:6.8%;">
+			<img src="./erwei.png" style="position:absolute;width:4.5%;top:11.5%;right:6.7%;">
+			</router-link>
+			<ul class="te1">
+			<li class="cc1">{{item.provinceName}}{{item.cityName}}</li>
+			<li class="cc2">{{item.actualNum}}/{{item.planNum}}</li>
+			</ul>
+			<ul class="te2">
+			<li class="cc1">{{item.proName}}</li>
+			<li class="cc3">{{item.startDate}}-{{item.endDate}}</li>
+			</ul>
+			</span>
 			
-			<ul class="te">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">志多星项目名称</li>
-			<li class="cc3">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
 			</div>
-
-			<div class="main1">
-			<span>
-			<img src="./banner@2x.png" style="border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem">
-			<img src="./teb2.png" style="border-radius: 0.3rem;" >
-			<img class="zz1" src="./quan@2x.png">
-			<img class="zz4" src="./wdsc@2x.png">
-			<img class="zz3" src="./quan@2x.png">
-			<img src="./erwei.png" style="position:absolute;width:4.5%;top:12%;right:6.8%;">
-			<ul class="te">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">志多星项目名称</li>
-			<li class="cc3">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-			</div>
+			
 	</div>
 </template>
 <script>
@@ -62,15 +48,36 @@
 				 	{type: '进行中'},
 				 	{type: '已结束'}
 				],
+				list:[],
+				page:3,
+				pic:[],
+				saoma:false
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.listView(this.page)
+			})
 		},
 		methods:{
 			toggle(index) {
 		    	this.iscur = index;
+		    	this.page = index + 3
+		    	this.listView(this.page)
 		    },
-		    toAddress(path){
-                this.$router.push(path)
-            }
+            listView(status){
+				this.$http.get('/api/teamHub/private/ownDetai',{
+					params:{
+						appStatus:1,
+						status:status
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data
+				}
+				})
+			},
 		}
 	}
 </script>
@@ -94,6 +101,7 @@
 .main{
 	background:#F5F5F5;
 	padding:0.2rem;
+	position:relative;
 	
 }
 .main span{
@@ -103,37 +111,46 @@
     box-shadow: 0px 1px 3px #ccc;
     border-radius: 0.4rem;
 }
-.main1{
-	background:#F5F5F5;
-	padding:0.2rem;
-	
-}
-.main1 span{
-	margin:0.4rem;
-	display:inline-block;
-	position:relative;
-}
-.te{
+.te1{
 	display:flex;
 	position:absolute;
-	width:100%;
-	bottom:23%;
+	width:96%;
+	bottom:24%;
+	left:0;
+	right:0;
+	margin:auto;
 
 }
-.te li{
-	width: 50%;
+.te1 li{
+	width:90%;
 	color:white
 }
 .te2{
 	display:flex;
 	position:absolute;
-	width:100%;
+	width:97%;
 	bottom:5%;
+	left:0;
+	right:0;
+	margin:auto;
 
 }
 .te2 li{
 	width:90%;
 
+}
+.cc1{
+	text-align:left;
+}
+.cc2{
+	text-align:right;
+}
+.cc3{
+	text-align:right;
+}
+.cc4{
+	text-align:right;
+	color:#666
 }
 .zz1{
 	position:absolute;width:8%;top:8%;left:5%;
@@ -147,14 +164,20 @@
 .zz4{
 	position:absolute;width:5%;top:12%;left:6.5%;
 }
-.cc1{
-	text-align:left;
+.erweima{
+	position:absolute;
+	width:7.8rem;
+	right:16%;
+	top:8%;
+	height:7.8rem;
+	background:white;
+	padding:0.5rem;
+	border-radius:2px;
+	opacity:0.7;
 }
-.cc2{
-	text-align:right;
+.erweima img{
+	width:100%;
+	height:100%;
 }
-.cc3{
-	text-align:right;
-	color:#666
-}
+
 </style>

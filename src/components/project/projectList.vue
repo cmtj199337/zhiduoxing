@@ -10,7 +10,7 @@
 			</ul>
 			<ul class="te1">
 			<li class="cc1">{{item.provinceName}}{{item.cityName}}</li>
-			<li class="cc2">{{item.actualNum}}/{{item.planNum}}</li>
+			<li class="cc2">{{item.planNum}}/{{item.actualNum}}</li>
 			<li class="cc3">招募中</li>
 			</ul>
 			<ul class="te2">

@@ -44,7 +44,7 @@
 						<span>个人资料</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>
-					<li @click="toAddress({path: ''})">
+					<li @click="toAddress({path: './myCertificate'})">
 						<img class="icon" src="./renzheng2.png">
 						<span>我的证书</span>
 						<img class="arrow" src="./you@2x.png">

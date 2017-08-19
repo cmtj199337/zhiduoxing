@@ -1,89 +1,58 @@
 <template>
 <div class="pass">
-	<div class="main" @click="toAddress({path: '/myprojectDetails'})">
+	<div class="main" v-for="item in list">
+	
 			<span>
+			<router-link :to="{path:'../pDetail',query:{projectId:item.projectId}}">
 			<img src="../banner@2x.png" style="border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem">
-			<img src="../teb2.png" style="border-radius: 0.3rem;">
+    border-top-right-radius: 0.3rem;height:8.2rem;">
+			<img src="../teb2.png" style="border-radius: 0.3rem;height:2.5rem">
+			</router-link>
 			<ul class="te">
-			<li class="cc1">志多星项目</li>
+			<li class="cc1">{{item.proName}}</li>
 			</ul>
 			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
+			<li class="cc1">{{item.provinceName}}{{item.cityName}}</li>
+			<li class="cc2">{{item.actualNum}}/{{item.planNum}}</li>
 			<li class="cc3"></li>
 			</ul>
 			<ul class="te2">
 			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
+			<li class="cc4">{{item.startDate}}-{{item.endDate}}</li>
 			</ul>
 			</span>
-	</div>
-	<div class="main">
-			<span>
-			<img src="../banner@2x.png" style="border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem">
-			<img src="../teb2.png" style="border-radius: 0.3rem;">
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3"></li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-	</div>
-	<div class="main">
-			<span>
-			<img src="../banner@2x.png" style="border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem">
-			<img src="../teb2.png" style="border-radius: 0.3rem;" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3"></li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
-	</div>
-	<div class="main">
-			<span>
-			<img src="../banner@2x.png"  style="border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem">
-			<img src="../teb2.png" style="border-radius: 0.3rem;" >
-			<ul class="te">
-			<li class="cc1">志多星项目</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">北京市朝阳区</li>
-			<li class="cc2">40/100</li>
-			<li class="cc3">待启动</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">2017/05/02-2017/05/02</li>
-			</ul>
-			</span>
+			
 	</div>
 </div>
 </template>
 <script>
 	export default{
 		name:'pass',
+		data(){
+			return{
+				list:[]
+			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.getInfo(2)
+			})
+		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
+            },
+               getInfo(status){           
+            	this.$http.get('/api/teamHub/private/ownDetai',{
+            		params:{         			
+            			appStatus:status,
+            		}
+            	}).then(response=>{
+            		let res=response.data
+            		if (res.result==0) {
+            			this.list=res.data
+            		}
+            	})
             }
 		}
 	}
@@ -91,7 +60,8 @@
 <style scoped>
 .main{
 	background:#F5F5F5;
-	padding:0.2rem;
+	padding:0 0.3rem;
+
 	
 }
 .main span{
@@ -105,28 +75,36 @@
 	position:absolute;
 	width:100%;
 	bottom:40%;
+	left:2%;
 
 }
 .te li{
-	width: 50%;
-	color:white
+	width:50%;
+	color:white;
+	font-size:0.9rem;
 }
 .te1{
 	display:flex;
 	position:absolute;
-	width:100%;
-	bottom:23%;
+	width:97%;
+	bottom:24%;
+	left:0;
+	right:0;
+	margin:auto;
 
 }
 .te1 li{
-	width: 50%;
+	width:98%;
 	color:white
 }
 .te2{
 	display:flex;
 	position:absolute;
-	width:100%;
+	width:97%;
 	bottom:5%;
+	left:0;
+	right:0;
+	margin:auto;
 
 }
 .te2 li{

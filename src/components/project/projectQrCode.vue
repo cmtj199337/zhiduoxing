@@ -3,18 +3,18 @@
    <headerTip message="项目二维码" goBack="true"></headerTip>
 
 	
-	<div class="erwei"><img src="./weweima.png" alt=""></div>
-	<p >【中国滋根】数据管理新思路，唤醒沉睡动员力</p>	
+	<div class="erwei"><img :src="pic.qrCode"></div>
+	<p >{{list.projectName}}</p>	
        
-	<p >发布人：志多星</p>
+	<p >发布人：{{list.teamName}}</p>
 	  
-	<p >项目类型：应急救援</p>	
+	<p >项目类型：{{list.serverType}}</p>	
       
-	<p >服务对象：儿童</p>
+	<p >服务对象：{{list.serverObject}}</p>
 	        
-	<p >活动时间：2017/05/10-2017/08/29</p>    
+	<p >活动时间：{{list.projectDate}}</p>    
    
-	<p >计划招募人数：200人</p>
+	<p >计划招募人数：{{list.yotNum}}人</p>
 	
   </div>  
 </template>
@@ -29,20 +29,58 @@
 	  	}, 
 	 	data () {
 		    return {
-		    	
+		    	list:[],
+		    	pic:[]
 		    }
 	  	},
+	  	mounted(){
+	  		this.$nextTick(function(){
+	  			this.showInfo()
+	  			this.getCode()
+	  		})
+	  	},
 	  	methods:{
-	  		
+	  		showInfo(){
+	  			this.$http.get('/api/public/getProjectDetail',{
+	  				params:{
+	  					id:this.$route.query.projectId
+	  				}
+	  			}).then(response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.list = res.data
+
+
+	  				}
+	  			})
+	  		},
+	  		getCode(){
+				this.$http.get('/api/teamHub/private/selectQrCode',{
+					params:{
+						proId:this.$route.query.projectId
+				}
+			}).then(response=>{
+				let res=response.data
+				if (res.result==0) {
+					this.pic=res.data
+				}
+				})
+			},
 	  	}
 	}
 </script>
 
  <style scoped>
 		h1 {text-align:center;}
+		.erwei{
+			width:100%;
+			height:14rem; 
+			padding:1rem 0;
+		}
 		.erwei img{
-			width:50%; 
-			margin:10% 25%;
+			width:13rem;
+			height:13rem; 
+			margin:0 auto;
 		}
 
 
