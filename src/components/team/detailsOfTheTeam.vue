@@ -87,6 +87,7 @@
 		},
 		mounted(){
 			this.getInfo()
+			
 		},
 		methods:{
 			getInfo(){

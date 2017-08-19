@@ -76,13 +76,21 @@
 			<span class="bm3"><p @click="chooseFamily()" class="bm">我要报名</p></span>
 		</footer>
 		<!-- <div class="overlay"></div> -->
+		<qrcode 
+			:value="qrcodeUrl" 
+			v-if="qrcodeUrl" 
+			:options="{ size: 170 }">
+		</qrcode>
 	</div>	
 </template>
 <script>
+	import Qrcode from 'vue-qrcode';
+
 	export default{
 		name:'detail',
 		data () {
 		    return {
+		    	qrcodeUrl:'',
 		    	data:[],
 				icon:[],
 				isPaid:2,
@@ -92,9 +100,13 @@
 				regular:true, 		//规律不规律时间
 		    }
 	  	},
+	  	components: {
+		    qrcode: Qrcode
+		},
 	  	mounted(){
 	  		this.$nextTick(function(){
 	  			this.showView()
+	  			this.qrcodeUrl = window.location.href
 	  		})
 	  		
 	  	},
