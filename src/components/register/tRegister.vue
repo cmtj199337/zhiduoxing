@@ -33,18 +33,14 @@
 					</el-upload>
 				</a>
 			</div>
-	        <div class="usertext" style="border-top:1px solid #f5f5f5">
+			<div class="usertext" style="border-top:1px solid #f5f5f5">
+	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队名称">
+	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
+	        </div>
+	        <div class="usertext">
 	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队账号">
 	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队账号</span>
 	        </div>
-	        <!-- <div class="usertext">
-				<input type="tel" name="mobile" v-validate="'required|mobile'" @change="checkMobile" v-model="teamInfo.mobileNumber" placeholder="请输入手机号" maxlength="11" />
-				<span class="toast" v-show="errors.has('mobile')">请输入手机号</span>
-			</div>
-	        <div class="usertext">
-				<input type="number" @change="checkCode" v-model="verify" placeholder="请输入验证" maxlength="6" style="width:56%" />
-				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" :second="60"></timer-btn>
-			</div> -->
 			<div class="usertext">
 				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
 				<span class="toast" v-show="errors.has('password')">请输入密码</span>
@@ -68,19 +64,19 @@
 			<div class="usertext right">
 				<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamCategory">
 					<option v-for="item in teamclist" :value="item.key">{{item.value}}</option>
-				</select><img src="./right.png"></span>
+				</select><img src="./right.png" style="transform:rotate(90deg)"></span>
 			</div>
 			<div class="usertext bottom">
 				<span>团队种类：<select class="select" v-model="teamInfo.teamKind">
 					<option v-for="item in teamKlist" :value="item.key">{{item.value}}</option>
 				</select><img src="./bottom.png"></span>
 			</div>
-			<div class="usertext">
+			<!-- <div class="usertext">
 	        	<input type="text" v-model="teamInfo.teamManager" placeholder="请输入团队管理员">
 	        </div>
 	        <div class="usertext">
 				<input type="tel" v-model="teamInfo.contactNumber" placeholder="请输入联系电话" maxlength="11" />
-			</div>
+			</div> -->
 			<div class="kong">
 			</div>
 
@@ -98,7 +94,7 @@
 	       		<span class="toast" v-show="errors.has('teamIntro')">请输入团队简介</span>
 	        </div>
 	        <div class="end">
-	        不超过100字
+	        10-500字
 	        </div>
 	        <div class="eee">
 	        	<input type="button" name=""  class="next" value="下一步" @click="formData()">
@@ -369,8 +365,9 @@
 	  				let res = response.data
 	  				if(res.result == 0){
 	  					//将返回的teamId存入
-	  					sessionStorage.setItem('teamId',res.data)
-						this.$router.push('tregisternext')
+	  			// 		sessionStorage.setItem('teamId',res.data)
+						// this.$router.push('tregisternext')
+						this.$router.push({path:'tregisternext',query:{teamId:res.data.teamId}})
 	  				}else{
 
 	  				}
@@ -383,9 +380,12 @@
 </script>
 <style scoped>
 	@import '../../styles/usertext.css';
+	.teamRegistration{
+		background: #fff
+	}
 	.header{
 	    margin: auto;
-    	    background:#F5F5F5;
+    	background:#F5F5F5;
 	    display:flex;
 	    position: relative;
 	}
@@ -457,10 +457,10 @@
 	    position: relative;
 	}
 	.bottom img{
-			width:1rem;
-			display: inline-block;
-			vertical-align: middle;
-		left: 45%;
+		width:1rem;
+		display: inline-block;
+		vertical-align: middle;
+		left: 50%;
 		top:40%;
 	}
 	.usertext a{

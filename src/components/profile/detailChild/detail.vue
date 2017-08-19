@@ -244,7 +244,8 @@
 		font-size:0.9rem;
 	}
 	.detail{
-		padding-bottom:10%; 
+		padding-bottom:10%;
+		background: #fff
 	}
 	.family{
 		width: 16rem;

@@ -25,6 +25,9 @@ Vue.use(vueEventCalendar, {locale: 'en',color: '#43B7B5'}) //可以设置语言�
 import Infiniteloading from 'vue-infinite-loading'
 Vue.use(Infiniteloading)
 
+import Qrcode from 'vue-qrcode';
+Vue.use(Qrcode)
+
 import './config/validate.js'
 
 // import Easemob from 'easemob-websdk'
@@ -56,7 +59,7 @@ router.beforeEach((to, from, next) => {
      // 判断该路由是否需要登录权限
      if (to.meta.requireAuth) {
         // 通过vuex state获取当前的token是否存在
-        //console.log(isEmptyObject(store.state.user))
+        // console.log(isEmptyObject(store.state.user))
         if(!isEmptyObject(store.state.user)) {   
             next();
         }
@@ -68,6 +71,7 @@ router.beforeEach((to, from, next) => {
         }
     }
     else {
+        // console.log(isEmptyObject(store.state.user))
         next();
     }
 })

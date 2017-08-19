@@ -49,6 +49,9 @@
 	height: 40rem;
 
 }
+.header{
+	background: #fff
+}
 .header ul {
 	display:flex;
 	padding: 0.8rem 0 0 0;

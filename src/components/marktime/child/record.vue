@@ -52,6 +52,9 @@ import Calendar from '../../common/tools/calendar.vue'
 
 
 <style scoped>
+.volunteerTime{
+	background: #fff
+}
 p{
 	font-size:0.85rem;
 	color: rgb(175, 175, 175);

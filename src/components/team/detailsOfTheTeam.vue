@@ -123,31 +123,31 @@
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
-.header1{
-    border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
+.detailsOfTheTeam{
+	background: #fff
 }
-.header2{
+.header1{
     border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
 }
 .header  span p{
 		font-size: 1.2rem;
 	}
 .bottom img{
-			width:1rem;
-			display: inline-block;
-			vertical-align: middle;
-		left: 45%;
-		top:40%;
-	}
-	.select{
-		width: 35%;
-		border: 0;
-	    margin: 0 auto;
-	    height: 2rem;
-	    font-size: 1rem;
-	    appearance:none;
-	    position: relative;
-	}
+	width:1rem;
+	display: inline-block;
+	vertical-align: middle;
+	left: 45%;
+	top:40%;
+}
+.select{
+	width: 35%;
+	border: 0;
+    margin: 0 auto;
+    height: 2rem;
+    font-size: 1rem;
+    appearance:none;
+    position: relative;
+}
 .usertext a{
 	    border: 0;
 	    width: 100%;
@@ -206,6 +206,7 @@
 	margin-left: 67%;
 	padding: 0.5rem;
 	color:#ccc;
+	text-align: right;
 	}
 .eee{
 	padding: 2rem 0;

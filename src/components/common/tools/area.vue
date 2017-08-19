@@ -3,14 +3,14 @@
 		<div class="header3">
             <h4 class="texttitle"><span><img src="./dizhi.png"></span>团队地址</h4>
         </div>
-        <div class="usertext right">
+        <div class="usertext bottom">
         	<span>所在地区</span>
 			<select v-model="f.p" @change="selpro">
 				<option :value="i" v-for="(v,i) in pro">{{v.name}}</option>
 			</select>
 			<img src="./right.png">
 		</div>
-		<div class="usertext right">
+		<div class="usertext bottom">
 			<span>所在区县</span>
 			<select v-model="f.c" @change="selcity">
 				<option :value="i" v-for="(v,i) in city">{{v.name}}</option>
@@ -34,7 +34,13 @@
 		position: absolute;
 		right: 0;
 	}
-
+	.bottom img{
+		width:0.6rem;
+		display: inline-block;
+		vertical-align: middle;
+		top: 32%;
+		transform: rotate(90deg);
+	}
 	.right img{
 		width:0.6rem;
 		display: inline-block;
@@ -52,6 +58,13 @@
 	    text-indent: 5rem;
 	}
 	.right span{
+		font-size: 1rem;
+		position: absolute;
+		z-index: 1;
+	    height: 2rem;
+	    line-height: 2rem;
+	}
+	.bottom span{
 		font-size: 1rem;
 		position: absolute;
 		z-index: 1;

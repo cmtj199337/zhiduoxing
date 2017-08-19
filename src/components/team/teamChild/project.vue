@@ -126,7 +126,6 @@ margin-left:1rem;
 .main{
 	background:#F5F5F5;
 	padding:0.2rem;
-	
 }
 .main span{
 	margin:0.4rem;

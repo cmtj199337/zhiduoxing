@@ -98,6 +98,7 @@
 }
 .detail{
 	padding-bottom: 3rem;
+	background: #fff;
 }
 .header{
 	padding:0.4rem 0;

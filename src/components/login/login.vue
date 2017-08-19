@@ -48,9 +48,6 @@
                 userType:''
 		    }
 	  	},
-	  	mounted(){
-	  		
-	  	},
 	  	computed:{
 	  		user () {
 	  			return this.$store.state.user
@@ -72,15 +69,15 @@
 	  				let res = response.data
 	  				let verify = res.data
 	  				if(res.result == 0){
-	  				
+
 	  					localStorage.setItem('access_token',verify.token)
 	  					localStorage.setItem('userId',verify.userId)
 	  					
 	  					if(verify.userType == 0){
-	  						this.$store.commit('isLogin',response.body[0])
+	  						this.$store.commit('isLogin',res.data)
                         	this.$router.push({ path: 'index' })
 	  					}else if(verify.userType == 1){
-	  						this.$store.commit('isLogin',response.body[0])
+	  						this.$store.commit('isLogin',res.data)
                         	this.$router.push({ path: 'teamIndex' })
 	  					}
 
@@ -102,6 +99,8 @@
 	@import '../../styles/usertext.css';
 	.login{
 		text-align: center;
+		height: 100%;
+		background: #fff;
 	}
 	.link{
 		position: absolute;

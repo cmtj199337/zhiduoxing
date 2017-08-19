@@ -76,7 +76,7 @@ const router = new Router({
 		//index 
 		{
 			path: '/index',
-			component:require('../components/index/index.vue')
+			component:require('../components/index/index.vue'),
 		},
 		{
 			path: '/teamIndex',

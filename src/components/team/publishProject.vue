@@ -7,7 +7,7 @@
         </div>
             <div class="usertext tlo" style="top:-0.5rem">
 				<a href="javascript:;">
-					<span>团队logo</span>
+					<span>项目logo</span>
 					<el-upload
 					  class="avatar-uploader"
 					  action="/api/public/upload"
@@ -65,7 +65,7 @@
        		 <textarea name="" rows="5"  v-model="projectInfo.teamIntro"></textarea>
         </div>
         <div class="end">
-        不超过100字
+        10-500字
         </div>
         <div class="kong">`
 		</div>
@@ -90,18 +90,17 @@
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	import MyArea from '../../components/common/tools/area2.vue'
-	import UploadImg from '../../components/common/tools/uploadImg.vue'
 	export default{
 
 		name:'publishProject',
 		components:{
 	  		headerTip,
-	  		MyArea,
-	  		UploadImg,
+	  		MyArea
 	  	},
 		data(){
 			return {
 				projectInfo:{
+					proIcon:'',
 					area:'',
 					contactNumber:null,			//联系人电话
 					address:'',
@@ -109,18 +108,35 @@
 					jnumber:'',
 					contactName:'',
 					proNum:'',
-
 				},
 				imageUrl:'',
 			}
 		},
 		methods:{
 			haha(d){
-            	this.teamInfo.area = d
+            	this.projectInfo.area = d
 			},
 			isTijiao(){
 				
-			}
+			},
+			handleAvatarSuccess(res, file) {
+	  			let result = res.data
+		        this.imageUrl = URL.createObjectURL(file.raw);
+		        // this.imageUrl = result
+		        this.projectInfo.proIcon = result
+		    },
+		    beforeAvatarUpload(file) {
+		        const isJPG = file.type === 'image/jpeg';
+		        const isLt2M = file.size / 1024 / 1024 < 2;
+
+		        if (!isJPG) {
+		          this.$message.error('上传头像图片只能是 JPG 格式!');
+		        }
+		        if (!isLt2M) {
+		          this.$message.error('上传头像图片大小不能超过 2MB!');
+		        }
+		        return isJPG && isLt2M;
+		    },
 		}
 
 	}
@@ -129,6 +145,9 @@
 @import '../../styles/usertext.css';
 span{
 	font-size:1rem;
+}
+.publishProject{
+	background: #fff
 }
 .usertext input{
 		margin: 0;
@@ -143,8 +162,6 @@ span{
 		right: 0;
 	}
 .tlo{
-		margin:0 1rem;
-		padding:0.9rem 0 0 0;
 		border:0;
 		border-bottom:1px #F5F5F5 solid;
 	}

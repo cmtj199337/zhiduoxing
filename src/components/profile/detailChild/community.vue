@@ -49,6 +49,9 @@
 	padding:0.8rem 0; 
 	font-size: 0.85rem;
 }
+.community{
+	background: #fff
+}
 .usertext span{
 	color:#43B7B5;
 }

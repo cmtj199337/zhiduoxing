@@ -132,9 +132,6 @@
      			this.showAlert=false
      			this.$router.push('login')
      		},
-
-
-
         }
 	}
 </script>
@@ -144,18 +141,22 @@
 		padding:0.8rem 0;
 		font-size:0.85rem;
 	}
+	.modifyPassword{
+		height: 100%;
+		background: #fff
+	}
 	.modifyPassword form{
 		margin-top: 10%;
 	}
 	.getcode{
-	font-family: microsoft yahei;
-    float: right;
-    display: inline-block;
-    color: #43B7B6;
-    border: 1px solid #43B7B6;
-    padding: 0.3rem 1rem;
-    border-radius: 4px;
-    vertical-align: middle;
-    background: #fff;
+		font-family: microsoft yahei;
+	    float: right;
+	    display: inline-block;
+	    color: #43B7B6;
+	    border: 1px solid #43B7B6;
+	    padding: 0.3rem 1rem;
+	    border-radius: 4px;
+	    vertical-align: middle;
+	    background: #fff;
 	}
 </style>

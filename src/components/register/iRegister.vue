@@ -271,7 +271,7 @@
 
 <style scoped>
 	@import '../../styles/usertext.css';
-	.iRegister{padding:0 0 10% 0;}
+	.iRegister{padding:0 0 10% 0;height: 100%;background: #fff}
 	.usertext{margin: 0 1rem;padding: 0.5rem 0;}
 	.usertext input{
 		width:100%;

@@ -204,4 +204,8 @@
 	.forgetpass form{
 		margin-top: 10%;
 	}
+	.forgetpass{
+		height: 100%;
+		background: #fff;
+	}
 </style>

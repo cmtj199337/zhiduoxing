@@ -50,6 +50,9 @@
 	padding:0.8rem 0; 
 	font-size: 0.85rem;
 }
+.introduce{
+	background: #fff
+}
 .last{
 	margin:0rem 1rem;
 	padding:0.8rem 0; 
@@ -163,7 +166,7 @@
     font-size: 0.9rem;
 }
 .jheader{
-	margin: 1rem 0.5rem;
+	padding: 1rem 0.5rem;
 }
 .jtext p{
 	margin: 0.5rem 0.5rem;

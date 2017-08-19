@@ -16,10 +16,10 @@
             <h4 class="texttitle"><span><img src="./t1.png"></span>注册信息</h4>
         </div>
          <div class="usertext">
-			<input type="text" placeholder="请输入联系人姓名" v-model="dataList.contactName" />
+			<input type="text" placeholder="请输入团队管理员姓名" v-model="dataList.contactName" />
 		</div>
 		<div class="usertext">
-			<input type="tel" placeholder="请输入手机号" maxlength="11" v-model="dataList.contactMobileNo"/>
+			<input type="tel" placeholder="请输入团队管理员手机号" maxlength="11" v-model="dataList.contactMobileNo"/>
 		</div>
 		 <div class="usertext">
 			<input type="text" placeholder="请输入联系人邮箱" maxlength="11" v-model="dataList.contactMail" />
@@ -65,9 +65,9 @@
 				  class="avatar-uploader"
 				  action="/api/public/upload"
 				  :show-file-list="false"
-				  :on-success="handleAvatarSuccess"
+				  :on-success="handleAvatar"
 				  :before-upload="beforeAvatarUpload">
-				  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+				  <img v-if="image" :src="image" class="avatar">
 				  <i v-else class="avatar-uploader-icon">
 				  	<img src="./tianjia.png" alt="">
 				  </i>
@@ -107,7 +107,7 @@
 				},
 				typelist:[],
 				imageUrl:'',
-				imageUr:''
+				image:''
 			}
 		},
 		mounted(){
@@ -135,6 +135,11 @@
 		        this.imageUrl = URL.createObjectURL(file.raw);
 		        this.dataList.picture1 = result
 		    },
+		    handleAvatar(res, file){
+		    	let result = res.data
+		        this.image = URL.createObjectURL(file.raw);
+		        this.dataList.picture2 = result
+		    },
 		    beforeAvatarUpload(file) {
 		        const isLt2M = file.size / 1024 / 1024 < 2;
 		        if (!isLt2M) {
@@ -155,6 +160,9 @@
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
+.tRegisternext{
+	background: #fff;
+}
 .usertext{
 	margin: 0 1rem 0rem 1rem;
 	padding: 0.5rem 0;
