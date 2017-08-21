@@ -1,90 +1,131 @@
 <template>
 	<div class="publishProject">
-		<headerTip message="发布项目" goBack="true"></headerTip>
-		<div class="kong"></div>
-		<div class="header">
-            <h4 class="texttitle"><span><img src="./zil@2x.png"></span>项目信息</h4>
-        </div>
-            <div class="usertext tlo" style="top:-0.5rem">
-				<a href="javascript:;">
-					<span>项目logo</span>
-					<el-upload
-					  class="avatar-uploader"
-					  action="/api/public/upload"
-					  :show-file-list="false"
-					  :on-success="handleAvatarSuccess"
-					  :before-upload="beforeAvatarUpload">
-					  <img v-if="imageUrl" :src="imageUrl" class="avatar">
-					  <i v-else class="avatar-uploader-icon">
-					  	<img src="./tlogo1.png" alt="">
-					  </i>
-					</el-upload>
+		<div v-show="wrap">
+			<headerTip message="发布项目" goBack="true"></headerTip>
+			<div class="kong"></div>
+			<div class="header">
+	            <h4 class="texttitle"><span><img src="./zil@2x.png"></span>项目信息</h4>
+	        </div>
+	            <div class="usertext tlo">
+					<a href="javascript:;">
+						<span>项目logo</span>
+						<el-upload
+						  class="avatar-uploader"
+						  action="/api/public/upload"
+						  :show-file-list="false"
+						  :on-success="handleAvatarSuccess"
+						  :before-upload="beforeAvatarUpload">
+						  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+						  <i v-else class="avatar-uploader-icon">
+						  	<img src="./tlogo1.png" alt="">
+						  </i>
+						</el-upload>
+					</a>
+				</div>
+			<div class="usertext" style="border-top:1px solid #f5f5f5">
+				<input type="text" placeholder="请输入项目名称" v-model="projectInfo.projectName" /><br />
+			</div>
+			<div class="usertext">
+	        	<input type="text" name="" placeholder="请输入联系人姓名"  v-model="projectInfo.contactName">
+	        </div>
+	        <div class="usertext">
+				<input type="tel" placeholder="请输入联系手机号" maxlength="11"  v-model="projectInfo.contactMobNo" />
+			</div>
+			<div class="usertext right">
+				<a href="javascript:;" @click="showToggle()">
+					<span class="good">服务类别<span v-for="item in caleCh">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
-		<div class="usertext">
-			<input type="password" placeholder="请输入项目名称" v-model="projectInfo.proNum" /><br />
-		</div>
-		<div class="usertext">
-        	<input type="text" name="" placeholder="请输入联系人姓名"  v-model="projectInfo.contactName">
-        </div>
-        <div class="usertext">
-			<input type="tel" placeholder="请输入联系手机号" maxlength="11"  v-model="projectInfo.contactNumber" />
-		</div>
-		<div class="usertext right">
-			<a href="javascript:;"><span>服务类别:关爱服务<img src="./you@2x.png"></span></a>
-		</div>
-		<div class="usertext right">
-			<a href="javascript:;"><span>招募时间<img src="./you@2x.png"></span></a>
-		</div>
-		<div class="usertext right">
-			<a href="javascript:;"><span>项目时间<img src="./you@2x.png"></span></a>
-		</div>
-		<div class="usertext">
-        	<input type="text" name="" placeholder="计划招募人数"  v-model="projectInfo.jnumber">
-        </div>
-		<div class="kong">
-		</div>
+			<div class="usertext right">
+				<a href="javascript:;"><span>招募开始时间 
+					<el-date-picker
+				      v-model="projectInfo.recruitSTime"
+				      type="date"
+				      placeholder="开始时间"
+				      :picker-options="pickerOptions0">
+				    </el-date-picker>
+				    <img src="./right.png" alt="">
+				</span></a>
+			</div>
+			<div class="usertext right">
+				<a href="javascript:;"><span>招募结束时间 
+					<el-date-picker
+				      v-model="projectInfo.recruitETime"
+				      type="date"
+				      placeholder="结束时间"
+				      :picker-options="pickerOptions0">
+				    </el-date-picker>
+				    <img src="./right.png" alt="">
+				</span></a>
+			</div>
+			<div class="usertext right">
+				<router-link to="during"><span>项目时间<img src="./you@2x.png"></span></router-link>
+			</div>
+			<div class="usertext">
+	        	<input type="text" name="" placeholder="计划招募人数"  v-model="projectInfo.planRecruitNum">
+	        </div>
+			<div class="kong">
+			</div>
 
-        <my-area @select="haha"></my-area>
-		<div class="usertext">
-       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字"  v-model="projectInfo.address">
-        </div>
-        <div class="usertext right">
-			<a href="javascript:;"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;">马哥波罗大厦<img src="./you@2x.png"></span></a>
-		</div>
-		<div class="usertext right">
-			<a href="javascript:;"><span>项目打卡区域</span><span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span></a>
-		</div>
-        <div class="kong">
-		</div>
+	        <my-area @select="haha"></my-area>
+			<div class="usertext">
+	       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字"  v-model="projectInfo.address">
+	        </div>
+	        <div class="usertext right">
+				<a href="javascript:;"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;">马哥波罗大厦<img src="./you@2x.png"></span></a>
+			</div>
+			<div class="usertext right">
+				<a href="javascript:;"><span>项目打卡区域</span><span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span></a>
+			</div>
+	        <div class="kong">
+			</div>
 
-		<div class="header2">
-            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>项目介绍</h4>
-        </div>
-        <div class="usertextend">
-       		 <textarea name="" rows="5"  v-model="projectInfo.teamIntro"></textarea>
-        </div>
-        <div class="end">
-        10-500字
-        </div>
-        <div class="kong">`
-		</div>
+			<div class="header2">
+	            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>项目介绍</h4>
+	        </div>
+	        <div class="usertextend">
+	       		 <textarea name="" rows="5"  v-model="projectInfo.projectIntro"></textarea>
+	        </div>
+	        <div class="end">
+	        10-500字
+	        </div>
+	        <div class="kong">`
+			</div>
 
-		<div class="header3">
-            <h4 class="texttitle"><span><img src="./baoxian@2x.png"></span>保险选择</h4>
+			<div class="header3">
+	            <h4 class="texttitle"><span><img src="./baoxian@2x.png"></span>保险选择</h4>
+	        </div>
+	        <div class="usertext right">
+				<a href="javascript:;"><span>团队购买<img src="./you@2x.png"></span></a>
+			</div>
+			<div class="usertext right">
+				<a href="javascript:;"><span>个人购买<img src="./you@2x.png"></span></a>
+			</div>
+			<div class="usertext right">
+				<a href="javascript:;"><span>不购买</span></a>
+			</div>
+			<div class="eee">
+	        	<p @click="isTijiao">发布</p>
+	        </div>
         </div>
-        <div class="usertext right">
-			<a href="javascript:;"><span>团队购买<img src="./you@2x.png"></span></a>
+        <!-- 服务类型 -->
+		<div class="type" v-show="isShow">
+			<div class="head_top">
+				<div class='tip'>
+	            	<p><span @click="showToggle()"><img src="./back.png"></span>服务类别</p>
+	        	</div>
+        	</div>
+			<form action="" method="post">
+				<ul>
+					<li v-for="item in list">
+						<span>{{item.value}}</span>
+						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+							<svg class="icon icon-ok"></svg>
+						</span>
+					</li>
+				</ul>
+			</form>
 		</div>
-		<div class="usertext right">
-			<a href="javascript:;"><span>个人购买<img src="./you@2x.png"></span></a>
-		</div>
-		<div class="usertext right">
-			<a href="javascript:;"><span>不购买</span></a>
-		</div>
-		<div class="eee">
-        	<p @click="isTijiao">发布</p>
-        </div>
 	</div>
 </template>
 <script>
@@ -100,30 +141,90 @@
 		data(){
 			return {
 				projectInfo:{
-					proIcon:'',
-					area:'',
-					contactNumber:null,			//联系人电话
+					projectPicture:'',
+					projectName:'',						//项目名称
+					contactMobNo:'',					//联系人电话
+					province:'',
+					city:'',
 					address:'',
-					teamIntro:'',
-					jnumber:'',
-					contactName:'',
-					proNum:'',
+					contactName:'',						//联系人姓名
+					recruitSTime:'',					//招募开始时间
+					recruitETime:'',					//招募结束时间
+					planRecruitNum:'',					//计划招募人数
+					projectIntro:'',					//项目介绍
+					serverType:''
 				},
 				imageUrl:'',
+				isShow:false,
+				wrap:true,
+				list:[],
+				caleValue:[],
+				pickerOptions0: {
+		            disabledDate(time) {
+		            	return time.getTime() < Date.now() - 8.64e7;
+		        	}
+        		},
+			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				this.showList()
+			})
+		},
+		computed:{
+			caleCh(){
+				return this.caleValue.slice(0,-1)
 			}
 		},
 		methods:{
 			haha(d){
-            	this.projectInfo.area = d
+            	this.projectInfo.province = d.pro.id
+            	this.projectInfo.city = d.city.id
 			},
 			isTijiao(){
 				
 			},
+			showList(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'SERVER_TYPE'
+            		}
+            	}).then(response => {
+            		this.list = response.data.data
+            	})
+            },
+			showToggle(){
+            	this.isShow = !this.isShow
+                if(this.isShow){
+                    this.wrap = false  
+                }else{  
+                    this.wrap = !this.wrap   
+                }  
+            },
+            checkFlag(item){
+            	if(typeof item.checked == 'undefined'){
+	  				this.$set(item,'checked',true);
+	  			}else{
+	  				item.checked = !item.checked
+	  			}
+	  			this.caleCheck()
+            },
+            caleCheck(){
+            	this.projectInfo.serverType  = ''
+            	this.caleValue = ''
+            	this.list.forEach((item,index) => {
+            		if(item.checked == true){
+            			this.projectInfo.serverType  += item.key+','
+            			this.caleValue += item.value + ','
+            			this.caleValue = this.caleValue.split(',')
+            		}
+            	})
+            },
 			handleAvatarSuccess(res, file) {
 	  			let result = res.data
 		        this.imageUrl = URL.createObjectURL(file.raw);
 		        // this.imageUrl = result
-		        this.projectInfo.proIcon = result
+		        this.projectInfo.projectPicture = result
 		    },
 		    beforeAvatarUpload(file) {
 		        const isJPG = file.type === 'image/jpeg';
@@ -158,13 +259,9 @@ span{
 	padding: 0.5rem 0;
 }
 .usertext img{
-		position: absolute;
-		right: 0;
-	}
-.tlo{
-		border:0;
-		border-bottom:1px #F5F5F5 solid;
-	}
+	position: absolute;
+	right: 0;
+}
 .tlo a{
 		border: 0;
 	    width: 3rem;
@@ -250,6 +347,7 @@ span{
 	margin-left: 67%;
 	padding: 0.5rem;
 	color:#ccc;
+	text-align: right;
 	}
 .eee{
 	padding: 2rem 0;
@@ -283,5 +381,71 @@ span{
 	}
 	.usertext span{
 		font-size: 1rem;
+	}
+	.head_top{
+	    width: 100%;
+	    font-size:1.2rem;
+	    font-family: arial,'microsoft yahei';
+	    color: #333;
+	    text-align: center;
+	    padding: 0.5rem 0;
+	    border-bottom: 0.5px solid #c9c9c9;
+	}
+	.tip{
+	    width: 96%;
+	    margin:0.5rem auto;
+	    position: relative;
+	}
+	.tip span{
+	    width: 0.7rem;
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: absolute;
+	    left: 0.5rem;
+	}
+	.tip span img{
+	    width: 100%;
+	}
+	.tip p{
+	    vertical-align: middle;
+	    line-height: 1;
+	}
+	.type{
+		width: 100%;
+		font-size: 1rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		background: #fff;
+
+	}
+	.type form{
+		padding-top: 10%;
+    	border-top: 0.6rem solid #f5f5f5;
+	}
+	.type li{ 
+		width: 92%;
+		margin: 0 auto;
+	    border-bottom: 1px solid #dcdcdc;
+	    padding-bottom: 1rem;
+	    margin-bottom: 1rem;
+	    text-align: left;
+	    color: #333;
+		line-height: 1;
+		display: block;
+	}
+	.type li span{
+		vertical-align: middle;
+	}
+	.type li input{
+		vertical-align: sub;
+		float: right;
+	}
+	.list-btn {
+	    float: right;
+	}
+	.good span{
+		padding-left:1.5rem;
 	}
 </style>

@@ -60,7 +60,7 @@
 		</div>
         <div class="header3">
 			<router-link :to="{path:'signList',query:{projectId:data.projectId}}">
-			已报名列表<span>20/200<img src="../right.png"></span>
+			已报名列表<span>{{data.yotNum}}/{{data.honNum}}<img src="../right.png"></span>
 			</router-link>
         </div>
 		<div class="touxiang">
@@ -71,17 +71,19 @@
 		<div class="kong2">
 		</div>
 		<footer class="foot">
-			<span class="bm1"><img src="../shoucang.png">收藏</span>
+			<span class="bm1" @click="addCollect()">
+				<img src="../shoucang.png">
+			收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
 			<span class="bm3"><p @click="chooseFamily()" class="bm">我要报名</p></span>
 		</footer>
 		<!-- <div class="overlay"></div> -->
-		<qrcode 
+<!-- 		<qrcode
 			:value="qrcodeUrl" 
 			v-if="qrcodeUrl" 
 			:options="{ size: 170 }">
 		</qrcode>
-	</div>	
+ -->	</div>	
 </template>
 <script>
 	import Qrcode from 'vue-qrcode';
@@ -148,6 +150,21 @@
             			}
             		}
             	})
+            },
+            addCollect(){
+            	this.$http.post('/api/private/addCollect',{
+            		collectType:1,
+            		collectId:this.data.projectId
+            	},{
+            		emulateJSON:true
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.$message.success('收藏成功')
+            		}else{
+            			this.$message.error('收藏失败')
+            		}
+            	})
             }
 	  	}
 
@@ -174,7 +191,7 @@
 		border-bottom:1px #dcdcdc solid;
 	}
 	.header3 span{
-		margin-left: 62%;
+		float: right;
 	}
  	.header3 span img{
 		width:0.6rem;

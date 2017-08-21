@@ -1,7 +1,6 @@
 <template>
 	<div class="projectCycle">
 		<headerTip message="项目周期" goBack="true"></headerTip>
-	
 	<div class="header">
 		<ul>
 			<li v-for="(item,index) in tabs">
@@ -11,14 +10,24 @@
 	</div>
 	<div class="kong"></div>
 	<div class="date">
-	<p>项目开始日期：
-	<span>2017年7月1日</span>
-	</p>
+		<p>项目开始日期：
+			<el-date-picker
+		      v-model="startTime"
+		      type="date"
+		      placeholder="开始时间"
+		      :picker-options="pickerOptions0">
+		    </el-date-picker>
+		</p>
 	</div>
 	<div class="date">
-	<p>项目结束日期：
-	<span>2017年7月1日</span>
-	</p>
+		<p>项目结束日期：
+			<el-date-picker
+		      v-model="endTime"
+		      type="date"
+		      placeholder="结束时间"
+		      :picker-options="pickerOptions0">
+		    </el-date-picker>
+		</p>
 	</div>
 	<div class="kong"></div>
 	<component :is='currentView' keep-alive></component>
@@ -45,6 +54,13 @@
 				 	{type: '规律时间',view: 'LawGular'},  
 				 	{type: '不规律时间',view: 'Irregular'}
 				],
+				startTime:'',
+				endTime:'',
+				pickerOptions0: {
+		            disabledDate(time) {
+		            	return time.getTime() < Date.now() - 8.64e7;
+		        	}
+        		},
 			}
 		},
 		methods:{
@@ -57,7 +73,7 @@
 </script>
 <style scoped>
 .projectCycle{
-	height:10rem;
+	background: #fff
 }
 p{
 	font-size:0.85rem;
@@ -77,7 +93,7 @@ p{
 .header ul li{
 	width:50%;
 	text-align:center;
-	padding:0.5rem 0;
+	padding:0.5rem 0 0 0;
 }
 
 .header ul li a{

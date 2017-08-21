@@ -5,21 +5,69 @@
 	</div>
 	<div class="date2">
 		<p>服务开始时间：
-			<span>09：00</span>
+			<el-time-select
+			    placeholder="起始时间"
+			    v-model="startTime"
+			    :picker-options="{
+			      start: '08:30',
+			      step: '00:30',
+			      end: '18:30'
+			    }">
+		  	</el-time-select>
 		</p>
 	</div>
 	<div class="date2">
 		<p>服务结束时间：
-			<span>18：00</span>
+			<el-time-select
+			    placeholder="结束时间"
+			    v-model="endTime"
+			    :picker-options="{
+			      start: '08:30',
+			      step: '00:30',
+			      end: '18:30',
+			      minTime: startTime
+			    }">
+			</el-time-select>
 		</p>
 	</div>
 	<div class="date2">
 	<p>单次服务时长：
-		<span>8小时</span>
+		<span>{{getDays}}小时</span>
 	</p>
 	</div>
 </div>
 </template>
+<script>
+	export default{
+		data(){
+			return{
+				startTime: '',
+        		endTime: '',
+			}
+		},
+		computed:{
+			getDays(){ 
+			   	var s = this.startTime.split(':');
+			   	var e = this.endTime.split(':');
+
+			   	var daya = new Date();
+				var dayb = new Date();
+
+				daya.setHours(s[0]);
+				dayb.setHours(e[0]);
+				daya.setMinutes(s[1]);
+				dayb.setMinutes(e[1]);
+			                
+			    var count = (dayb-daya)/1000/60/60
+
+			    return count;
+		 	}
+		},
+		methods:{
+			
+		}
+	}
+</script>
 <style scoped>
 span{
 	font-size:0.85rem;

@@ -24,9 +24,9 @@
 						<li>{{item.projectStatus}}</li>
 					</ul>
 					<dl class="icon">
-						<dd @click.stop="collect()">
+						<dd>
 							<img v-if="item.collectionFlg == 1" src="./xin.png" style="margin-top:0.5rem">
-							<img v-else="item.collectionFlg == 0" src="./xin2.png" style="margin-top:0.5rem">
+							<img v-else src="./xin2.png" style="margin-top:0.5rem">
 						</dd>
 						<dd v-show="item.safeFlg == 1"><img src="./baoxian.png"></dd>
 					</dl>
@@ -144,7 +144,6 @@
 		    	})
 		    }
 		}
-
 	}
 </script>
 <style scoped>
@@ -282,12 +281,15 @@
 .xm1 a{color: #000;}
 .info{
 	width: 96%;
+	padding: 0 2%;
+	height: 1.5rem;
+	line-height: 1.8rem;
 	position: absolute;
-	bottom: 0.2rem;
+	bottom: 0;
 	color: #fff;
 	display: flex;
-	padding: 0 2%;
 	justify-content:space-between;
+	background: linear-gradient(360deg,rgba(0,0,0,0.2),rgba(255,255,255,0));
 }
 .te2{
 	padding:0.6rem 2%;

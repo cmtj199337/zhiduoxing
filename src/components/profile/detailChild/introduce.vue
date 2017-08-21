@@ -1,10 +1,10 @@
 <template>
 	<div class="introduce">
 		<div class="jheader">
-			<img src="../jieshaotu.png">
+			<!-- <img src="../jieshaotu.png"> -->
 		</div>
 		<div class="jtext">
-			<p>据《报告》数据披露，蚂蚁金服旗下网商银行已成功为650万小微经营者提供超过8000亿贷款，更多蓝领、大学生、进城务工人员开启了精彩人生;2000万人通过芝麻信用获得了金融机构的授信，累计总额1000亿元</p>
+			<p>{{intro}}</p>
 		</div>
 		<footer class="foot">
 			<span class="bm1"><img src="../shoucang.png">收藏</span>
@@ -125,7 +125,11 @@
 }
 .foot{
 	display:flex;
-	text-align:center; 
+	text-align:center;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: #fff 
 }
 .foot span{
 	position:relative;

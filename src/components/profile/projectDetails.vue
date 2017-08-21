@@ -57,6 +57,10 @@
 <style scoped>
 @import '../../styles/usertext.css';
 @import '../../styles/swipe.css';
+.projectDetails{
+	height: 100%;
+	background: #fff;
+}
 .usertext{
 	margin:0rem 1rem;
 	padding:0.8rem 0; 

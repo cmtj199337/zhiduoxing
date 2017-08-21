@@ -58,11 +58,11 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle()">
-					<span class="good">服务类型<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
+					<span class="good">服务类别<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="usertext right">
-				<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamCategory">
+				<span>团队类型：<select class="select" style="width:75%" v-model="teamInfo.teamCategory">
 					<option v-for="item in teamclist" :value="item.key">{{item.value}}</option>
 				</select><img src="./right.png" style="transform:rotate(90deg)"></span>
 			</div>

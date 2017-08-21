@@ -1,20 +1,77 @@
 <template>
 <div class="months">
 	<div class="select">
-		<p><img src="../../xuanze.png">每月第<input type="text" name="">日<img src="../../tianjia.png" class="jia"></p>
+		<p>
+			<span class="item-check-btn">
+				<svg class="icon icon-ok"></svg>
+			</span>
+			每月第<input type="text" v-model="list.day" name="">日
+				<el-time-select
+					    placeholder="起始时间"
+					    v-model="start"
+					    :picker-options="{
+					      start: '08:30',
+					      step: '00:30',
+					      end: '18:30'
+					    }">
+				  	</el-time-select>
+				  	<el-time-select
+					    placeholder="结束时间"
+					    v-model="end"
+					    :picker-options="{
+					      start: '08:30',
+					      step: '00:30',
+					      end: '18:30',
+					      minTime:start
+					    }">
+					</el-time-select>
+			<img @click="add()" src="../../tianjia.png" class="jia">
+		</p>
 	</div>
 	<div class="text2">
 		<ul>
-		<li>
-		<p style="text-align:center">每月第<b>5</b>日</p>
-			<p>08：00-18：00</p>
-				<p>10小时</p>
-		</li>
+			<li v-for="item in list">
+				<span class="item-check-btn">
+					<svg class="icon icon-ok"></svg>
+				</span>
+				<p style="text-align:center">每月第<b>{{item.day}}</b>日</p>
+				<p>
+					
+				</p>
+				<p>{{item.totle}}小时</p>
+			</li>
 		</ul>
 	</div>
 </div>
 </template>
+<script>
+	export default{
+		data(){
+			return{
+				list:[
+					{"id":0,"day":5,"start":"9:00:00","end":"18:00:00","totle":3}
+				],
+				next:1,
+				sTime:'',
+				eTime:''
+			}
+		},
+		methods:{
+			add(){
+				this.list.push({
+		        	id: this.next++,
+		        	day:this.list.day,
+			        start: this.sTime,
+			        end:this.eTime,
+			        totle:this.list.total
+			    })
+		        this.next = ''
+			}
+		}
+	}
+</script>
 <style scoped>
+@import '../../../../styles/usertext.css';
 span{
 	font-size:0.85rem;
 }
@@ -95,14 +152,12 @@ p{
 	margin-left:0.6rem;
 }
 .select p{
-	padding:0.8rem 0;
+	padding:0.8rem;
 }
 .select p img{
 	width:5%;
 	display:inline;
 	vertical-align:middle;
-	margin-left:5%;
-	margin-right:0.6rem;
 }
 .select p  input{
 	width:2.2rem;
@@ -111,7 +166,7 @@ p{
 	height:1.3rem;
 }
 .select p .jia{
-	margin-left:54%;
+	float: right;
 }
 .text2 ul li{
 	display:flex; 

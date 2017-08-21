@@ -54,10 +54,9 @@ p{
 	font-size:0.85rem;
 }
 .team{
-	background:#F1F1F1;
+	background:#f5f5f5;
 	padding: 0.6rem 0;
 	position:relative;
-	height:100%;
 
 }
 .team ul li .hd{
@@ -78,8 +77,8 @@ p{
 	border-radius:7px;
 	margin-left:15%;
 	margin-right: 2%;
-	top: 5%;
 	position:relative;
+	margin-bottom: 0.6rem;
 }
 .team  ul li img{
 	width:5.1rem;

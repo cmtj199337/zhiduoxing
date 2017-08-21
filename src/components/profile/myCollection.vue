@@ -58,6 +58,7 @@ span{
 }
 .header{
 	padding:0;
+	background: #fff
 }
 .header ul{
 	display:flex;

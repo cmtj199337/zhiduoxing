@@ -19,7 +19,11 @@
 						</div>
 						</router-link>
 					</li>
-					<infinite-loading :on-infinite="onInfinite" ref="infiniteLoading"></infinite-loading>
+					<infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
+						<i slot="no-more">
+							没有更多了...
+						</i>
+					</infinite-loading>
 				</ul>
 			</div>
 		</form>

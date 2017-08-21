@@ -34,7 +34,6 @@
 	  		Detail,
 	  		Project,
 	  		Community
-
 	  	},
 		data () {
 		    return {

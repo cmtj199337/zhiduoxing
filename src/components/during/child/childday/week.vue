@@ -3,40 +3,106 @@
 <div class="week">
 	<div class="time">
 		<ul>
-			<li><img src="../../gou.png"><span>星期一</span></li>
-			<li><img src="../../gou.png"><span>星期二</span></li>
-			<li><img src="../../gou.png"><span>星期三</span></li>
+			<li v-for="item in list">
+				<span class="item-check-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+					<svg class="icon icon-ok"></svg>
+				</span>
+				<span>{{item.week}}</span>
+			</li>
 		</ul>
-		<ul>
-			<li><img src="../../gou.png"><span>星期四</span></li>
-			<li><img src="../../gou.png"><span>星期五</span></li>
-			<li><img src="../../xuanze.png"><span>星期六</span></li>
-		</ul>
-		<ul>
-			<li><img src="../../xuanze.png"><span>星期日</span></li>
-			<li></li>
-		</ul>
-		
 	</div>
 	<div class="date2">
 		<p>服务开始时间：
-		<span>09：00</span>
+			<el-time-select
+			    placeholder="起始时间"
+			    v-model="startTime"
+			    :picker-options="{
+			      start: '08:30',
+			      step: '00:30',
+			      end: '18:30'
+			    }">
+		  	</el-time-select>
 		</p>
 	</div>
 	<div class="date2">
 	<p>服务结束时间：
-	<span>18：00</span>
+		<el-time-select
+		    placeholder="结束时间"
+		    v-model="endTime"
+		    :picker-options="{
+		      start: '08:30',
+		      step: '00:30',
+		      end: '18:30',
+		      minTime: startTime
+		    }">
+		</el-time-select>
 	</p>
 	</div>
 	<div class="date2">
 	<p>单次服务时长：
-	<span>8小时</span>
+	<span>{{getDays}}小时</span>
 	</p>
 	</div>
 </div>
-
 </template>
+<script>
+	export default{
+		data(){
+			return{
+				startTime: '',
+        		endTime: '',
+        		list:[
+        			{week:'星期一',id:'1'},
+        			{week:'星期二',id:'2'},
+        			{week:'星期三',id:'3'},
+        			{week:'星期四',id:'4'},
+        			{week:'星期五',id:'5'},
+        			{week:'星期六',id:'6'},
+        			{week:'星期日',id:'7'}
+        		],
+        		totle:''
+			}
+		},
+		computed:{
+			getDays(){ 
+			   	var s = this.startTime.split(':');
+			   	var e = this.endTime.split(':');
+
+			   	var daya = new Date();
+				var dayb = new Date();
+
+				daya.setHours(s[0]);
+				dayb.setHours(e[0]);
+				daya.setMinutes(s[1]);
+				dayb.setMinutes(e[1]);
+			                
+			    var count = (dayb-daya)/1000/60/60
+
+			    return count;
+		 	}
+		},
+		methods:{
+			checkFlag(item){
+				if(typeof item.checked == 'undefined'){
+					this.$set(item,'checked',true)
+				}else{
+					item.checked = !item.checked
+				}
+				this.caleTime()
+			},
+			caleTime(){
+				this.totle = ''
+				this.list.forEach((item,index) => {
+					if(item.checked){
+						this.totle += item.id+','
+					}
+				})
+			}
+		}
+	}
+</script>
 <style scoped>
+@import '../../../../styles/usertext.css';
 span{
 	font-size:0.85rem;
 }
@@ -101,12 +167,13 @@ p{
 	border-bottom:1px #E5E5E5 solid;
 }
 .time ul{
-	display:flex;
+	overflow: hidden;
 }
 .time ul li{
 	width:33%;
 	text-align:center;
 	padding:0.6rem 0;
+	float: left;
 }
 .time ul li img{
 	width:14%;

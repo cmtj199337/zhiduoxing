@@ -30,7 +30,11 @@
 							</div>
 						</div>
 					</li>
-					<infinite-loading :on-infinite="getProject" ref="infiniteLoading"></infinite-loading>
+					<infinite-loading :on-infinite="getProject" ref="infiniteLoading">
+						<i slot="no-more">
+							没有更多了...
+						</i>
+					</infinite-loading>
 				</ul>
 			</div>
 		</div>	
@@ -61,6 +65,12 @@
 						// this.info = this.info.concat(res.data)
 						this.info = res.data
 						this.list = res.data.wxatProjectDetail
+						if(res.data.length > 0){
+		    				this.list = this.list.concat(res.data);
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+		    			}else{
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+		    			}
             		}
             	})
             }

@@ -32,7 +32,7 @@
 		<div class="usertext">
 			<span>团队管理员：{{list.teamManager}}</span>
 		</div>
-		<div class="usertext">
+		<div class="usertext" v-show="list.joinFlg == 1">
 			<span>联系电话：{{list.contactNumber}}</span>
 		</div>
 		<div class="usertext">
@@ -43,20 +43,20 @@
 	    </div>
 
 		<div class="touxiang">
-			<img src="../touxiang1.png" class="img1" >
 			<img src="../touxiang2.png" v-for="item in list.wXTeamVolunteerList">
 		</div>
 		<div class="kong2">
 		</div>
 		<footer class="foot">
-			<span class="bm1"><img src="../shoucang.png">收藏</span>
+			<span class="bm1" v-if="list.collectFlg == 0" @click="addCollect()"><img src="../shoucang.png">收藏</span>
+			<span class="bm1" v-else-if="list.collectFlg == 1" @click="cancelCollect()"><img src="../shoucang.png">取消收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
-			<span class="bm3"><p class="bm">我要加入</p></span>
+			<span class="bm3" v-if="list.joinFlg == 1" @click="joinTeam()"><p class="bm">我要加入</p></span>
+			<span class="bm3 disable" v-else-if="list.joinFlg == 0"><p class="bm">我要退出</p></span>
 		</footer>
 	</div>
 </template>
 <script>
-
 	export default{
 
 		name:'detail',
@@ -65,7 +65,8 @@
 	  	},
 		data () {
 		    return {
-		    	list:[]		    
+		    	list:[],
+		    	status:''	    
 		    }
 	  	},
 	  	mounted(){
@@ -79,9 +80,61 @@
 	  				}
 	  			}).then(response=>{
 	  				let res = response.data
-	  				console.log(res)
 	  				if(res.result == 0){
 	  					this.list = res.data
+	  				}
+	  			})
+	  		},
+	  		joinTeam(){
+	  			let user = localStorage.getItem('userId')
+	  			this.$http.post('/api/private/joinTeam',{
+	  				teamId:this.list.teamId,
+	  				volunteerId:user,
+	  			},{
+	  				emulateJSON:true
+	  			}).then( response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.$message.success('团队管理员审核中...')
+	  					setInterval(()=>{
+	  						this.$router.go(0)
+	  					},1000)
+	  				}
+	  			})
+	  		},
+	  		addCollect(){
+	  			this.$http.post('/api/private/addCollect',{
+	  				collectType:0,
+	  				collectId:this.list.teamId
+	  			},{
+	  				emulateJSON:true
+	  			}).then( response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.$message.success('收藏成功')
+	  					setInterval(()=>{
+	  						this.$router.go(0)
+	  					},1000)
+	  				}else{
+	  					this.$message.error('收藏失败')
+	  				}
+	  			})
+	  		},
+	  		cancelCollect(){
+	  			this.$http.post('/api/private/delCollect',{
+	  				collectType:0,
+	  				collectId:this.list.teamId
+	  			},{
+	  				emulateJSON:true
+	  			}).then( response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					this.message.success('取消收藏成功')
+	  					setInterval(()=>{
+	  						this.$router.go(0)
+	  					},1000)
+	  				}else{
+	  					this.$message.error('取消收藏失败')
 	  				}
 	  			})
 	  		}
@@ -91,6 +144,9 @@
 </script>
 <style scoped>
 @import '../../../styles/usertext.css';
+.disable{
+	background: #666 !important;
+}
 .usertext{
 	margin:0rem 1rem;
 	padding:0.8rem 0; 
@@ -131,12 +187,9 @@ width:33%;
 }
 .touxiang{
 	position:relative;
-	margin:0rem 1rem;
+	margin:0rem 1rem 0 2rem;
 	padding:0.6rem 0; 
 
-}
-.touxiang .img1{
-	margin-left:0.6rem;
 }
 .touxiang img{
 	width:11%;
