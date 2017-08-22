@@ -2,45 +2,50 @@
 <div class="months">
 	<div class="select">
 		<p>
-			<span class="item-check-btn">
-				<svg class="icon icon-ok"></svg>
-			</span>
-			每月第<input type="text" v-model="list.day" name="">日
+			每月第<input type="text" v-model="day" name="">日
 				<el-time-select
-					    placeholder="起始时间"
-					    v-model="start"
-					    :picker-options="{
-					      start: '08:30',
-					      step: '00:30',
-					      end: '18:30'
-					    }">
-				  	</el-time-select>
-				  	<el-time-select
-					    placeholder="结束时间"
-					    v-model="end"
-					    :picker-options="{
-					      start: '08:30',
-					      step: '00:30',
-					      end: '18:30',
-					      minTime:start
-					    }">
-					</el-time-select>
+					class="fixWidth"
+				    placeholder="起始时间"
+				    v-model="sTime"
+				    size="mini"
+				    readonly
+				    :picker-options="{
+				      start: '08:00',
+				      step: '00:30',
+				      end: '18:00'
+				    }">
+			  	</el-time-select>
+			  	<el-time-select
+			  		class="fixWidth"
+				    placeholder="结束时间"
+				    v-model="eTime"
+				    readonly
+				    size="mini"
+				    :picker-options="{
+				      start: '08:00',
+				      step: '00:30',
+				      end: '18:00',
+				      minTime:sTime
+				    }">
+				</el-time-select>
 			<img @click="add()" src="../../tianjia.png" class="jia">
 		</p>
 	</div>
 	<div class="text2">
 		<ul>
 			<li v-for="item in list">
-				<span class="item-check-btn">
-					<svg class="icon icon-ok"></svg>
-				</span>
-				<p style="text-align:center">每月第<b>{{item.day}}</b>日</p>
-				<p>
-					
-				</p>
-				<p>{{item.totle}}小时</p>
+				<p style="text-align:left">
+					<!-- <span class="item-check-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
+						<svg class="icon icon-ok"></svg>
+					</span> -->
+				每月第<b>{{item.day}}</b>日</p>
+				<p>{{item.sTime}}-{{item.eTime}}</p>
+				<p>{{count}}小时</p>
 			</li>
 		</ul>
+	</div>
+	<div class="end">
+		<p @click="save()">确定</p>
 	</div>
 </div>
 </template>
@@ -49,23 +54,78 @@
 		data(){
 			return{
 				list:[
-					{"id":0,"day":5,"start":"9:00:00","end":"18:00:00","totle":3}
+					// {"id":0,"day":5,"sTime":"8:00:00","eTime":"18:00:00"}
 				],
-				next:1,
-				sTime:'',
-				eTime:''
+				next:0,
+				sTime:'8:00:00',
+				eTime:'18:00:00',
+				count:'10',
+				day:'',
+				result:[],
+				month:''
 			}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				sessionStorage.removeItem('startTime')
+				sessionStorage.removeItem('endTime')
+				sessionStorage.removeItem('count')
+				sessionStorage.removeItem('day')
+			})
 		},
 		methods:{
 			add(){
-				this.list.push({
-		        	id: this.next++,
-		        	day:this.list.day,
-			        start: this.sTime,
-			        end:this.eTime,
-			        totle:this.list.total
-			    })
-		        this.next = ''
+				if(this.day == ''){
+					this.$message.error("请输入每月第几日")
+				}else{
+					this.list.push({
+			        	id: this.next++,
+			        	day:this.day,
+				        sTime:this.sTime,
+				        eTime:this.eTime,
+				        count:this.count
+				    })
+			        this.next = ''
+				}
+			},
+			checkFlag(item){
+				if(typeof item.checked == 'undefined'){
+					this.$set(item,'checked',true)
+				}else{
+					item.checked = !item.checked
+				}
+				this.caleFlag()
+			},
+			caleFlag(){
+				this.result = []
+				this.list.forEach((item,index) => {
+					if(item.checked){
+						this.result.push({
+				        	id: this.next++,
+				        	day:this.list.day,
+					        sTime:this.sTime,
+					        eTime:this.eTime,
+					        count:this.count
+					    })
+				        this.next = ''
+					}
+				})
+			},
+			save(){
+				this.list.forEach((item,index) => {
+					if(!item.sTime || !item.eTime || !item.day){
+						this.$message.error('请填写完整信息')
+					}else{
+						this.month += item.day+','
+						sessionStorage.setItem('startTime',this.sTime)
+						sessionStorage.setItem('endTime',this.eTime)
+						sessionStorage.setItem('count',this.count)
+						sessionStorage.setItem('day',this.month)
+						sessionStorage.setItem('regularType',0)
+						sessionStorage.setItem('timeRate',2)
+						this.$router.push('sendProject')
+					}
+				})
 			}
 		}
 	}
@@ -77,6 +137,9 @@ span{
 }
 p{
 	font-size:0.85rem;
+}
+.fixWidth{
+	width: 6.5rem;
 }
 .header ul {
 	display:flex;
@@ -167,6 +230,7 @@ p{
 }
 .select p .jia{
 	float: right;
+	margin-top: 0.2rem;
 }
 .text2 ul li{
 	display:flex; 

@@ -15,7 +15,8 @@
 		<p>服务开始时间：
 			<el-time-select
 			    placeholder="起始时间"
-			    v-model="startTime"
+			    v-model="startTimeWeek"
+			    size="small"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -28,20 +29,24 @@
 	<p>服务结束时间：
 		<el-time-select
 		    placeholder="结束时间"
-		    v-model="endTime"
+		    v-model="endTimeWeek"
+		    size="small"
 		    :picker-options="{
 		      start: '08:30',
 		      step: '00:30',
 		      end: '18:30',
-		      minTime: startTime
+		      minTime: startTimeWeek
 		    }">
 		</el-time-select>
 	</p>
 	</div>
 	<div class="date2">
-	<p>单次服务时长：
-	<span>{{getDays}}小时</span>
-	</p>
+		<p>单次服务时长：
+			<span>{{getDays}}小时</span>
+		</p>
+	</div>
+	<div class="end">
+		<p @click="save()">确定</p>
 	</div>
 </div>
 </template>
@@ -49,24 +54,24 @@
 	export default{
 		data(){
 			return{
-				startTime: '',
-        		endTime: '',
+				startTimeWeek: '',
+        		endTimeWeek: '',
         		list:[
-        			{week:'星期一',id:'1'},
-        			{week:'星期二',id:'2'},
-        			{week:'星期三',id:'3'},
-        			{week:'星期四',id:'4'},
-        			{week:'星期五',id:'5'},
-        			{week:'星期六',id:'6'},
-        			{week:'星期日',id:'7'}
+        			{week:'星期一',id:'2'},
+        			{week:'星期二',id:'3'},
+        			{week:'星期三',id:'4'},
+        			{week:'星期四',id:'5'},
+        			{week:'星期五',id:'6'},
+        			{week:'星期六',id:'7'},
+        			{week:'星期日',id:'1'}
         		],
         		totle:''
 			}
 		},
 		computed:{
 			getDays(){ 
-			   	var s = this.startTime.split(':');
-			   	var e = this.endTime.split(':');
+			   	var s = this.startTimeWeek.split(':');
+			   	var e = this.endTimeWeek.split(':');
 
 			   	var daya = new Date();
 				var dayb = new Date();
@@ -80,6 +85,14 @@
 
 			    return count;
 		 	}
+		},
+		mounted(){
+			this.$nextTick(function(){
+				sessionStorage.removeItem('startTime')
+				sessionStorage.removeItem('endTime')
+				sessionStorage.removeItem('count')
+				sessionStorage.removeItem('day')
+			})
 		},
 		methods:{
 			checkFlag(item){
@@ -97,6 +110,26 @@
 						this.totle += item.id+','
 					}
 				})
+			},
+			save(){
+				if(!this.startTimeWeek || !this.endTimeWeek || !this.totle){
+					this.$message.error('请填写完整时间')
+				}else{
+					// sessionStorage.setItem('startTimeWeek',this.startTimeWeek)
+					// sessionStorage.setItem('endTimeWeek',this.endTimeWeek)
+					// sessionStorage.setItem('week',this.totle)
+					// sessionStorage.setItem('countWeek',this.getDays)
+					// sessionStorage.setItem('regularType',0)
+					// sessionStorage.setItem('timeRate',1)
+					// this.$router.push('sendProject')
+					sessionStorage.setItem('startTime',this.startTimeWeek)
+					sessionStorage.setItem('endTime',this.endTimeWeek)
+					sessionStorage.setItem('day',this.totle)
+					sessionStorage.setItem('count',this.getDays)
+					sessionStorage.setItem('regularType',0)
+					sessionStorage.setItem('timeRate',1)
+					this.$router.push('sendProject')
+				}
 			}
 		}
 	}

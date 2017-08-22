@@ -14,7 +14,9 @@
 			<el-date-picker
 		      v-model="startTime"
 		      type="date"
+		      size="small"
 		      placeholder="开始时间"
+		      @change="send"
 		      :picker-options="pickerOptions0">
 		    </el-date-picker>
 		</p>
@@ -24,7 +26,9 @@
 			<el-date-picker
 		      v-model="endTime"
 		      type="date"
+		      size="small"
 		      placeholder="结束时间"
+		      @change="send"
 		      :picker-options="pickerOptions0">
 		    </el-date-picker>
 		</p>
@@ -63,10 +67,18 @@
         		},
 			}
 		},
+		computed:{
+		},
 		methods:{
 			toggle(v,index) {
 		    	this.iscur = index;
 		    	this.currentView = v
+		    },
+		    send(){
+		    	if(this.startTime != '' || this.endTime != ''){
+		    		sessionStorage.setItem('start',this.startTime)
+		    		sessionStorage.setItem('end',this.endTime)
+		    	}
 		    }
 		}
 	}

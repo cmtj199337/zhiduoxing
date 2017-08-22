@@ -5,20 +5,10 @@
 </div>
 <div class="tianjia">
 	<ul>
-		<li>
-			<p style="text-align:center">2018/06/01</p>
-			<p>08：00-18：00</p>
-			<p>10小时</p>
-		</li>
-		<li>
-			<p style="text-align:center">2018/06/01</p>
-			<p>08：00-18：00</p>
-			<p>10小时</p>
-		</li>
-		<li>
-			<p style="text-align:center">2018/06/01</p>
-			<p>08：00-18：00</p>
-			<p>10小时</p>
+		<li v-for="item in list">
+			<p style="text-align:center">{{item.serverDay}}</p>
+			<p>{{item.serverSTime}}-{{item.serverETime}}</p>
+			<p>{{item.serviceTime}}小时</p>
 		</li>
 	</ul>
 </div>
@@ -27,27 +17,53 @@
 </div>
 	<div class="end">
 		<p>注：项目时间不规律的情况下，需要团队管理员添加每次活动志愿服务时间噢~</p>
-		<p class="queding">确定</p>
+		<p class="queding" @click="save()">确定</p>
 	</div>
 	<!-- 弹框 -->
 	<div class="xuanze" v-show="isShow">
 		<div class="header">
 			<p>总志愿时长：<span>200小时</span></p>
 		</div>
-		<div class="xx">
-			<input type="text">年<input type="text">月<input type="text">日
+		<div class="xx">选择日期
+			<el-date-picker
+			    v-model="year"
+			    align="right"
+			    type="date"
+			    size="small"
+			    placeholder="年-月-日">
+			</el-date-picker>
 		</div>
 		<div class="tt">
-			<p>开始时间  <span>18:00</span><img src="../xia.png"></p>	
+			<p>开始时间  <el-time-select
+			    placeholder="起始时间"
+			    v-model="startTime"
+			    size="small"
+			    :picker-options="{
+			      start: '08:30',
+			      step: '00:30',
+			      end: '18:30'
+			    }">
+		  	</el-time-select></p>	
 		</div>
 		<div class="tt">
-			<p>结束时间  <span>18:00</span><img src="../xia.png"></p>	
+			<p>结束时间  <el-time-select
+			    placeholder="结束时间"
+			    v-model="endTime"
+			    size="small"
+			    @change="cale()"
+			    :picker-options="{
+			      start: '08:30',
+			      step: '00:30',
+			      end: '18:30',
+			      minTime: startTime
+			    }">
+			</el-time-select></p>	
 		</div>
 		<div class="tt2">
-			<p>志愿时长 <span>10小时</span></p>
+			<p>志愿时长 <span>{{count}}小时</span></p>
 		</div>
 		<div class="end2">
-			<p @click="isShow=false">确定</p>
+			<p @click="add()">确定</p>
 		</div>
 	</div>
 	<div class="overlay" v-show="isShow"></div>
@@ -60,17 +76,73 @@ export default{
 	data(){
 		return {
 			isShow:false,
+			startTime:'',
+			endTime:'',
+			year:'',
+			list:[],
+			count:'',
+			message:''
 		}
+	},
+	mounted(){
+		this.$nextTick(function(){
+			sessionStorage.removeItem('startTime')
+			sessionStorage.removeItem('endTime')
+			sessionStorage.removeItem('count')
+			sessionStorage.removeItem('day')
+		})
 	},
 	methods:{
 		show(){
 			this.isShow = true;
+		},
+		add(){
+			if(!this.year || !this.startTime || !this.endTime){
+				this.$message.error('请输入完整信息')
+			}else{
+				this.year = this.year.toLocaleDateString()
+
+				this.list.push({
+		        	serverDay:this.year,
+			        serverSTime:this.startTime,
+			        serverETime:this.endTime,
+			        serviceTime:this.count
+			    })
+		        this.next = ''
+		        this.isShow = false
+			}
+		},
+		cale(){
+			var s = this.startTime.split(':');
+		   	var e = this.endTime.split(':');
+
+		   	var daya = new Date();
+			var dayb = new Date();
+
+			daya.setHours(s[0]);
+			dayb.setHours(e[0]);
+			daya.setMinutes(s[1]);
+			dayb.setMinutes(e[1]);
+		                
+		    this.count = (dayb-daya)/1000/60/60
+		},
+		save(){
+			if(this.list.length == 0){
+				this.$message.error('请完善信息')
+			}else{
+				sessionStorage.setItem('regularType',1)
+				sessionStorage.setItem('timeRate','')
+				this.message += sessionStorage.setItem('message',JSON.stringify(this.list))
+				this.$router.push('sendProject')
+			}
 		}
 	}
 }
 </script>
 <style scoped>
-
+.date{
+	width: 5	rem;
+}
 p{
 	font-size:0.85rem;
 }
@@ -126,15 +198,16 @@ p{
 	margin-top:3rem;
 }
 .xuanze{
-	width:80%;
-	height:20rem;
-	border-radius:6px;
-	position:fixed;
-	margin:-32rem 2rem;
-	padding:0 0.6rem;
-	border:1px #F2F2F2 solid;
-	background:white;
-	z-index: 3;
+    width: 80%;
+    /* height: 20rem; */
+    border-radius: 6px;
+    position: fixed;
+    margin: 0 2rem;
+    padding: 0 0.6rem;
+    border: 1px #F2F2F2 solid;
+    background: white;
+    z-index: 3;
+    top: 26%;
 }
 span{
 	font-size:0.85rem;

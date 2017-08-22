@@ -22,7 +22,7 @@
 						</el-upload>
 					</a>
 				</div>
-			<div class="usertext" style="border-top:1px solid #f5f5f5">
+			<div class="usertext" style="border-top:none">
 				<input type="text" placeholder="请输入项目名称" v-model="projectInfo.projectName" /><br />
 			</div>
 			<div class="usertext">
@@ -89,9 +89,8 @@
 	        <div class="end">
 	        10-500字
 	        </div>
-	        <div class="kong">`
+	        <div class="kong">
 			</div>
-
 			<div class="header3">
 	            <h4 class="texttitle"><span><img src="./baoxian@2x.png"></span>保险选择</h4>
 	        </div>
@@ -152,7 +151,19 @@
 					recruitETime:'',					//招募结束时间
 					planRecruitNum:'',					//计划招募人数
 					projectIntro:'',					//项目介绍
-					serverType:''
+					serverType:'',
+					wxProjectCycleDto:{					
+						projectSDate:'',				//项目开始时间
+						projectEDate:'',				//项目结束时间
+						regularType:'',					//是否规律
+						timeRate:'',					//时间频率
+						wxProjectCycleTimeDtoList:{
+							serverDay :'',				//服务日
+							serverSTime:'',				//服务开始时间
+							serverETime:'',				//服务结束时间
+							serviceTime:''				//单次志愿时长
+						}
+					}
 				},
 				imageUrl:'',
 				isShow:false,
@@ -169,6 +180,12 @@
 		mounted(){
 			this.$nextTick(function(){
 				this.showList()
+				this.getPTime()
+
+				// this.getDay()
+				// this.getWeek()
+				// this.getMonth()
+				this.getInfo()
 			})
 		},
 		computed:{
@@ -237,6 +254,19 @@
 		          this.$message.error('上传头像图片大小不能超过 2MB!');
 		        }
 		        return isJPG && isLt2M;
+		    },
+		    getPTime(){
+		    	this.projectInfo.wxProjectCycleDto.projectSDate = sessionStorage.getItem('start')
+		    	this.projectInfo.wxProjectCycleDto.projectEDate = sessionStorage.getItem('end')
+		    	this.projectInfo.wxProjectCycleDto.regularType = sessionStorage.getItem('regularType')
+		    	this.projectInfo.wxProjectCycleDto.timeRate = sessionStorage.getItem('timeRate')
+			},
+		    getInfo(){
+		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverDay = sessionStorage.getItem('day')
+		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverSTime = sessionStorage.getItem('startTime')
+		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverETime = sessionStorage.getItem('endTime')
+		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serviceTime = sessionStorage.getItem('count')
+		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList = JSON.parse(sessionStorage.getItem('message'))
 		    },
 		}
 

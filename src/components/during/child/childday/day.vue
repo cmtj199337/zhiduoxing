@@ -7,7 +7,8 @@
 		<p>服务开始时间：
 			<el-time-select
 			    placeholder="起始时间"
-			    v-model="startTime"
+			    v-model="startTimeDay"
+			    size="small"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -20,20 +21,24 @@
 		<p>服务结束时间：
 			<el-time-select
 			    placeholder="结束时间"
-			    v-model="endTime"
+			    v-model="endTimeDay"
+			    size="small"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
 			      end: '18:30',
-			      minTime: startTime
+			      minTime: startTimeDay
 			    }">
 			</el-time-select>
 		</p>
 	</div>
 	<div class="date2">
-	<p>单次服务时长：
-		<span>{{getDays}}小时</span>
-	</p>
+		<p>单次服务时长：
+			<span>{{getDays}}小时</span>
+		</p>
+	</div>
+	<div class="end">
+		<p @click="save()">确定</p>
 	</div>
 </div>
 </template>
@@ -41,14 +46,14 @@
 	export default{
 		data(){
 			return{
-				startTime: '',
-        		endTime: '',
+				startTimeDay: '',
+        		endTimeDay: '',
 			}
 		},
 		computed:{
-			getDays(){ 
-			   	var s = this.startTime.split(':');
-			   	var e = this.endTime.split(':');
+			getDays(){
+			   	var s = this.startTimeDay.split(':');
+			   	var e = this.endTimeDay.split(':');
 
 			   	var daya = new Date();
 				var dayb = new Date();
@@ -63,8 +68,33 @@
 			    return count;
 		 	}
 		},
+		mounted(){
+			this.$nextTick(function(){
+				sessionStorage.removeItem('startTime')
+				sessionStorage.removeItem('endTime')
+				sessionStorage.removeItem('count')
+				sessionStorage.removeItem('day')
+			})
+		},
 		methods:{
-			
+			save(){
+				if(!this.startTimeDay || !this.endTimeDay){
+					this.$message.error('请填写完整时间')
+				}else{
+					// sessionStorage.setItem('startTimeDay',this.startTimeDay)
+					// sessionStorage.setItem('endTimeDay',this.endTimeDay)
+					// sessionStorage.setItem('countDay',this.getDays)
+					// sessionStorage.setItem('regularType',0)
+					// sessionStorage.setItem('timeRate',0)
+					// this.$router.push('sendProject')
+					sessionStorage.setItem('startTime',this.startTimeDay)
+					sessionStorage.setItem('endTime',this.endTimeDay)
+					sessionStorage.setItem('count',this.getDays)
+					sessionStorage.setItem('regularType',0)
+					sessionStorage.setItem('timeRate',0)
+					this.$router.push('sendProject')
+				}
+			}
 		}
 	}
 </script>

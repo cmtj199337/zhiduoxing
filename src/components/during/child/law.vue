@@ -3,14 +3,11 @@
 <div class="header">
 	<ul>
 		<li v-for="(item,index) in tabs" :class="{one:index == iscur }" @click="toggle(item.view,index)">
-			<span >{{item.type}}</span>
+			<span>{{item.type}}</span>
 		</li>
 	</ul>
 </div>
 <component :is='currentView' keep-alive></component>
-<div class="end">
-	<p>确定</p>
-</div>
 
 </div>
 </template>
