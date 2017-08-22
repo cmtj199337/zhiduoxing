@@ -1,7 +1,7 @@
 <template>
 	<div class="publishProject">
 		<div v-show="wrap">
-			<headerTip message="发布项目" goBack="true"></headerTip>
+			<headerTip message="创建项目" goBack="true"></headerTip>
 			<div class="kong"></div>
 			<div class="header">
 	            <h4 class="texttitle"><span><img src="./zil@2x.png"></span>项目信息</h4>
@@ -72,7 +72,7 @@
 	       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字"  v-model="projectInfo.address">
 	        </div>
 	        <div class="usertext right">
-				<a href="javascript:;"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;">马哥波罗大厦<img src="./you@2x.png"></span></a>
+				<router-link to="map"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;">马哥波罗大厦<img src="./you@2x.png"></span></router-link>
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;"><span>项目打卡区域</span><span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span></a>

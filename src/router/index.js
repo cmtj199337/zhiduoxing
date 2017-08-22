@@ -450,6 +450,10 @@ const router = new Router({
 			path: '/im',
 			component:require('../components/Im/im.vue')
 		},
+		{
+			path: '/map',
+			component:require('../components/city/map.vue')
+		},
 	],
 	mode:'hash'
 })

@@ -28,6 +28,12 @@ Vue.use(Infiniteloading)
 import Qrcode from 'vue-qrcode';
 Vue.use(Qrcode)
 
+import BaiduMap from 'vue-baidu-map'
+Vue.use(BaiduMap, {
+  ak: 'E4vYNbh4LBcHlmzE9dmE5KVv2NMxvFBY'
+})
+
+
 import './config/validate.js'
 
 // import Easemob from 'easemob-websdk'
