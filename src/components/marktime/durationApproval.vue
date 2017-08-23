@@ -169,7 +169,7 @@
 }
 .header ul li{
 	background:white;
-	padding:0.8rem 0;
+	padding:0.9rem 0;
 	border-radius:7px;
 	margin:0rem 0.5rem 0 2.4rem;
 	position:relative;
@@ -273,6 +273,7 @@
 	position: fixed;
 	bottom:0;
 	border-top:3px #F5F5F5 solid;
+	background:white;
 }
 .jieshu ul{
 	display:flex;

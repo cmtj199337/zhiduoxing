@@ -18,7 +18,7 @@
 				<li @click="toAddress({path: '/personnelList'})">
 					<img src="./c@2x.png" class="zhiyuan"><b>{{list.voNum}}</b><p>志愿者总人数（人）</p>
 				</li>
-				<li>
+				<li @click="toAddress({path: '/teammanagetimer1'})">
 					<img src="./d@2x.png"><b>{{list.serHour}}</b><p>志愿时长（小时）</p>
 				</li>
 				</ul>

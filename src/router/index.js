@@ -263,6 +263,11 @@ const router = new Router({
 			path: '/allTeam',
 			component:require('../components/team/allTeamChecked.vue')
 		},
+		{
+			path: '/teammanagetimer1',
+			component:require('../components/team/teammanagetimer1.vue')
+		},
+
 		//下级团队管理
 		{
 			path: '/juniorTeamManagement',

@@ -11,7 +11,7 @@
 			<div class="main" v-for="item in list" >
 			
 			<span>
-			<router-link :to="{path:'../pDetail',query:{projectId:item.proId}}">
+			<router-link :to="{path:'../myprojectDetails',query:{projectId:item.proId}}">
 			<img src="./banner@2x.png" style="border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;height:8.2rem;"   >
 			<img src="./teb2.png" style="border-radius: 0.3rem;height:2.5rem" >
@@ -84,11 +84,12 @@
 <style scoped>
 .header ul{
 	display: flex;
+	background: #fff;
 }
 .header ul li{
 	width:50%;
 	text-align:center;
-	padding:0.5rem 0;
+	padding:0.5rem 0 0 0;
 }
 .header ul li span{
 	display: inline-block;

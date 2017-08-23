@@ -24,12 +24,10 @@
 		<div class="usertext">
 			<input type="text" placeholder="请输入团队口号"  v-model="teamInfo.teamSlogan"/><br />
 		</div>
-		<div class="usertext bottom">
-			<span>团队种类：<select class="select" style="width:30%" v-model="teamInfo.teamKind">
-				<option value="" selected="selected">初级团队</option>
-				<option value="">中级团队</option>
-				<option value="">高级团队</option>
-			</select><img src="./xial@2x.png"></span>
+			<div class="usertext bottom">
+				<span>团队种类：<select class="select" v-model="teamInfo.teamKind">
+					<option v-for="item in teamKlist" :value="item.key">{{item.value}}</option>
+				</select><img src="./bottom.png"></span>
 			<span style="position:relative;">
 				<img src="./quanxian.png" style="margin-left:-12%;position:absolute;top:18%;width:9%">
 				<span style="margin-left:20%;font-size:0.8rem;color:#CACACA">团队权限介绍</span></span>
@@ -39,13 +37,11 @@
 					<span class="good">服务类型<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
-		<div class="usertext right">
-			<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamCategory">
-				<option value="" selected="selected">机构团队</option>
-				<option value="">机构团队</option>
-				<option value="">机构团队</option>
-			</select><img src="./you@2x.png"></span>
-		</div>
+			<div class="usertext right">
+				<span>团队类别：<select class="select" style="width:75%" v-model="teamInfo.teamCategory">
+					<option v-for="item in teamclist" :value="item.key">{{item.value}}</option>
+				</select><img src="./right.png" style="transform:rotate(90deg)"></span>
+			</div>
 		<div class="usertext">
         	<input type="text" name="" placeholder="请输入团队管理员" v-model="teamInfo.teamManager">
         </div>
@@ -54,39 +50,23 @@
 		</div>
 		<div class="kong">
 		</div>
-		 <div class="header3">
-            <h4 class="texttitle"><span><img src="./dingwei@2x.png"></span>团队地址</h4>
-        </div>
-        <div class="usertext right">
-			<span>所在地区：<select class="select" style="width:75%" v-model="teamInfo.city">
-				<option value="" selected="selected">北京市</option>
-				<option value="">上海市</option>
-				<option value="">河北省</option>
-			</select><img src="./you@2x.png"></span>
-		</div>
-		<div class="usertext right">
-			<span>所在区县：<select class="select" style="width:75%" v-model="teamInfo.city">
-				<option value="" selected="selected">东城区</option>
-				<option value="">朝阳区</option>
-				<option value="">海淀区</option>
-			</select><img src="./you@2x.png"></span>
-		</div>
+		<my-area @select="haha"></my-area>
 		<div class="usertext" style="border:0;">
        		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字" v-model="teamInfo.address">
         </div>
         <div class="kong">
 		</div>
 		<div class="header2">
-            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>团队简介</h4>
+            <h4 class="texttitle" ><span><img src="./jianjie@2x.png"></span>团队简介</h4>
         </div>
         <div class="usertextend">
-       		 <textarea name="" rows="5" class="jianjie"></textarea>
+       		 <textarea name="" rows="5" class="jianjie" v-model="teamInfo.teamIntro"></textarea>
         </div>
         <div class="end">
         不超过100字
         </div>
         <div class="eee">
-        	<input type="button" name=""  class="next" value="下一步" @click="isTijiao">
+        	<input type="button" name=""  class="next" value="下一步" @click="formData()">
         </div>
         <div class="type" v-show="isShow">
 			<div class="head_top">
@@ -110,12 +90,14 @@
 <script>
 	import headerTip from '../../components/common/header/header.vue'
 	 import UploadImg from '../../components/common/tools/uploadImg.vue'
+	 import MyArea from '../../components/common/tools/area.vue'
 	export default{
 
 		name:'setUpTeam',
 		components:{
 	  		headerTip,
 	  		 UploadImg,
+	  		 MyArea
 	  	},
 		data(){
 			return {
@@ -133,14 +115,43 @@
 				imageUrl:'',
 				isShow:false,
 				list:[],
+				lisnluoShow:false,
+		        wrap:true,
+		        arr:'',
+		        listSelected:[],
+		       	teamclist:[],
+		        teamKlist:[],
+
 				
 			}
 		},
+		mounted(){
+        	this.$nextTick(function(){
+            	this.showList();
+        	})
+        },
 		methods:{
-			isTijiao(){
-
+			formData(){
+				this.$http.post('/api/public/addTeam',this.teamInfo).then( response => {
+	  				let res = response.data
+	  				if(res.result == 0){
+	  					//将返回的teamId存入
+	  			// 		sessionStorage.setItem('teamId',res.data)
+						// this.$router.push('tregisternext')
+						this.$router.push({path:'tregisternext',query:{teamId:res.data.teamId}})
+	  				}else{
+	  					this.$message.error('信息未填完整')
+	  				}
+	  			})
 			},
-			 checkFlag(item,way){
+			toAddress(path){
+                this.$router.push(path)
+            },
+            haha(d){
+            	this.teamInfo.province = d.pro.id
+            	this.teamInfo.city = d.city.id
+			},
+		    checkFlag(item,way){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
 
@@ -189,13 +200,46 @@
 		          this.$message.error('上传头像图片大小不能超过 2MB!');
 		        }
 		        return isJPG && isLt2M;
-		    }
+		    },
+		      showList(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'SERVER_TYPE'
+            		}
+            	}).then(response => {
+            		this.list = response.data.data
+            	})
+            	this.teamcatlist()
+            	this.showteamKlist()
+				this.getContactTeam()
+            },
+             teamcatlist(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'TEAM_CATEGORY'
+            		}
+            	}).then(response => {
+            		this.teamclist = response.data.data
+            	})
+            },
+            showteamKlist(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'TEAM_TYPE'
+            		}
+            	}).then(response => {
+            		this.teamKlist = response.data.data
+            	})
+            },
 		}
 
 	}
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
+.setUpTeam{
+	background:white;
+}
 .avatar-uploader{
 		position: absolute;
 		right: 0;
@@ -315,14 +359,20 @@
 	width:60%;
 	height:3rem;
 	}
-	.select{
-		height: 2rem;
-		border: none;
-		appearance:none;
-		font-size: 1rem;
+.select{
+		width: 35%;
+		border: 0;
+	    margin: 0 auto;
+	    height: 2rem;
+	    font-size: 1rem;
+	    appearance:none;
+	    position: relative;
 	}
 	.usertext span{
 		font-size: 1rem;
+	}
+	.list-btn {
+	    float: right;
 	}
 	.head_top{
 	    width: 100%;
@@ -383,5 +433,8 @@
 	.type li input{
 		vertical-align: sub;
 		float: right;
+	}
+		.good span{
+		padding-left:1.5rem;
 	}
 </style>

@@ -86,6 +86,10 @@
 	}
 </script>
 <style scoped>
+.passed{
+	background: #fff;
+	height: 100%;
+}
 .header1 p{
 	display: flex;
 }

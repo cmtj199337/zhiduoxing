@@ -1,22 +1,24 @@
 <template>
 	<div class="projectList">
 		<headerTip message="项目列表" goBack="true"></headerTip>
-		<div class="main" v-for="item in list">
-			<span>
-			<img :src="item.picUrl" class="bg">
-			<img src="./teb2.png" class="bg2">
-			<ul class="te">
-			<li class="cc1">{{item.proName}}</li>
-			</ul>
-			<ul class="te1">
-			<li class="cc1">{{item.provinceName}}{{item.cityName}}</li>
-			<li class="cc2">{{item.planNum}}/{{item.actualNum}}</li>
-			<li class="cc3">招募中</li>
-			</ul>
-			<ul class="te2">
-			<li class="cc1">项目时间</li>
-			<li class="cc4">{{item.startDate}}-{{item.endDate}}</li>
-			</ul>
+		<div class="project">
+			<span class="xm1" v-for="item in list">
+				<a href="javascript:;" @click="toAddress('myprojectDetails',item.proId)">
+					<div class="bg">
+						<img src="./banner.png">
+						<ul class="name"><li>{{item.proName}}</li></ul>
+						<ul class="info">
+							<li>{{item.provinceName}}{{item.cityName}}</li>
+							<li>{{item.planNum}}/{{item.actualNum}}</li>
+							<li>{{item.proStatus}}</li>
+						</ul>
+			
+					</div>
+					<ul class="te2 clearfix">
+						<li>项目时间</li>
+						<li style="text-align:right;color:#666">{{item.startDate}}-{{item.endDate}}</li>
+					</ul>
+				</a>
 			</span>
 		</div>
 		
@@ -39,31 +41,95 @@
 		},
 		methods:{
 			getInfo(){
-				let userId=localStorage.getItem('userId')
-				this.$http.get('/api/private/allProjectDetailList',{
-					params:{
-						id:userId
-					}
-				}).then(response=>{
+				this.$http.get('/api/private/allProjectDetailList').then(response=>{
 					let res=response.data
 					if(res.result==0){
 						this.list=res.data
 					}
 				})
-			}
+			},
+			toAddress(url,item){
+		    	this.$router.push({path:url,query:{projectId:item}})
+		    }
+
 		}
 
 	}
 </script>
 <style scoped>
+.project span{
+    width: 96%;
+    margin: 2%;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0px 1px 3px #ccc;
+    border-radius: 0.4rem;
+}
 .bg{
-	height:8rem;
+	width: 100%;
+	height: 8.6rem;
+	position: relative;
+}
+.bg .name{
+	position:absolute;
+	bottom:1.5rem;
+	left:0.5rem;
+	color:white;
+}
+.bg img{
 	border-top-left-radius:0.3rem;
 	border-top-right-radius:0.3rem;
+	height:100%;
 }
-.bg2{
-	border-bottom-left-radius:0.3rem;
-	border-bottom-right-radius:0.3rem;
+.xm1 a{color: #000;}
+.info{
+	width: 96%;
+	position: absolute;
+	bottom: 0.2rem;
+	color: #fff;
+	display: flex;
+	padding: 0 2%;
+	justify-content:space-between;
+}
+.te2{
+	padding:0.6rem 2%;
+	background: #fff;
+	border-radius: 0.3rem
+}
+.te2 li{
+	width: 50%;
+	float: left;
+	line-height: 1;
+}
+.icon{
+	width: 100%;
+	position: absolute;
+	top: 9%;
+}
+.icon dd:first-child{
+	position: absolute;
+	left:3%;
+	width: 2rem;
+	height:2rem;
+	border-radius: 50%;
+	background: rgba(0,0,0,0.3)
+}
+.icon dd:last-child{
+	position: absolute;
+	right:3%;
+	width: 2rem;
+	height:2rem;
+	border-radius: 50%;
+	background: rgba(0,0,0,0.3)
+}
+.icon dd img{
+	width: 1.2rem;
+    margin: 0 auto;
+    margin-top: 0.4rem;
+}
+.active{
+	color: #43B7B5;
+    border-bottom: 3px solid #43B7B5;
 }
 .main{
 	background:#F5F5F5;
@@ -96,17 +162,7 @@
 	width: 50%;
 	color:white
 }
-.te2{
-	display:flex;
-	position:absolute;
-	width:100%;
-	bottom:5%;
 
-}
-.te2 li{
-	width:90%;
-
-}
 .cc1{
 	text-align:left;
 }

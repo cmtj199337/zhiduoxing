@@ -3,7 +3,7 @@
 		<headerTip message="团队列表" goBack="true"></headerTip>
 		<div class="main2">
 			<ul>
-				<li v-for="item in list" @click="toAddress({path: '/teamDetails'})">
+				<li v-for="item in list" @click="toAddress('teamPresentation',item.teamId)">
 					<img :src="item.logo">
 					<p class="hd">{{item.name}}</p>
 					<p class="two">
@@ -49,25 +49,32 @@
 						this.list = res.data
 					}
 				})
-			}
+			},
+			 toAddress(url,item){
+		    	this.$router.push({path:url,query:{teamId:item}})
+		    },
 		}
 	}
 </script>
 <style scoped>
+.bulletedList{
+	background:white;
+	height:100%;
+}
 
 .main2 ul li h3{
 	margin-bottom: 0.8rem;
 	margin-left:4rem;
 }
 .main2{
-	background:#F1F1F1;
+	background:#F5F5F5;
 	padding: 0.2rem 0;
 	position:relative;
 }
 .main2 ul li .hd{
 	margin-bottom:0.5rem;
 	font-size:1rem;
-	margin-left:15%;
+	margin-left:12%;
 }
 .main2 ul li p{
 	margin:0.2rem 0;
@@ -82,7 +89,7 @@
 	border-radius:7px;
 	top: 5%;
 	position:relative;
-	margin:0.6rem 3% 0.2rem 12%;  
+	margin:0.3rem 3% 0.3rem 12%;  
 }
 .main2  ul li img{
 	width:4rem;

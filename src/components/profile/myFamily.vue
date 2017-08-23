@@ -19,10 +19,10 @@
 	<div class="main">
 	<ul>
 		<li v-for="item in list.wxFamilyDtoList">
-			<img src="./toux.png" class="tt">
-			<p class="hd"><span>{{item.trueName}}</span><span class="bj">编辑</span></p>
-			<p><span>志愿时长</span>  <span>{{item.serverDuration}}</span></p>
-			<p><span>身份证号</span>  <span>{{item.idNo}}</span><img src="./shanchu.png" class="shanchu" @click="shanChu(item.memberId)"></p>
+			<img :src="item.headIcon" class="tt">
+			<p class="hd"><span>{{item.nickName}}</span></p>
+			<p><span>账号</span>  <span>{{item.accountNo}}</span></p>
+			<p><span>密码</span>  <span>{{item.password}}</span><img src="./shanchu.png" class="shanchu" @click="shanChu(item.memberId)"></p>
 		</li>
 	</ul>
 	</div>
@@ -56,7 +56,9 @@
                 this.$router.push(path)
             },
             getInfo(){
-            this.$http.get('/api/private/getMyFamily').then(response=>{
+            this.$http.get('/api/private/getMyFamilySign',{
+            	emulateJSON:true
+            }).then(response=>{
             	let res=response.data
             	console.log(res)
 	  				if(res.result == 0){
@@ -105,13 +107,17 @@
 .header ul li{
 	margin:0.2rem 0.6rem;
 	text-align:center;
-	padding: 1.1rem 0rem;		
+	padding: 1.5rem 0;	
 	background: #FFFFFF;
 	display:flex;
 	border-radius:0.3rem;
 	position:relative;
-	
-}
+}	
+.header ul li p{
+	height: 1.5rem;
+	line-height: 1.5rem;
+	}
+
 .header ul li span{
 	font-size: 14px;
 	width: 50%;

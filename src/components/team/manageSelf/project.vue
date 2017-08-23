@@ -8,7 +8,6 @@
 				</li>
 			</ul>
 		</div>
-		<div class="kong"></div>
 		<component :is='currentView' keep-alive></component>
 	</div>
 </template>
@@ -65,8 +64,8 @@ span{
 }
 .header ul{
 	display: flex;
-	margin:0.1rem 0;
-	padding: 0.2rem 0;
+	margin:0.1rem 0 0 0;
+	padding: 0.2rem 0 0 0;
 	background: white;
 	text-align: center;
 }

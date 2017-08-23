@@ -221,5 +221,6 @@ margin:0.3rem 0;
 }
 .detail{
 	padding-bottom:20%;
+	background: #fff;
 }
 </style>

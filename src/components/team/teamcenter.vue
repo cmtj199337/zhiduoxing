@@ -58,7 +58,7 @@
 					<span>全部团队查看</span>
 				</li>
 				<hr>
-				<li @click="toAddress({path: '/createTeam'})">
+				<li @click="toAddress({path: '/tregister'})">
 					<img class="icon" src="./cjtd.png">
 					<span>创建团队</span>
 				</li>

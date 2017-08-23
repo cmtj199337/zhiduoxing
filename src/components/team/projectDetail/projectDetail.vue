@@ -73,8 +73,8 @@
 }
 .header ul{
 	display:flex;
-	margin:0.1rem 0;
-	padding:0.5rem 0;
+	margin:0.1rem 0 0 0;
+	padding:0.5rem 0 0 0;
 	background:white;
 	text-align: center;
 }

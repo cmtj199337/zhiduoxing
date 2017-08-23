@@ -120,6 +120,7 @@
 	  	mounted(){
 	  		this.$nextTick(function(){
 	  			this.goodList()
+	  			this.$refs.timerbtn.setDisabled(true);
 	  		})
 	  	},
 	  	methods:{
@@ -247,7 +248,8 @@
 		    isRegister(){
 		    	if(this.userinfo.mobileNo){
 		    		this.$http.post('/api/public/checkMobileNo',{
-		    			mobileNo:this.userinfo.mobileNo
+		    			mobileNo:this.userinfo.mobileNo,
+		    			userType:1
 		    		},{
 		    			emulateJSON:true
 		    		}).then(response =>{

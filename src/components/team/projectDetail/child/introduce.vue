@@ -68,6 +68,10 @@
 </script>
 <style scoped>
 @import '../../../../styles/usertext.css';
+.introduce{
+	height: 100%;
+	background: #fff;
+}
 .usertext{
 	margin:0rem 1rem;
 	padding:0.8rem 0; 
@@ -186,7 +190,7 @@ margin:0.3rem 0;
 	font-size:0.9rem;
 }
 .jheader{
-	margin: 1rem 0.5rem;
+	margin:0.5rem;
 }
 .jtext p{
 	margin: 0.5rem 0.5rem;

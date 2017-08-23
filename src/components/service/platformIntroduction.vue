@@ -6,7 +6,7 @@
 		</div>
 		<div class="text">
 		<img src="./image.png">
-		<p>{{list}}</p>
+		<p v-html="list"></p>
 		</div>
 			
 		</div>
@@ -26,14 +26,14 @@
 			}
 		},
 		mounted(){
-			this.getInfo()
+			this.getInfo(3)
 		},
 		methods:{
-		getInfo(){
+		getInfo(type){
 			
 			this.$http.get('/api/public/getPlatformIntro',{
 				params:{
-				type:3
+				type:type
 			}}).then(response=>{
 				let res = response.data
 	  				console.log(res)

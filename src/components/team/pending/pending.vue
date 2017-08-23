@@ -82,6 +82,9 @@
 	}
 </script>
 <style scoped>
+.pending{
+	background: #fff
+}
 .header1 p{
 	display: flex;
 }

@@ -2,7 +2,10 @@
 	<div class="index">
 		<div class="headerBar">
 			<div class="number"><img src="./logo.png"><span>5000人</span></div>
-			<div class="denglu"><span @click="toAddress({path: '/login'})">登录</span></div>		
+			<div class="denglu">
+				<span v-if="userName">{{userName}}</span>
+				<span v-else @click="toAddress({path: '/login'})">登录</span>
+			</div>		
 		</div>
 		<swipe v-model="index" style="text-align: center;">
 		  <swipe-item><img src="/static/banner.png" alt=""></swipe-item>
@@ -160,14 +163,16 @@
 		    	article:[],
 		    	guessCity:'',
 		    	isShow:true,				//当前定位城市
+		    	userName:''
 		    }
 	  	},
 	  	mounted(){
+	  		this.userName = localStorage.getItem('userId')
 	  		// 获取当前城市
-	        this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then(response => {
-	            let res = response.data;
-	            this.guessCity = res.name;
-	        })
+	        // this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then(response => {
+	        //     let res = response.data;
+	        //     this.guessCity = res.name;
+	        // })
 	  		// this.showList()
 	  	},
 	  	computed:{

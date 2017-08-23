@@ -66,7 +66,8 @@
 .header{
 	padding:0.8rem 0;
 	display:flex;
-	border-bottom:1px 
+	border-bottom:1px;
+	background:white;
 }
 .header img{
 	width:58%;
