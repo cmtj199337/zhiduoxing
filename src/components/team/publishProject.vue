@@ -22,6 +22,33 @@
 						</el-upload>
 					</a>
 				</div>
+				<el-upload
+				  class="bg"
+				  action="/api/public/upload"
+				  :show-file-list="false"
+				  :on-success="handleAvatarSuccess"
+				  :before-upload="beforeAvatarUpload">
+				  <img v-if="image1" :src="image1" class="bg-img">
+				  <i v-else class="el-icon-plus avatar-bg"></i>
+				</el-upload>
+				<el-upload
+				  class="bg"
+				  action="/api/public/upload"
+				  :show-file-list="false"
+				  :on-success="handleAvatarSuccess"
+				  :before-upload="beforeAvatarUpload">
+				  <img v-if="image2" :src="image2" class="bg-img">
+				  <i v-else class="el-icon-plus avatar-bg"></i>
+				</el-upload>
+				<el-upload
+				  class="bg"
+				  action="/api/public/upload"
+				  :show-file-list="false"
+				  :on-success="handleAvatarSuccess"
+				  :before-upload="beforeAvatarUpload">
+				  <img v-if="image3" :src="image3" class="bg-img">
+				  <i v-else class="el-icon-plus avatar-bg"></i>
+				</el-upload>
 			<div class="usertext" style="border-top:none">
 				<input type="text" placeholder="请输入项目名称" v-model="projectInfo.projectName" /><br />
 			</div>
@@ -324,6 +351,26 @@ span{
 	    right: 0;
 	    top: 0;
 	}
+	.bg-img{
+		width: 100%;
+	    height: 8.6rem;
+	    display: block;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	}
+	.bg{
+		padding: 1rem 1rem 0 1rem;
+	}
+	.avatar-bg {
+	    font-size: 28px;
+	    color: #8c939d;
+	    width: 100%;
+	    height: 8.6rem;
+	    line-height: 8.6rem;
+	    text-align: center;
+	    border: 1px dashed #d9d9d9;
+	  }
 .header1{
     border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
 }

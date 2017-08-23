@@ -1,6 +1,6 @@
 <template>
 	<div class="timeInput">
-		<headerTip message="2016年6月1日" goBack="true"></headerTip>
+		<headerTip :message="title" goBack="true"></headerTip>
 		<div class="header">
 			<ul>
 				<li>
@@ -20,7 +20,7 @@
 		</div>
 		
 		<div class="header3" >
-			<div class="title"><p>A</p></div>
+			<!-- <div class="title"><p>A</p></div> -->
 			<ul v-for="item in list">
 				<li class="one">
 				<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
@@ -35,7 +35,7 @@
 		<div class="foot">
 			<ul>
 			<li><p>共计：<span>{{list.length}}</span>人</p></li>
-			<li class="right"><router-link :to="{path:'informationFilling',query:{projectId:projectId}}">团队补录</router-link></li>
+			<li class="right"><router-link :to="{path:'informationFilling',query:{projectId:projectId,tit:title}}">团队补录</router-link></li>
 			</ul>
 		</div>
 			</div>
@@ -54,7 +54,8 @@
 				list:[],
 				volutors:'',
 				projectId:'',
-				volutorName:''
+				volutorName:'',
+				title:''
 			}
 		},
 		mounted(){
@@ -84,6 +85,8 @@
 
         	sessionStorage.removeItem('volunteerId')
 	        sessionStorage.removeItem('volunteerName')
+
+	        this.title = this.$route.query.title
 		},
 		methods:{
 			toAddress(path){
@@ -119,8 +122,21 @@
 	        		}
 	        	})
 	        }
-		}
-
+		},
+		filters: {
+		    formatDate(value) {
+		      	if (!value) return ''
+		      	let date = new Date(value * 1000)
+		      	let year = date.getFullYear()  // 获取完整的年份(4位,1970)
+		      	let month = date.getMonth() + 1  // 获取月份(0-11,0代表1月,用的时候记得加上1)
+		      	let day = date.getDate()  // 获取日(1-31)
+		      	let hour = date.getHours()  // 获取小时数(0-23)
+		      	let minute = date.getMinutes()  // 获取分钟数(0-59)
+		      	let weekDay = date.getDay() > 0 ? date.getDay() - 1 : 6 // 获取星期中的天数(0-6) 	0代表周日
+		      	let week = ['一', '二', '三', '四', '五', '六', '日']
+		      	return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ' 周' + week[weekDay]
+		    }
+	    }
 	}
 </script>
 <style scoped>

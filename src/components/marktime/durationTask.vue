@@ -1,47 +1,38 @@
 <template>
 	<div class="durationTask">
-		<headerTip message="补录时长" goBack="true"></headerTip>
+		<headerTip message="时长记录" goBack="true"></headerTip>
 		<div class="main">
 			<div class="header">
 				<ul>
 					<li>
-						<img src="./toux.png"  class="touxiang">
+						<img src="./toux.png" class="touxiang">
 						<div class="m11">
 							<div class="mm1">
-								<h3>志多星项目</h3>
-								<p>2017/05/20-2017/5/20</p>
+								<h3>{{list.projectName}}</h3>
+								<p>{{list.projectSDate}}-{{list.projectEDate}}</p>
 							</div>
 							<div class="mm2">
 								<span>
-								<p class="being">进行中</p>
+								<p v-if="list.projectStatus == '进行中'" class="being">进行中</p>
+								<p v-if="list.projectStatus == '已结束'" class="passed">已结束</p>
 								</span>
-								<p class="btn" style="top:60%">补录记录</p>
+								<p class="btn" style="top:60%"><router-link to="makeupRecord">补录记录</router-link></p>
 							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<div class="main2">
+		<div class="main2" v-if="list.regularType == 2" v-for="month in list.wxatpCycleMonthDtoList">
 			<div class="header2">
-				<img src="./que.png"><p style="margin-left:0.5rem;">2016年7月</p>
+				<img src="./que.png"><p style="margin-left:0.5rem;">{{month.month}}</p>
 			</div>
-			<div class="header3">
-				<span><p class="cycle">1日</p></span>
-				<p>开始时间：2017/05/02 15:00</p>
-				<p>开始时间：2017/05/02 15:00</p>
-				<p style="color:#62C1BF">志愿时长：3小时</p>
-				<span>
-				<p class="btn">补录时长</p></span>
-			</div>
-			<div class="header3">
-				<span>
-				<p class="cycle">2日</p></span>
-				<p>开始时间：2017/05/02 15:00</p>
-				<p>开始时间：2017/05/02 15:00</p>
-				<p style="color:#62C1BF">志愿时长：3小时</p>
-				<span>
-				<p class="btn">补录时长</p></span>
+			<div class="header3" v-for="day in month.wxatpCycleDtoList">
+				<span><p class="cycle">{{day.day}}日</p></span>
+				<p>开始时间：{{month.month}}/{{day.day}} {{day.startTime}}</p>
+				<p>结束时间：{{month.month}}/{{day.day}} {{day.endTime}}</p>
+				<p style="color:#62C1BF">志愿时长：{{day.serverTime}}小时</p>
+				<span><router-link :to="{path:'timeInput',query:{title:month.month+day.day,projectId:pId}}"><p class="btn">补录时长</p></router-link></span>
 			</div>
 		</div>
 		<div class="kong"></div>
@@ -57,16 +48,38 @@
 	  	},
 		data(){
 			return {
-				
+				list:[],
+				pId:''
 			}
 		},
-
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+				this.pId = this.$route.query.projectId
+			})
+		},
+		methods:{
+			listView(){
+				this.$http.get('/api/private/getATTPTimes',{
+					params:{
+						projectId:this.$route.query.projectId
+					}
+				}).then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data
+					}
+				})
+			}
+		}
 	}
 </script>
 <style scoped>
+.durationTask{
+	background: #fff
+}
 .kong{
 	background: #F5F5F5;
-	height:20rem;
 }
 .header{
 	position:relative;
@@ -75,7 +88,7 @@
 	background:white;
 	padding:0.8rem 0;
 	border-radius:7px;
-	margin:0.6rem 0.6rem 0 2.4rem;
+	margin:0rem 0.6rem 0 2.4rem;
 	position:relative;
 
 }
@@ -155,6 +168,9 @@
     background: rgb(70, 184, 183);
     padding: 0.3rem 0.6rem;
     border-radius: 0.2rem;
+}
+.btn a{
+	color: #fff
 }
 .cycle{
 	width:2.5rem;

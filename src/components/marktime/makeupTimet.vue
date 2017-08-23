@@ -1,6 +1,6 @@
 <template>
 	<div class="makeupTimet">
-		<headerTip message="补录时长" goBack="true"></headerTip>
+		<headerTip message="时长记录" goBack="true"></headerTip>
 		<div class="header">
 			<span style="width:10%;margin-left:0.5rem"><img src="./td.png"></span><span style="text-align:left">团队项目</span>
 		</div>	
@@ -19,7 +19,7 @@
 								<router-link :to="{path:'durationApproval',query:{projectId:item.projectId}}">时长审批</router-link>
 							</p></span>
 							<span><p class="btn1">
-								<router-link :to="{path:'timeInput',query:{projectId:item.projectId}}">团队补录</router-link>
+								<router-link :to="{path:'durationTask',query:{projectId:item.projectId}}">团队补录</router-link>
 							</p></span>
 						</div>	
 					</li>

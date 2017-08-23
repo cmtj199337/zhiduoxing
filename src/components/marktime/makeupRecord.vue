@@ -1,21 +1,25 @@
 <template>
 	<div class="makeupRecord">
-		<headerTip message="补录时长" goBack="true"></headerTip>
+		<headerTip message="时长记录" goBack="true"></headerTip>
 		<div class="main">
 		<div class="header">
 			<ul>
-			<li>
-			<img src="./toux1.png"  class="touxiang">
-			<div class="m11">
-			<div class="mm1"><h3>志多星项目</h3>
-			<p>2017/05/20-2017/5/20</p></div>
-			<div class="mm2">
-			<span>
-			<p class="end">已结束</p>
-			</span>
-			</div>
-			</div>
-			</li>
+				<li>
+					<img src="./toux.png" class="touxiang">
+					<div class="m11">
+						<div class="mm1">
+							<h3>{{list.projectName}}</h3>
+							<p>{{list.projectSDate}}-{{list.projectEDate}}</p>
+						</div>
+						<div class="mm2">
+							<span>
+							<p v-if="list.projectStatus == '进行中'" class="being">进行中</p>
+							<p v-if="list.projectStatus == '已结束'" class="passed">已结束</p>
+							</span>
+							<p class="btn" style="top:60%"><router-link to="makeupRecord">补录记录</router-link></p>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</div>
 		<div class="header2">
@@ -70,10 +74,24 @@
 	  	},
 		data(){
 			return {
-				
+				list:[]
 			}
 		},
-
+		mounted(){
+			this.$nextTick(function(){
+				this.listView()
+			})
+		},
+		methods:{
+			listView(){
+				this.$http.get('/api/private/getHistory').then( response => {
+					let res = response.data
+					if(res.result == 0){
+						this.list = res.data
+					}
+				})
+			}
+		}
 	}
 </script>
 <style scoped>
@@ -88,7 +106,7 @@
 	background:white;
 	padding:0.8rem 0;
 	border-radius:7px;
-	margin:0.6rem 0.6rem 0 2.4rem;
+	margin:0rem 0.6rem 0 2.4rem;
 	position:relative;
 
 }

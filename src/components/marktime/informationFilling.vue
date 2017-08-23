@@ -1,6 +1,6 @@
 <template>
 	<div class="informationFilling">
-		<headerTip message="补录时长" goBack="true"></headerTip>
+		<headerTip message="时长记录" goBack="true"></headerTip>
 		<div class="main">
 		<div class="header">
 			<ul>
@@ -68,7 +68,7 @@
 				],
 				volutorId:'',
 				volutorName:[],
-				time:''
+				time:null
 			}
 		},
 		mounted(){
@@ -95,6 +95,11 @@
 		methods:{
 			toggle(index){
 				this.isCur = index
+				if(this.isCur == 0){
+					this.time = this.time
+				}else if(this.isCur == 1){
+					this.time = -this.time
+				}
 			},
 			volutorInfo(){
 				this.volutorName = this.volutorName.split(',').slice(0,-1)
@@ -104,7 +109,7 @@
 					this.$message.error("信息填写完整")
 				}else{
 					this.$http.post('/api/private/insertATRecords',{
-						addDate:'2017/8/15',
+						addDate:this.$route.query.tit,
 						addTime:this.time,
 						projectId:this.$route.query.projectId,
 						volunteerId:this.volutorId
@@ -114,7 +119,7 @@
 							this.$message.success("提交成功")
 							setInterval(()=>{
 								//补录记录
-								this.$router.push('teamcenter')
+								this.$router.push('makeupRecord')
 							},500)
 						}
 					})
