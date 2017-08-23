@@ -24,7 +24,8 @@
 							</div>
 							<div class="mm2">
 								<span>
-									<p class="being">{{item.projectStatus}}</p>
+									<p v-if="item.projectStatus == '进行中'" class="being">{{item.projectStatus}}</p>
+									<p v-else-if="item.projectStatus == '已结束'" class="passed">{{item.projectStatus}}</p>
 								</span>
 								<router-link :to="{path:'personalLength',query:{projectId:item.projectId}}"><p class="btn">补录时长</p></router-link>
 							</div>

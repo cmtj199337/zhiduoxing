@@ -15,7 +15,7 @@
 		</div>
 		<div class="project">
 			<span v-for="item in proList">
-			<a href="javascript:;" @click="toAddress('myprojectDetails',item.projectId)">
+			<a href="javascript:;" @click="toAddress('/myprojectDetails',item.projectId)">
 				<div class="bg">
 					<img src="./xiangm.png">
 					<ul class="info">
@@ -61,7 +61,7 @@
 				<div class="header2">
 					<ul>
 						<li v-for="(item,index) in nav">
-							<span :class="{current:index == current }" @click="toggle(index,item.view)">{{item.type}}</span>
+							<span :class="{current:index == iscur }" @click="toggle(index,item.view)">{{item.type}}</span>
 						</li>
 					</ul>
 				</div>
@@ -115,7 +115,8 @@
 			toggle(index,v) {
 		    	this.iscur = index
 				this.currentView = v
-
+				
+				this.proList = []
 				this.current = index+3
 				this.projeckList(this.current)
 		    },
@@ -235,6 +236,7 @@
     text-align: center;
     padding: 0.5rem 0;
     border-bottom: 0.5px solid #c9c9c9;
+    background: #fff;
 }
 .tip{
     width: 96%;
@@ -258,7 +260,7 @@
 .header{
 	width:100%;
 	display:flex;
-
+	background: #fff;
 }
 .header2 {
 	width:30%;

@@ -67,6 +67,9 @@ import { Swipe, SwipeItem } from 'c-swipe';
 </script>
 <style scoped>
 @import '../../styles/swipe.css';
+.voluntaryGuarantee{
+	background: #fff;
+}
 p{
 	font-size:0.85rem;
 }

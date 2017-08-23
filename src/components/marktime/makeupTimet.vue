@@ -11,7 +11,8 @@
 						<img :src="item.projectIcon" class="touxiang">
 						<div class="text">
 							<h3>{{item.projectName}}</h3>
-							<p class="being">{{item.projectStatus}}</p>
+							<p v-if="item.projectStatus == '已结束'" class="passed">{{item.projectStatus}}</p>
+							<p v-else-if="item.projectStatus == '进行中'" class="being">{{item.projectStatus}}</p>
 						</div>
 						<div class="anniu">
 							<span><p class="btn">

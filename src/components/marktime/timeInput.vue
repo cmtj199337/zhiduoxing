@@ -6,7 +6,7 @@
 				<li>
 					<img :src="projectList.projectIcon"  class="touxiang">
 
-					<p>{{projectList.projectName}}<span class="end">{{projectList.projectStatus}}</span></p>
+					<p>{{projectList.projectName}}<span v-if="projectList.projectStatus == '已结束'" class="passed">{{projectList.projectStatus}}</span><span v-if="projectList.projectStatus == '进行中'" class="being">{{projectList.projectStatus}}</span></p>
 					<p style="width:90%;display:flex;"><span style="width:50%">志愿总时长<b style="color:#43B7B5">{{projectList.serverDuration}}小时</b></span><span style="width:40%;margin-left:20%;">报名人数<b style="color:#43B7B5">{{projectList.joinNumber}}人</b></span></p>
 				</li>
 			</ul>
@@ -81,6 +81,9 @@
         			this.list = res.data
         		}
         	})
+
+        	sessionStorage.removeItem('volunteerId')
+	        sessionStorage.removeItem('volunteerName')
 		},
 		methods:{
 			toAddress(path){
@@ -122,6 +125,9 @@
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
+.timeInput{
+	background: #fff;
+}
 .header{
 	position:relative;
 	padding:0.6rem 0;
@@ -138,6 +144,7 @@
 .header ul li p{
 	margin:0.6rem 0;
 	margin-left:2.5rem;
+	position: relative;
 }
 .header ul li p .end{
 	width:2rem;
@@ -242,5 +249,25 @@
 .list-btn{
 	position: relative;
 	top:0.7rem;
+}
+.being{
+	position: absolute;
+    right:10%;
+    top: 0;
+    font-size: 0.5rem;
+    color: rgb(70, 184, 183);
+    border: 1px solid rgb(70, 184, 183);
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
+}
+.passed{
+	position: absolute;
+    right:10%;
+    top: 0;
+    font-size: 0.5rem;
+    color: #e5e5e5;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
 }
 </style>

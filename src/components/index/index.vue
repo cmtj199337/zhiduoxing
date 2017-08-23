@@ -171,7 +171,7 @@
 		    }
 	  	},
 	  	mounted(){
-	  		this.userName = localStorage.getItem('userId')
+	  		this.userName = localStorage.getItem('username')
 	  		// 获取当前城市
 	        // this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then(response => {
 	        //     let res = response.data;

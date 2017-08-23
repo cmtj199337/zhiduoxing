@@ -72,6 +72,7 @@
 
 	  					localStorage.setItem('access_token',verify.token)
 	  					localStorage.setItem('userId',verify.userId)
+	  					localStorage.setItem('username',verify.userName)
 	  					
 	  					if(verify.userType == 0){
 	  						this.$store.commit('isLogin',res.data)

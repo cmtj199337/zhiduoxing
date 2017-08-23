@@ -23,6 +23,9 @@
 		</div>
 
 		<prove @sendData="getData"></prove>
+		<div class="end">
+			<p>确定</p>
+		</div>
 	</div>  
 </template>
 
@@ -51,8 +54,12 @@
 
 <style scoped>
 @import '../../styles/usertext.css';
+.perfect{
+	padding-bottom:10%;
+}
 .insurance{
 	border-top: 0.8rem solid #f5f5f5;
+	background: #fff;
 }
 .insurance h4{
 	font-size: 1rem;
@@ -77,5 +84,19 @@
 	display: inline-block;
 	color: #FFA92F;
 	float: right;
-}	
+}
+.end{
+	margin: 2.5rem 0 0 0;
+	text-align: center;
+}
+.end p{
+	width: 14rem;
+	color: #fff;
+	background: #43B7B6;
+	padding: 0.8rem 0;
+	margin: 0 auto;
+	border-radius: 0.4rem;
+	border:none;
+	appearance:none;
+}
 </style>

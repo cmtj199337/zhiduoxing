@@ -50,6 +50,9 @@
 </script>
 <style scoped>
 @import '../../styles/usertext.css';
+	.signList{
+		background: #fff;
+	}
 	.list{
 		width: 96%;
 		margin: 0 auto;

@@ -36,7 +36,7 @@
 			</el-radio-group>
 		</ul>
 
-        <div class="usertext">
+        <div class="usertext" style="border-top:1px solid #f5f5f5">
 			<input type="tel" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" />
 		</div>
 		 <div class="usertext">
@@ -112,7 +112,7 @@
 		},
 		mounted(){
 			this.getType();
-			this.teamId = sessionStorage.getItem('teamId')
+			this.teamId = this.$route.query.teamId
 		},
 		methods:{
 			toAddress(path){
@@ -152,6 +152,9 @@
 		    		this.dataList
 		    	).then(response => {
 		    		let res = response.data
+		    		if(res.result == 0){
+		    			this.$router.push('login')
+		    		}
 		    	})
 		    }
 		}
@@ -281,7 +284,7 @@
 	padding:0.8rem 0;
 }
 .improve{
-	margin: 1rem;
+	margin: 1rem 0 1rem 2rem;
 }
 .improve li{
     width: 32%;

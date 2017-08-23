@@ -38,15 +38,15 @@
 	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
 	        </div>
 	        <div class="usertext">
-	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队账号">
-	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队账号</span>
+	       		 <input type="text" name="teamAccount" v-validate="'required'"  v-model="teamInfo.teamAccount" placeholder="请输入团队账号">
+	       		 <span class="toast" v-show="errors.has('teamAccount')">请输入团队账号</span>
 	        </div>
 			<div class="usertext">
 				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
 				<span class="toast" v-show="errors.has('password')">请输入密码</span>
 			</div>
 			<div class="usertext">
-				<input type="password" v-validate="'confirmed:password'" v-model="teamInfo.rePassword" name="pwdagain" placeholder="请确认密码" /><br />
+				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" /><br />
 				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
 			</div>
 			<!-- <div class="usertext">
@@ -135,7 +135,7 @@
 	            <form class="weui-search-bar__form">
 	                <div class="weui-search-bar__box">
 	                    <i class="weui-icon-search"></i>
-	                    <input type="search" class="sousuokuang" id="searchInput" placeholder="搜索" required="">
+	                    <input type="search" v-model="contant" @blur="getContactTeam(contant,teamInfo.teamKind)" class="sousuokuang" id="searchInput" placeholder="搜索" required="">
 	                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
 	                </div>
 	                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -180,19 +180,16 @@
             	teamInfo:{
             		teamIcon:'',			//团队头像
             		teamName:'',			//团队名
-            		mobileNumber:'',		//电话
+            		teamAccount:'',			//团队账号
             		password:'',			//密码
-		        	teamSlogan:'',			//团队口号
-		        	contactTeamId:'',		//联系团队
+		        	contactTeamId:0,		//联系团队
 		        	serverType:'',			//服务类型
 		        	teamCategory:'',		//团队类别
-		        	teamKind:'',		//团队种类（大小）
-		        	teamManager:null,			//团队管理员
-		        	contactNumber:null,			//联系人电话
-		        	province:'',					//地址
-		        	city:'',				//团队简介
+		        	teamKind:'',			//团队种类（大小）
+		        	province:'',			//省
+		        	city:'',				
 		        	address:'',
-		        	teamIntro:''
+		        	teamIntro:''			//团队简介
             	},
             	verify:'',
             	isShow:false,
@@ -204,7 +201,8 @@
 		        list:[],
 		        teamclist:[],
 		        teamKlist:[],
-		        contactTeam:[]
+		        contactTeam:[],
+		        contant:''
             }
         },
         mounted(){
@@ -261,7 +259,7 @@
             	})
             	this.teamcatlist()
             	this.showteamKlist()
-				this.getContactTeam()
+				// this.getContactTeam()
             },
             teamcatlist(){
             	this.$http.get('/api/public/getCommonList',{
@@ -281,8 +279,13 @@
             		this.teamKlist = response.data.data
             	})
             },
-            getContactTeam(){
-            	this.$http.get('/api/public/getContactTeam').then(response => {
+            getContactTeam(name,type){
+            	this.$http.get('/api/public/getContactTeam',{
+            		params:{
+            			teamType:type,
+            			teamName:name
+            		}
+            	}).then(response => {
             		let res = response.data
             		if(res.result == 0){
             			this.contactTeam = res.data

@@ -100,12 +100,25 @@
 				this.volutorName = this.volutorName.split(',').slice(0,-1)
 			},
 			comform(){
-				this.$http.post('/api/private/insertATRecords',{
-					addDate:'2017/8/15',
-					addTime:this.time,
-					projectId:this.$route.query.projectId,
-					volunteerId:this.volutorId
-				})
+				if(this.time == ''){
+					this.$message.error("信息填写完整")
+				}else{
+					this.$http.post('/api/private/insertATRecords',{
+						addDate:'2017/8/15',
+						addTime:this.time,
+						projectId:this.$route.query.projectId,
+						volunteerId:this.volutorId
+					}).then( response => {
+						let res = response.data
+						if(res.result == 0){
+							this.$message.success("提交成功")
+							setInterval(()=>{
+								//补录记录
+								this.$router.push('teamcenter')
+							},500)
+						}
+					})
+				}
 			},
 			limitTime(){
 				if(this.time > 12){
@@ -117,6 +130,9 @@
 	}
 </script>
 <style scoped>
+.informationFilling{
+	background: #fff
+}
 .main{
 	background: #F5F5F5;
 	padding:0.5rem 0;
@@ -204,7 +220,7 @@
 	position:relative;
 }
 .header2 span{
-	border:1px solid #000;
+	border:1px solid #afafaf;
 	padding:0.2rem 1rem;
 	border-radius: 0.4rem; 
 }

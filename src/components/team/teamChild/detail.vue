@@ -98,7 +98,7 @@
 	  					this.$message.success('团队管理员审核中...')
 	  					setInterval(()=>{
 	  						this.$router.go(0)
-	  					},1000)
+	  					},500)
 	  				}
 	  			})
 	  		},

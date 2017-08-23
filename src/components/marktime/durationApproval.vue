@@ -13,7 +13,10 @@
 							<span style="width:40%;">报名人数<b style="color:#43B7B5">{{projectList.joinNumber}}人</b></span></p>
 						</div>
 						<div class="mm2">
-							<span><p class="being">{{projectList.projectStatus}}</p></span>
+							<span>
+								<p v-if="projectList.projectStatus == '已结束'" class="passed">{{projectList.projectStatus}}</p>
+								<p v-else-if="projectList.projectStatus == '进行中'" class="being">{{projectList.projectStatus}}</p>
+							</span>
 						</div>
 					</div>
 				</li>
@@ -40,8 +43,8 @@
 		</div>
 		<div class="jieshu">
 			<ul>
-				<li @click="unpass()"><span style=""><img src="./butongg.png"></span><span>不通过</span></li>
-				<li @click="pass()"><span><img src="./tongg.png"></span><span>通过</span></li>
+				<li @click="approval(unps)"><span style=""><img src="./butongg.png"></span><span>不通过</span></li>
+				<li @click="approval(pass)"><span><img src="./tongg.png"></span><span>通过</span></li>
 			</ul>
 		</div>
 		</div>
@@ -58,7 +61,9 @@
 			return {
 				projectList:[],
 				list:[],
-				volutors:[]
+				volutors:'',
+				pass:'/api/private/approveAddTime',
+				unps:'/api/private/refuseAddTime'
 			}
 		},
 		mounted(){
@@ -98,37 +103,31 @@
 				this.caleVolutor()
 			},
 			caleVolutor(){
-				this.volutors = []
+				this.volutors = ''
 				this.list.forEach((item,index) => {
 					if(item.checked){
 						this.volutors += item.id
-						this.volutors = this.volutors.split(',')
+						// this.volutors = this.volutors.split(',')
 					}
 				})
 			},
-			pass(){
-				if(this.volutors != null){
-					
-					this.$http.post('/api/private/approveAddTime',{}).then( response => {
+			approval(ps){
+				if(this.volutors == ''){
+					this.$message.error("请选择审批内容")
+				}else{
+					this.$http.post(ps,{
+						idStr:this.volutors
+					},{
+						emulateJSON:true
+					}).then( response => {
 						let res = response.data
 						if(res.result == 0){
 							this.$message.success("审批成功")
+							setInterval(()=>{
+								this.$router.go(0)
+							},500)
 						}
 					})
-				}else{
-					this.$message.error("提交信息为空")
-				}
-			},
-			unpass(){
-				if(this.volutors != null){
-					this.$http.post('/api/private/refuseAddTime',{}).then( response => {
-						let res = response.data
-						if(res.result == 0){
-							this.$message.success("审批成功")
-						}
-					})
-				}else{
-					this.$message.error("提交信息为空")
 				}
 			}
 		}
@@ -214,7 +213,7 @@
 .mm2 img{
 	position:absolute;
 }
-.end{
+.passed{
 	position:absolute;
 	border-radius:5px;
 	border:1px #E0E0E0 solid;

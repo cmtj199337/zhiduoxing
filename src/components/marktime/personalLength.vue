@@ -4,7 +4,11 @@
 	<div class="main">
 		<div class="header">
 			<img :src="info.projectIcon">
-			<p><span class="tit">{{info.projectName}}</span><span class="ac">{{info.projectStatus}}</span></p> 
+			<p>
+				<span class="tit">{{info.projectName}}</span>
+				<span v-if="info.projectStatus == '已结束'" class="passed">{{info.projectStatus}}</span>
+				<span v-else-if="info.projectStatus == '进行中'" class="being">{{info.projectStatus}}</span>
+			</p> 
 			<p><span style="font-size:0.8rem;color:#CCCCCC">志愿总时长</span>
 				<span style="color:#77CBCA">{{info.serverDuration}}</span>小时</p>
 		</div>
@@ -15,7 +19,10 @@
 			<li v-for="item in list">
 				<p>{{item.signInDate}}</p>
 				<p>{{item.serverTime}}</p>
-				<p>{{item.status}}</p>
+				<p v-if="item.status == 0" style="color: rgb(119, 203, 202)">补时审批</p>
+				<p v-else-if="item.status == 1">补时成功</p>
+				<p v-else-if="item.status == 2" style="color: rgb(255, 170, 61)">补时失败</p>
+				<p v-else-if="item.status == 3">打卡签到</p>
 			</li>
 		</ul>
 	</div>
@@ -126,8 +133,7 @@ h1 {text-align:center;}
 }
 .texts{
 	background: #FFFFFF;
-	font-size:16px;
-	margin:0 0.8rem;
+	padding:0 0.8rem;
 }
 .texts h4{
 	font-weight: normal;
@@ -216,6 +222,26 @@ h1 {text-align:center;}
 	width: 76%;
 	display: inline-block;
 	margin: 0 auto;
+}
+.being{
+	position: absolute;
+    top: 19%;
+    right: 3%;
+    font-size: 0.6rem;
+    color: rgb(70, 184, 183);
+    border: 1px solid rgb(70, 184, 183);
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
+}
+.passed{
+	position: absolute;
+    top: 19%;
+    right:3%;
+    font-size: 0.6rem;
+    color: #e5e5e5;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
 }
 </style>
 

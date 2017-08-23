@@ -44,9 +44,11 @@
             <h4 class="texttitle"><span><img src="../baoxian.png"></span>保险方案</h4>
         </div>
         <div class="usertext" @click="toggle()">
-        	<p>本项目包含<span>“志愿者意外伤害险”</span></p>
+        	<p>本项目包含<span v-for="type in data.projectSafe">
+        		<em style="display:block">{{type.safeName}}</em>
+        	</span></p>
         </div>
-        <div class="insurance" v-show="isShow">
+      <!--   <div class="insurance" v-show="isShow">
         	<h4>
         		<el-radio-group v-model="isPaid">
 					<el-radio :label="1">购买</el-radio>
@@ -57,7 +59,7 @@
 				<el-radio :label="1"><p>意外险：平安保障方案三 </p><i>￥50</i></el-radio>
 				<el-radio :label="2"><p>意外险：平安保障方案三 </p><i>￥50</i></el-radio>
 			</el-radio-group>
-		</div>
+		</div> -->
         <div class="header3">
 			<router-link :to="{path:'signList',query:{projectId:data.projectId}}">
 			已报名列表<span>{{data.yotNum}}/{{data.honNum}}<img src="../right.png"></span>
@@ -69,6 +71,12 @@
 			</router-link>
 		</div>
 		<div class="kong2">
+		</div>
+		<div class="header4">
+			<h4 class="texttitle"><span><img src="../jianjie.png" alt=""></span>项目简介</h4>
+		</div>
+		<div class="usertextend">
+			<textarea class="jianjie" rows="5">{{data.projectIntro}}</textarea>
 		</div>
 		<footer class="foot">
 			<span class="bm1" @click="addCollect()">
@@ -82,8 +90,8 @@
 			:value="qrcodeUrl" 
 			v-if="qrcodeUrl" 
 			:options="{ size: 170 }">
-		</qrcode>
- -->	</div>	
+		</qrcode>-->	
+	</div>	
 </template>
 <script>
 	import Qrcode from 'vue-qrcode';
@@ -140,14 +148,34 @@
             	this.isShow = !this.isShow
             },
             chooseFamily(){
-            	this.$http.get('/api/private/getMyFamily').then( response => {
+            	this.$http.get('/api/private/getMyFamilySign').then( response => {
             		let res = response.data
             		if(res.result == 0){
             			if(res.data.familyNum > 0){
             				this.$router.push('familys')
+            				this.$router.push({path:'familys',query:{projectId:this.data.projectId}})
             			}else{
-            				this.$message.success('报名成功')
+            				// this.$message.success('报名成功')
+            				// this.$router.push('perfact')
+            				this.join()
             			}
+            		}
+            	})
+            },
+            join(){
+            	let userId = localStorage.getItem('userId')
+            	this.$http.post('/api/private/joinProject',{
+            		projectId:this.data.projectId,
+            		volunteerId:userId
+            	},{
+            		emulateJSON:true
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.$message.success("已报名")
+            			setInterval(()=>{
+            				this.$router.go(0)
+            			},500)
             		}
             	})
             },
@@ -200,13 +228,24 @@
 	}
 	.header3 a{
 		color:#000;
+		display: block;
 	}
  	.texttitle {
-	    font-size: 0.8rem;
+	    font-size: 1rem;
 	    font-weight: normal;
 	    margin:0rem 1rem;
 		padding:0.8rem 0; 
 		border-bottom:1px #dcdcdc solid;
+	}
+	.usertextend textarea{
+	    border: none;
+	    width: 94%;
+	    padding: 3%;
+	    font-size: .9rem;
+	    font-family: Microsoft yahei;
+	    letter-spacing: 2px;
+	    line-height: 1.5;
+	    text-indent: 2em;
 	}
 	.kong2{
 			background:rgba(235, 234, 234, 0.48);
@@ -273,7 +312,7 @@
 		font-size:0.9rem;
 	}
 	.detail{
-		padding-bottom:10%;
+		padding-bottom:20%;
 		background: #fff
 	}
 	.family{

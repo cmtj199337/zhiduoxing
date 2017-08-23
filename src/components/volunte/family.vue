@@ -31,7 +31,8 @@
 	  	}, 
 	 	data () {
 		    return {
-		    	list:[]
+		    	list:[],
+		    	currFamily:''
 		    }
 	  	},
 		mounted(){
@@ -44,7 +45,7 @@
                 this.$router.push(path)
             },
 			listView(){
-				this.$http.get('/api/private/getMyFamily').then( response =>{
+				this.$http.get('/api/private/getMyFamilySign').then( response =>{
 					let res = response.data
 					if(res.result == 0){
 						this.list = res.data.wxFamilyDtoList
@@ -57,9 +58,35 @@
 				}else{
 					item.checked = !item.checked
 				}
+				this.cale()
 			},
+			cale(){
+				this.currFamily = ''
+				this.list.forEach((item,index) => {
+					if(item.checked){
+						this.currFamily += item.memberId + ','
+					}
+				})
+			},
+			// comfirm(){
+			// 	this.$router.push({path:'perfact',query:{memberId:this.currFamily}})
+			// }
 			comfirm(){
-				
+				let userId = localStorage.getItem('userId')
+            	this.$http.post('/api/private/joinProject',{
+            		projectId:this.$route.query.projectId,
+            		volunteerId:userId+','+this.currFamily
+            	},{
+            		emulateJSON:true
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.$message.success("已报名")
+            			setInterval(()=>{
+            				this.$router.go(0)
+            			},500)
+            		}
+            	})
 			}
 	  	}
 	}

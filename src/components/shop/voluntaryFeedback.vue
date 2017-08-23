@@ -71,6 +71,9 @@
 </script>
 <style scoped>
 @import '../../styles/swipe.css';
+.voluntaryFeedback{
+	background: #fff;
+}
 p{
 	font-size:0.85rem;
 }

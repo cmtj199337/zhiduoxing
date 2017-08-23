@@ -4,7 +4,7 @@
  	<div class="main">
 		<div class="header">
 			<img :src="list.projectIcon">
-			<p>{{list.projectName}}<span class="ac">{{list.projectStatus}}</span></p> 
+			<p>{{list.projectName}}<span v-if="list.projectStatus == '已结束'" class="passed">{{list.projectStatus}}</span><span v-else-if="list.projectStatus == '进行中'" class="being">{{list.projectStatus}}</span></p> 
 			<p><span style="font-size:0.8rem;color:#CCCCCC">志愿总时长</span> <span style="color:#77CBCA">{{list.serverDuration}}</span>小时</p>
 		</div>
 	</div>
@@ -12,8 +12,7 @@
 		<p>日期
 			<el-date-picker
 				v-model="date"
-				clearable
-				editable
+				size="small"
 				type="date"
 				placeholder="/年    /月    /日"
 				:picker-options="pickerOptions0">
@@ -67,6 +66,8 @@
 				let userId = localStorage.getItem("userId")
 				if(!this.date || !this.time){
 					this.$message.error("请完善信息")
+				}else if(this.time > 12){
+					this.$message.error("不能大于12小时")
 				}else{
 					this.$http.post('/api/private/insertATRecord',{
 					addDate:this.date,
@@ -123,7 +124,7 @@ p{
 }
 .texts{
 	background: #FFFFFF;
-	margin:0 0.8rem;
+	padding:0 0.8rem;
 }
 .texts p{
 	border-bottom:1px solid rgba(235,234,234,0.48);
@@ -147,5 +148,24 @@ input::-webkit-input-placeholder{
 	font-size: 0.9rem;
 	line-height: 1
 }			
-
-    </style>
+.being{
+	position: absolute;
+    top: 19%;
+    right: 3%;
+    font-size: 0.6rem;
+    color: rgb(70, 184, 183);
+    border: 1px solid rgb(70, 184, 183);
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
+}
+.passed{
+	position: absolute;
+    top: 19%;
+    right:3%;
+    font-size: 0.6rem;
+    color: #e5e5e5;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
+}
+</style>
