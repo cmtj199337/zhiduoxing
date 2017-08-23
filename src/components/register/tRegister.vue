@@ -70,6 +70,9 @@
 				<span>团队种类：<select class="select" v-model="teamInfo.teamKind">
 					<option v-for="item in teamKlist" :value="item.key">{{item.value}}</option>
 				</select><img src="./bottom.png"></span>
+				<span style="position:relative;">
+				<img src="./quanxian.png" style="margin-left:-10%;position:absolute;top:20%;width:8%">
+				<span style="margin-left:20%;font-size:0.8rem;color:#CACACA">团队权限介绍</span></span>
 			</div>
 			<!-- <div class="usertext">
 	        	<input type="text" v-model="teamInfo.teamManager" placeholder="请输入团队管理员">
@@ -490,6 +493,7 @@
 		margin-left: 67%;
 		padding: 0.5rem;
 		color:#ccc;
+		text-align: right;
 	}
 	.eee{
 		padding: 2rem 0;

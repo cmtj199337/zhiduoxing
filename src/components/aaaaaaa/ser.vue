@@ -22,19 +22,55 @@
 					</span>
 				</li>
 				<li>
-					<span>关爱服务</span>
+					<span>教育</span>
 					<span class="item-check-btn">
 						<svg class="icon icon-ok"></svg>
 					</span>
 				</li>
 				<li>
-					<span>国际服务</span>
+					<span>助残</span>
 					<span class="item-check-btn">
 						<svg class="icon icon-ok"></svg>
 					</span>
 				</li>
 				<li>
-					<span>社区服务</span>
+					<span>助老</span>
+					<span class="item-check-btn">
+						<svg class="icon icon-ok"></svg>
+					</span>
+				</li>
+				<li>
+					<span>医疗卫生</span>
+					<span class="item-check-btn">
+						<svg class="icon icon-ok"></svg>
+					</span>
+				</li>
+				<li>
+					<span>绿色环保</span>
+					<span class="item-check-btn">
+						<svg class="icon icon-ok"></svg>
+					</span>
+				</li>
+				<li>
+					<span>文化倡导</span>
+					<span class="item-check-btn">
+						<svg class="icon icon-ok"></svg>
+					</span>
+				</li>
+				<li>
+					<span>应急救援</span>
+					<span class="item-check-btn">
+						<svg class="icon icon-ok"></svg>
+					</span>
+				</li>
+				<li>
+					<span>赛事服务</span>
+					<span class="item-check-btn">
+						<svg class="icon icon-ok"></svg>
+					</span>
+				</li>
+				<li>
+					<span>其他</span>
 					<span class="item-check-btn">
 						<svg class="icon icon-ok"></svg>
 					</span>

@@ -42,7 +42,7 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
-					<span class="good">服务类型<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
+					<span class="good">擅长<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="read">
