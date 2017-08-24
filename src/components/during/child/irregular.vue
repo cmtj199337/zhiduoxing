@@ -81,15 +81,16 @@ export default{
 			year:'',
 			list:[],
 			count:'',
-			message:''
+			message:'',
+			listdata:{}
 		}
 	},
 	mounted(){
 		this.$nextTick(function(){
-			sessionStorage.removeItem('startTime')
-			sessionStorage.removeItem('endTime')
-			sessionStorage.removeItem('count')
-			sessionStorage.removeItem('day')
+			this.listdata = JSON.parse(sessionStorage.getItem('data'))
+			this.listdata.wxProjectCycleDto.regularType = 1
+			this.listdata.wxProjectCycleDto.timeRate = ''
+			this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList = []
 		})
 	},
 	methods:{
@@ -108,8 +109,14 @@ export default{
 			        serverETime:this.endTime,
 			        serviceTime:this.count
 			    })
-		        this.next = ''
 		        this.isShow = false
+
+		        this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.push({
+					serverDay:this.year,
+					serverSTime:this.startTime,
+					serverETime:this.endTime,
+					serviceTime:this.count
+				})	
 			}
 		},
 		cale(){
@@ -130,9 +137,8 @@ export default{
 			if(this.list.length == 0){
 				this.$message.error('请完善信息')
 			}else{
-				sessionStorage.setItem('regularType',1)
-				sessionStorage.setItem('timeRate','')
-				this.message += sessionStorage.setItem('message',JSON.stringify(this.list))
+				let data = JSON.stringify(this.listdata)
+				sessionStorage.setItem('data',data)
 				this.$router.push('sendProject')
 			}
 		}

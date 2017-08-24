@@ -82,6 +82,9 @@
 		    	if(this.startTime != '' || this.endTime != ''){
 		    		this.listdata.wxProjectCycleDto.projectSDate = this.startTime
 		    		this.listdata.wxProjectCycleDto.projectEDate = this.endTime
+
+		    		let data = JSON.stringify(this.listdata)
+					sessionStorage.setItem('data',data)
 		    	}
 		    }
 		}

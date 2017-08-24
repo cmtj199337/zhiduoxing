@@ -74,7 +74,6 @@
 		},
 		methods:{
 			add(){
-				
 				if(this.day == ''){
 					this.$message.error("请输入每月第几日")
 				}else{

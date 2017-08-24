@@ -106,7 +106,21 @@
 				<router-link to="map"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;">马哥波罗大厦<img src="./you@2x.png"></span></router-link>
 			</div>
 			<div class="usertext right">
-				<a href="javascript:;"><span>项目打卡区域</span><span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span></a>
+				<a href="javascript:;"><span>项目打卡区域</span>
+					<!-- <span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span> -->
+					<select class="range" name="" id="" v-model="projectInfo.punchRange">
+						<option value="1">1千米</option>
+						<option value="2">2千米</option>
+						<option value="3">3千米</option>
+						<option value="4">4千米</option>
+						<option value="5">5千米</option>
+						<option value="6">6千米</option>
+						<option value="7">7千米</option>
+						<option value="8">8千米</option>
+						<option value="9">9千米</option>
+						<option value="10">10千米</option>
+					</select>
+				</a>
 			</div>
 	        <div class="kong">
 			</div>
@@ -135,7 +149,7 @@
 				<a href="javascript:;"><span>不购买</span></a>
 			</div> -->
 			<div class="eee">
-	        	<p>发布</p>
+	        	<p @click="publishPro()">发布</p>
 	        </div>
         </div>
         <!-- 服务类型 -->
@@ -188,19 +202,15 @@
 					projectPicture1:'',					//项目图片1
 					projectPicture2:'',
 					projectPicture3:'',
-					wxProjectCycleDto:{					
+					punchLng:'',						//经度
+					puchLat:'',							//纬度
+					punchRange:'',						//范围
+					wxProjectCycleDto:{				
 						projectSDate:'',				//项目开始时间
 						projectEDate:'',				//项目结束时间
 						regularType:'',					//是否规律
 						timeRate:'',					//时间频率
-						wxProjectCycleTimeDtoList:[
-						// {
-						// 	serverDay :'',				//服务日
-						// 	serverSTime:'',				//服务开始时间
-						// 	serverETime:'',				//服务结束时间
-						// 	serviceTime:''				//单次志愿时长
-						// }
-						]
+						wxProjectCycleTimeDtoList:[]
 					}
 				},
 				imageUrl:'',
@@ -237,7 +247,6 @@
 				}else{
 					this.projectInfo = JSON.parse(datalist)
 				}
-				// this.getPTime()
 			},
 			haha(d){
             	this.projectInfo.province = d.pro.id
@@ -311,25 +320,22 @@
 		        }
 		        return isJPG && isLt2M;
 		    },
-		    getPTime(){
-		    	this.projectInfo.wxProjectCycleDto.projectSDate = sessionStorage.getItem('start')
-		    	this.projectInfo.wxProjectCycleDto.projectEDate = sessionStorage.getItem('end')
-		    	this.projectInfo.wxProjectCycleDto.regularType = sessionStorage.getItem('regularType')
-		    	this.projectInfo.wxProjectCycleDto.timeRate = sessionStorage.getItem('timeRate')
-
-				this.getInfo()
-			},
-		    getInfo(){
-		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverDay = sessionStorage.getItem('day')
-		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverSTime = sessionStorage.getItem('startTime')
-		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverETime = sessionStorage.getItem('endTime')
-		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serviceTime = sessionStorage.getItem('count')
-		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList = JSON.parse(sessionStorage.getItem('message'))
-		    },
 		    saveStatus(){
 		    	let data = JSON.stringify(this.projectInfo)
 		    	sessionStorage.setItem('data',data)
 		    	this.$router.push('during')
+		    },
+		    publishPro(){
+		    	this.$http.post('/api/private/createProject',
+		    		this.projectInfo).then( response => {
+		    			let res = response.data
+		    			if(res.result == 0){
+		    				this.$message.success('创建成功')
+		    				// setInterval(()=>{
+		    				// 	this.$router.push()
+		    				// })
+		    			}
+		    	})
 		    }
 		}
 
@@ -427,12 +433,11 @@ span{
 	font-size:1rem;
 }
 .right img{
-		width:0.6rem;
-		display: inline-block;
-		vertical-align: middle;
-		top: 32%;
-	}
-
+	width:0.6rem;
+	display: inline-block;
+	vertical-align: middle;
+	top: 32%;
+}
 .usertext a{
 	border: 0;
 	width: 100%;
@@ -560,5 +565,13 @@ span{
 	}
 	.good span{
 		padding-left:1.5rem;
+	}
+	.range{
+		width: 65%;
+		appearance:none;
+		border: none;
+		font-size: 1rem;
+	    margin-left: 0.4rem;
+	    color: rgb(133, 133, 133);
 	}
 </style>
