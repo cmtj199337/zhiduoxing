@@ -7,18 +7,18 @@
 			<ul>
 
 				<li @click="toAddress({path: '/teammanage/project'})">
-					<img src="./b@2x.png"><b>{{list.proNum}}</b><p>项目总数（个）</p>
+					<img src="./b@2x.png"><span>{{list.proNum}}</span><p>项目总数（个）</p>
 				</li>
 				<li @click="toAddress({path: '/teammanage/volunteer'})">
-				<img src="./c@2x.png" class="zhiyuan" style="width:12%;"><b>{{list.voNum}}</b><p>志愿者总人数（人）</p>
+				<img src="./c@2x.png" class="zhiyuan" style="width:12%;"><span>{{list.voNum}}</span><p>志愿者总人数（人）</p>
 				</li>
 				</ul>
 			</div>
 			<div class="header2">
 			<ul>
 				
-				<li @click="toAddress({path: 'teammanagetimer'})">
-				<img src="./d@2x.png"><b>{{list.serHour}}</b><p>志愿时长（小时）</p>
+				<li @click="toAddress({path: 'teammanagetimer1'})">
+				<img src="./d@2x.png"><span>{{list.serHour}}</span><p>志愿时长（小时）</p>
 				</li>
 				</ul>
 			</div>
@@ -64,7 +64,7 @@
 </script>
 <style scoped>
 .main{
-	background:#f6f6f9;
+	background:#F5F5F5;
 }
 .header1{
 	padding:0.3rem 0 0 0;
@@ -89,10 +89,7 @@ border-radius:5px;
 	width:16%;
 	display:inline;
 }
-.header1 ul li b{
-	font-size:2rem;
 
-}
 .header2{
 	padding:0;
 }
@@ -116,17 +113,17 @@ border-radius:5px;
 	width:16%;
 	display:inline;
 }
-.header2 ul li b{
-	font-size:2rem;
-
-}
 .header2 ul li .zhiyuan{
 	width:13%;
 }
-b{
+span{
 	color: #555;
 	font-weight: 400;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	padding-left: 0.2rem
+}
+.juniorTeamManagement{
+	background:white;
+	height:100%;
 }
 </style>

@@ -36,7 +36,7 @@
 		methods:{
 			getInfo(){
 			
-				this.$http.get('/api/private/allVoDetailList').then(response=>{
+				this.$http.get('/api/private/selectVoByTeamId').then(response=>{
 					let res=response.data
 					console.log(res)
 					if(res.result==0){

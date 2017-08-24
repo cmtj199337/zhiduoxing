@@ -36,7 +36,7 @@
 		},
 		methods:{
 			getInfo(){
-				this.$http.get('/api/private/sumAllTeamSerHour').then(response=>{
+				this.$http.get('/api/private/sumSerHour').then(response=>{
 					let res =response.data
 					if(res.result==0){
 						this.list=res.data

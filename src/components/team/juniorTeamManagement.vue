@@ -6,20 +6,20 @@
 			<div class="header1">
 				<ul>
 					<li @click="toAddress({path: '/juniorteam'})">
-						<img src="./a@2x.png"><b>{{info.teamNum}}</b><p>团队总数（个）</p>
+						<img src="./a@2x.png"><span>{{info.teamNum}}</span><p>团队总数（个）</p>
 					</li>
 					<li @click="toAddress({path: '/juniorproject'})">
-						<img src="./b@2x.png"><b>{{info.proNum}}</b><p>项目总数（个）</p>
+						<img src="./b@2x.png"><span>{{info.proNum}}</span><p>项目总数（个）</p>
 					</li>
 				</ul>
 			</div>
 			<div class="header2">
 				<ul>
-					<li @click="toAddress({path: '/juniorvolunteer'})">
-						<img src="./c@2x.png" class="zhiyuan"><b>{{info.voNum}}</b><p>志愿者总人数（人）</p>
+					<li @click="toAddress({path: '/personnelList'})">
+						<img src="./c@2x.png" class="zhiyuan"><span>{{info.voNum}}</span><p>志愿者总人数（人）</p>
 					</li>
-					<li>
-						<img src="./d@2x.png"><b>{{info.serHour}}</b><p>志愿时长（小时）</p>
+					<li @click="toAddress({path: '/teammanagetimer1'})">
+						<img src="./d@2x.png"><span>{{info.serHour}}</span><p>志愿时长（小时）</p>
 					</li>
 				</ul>
 			</div>
@@ -61,6 +61,12 @@
 	}
 </script>
 <style scoped>
+span{
+	color: #555;
+	font-weight: 400;
+	font-size: 2rem;
+	padding-left: 0.2rem
+}
 .main{
 	background:#f6f6f9;
 }
@@ -87,10 +93,6 @@ border-radius:5px;
 	width:22%;
 	display:inline;
 }
-.header1 ul li b{
-	font-size:2rem;
-
-}
 .header2{
 	padding:0.3rem 0;
 }
@@ -113,10 +115,6 @@ border-radius:5px;
 .header2 ul li img{
 	width:22%;
 	display:inline;
-}
-.header2 ul li b{
-	font-size:2rem;
-
 }
 .header2 ul li .zhiyuan{
 	width:13%;

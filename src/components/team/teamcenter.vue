@@ -54,12 +54,12 @@
 				</li>
 				<hr>
 				<li @click="toAddress({path: '/allTeam'})">
-					<img class="icon" src="./qbtdck.png">
+					<img class="icon" src="./qb.png">
 					<span>全部团队查看</span>
 				</li>
 				<hr>
 				<li @click="toAddress({path: '/tregister'})">
-					<img class="icon" src="./cjtd.png">
+					<img class="icon" src="./td.png">
 					<span>创建团队</span>
 				</li>
 				<hr>
@@ -72,7 +72,8 @@
 		<div class="column">
 			<ul>
 				<li style="border:none;" @click="toAddress({path: '/modifyPassword'})">
-					<img class="icon" src="./lock.png">
+					<img class="icon" src="./lock.png" style="width: 5%;display: inline-block;
+					padding:0 0.6rem 0 0.5rem;}">
 					<span>修改密码</span>
 				</li>
 				<hr>
@@ -196,9 +197,9 @@ hr{
 	font-size: 1rem;
 }
 .icon{
-		width: 5%;
+		width: 6%;
 		display: inline-block;
-		padding:0 0.6rem 0 1.5rem;
+		padding:0 0.6rem 0 0.5rem;
 }
 .column ul li span{
 		vertical-align: middle;

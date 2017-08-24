@@ -1,6 +1,6 @@
 <template>
 	<div class="personnelListAll">
-		<headerTip message="志愿者列表" goBack="true"></headerTip>
+		<headerTip message="志愿时长" goBack="true"></headerTip>
 		<div class="header1">
 			<ul>
 				<li>姓名</li>

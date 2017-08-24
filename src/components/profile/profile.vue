@@ -80,7 +80,8 @@
 						<img class="arrow" src="./you@2x.png">
 					</li> -->
 					<li @click="toAddress({path: '/modifypassword'})">
-						<img class="icon" src="./lock.png">
+						<img class="icon" src="./lock.png" style="width: 5%;display: inline-block;
+					padding:0 0.6rem 0 0.5rem;}">
 						<span>修改密码</span>
 						<img class="arrow" src="./you@2x.png">
 					</li>

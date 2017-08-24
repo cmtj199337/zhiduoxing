@@ -44,7 +44,7 @@
 			</div> -->
 			<my-area @select="haha"></my-area>
 			<div class="usertext">
-				<input style="text-indent:0" type="text" :value="info.teamAddress">
+				<input style="text-indent:0" type="text" :value="info.teamAddress" >
 			</div>
 
 			<div class="header3">
@@ -74,6 +74,9 @@
 		data(){
 			return {
 				info:[],
+				teaminfo:{
+					teamAddress:''
+				},
 				serverTypeList:[]
 			}
 		},
