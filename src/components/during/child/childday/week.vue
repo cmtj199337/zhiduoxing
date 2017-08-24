@@ -17,6 +17,7 @@
 			    placeholder="起始时间"
 			    v-model="startTimeWeek"
 			    size="small"
+			    @change="send"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -31,6 +32,7 @@
 		    placeholder="结束时间"
 		    v-model="endTimeWeek"
 		    size="small"
+		    @change="send"
 		    :picker-options="{
 		      start: '08:30',
 		      step: '00:30',
@@ -65,7 +67,8 @@
         			{week:'星期六',id:'7'},
         			{week:'星期日',id:'1'}
         		],
-        		totle:''
+        		totle:'',
+        		listdata:{}
 			}
 		},
 		computed:{
@@ -88,13 +91,19 @@
 		},
 		mounted(){
 			this.$nextTick(function(){
-				sessionStorage.removeItem('startTime')
-				sessionStorage.removeItem('endTime')
-				sessionStorage.removeItem('count')
-				sessionStorage.removeItem('day')
+				this.listdata = JSON.parse(sessionStorage.getItem('data'))
+				this.listdata.wxProjectCycleDto.regularType = 0
+				this.listdata.wxProjectCycleDto.timeRate = 1
 			})
 		},
 		methods:{
+			send(){
+				if(this.startTimeWeek != '' || this.endTimeWeek != ''){
+					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverSTime = this.startTimeWeek
+					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverETime = this.endTimeWeek
+					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serviceTime = this.getDays
+				}
+			},
 			checkFlag(item){
 				if(typeof item.checked == 'undefined'){
 					this.$set(item,'checked',true)
@@ -108,6 +117,7 @@
 				this.list.forEach((item,index) => {
 					if(item.checked){
 						this.totle += item.id+','
+						this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverDay = this.totle
 					}
 				})
 			},
@@ -115,19 +125,8 @@
 				if(!this.startTimeWeek || !this.endTimeWeek || !this.totle){
 					this.$message.error('请填写完整时间')
 				}else{
-					// sessionStorage.setItem('startTimeWeek',this.startTimeWeek)
-					// sessionStorage.setItem('endTimeWeek',this.endTimeWeek)
-					// sessionStorage.setItem('week',this.totle)
-					// sessionStorage.setItem('countWeek',this.getDays)
-					// sessionStorage.setItem('regularType',0)
-					// sessionStorage.setItem('timeRate',1)
-					// this.$router.push('sendProject')
-					sessionStorage.setItem('startTime',this.startTimeWeek)
-					sessionStorage.setItem('endTime',this.endTimeWeek)
-					sessionStorage.setItem('day',this.totle)
-					sessionStorage.setItem('count',this.getDays)
-					sessionStorage.setItem('regularType',0)
-					sessionStorage.setItem('timeRate',1)
+					let data = JSON.stringify(this.listdata)
+					sessionStorage.setItem('data',data)
 					this.$router.push('sendProject')
 				}
 			}

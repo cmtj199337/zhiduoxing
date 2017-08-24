@@ -15,7 +15,7 @@
 						  :show-file-list="false"
 						  :on-success="handleAvatarSuccess"
 						  :before-upload="beforeAvatarUpload">
-						  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+						  <img v-if="projectInfo.projectPicture" :src="projectInfo.projectPicture" class="avatar">
 						  <i v-else class="avatar-uploader-icon">
 						  	<img src="./tlogo1.png" alt="">
 						  </i>
@@ -26,27 +26,27 @@
 				  class="bg"
 				  action="/api/public/upload"
 				  :show-file-list="false"
-				  :on-success="handleAvatarSuccess"
+				  :on-success="handleAvatar1"
 				  :before-upload="beforeAvatarUpload">
-				  <img v-if="image1" :src="image1" class="bg-img">
+				  <img v-if="projectInfo.projectPicture1" :src="projectInfo.projectPicture1" class="bg-img">
 				  <i v-else class="el-icon-plus avatar-bg"></i>
 				</el-upload>
 				<el-upload
 				  class="bg"
 				  action="/api/public/upload"
 				  :show-file-list="false"
-				  :on-success="handleAvatarSuccess"
+				  :on-success="handleAvatar2"
 				  :before-upload="beforeAvatarUpload">
-				  <img v-if="image2" :src="image2" class="bg-img">
+				  <img v-if="projectInfo.projectPicture2" :src="projectInfo.projectPicture2" class="bg-img">
 				  <i v-else class="el-icon-plus avatar-bg"></i>
 				</el-upload>
 				<el-upload
 				  class="bg"
 				  action="/api/public/upload"
 				  :show-file-list="false"
-				  :on-success="handleAvatarSuccess"
+				  :on-success="handleAvatar3"
 				  :before-upload="beforeAvatarUpload">
-				  <img v-if="image3" :src="image3" class="bg-img">
+				  <img v-if="projectInfo.projectPicture3" :src="projectInfo.projectPicture3" class="bg-img">
 				  <i v-else class="el-icon-plus avatar-bg"></i>
 				</el-upload>
 			<div class="usertext" style="border-top:none">
@@ -86,7 +86,11 @@
 				</span></a>
 			</div>
 			<div class="usertext right">
-				<router-link to="during"><span>项目时间<img src="./you@2x.png"></span></router-link>
+				<!-- <router-link to="during"> -->
+				<a href="javascript:;" @click="saveStatus()">
+					<span>项目时间<img src="./you@2x.png"></span>
+				</a>
+				<!-- </router-link> -->
 			</div>
 			<div class="usertext">
 	        	<input type="text" name="" placeholder="计划招募人数"  v-model="projectInfo.planRecruitNum">
@@ -118,7 +122,7 @@
 	        </div>
 	        <div class="kong">
 			</div>
-			<div class="header3">
+		<!-- 	<div class="header3">
 	            <h4 class="texttitle"><span><img src="./baoxian@2x.png"></span>保险选择</h4>
 	        </div>
 	        <div class="usertext right">
@@ -129,9 +133,9 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;"><span>不购买</span></a>
-			</div>
+			</div> -->
 			<div class="eee">
-	        	<p @click="isTijiao">发布</p>
+	        	<p>发布</p>
 	        </div>
         </div>
         <!-- 服务类型 -->
@@ -152,6 +156,8 @@
 				</ul>
 			</form>
 		</div>
+		<!-- 项目周期 -->
+
 	</div>
 </template>
 <script>
@@ -179,20 +185,28 @@
 					planRecruitNum:'',					//计划招募人数
 					projectIntro:'',					//项目介绍
 					serverType:'',
+					projectPicture1:'',					//项目图片1
+					projectPicture2:'',
+					projectPicture3:'',
 					wxProjectCycleDto:{					
 						projectSDate:'',				//项目开始时间
 						projectEDate:'',				//项目结束时间
 						regularType:'',					//是否规律
 						timeRate:'',					//时间频率
-						wxProjectCycleTimeDtoList:{
+						wxProjectCycleTimeDtoList:[
+						{
 							serverDay :'',				//服务日
 							serverSTime:'',				//服务开始时间
 							serverETime:'',				//服务结束时间
 							serviceTime:''				//单次志愿时长
 						}
+						]
 					}
 				},
 				imageUrl:'',
+				image1:'',
+				image2:'',
+				image3:'',
 				isShow:false,
 				wrap:true,
 				list:[],
@@ -206,13 +220,8 @@
 		},
 		mounted(){
 			this.$nextTick(function(){
+				this.exChange()
 				this.showList()
-				this.getPTime()
-
-				// this.getDay()
-				// this.getWeek()
-				// this.getMonth()
-				this.getInfo()
 			})
 		},
 		computed:{
@@ -221,12 +230,18 @@
 			}
 		},
 		methods:{
+			exChange(){
+				let datalist = sessionStorage.getItem('data')
+				if(datalist == null){
+					console.log('null')
+				}else{
+					this.projectInfo = JSON.parse(datalist)
+				}
+				// this.getPTime()
+			},
 			haha(d){
             	this.projectInfo.province = d.pro.id
             	this.projectInfo.city = d.city.id
-			},
-			isTijiao(){
-				
 			},
 			showList(){
             	this.$http.get('/api/public/getCommonList',{
@@ -266,9 +281,23 @@
             },
 			handleAvatarSuccess(res, file) {
 	  			let result = res.data
-		        this.imageUrl = URL.createObjectURL(file.raw);
-		        // this.imageUrl = result
+		        this.projectInfo.projectPicture = URL.createObjectURL(file.raw)
 		        this.projectInfo.projectPicture = result
+		    },
+		    handleAvatar1(res, file){
+		    	let result = res.data
+		        this.image1 = URL.createObjectURL(file.raw)
+		        this.projectInfo.projectPicture1 = result
+		    },
+		    handleAvatar2(res, file){
+		    	let result = res.data
+		        this.image2 = URL.createObjectURL(file.raw)
+		        this.projectInfo.projectPicture2 = result
+		    },
+		    handleAvatar3(res, file){
+		    	let result = res.data
+		        this.image3 = URL.createObjectURL(file.raw)
+		        this.projectInfo.projectPicture3 = result
 		    },
 		    beforeAvatarUpload(file) {
 		        const isJPG = file.type === 'image/jpeg';
@@ -287,6 +316,8 @@
 		    	this.projectInfo.wxProjectCycleDto.projectEDate = sessionStorage.getItem('end')
 		    	this.projectInfo.wxProjectCycleDto.regularType = sessionStorage.getItem('regularType')
 		    	this.projectInfo.wxProjectCycleDto.timeRate = sessionStorage.getItem('timeRate')
+
+				this.getInfo()
 			},
 		    getInfo(){
 		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverDay = sessionStorage.getItem('day')
@@ -295,6 +326,11 @@
 		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList.serviceTime = sessionStorage.getItem('count')
 		    	this.projectInfo.wxProjectCycleDto.wxProjectCycleTimeDtoList = JSON.parse(sessionStorage.getItem('message'))
 		    },
+		    saveStatus(){
+		    	let data = JSON.stringify(this.projectInfo)
+		    	sessionStorage.setItem('data',data)
+		    	this.$router.push('during')
+		    }
 		}
 
 	}
@@ -355,9 +391,9 @@ span{
 		width: 100%;
 	    height: 8.6rem;
 	    display: block;
-	    position: absolute;
+/*	    position: absolute;
 	    right: 0;
-	    top: 0;
+	    top: 0;*/
 	}
 	.bg{
 		padding: 1rem 1rem 0 1rem;

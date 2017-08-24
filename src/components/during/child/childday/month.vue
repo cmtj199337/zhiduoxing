@@ -53,24 +53,22 @@
 	export default{
 		data(){
 			return{
-				list:[
-					// {"id":0,"day":5,"sTime":"8:00:00","eTime":"18:00:00"}
-				],
+				list:[],
 				next:0,
 				sTime:'8:00:00',
 				eTime:'18:00:00',
 				count:'10',
 				day:'',
 				result:[],
-				month:''
+				month:'',
+				listdata:{},
 			}
 		},
 		mounted(){
 			this.$nextTick(function(){
-				sessionStorage.removeItem('startTime')
-				sessionStorage.removeItem('endTime')
-				sessionStorage.removeItem('count')
-				sessionStorage.removeItem('day')
+				this.listdata = JSON.parse(sessionStorage.getItem('data'))
+				this.listdata.wxProjectCycleDto.regularType = 0
+				this.listdata.wxProjectCycleDto.timeRate = 2
 			})
 		},
 		methods:{
@@ -79,13 +77,14 @@
 					this.$message.error("请输入每月第几日")
 				}else{
 					this.list.push({
-			        	id: this.next++,
 			        	day:this.day,
 				        sTime:this.sTime,
 				        eTime:this.eTime,
 				        count:this.count
 				    })
-			        this.next = ''
+				    this.day = ''
+
+				    this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.push(this.list)		
 				}
 			},
 			checkFlag(item){
@@ -121,8 +120,7 @@
 						sessionStorage.setItem('endTime',this.eTime)
 						sessionStorage.setItem('count',this.count)
 						sessionStorage.setItem('day',this.month)
-						sessionStorage.setItem('regularType',0)
-						sessionStorage.setItem('timeRate',2)
+						
 						this.$router.push('sendProject')
 					}
 				})

@@ -9,6 +9,7 @@
 			    placeholder="起始时间"
 			    v-model="startTimeDay"
 			    size="small"
+			    @change="send"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -23,6 +24,7 @@
 			    placeholder="结束时间"
 			    v-model="endTimeDay"
 			    size="small"
+			    @change="send"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -48,6 +50,7 @@
 			return{
 				startTimeDay: '',
         		endTimeDay: '',
+        		listdata:{}
 			}
 		},
 		computed:{
@@ -64,36 +67,38 @@
 				dayb.setMinutes(e[1]);
 			                
 			    var count = (dayb-daya)/1000/60/60
-
 			    return count;
 		 	}
 		},
 		mounted(){
 			this.$nextTick(function(){
-				sessionStorage.removeItem('startTime')
-				sessionStorage.removeItem('endTime')
-				sessionStorage.removeItem('count')
-				sessionStorage.removeItem('day')
+				this.listdata = JSON.parse(sessionStorage.getItem('data'))
+				this.listdata.wxProjectCycleDto.regularType = 0
+				this.listdata.wxProjectCycleDto.timeRate = 0
 			})
 		},
 		methods:{
+			send(){
+				if(this.startTimeDay != '' || this.endTimeDay != ''){
+					this.listdata.wxProjectCycleDto.push({
+						serverDay:null,
+						serverSTime:this.startTimeDay,
+						serverETime:this.endTimeDay,
+						serviceTime:this.getDays
+					})
+					
+				}
+			},
 			save(){
 				if(!this.startTimeDay || !this.endTimeDay){
 					this.$message.error('请填写完整时间')
 				}else{
-					// sessionStorage.setItem('startTimeDay',this.startTimeDay)
-					// sessionStorage.setItem('endTimeDay',this.endTimeDay)
-					// sessionStorage.setItem('countDay',this.getDays)
-					// sessionStorage.setItem('regularType',0)
-					// sessionStorage.setItem('timeRate',0)
-					// this.$router.push('sendProject')
-					sessionStorage.setItem('startTime',this.startTimeDay)
-					sessionStorage.setItem('endTime',this.endTimeDay)
-					sessionStorage.setItem('count',this.getDays)
-					sessionStorage.setItem('regularType',0)
-					sessionStorage.setItem('timeRate',0)
+					let data = JSON.stringify(this.listdata)
+					sessionStorage.setItem('data',data)
+
 					this.$router.push('sendProject')
 				}
+				
 			}
 		}
 	}

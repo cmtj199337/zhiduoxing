@@ -65,9 +65,13 @@
 		            	return time.getTime() < Date.now() - 8.64e7;
 		        	}
         		},
+        		listdata:{}
 			}
 		},
-		computed:{
+		mounted(){
+			this.$nextTick(function(){
+				this.listdata = JSON.parse(sessionStorage.getItem('data'))
+			})
 		},
 		methods:{
 			toggle(v,index) {
@@ -76,8 +80,8 @@
 		    },
 		    send(){
 		    	if(this.startTime != '' || this.endTime != ''){
-		    		sessionStorage.setItem('start',this.startTime)
-		    		sessionStorage.setItem('end',this.endTime)
+		    		this.listdata.wxProjectCycleDto.projectSDate = this.startTime
+		    		this.listdata.wxProjectCycleDto.projectEDate = this.endTime
 		    	}
 		    }
 		}
