@@ -3,7 +3,7 @@
 	<div class="main"  v-for="item in list">
 	
 			<span>
-			<router-link :to="{path:'../pDetail',query:{projectId:item.projectId}}">
+			<router-link :to="{path:'../pDetail',query:{projectId:item.proId}}">
 			<img src="../banner@2x.png" style="border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;height:8.2rem;" >
 			<img src="../teb2.png" style="border-radius: 0.3rem;height:2.5rem;">

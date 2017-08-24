@@ -3,23 +3,18 @@
 		<div class="header1">
 			<p>
 				<span>姓名</span>
-				<span>加入时间</span>	
-				<span style="width:28%;text-align:right">操作</span>		
+				<span>加入时间</span>			
 			</p>
 		</div>
-		<div class="kong"></div>
 		<div class="header2">
 			<ul v-for="item in list">
-				<li style="display:flex;">
+				<li style="display:flex;text-indent:0.85rem">
 					<router-link :to="{path:'../personalData',query:{voId:item.voId}}">
 					<img :src="item.icon" >
 				</router-link>
 				<p>{{item.nickName}}</p>
 				</li>
 				<li><p>{{item.crtDate}}</p></li>
-				<li @click="jyong(item.voId,item.forStatus)">
-				<p class="zz1">
-				{{item.actionName}}</p></li>
 			</ul>	
 			
 		</div>
@@ -86,22 +81,18 @@
 	}
 </script>
 <style scoped>
-.passed{
-	background: #fff;
-	height: 100%;
-}
 .header1 p{
-	display: flex;
+	display:flex;
 }
 .header1 p span{
-	width:32%;
+	width:50%;
 	text-align:center;
 	padding:0.5rem 0;
 
 }
-.kong{
-	height:0.8rem;
-	background:#0000001a;
+.passed{
+	background:white;
+	height:100%;
 }
 .header2{
 	margin:0 0.5rem;
@@ -112,7 +103,7 @@
 
 }
 .header2 ul li{
-	width:32%;
+	width:50%;
 	text-align:center;
 	padding:0.5rem 0;
 

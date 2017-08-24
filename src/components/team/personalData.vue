@@ -1,16 +1,18 @@
 <template>
 	<div class="personalData">
-		<div v-show="wrap" class="wrap">
 		<headerTip message="个人资料" goBack="true"></headerTip>
 		<div class="kong"></div>
+		<div class="xinxi">
 		<div class="usertext right" style="margin-top:0.3rem">
-			<p>昵称</p><span><input type="text" v-model="nickName" :placeholder="info.nickName"><img src="./you@2x.png"></span>
+			<p>昵称</p><p class="xx">{{info.nickName}}</p>
 		</div>
-		<div class="usertext right">
-			<a href="javascript:;" @click="showToggle">
-				<div style="text-align:left;text-indent:1.2rem;">擅长<span v-for="li in good">{{li.value}}</span></div><span><img src="./you@2x.png"></span>
-			</a>	
+		<div class="usertext right" style="margin-top:0.3rem">
+			<p>手机号</p><p class="xx">{{info.mobileNo}}</p>
 		</div>
+		<div class="usertext right" style="margin-top:0.3rem">
+			<p>擅长</p><p class="xx">{{info.goodAt}}</p>
+		</div>
+		
 		<!-- <div class="usertext right">
 			<a href="javascript:;" @click="showToggle">
 				<span>服务类型<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
@@ -20,7 +22,7 @@
 			<p>邮箱</p><span><input type="text" :placeholder="info.eMail"><img src="./you@2x.png"></span>
 		</div> -->
 		<div class="usertext right" style="border:0;margin-bottom:0">
-			<p>志愿口号</p><span><input type="text" v-model="volunteerSlogan" :placeholder="info.volunteerSlogan"><img src="./you@2x.png"></span>
+			<p>志愿口号</p><p class="xx">{{info.volunteerSlogan}}</p>
 		</div>
 		<!-- <div class="usertext right" @click="toAddress({path: '/modifypassword'})">
 			<p>密码修改</p><span><img src="./you@2x.png"></span>
@@ -38,27 +40,9 @@
         	<span><img src="./zhengjian@2x.png" class="toux"></span>
             <p>身份证号</p><span><input type="text" placeholder="12345678901"></span>
         </div> -->
-        <div class="tijiao"><p @click="commit">提交</p></div>
+        </div>
 		</div>
         <!-- goodlist选项 -->
-		<div class="goodlist" v-show="isShow">
-			<div class="head_top">
-				<div class='tip'>
-	            	<p><span @click="showToggle"><img src="../register/back.png"></span>擅长</p>
-	        	</div>
-        	</div>
-			<form action="" method="post">
-				<ul>
-					<li v-for="item in goodList">
-						<span>{{item.value}}</span>
-						<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
-							<svg class="icon icon-ok"></svg>
-						</span>
-					</li>
-				</ul>
-			</form>
-		</div>
-	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
@@ -70,20 +54,11 @@
 	  	},
 		data(){
 			return {
-				isShow:false,
-				goodAt:[],
 				info:[],
-				wrap:true,
-				arr:'',
-				good:[],
-				goodList:[],
-				nickName:'',
-				volunteerSlogan:''
 			}
 		},
 		mounted(){
 			this.$nextTick(function(){
-				this.getGoodAt()
 				this.showInfo()
 			})
 		},
@@ -95,80 +70,10 @@
             	this.$http.get('/api/private/getVolunteerInfo').then( response => {
             		let res = response.data
             		if(res.result == 0){
-            			this.info = res.data
-            			var num = res.data.goodAt.split(',')
-
-            			var temp = {}
-            			for(var i in this.goodList){
-            				temp = {
-            					'key':this.goodList[i].key,
-            					'value':this.goodList[i].value
-            				}
-            				for(var j in num){
-            					if(temp.key == num[j]){
-            						this.good.push(temp)
-            					}
-            				}
-            			}
-
+            			this.info=res.data
             		}
             	})
             },
-            showToggle(){
-            	this.isShow = !this.isShow
-                if(this.isShow){
-                    this.wrap = false  
-                }else{  
-                    this.wrap = !this.wrap   
-                }  
-            },
-            getGoodAt(){
-            	this.$http.get('/api/public/getCommonList',{
-            		params:{
-            			type:'GOOD_AT'
-            		}
-            	}).then( response => {
-            		let res = response.data
-            		if(res.result == 0){
-            			this.goodList = res.data
-            		}
-            	})
-            },
-            checkFlag(item){
-	  			if(typeof item.checked == 'undefined'){
-	  				this.$set(item,'checked',true);
-	  				let count = 0
-	  				this.goodAt += item.key+','
-	  				//this.userinfo.goodAt = this.userinfo.goodAt.slice(0,-1)
-	  				this.arr += item.value+','
-	  				this.good = this.arr.split(',').slice(0,-1)
-	  				this.goodList.forEach((item,index)=>{
-	  					if(item.checked == true){
-	  						count++
-	  					}
-	  				})
-	  				if(count>=3){
-	  					this.isShow = false;
-	  					this.wrap = true;
-	  				}
-	  			}else{
-	  				item.checked = !item.checked	
-	  			}
-	  		},
-	  		commit(){
-	  			this.$http.post('/api/private/updVolunteerInfo',{
-	  				nickName:this.nickName,
-	  				volunteerSlogan:this.volunteerSlogan,
-	  				goodAt:this.good.value
-	  			}).then( response => {
-	  				let res = response.data
-	  				if(res.result == 0){
-	  					this.$message.success('提交成功')
-	  				}else{
-	  					this.$message.error('提交错误')
-	  				}
-	  			})
-	  		}
 		}
 	}
 </script>
@@ -178,31 +83,20 @@
 	height: 100%;
 	background: #f5f5f5;
 }
-.personalData .wrap{
-	background: #fff;
-}
-.usertext input{
-	margin: 0;
-	width: 100%;
-}
 .usertext{
 	margin: 0 1rem 0.4rem 1rem;
-}
-.usertext img{
-	position: absolute;
-	right: 0;
-}
-.usertext input{
-	text-align: right;
-}
-.header span p{
-	font-size: 1.2rem;
 }
 .right img{
 	width:0.6rem;
 	display: inline-block;
 	vertical-align: middle;
 	top: 25%;
+}
+.right span{
+	margin-right:0;
+}
+.xinxi{
+	background:white;
 }
 .tlo{
 	margin: 0.8rem;
@@ -222,11 +116,19 @@
 .right{
 	display:flex;
 }
+.right .xx{
+width:60%;
+margin-right:0;
+text-align:right;
+color:#C9C9C9;
+
+}
 .right p{
-	width:35%;
+	width:30%;
 	font-size:0.9rem;
 	line-height:2.5rem;
 	margin-left:1.2rem;
+	font-size:1rem;
 }
 .right a span{
 	margin-left:0.5rem;
@@ -245,7 +147,7 @@
 	}
 .kong{
 	background:#F5F5F5;
-	padding: 0.3rem;
+	padding: 0.1rem;
 	}
 	
 .usertextend textarea{

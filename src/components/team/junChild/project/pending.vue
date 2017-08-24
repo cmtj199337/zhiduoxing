@@ -9,20 +9,20 @@
 			</ul>
 		</div>
 		<div class="main" v-for="item in list">
-			<router-link :to="{path:'myprojectDetails',query:{projectId:item.projectId}}">
+			<router-link :to="{path:'myprojectDetails',query:{projectId:item.proId}}">
 				<span>
-					<img src="./banner@2x.png" >
+					<img :src="item.picUrl" >
 					<img src="./teb2.png" >
 					<img class="zz1" src="./quan@2x.png">
 					<img class="zz2" src="./shouc@2x.png">
 					<img class="zz3" src="./quan@2x.png">
 					<ul class="te">
-						<li class="cc1">{{item.projectAddress}}</li>
-						<li class="cc2">{{item.yotNum}}/{{item.honNum}}</li>
+						<li class="cc1">{{item.provinceName}}{{item.cityName}}</li>
+						<li class="cc2">{{item.actualNum}}/{{item.planNum}}</li>
 					</ul>
 					<ul class="te2">
-						<li class="cc1">{{item.projectName}}</li>
-						<li class="cc3">{{item.projectTime}}</li>
+						<li class="cc1">{{item.proName}}</li>
+						<li class="cc3">{{item.startDate}}-{{item.endDate}}</li>
 					</ul>
 				</span>
 			</router-link>
@@ -58,9 +58,9 @@
 		    	this.listView(this.page)
 		    },
 		    listView(status){
-		    	this.$http.get('/api/private/getLowTeamPList',{
+		    	this.$http.get('/api/private/ownDetai',{
 		    		params:{
-		    			projectStatus:status
+		    			appStatus:status
 		    		}
 		    	}).then( response => {
 		    		let res = response.data

@@ -267,6 +267,10 @@ const router = new Router({
 			path: '/teammanagetimer1',
 			component:require('../components/team/teammanagetimer1.vue')
 		},
+		{
+			path: '/teammanagetimer',
+			component:require('../components/team/teammanagetimer.vue')
+		},
 
 		//下级团队管理
 		{
@@ -349,6 +353,15 @@ const router = new Router({
 			path: '/teammanage/volunteer',
 			component:require('../components/team/manageSelf/volunteer'),
 		},
+		//时长
+		{
+			path: '/teammanagetimer',
+			component:require('../components/team/manageSelf/timer'),
+		},
+		{
+			path: '/teammanagetimer1',
+			component:require('../components/team/manageSelf/timer1'),
+		},
 		{
 			path: '/teamPresentation',
 			component:require('../components/team/teamPresentation.vue')
@@ -364,6 +377,11 @@ const router = new Router({
 		{
 			path: '/personnelList',
 			component:require('../components/team/personnelList.vue')
+		},
+		//全部团队查看-志愿者总人数
+		{
+			path: '/personnelListAll',
+			component:require('../components/team/personnelListAll.vue')
 		},
 		{
 			path: '/volunteerList',

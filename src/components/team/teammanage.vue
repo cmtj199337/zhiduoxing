@@ -17,7 +17,7 @@
 			<div class="header2">
 			<ul>
 				
-				<li>
+				<li @click="toAddress({path: 'teammanagetimer'})">
 				<img src="./d@2x.png"><b>{{list.serHour}}</b><p>志愿时长（小时）</p>
 				</li>
 				</ul>

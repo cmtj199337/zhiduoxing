@@ -48,7 +48,8 @@
 				mobileNo:'',			//手机号
 		        newPwd:'',			//新密码
 		        showAlert:false,
-			    flag:1,	       		      		
+			    flag:1,	    
+			   		      		
 		    }
 	  	},
 	  	components:{

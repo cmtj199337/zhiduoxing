@@ -3,7 +3,7 @@
 		<headerTip message="修改密码" goBack="true"></headerTip>
 			<form action="" method="post">
 			<div class="usertext">
-				<p model="mobileNo">手机号：{{mobileNo}}</p>
+				<p model="mobileNo">手机号：{{info.mobileNo}}</p>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./yanzheng.png"></i>
@@ -42,7 +42,6 @@
 	  	},
 		data(){
 			return {
-				mobileNo:'18013755211',
 				verification:'',
 				showAlert:false,				
 				reNewPassword:'' ,
@@ -50,7 +49,8 @@
  				reNewPassword:'' ,
  				toastshow:false,
  				disabled:false,
- 				toast:''
+ 				toast:'',
+ 				info:[]
 
 			}
 		},
@@ -58,6 +58,14 @@
 			this.getInfo()
 		},
 		methods:{
+				getInfo(){
+	  			this.$http.get('/api/private/getVolunteerInfo').then(response=>{
+	  				let res =response.data
+	  				if(res.result==0){
+	  					this.info=res.data
+	  				}
+	  			})
+	  		},
 			send(){
 				this.$refs.timerbtn.setDisabled(true);
 				this.$http.post('/api/public/sendShortMessage',{

@@ -6,16 +6,16 @@
 				<img src="./banner@2x.png" >
 				<img src="./teb2.png" >
 				<ul class="te">
-				<li class="cc1">{{item.projectName}}</li>
+				<li class="cc1">{{item.proName}}</li>
 				</ul>
 				<ul class="te1">
-				<li class="cc1">{{item.projectAddress}}</li>
-				<li class="cc2">{{item.yotNum}}/{{item.honNum}}</li>
+				<li class="cc1">{{item.provinceName}}{{item.cityName}}</li>
+				<li class="cc2">{{item.actualNum}}/{{item.planNum}}</li>
 				<li class="cc3">{{item.projectStatus}}</li>
 				</ul>
 				<ul class="te2">
 				<li class="cc1">项目时间</li>
-				<li class="cc4">{{item.projectTime}}</li>
+				<li class="cc4">{{item.startDate}}-{{item.endDate}}</li>
 				</ul>
 			</span>
 		</router-link>
@@ -37,9 +37,9 @@
 		},
 		methods:{
 			listView(status){
-				this.$http.get('/api/private/getLowTeamPList',{
+				this.$http.get('/api/private/ownDetai',{
 					params:{
-						projectStatus:status
+						appStatus:status
 					}
 				}).then( response => {
 					let res = response.data

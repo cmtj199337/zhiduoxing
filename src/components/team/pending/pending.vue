@@ -16,7 +16,9 @@
 					<img :src="item.icon" >
 				</router-link><p>{{item.nickName}}</p></li>
 				<li><p>{{item.crtDate}}</p></li>
-				<li><p class="zz1">{{item.forStatusName}}</p></li>
+				<li @click="jyong(item.voId,item.forStatus)" class="xx">
+				<p :class="[item.forStatus == 1?'active':'']">
+				{{item.actionName}}</p></li>
 			</ul>	
 		
 		</div>
@@ -28,7 +30,7 @@
 		name:'pending',
 		data(){
 			return {
-				list:[]
+				list:[],
 			}
 		},
 		mounted(){
@@ -49,6 +51,7 @@
             },
             jyong(id,forStatus){
             	if(forStatus=='0'){
+            		
             		this.$http.get('/api/teamHub/private/unForbiddenVo',{
             		params:{
             			voId:id,
@@ -57,10 +60,11 @@
             	}).then(response=>{
             		let res= response.data
             		if(res.result==0){
+            			
         				this.$router.go(0)
             		}
             	})
-            	return
+            	
             	}else{
             		this.$http.get('/api/teamHub/private/unForbiddenVo',{
             		params:{
@@ -73,7 +77,7 @@
         				this.$router.go(0)
             		}
             	})
-            	return
+            	
             	}
             	
             }
@@ -82,8 +86,19 @@
 	}
 </script>
 <style scoped>
+.active{
+	position:absolute;
+	background:#43B7B5;
+	width:4rem;
+	height:1.8rem;
+	border-radius:0.3rem;
+	color:white;
+
+}
+
 .pending{
-	background: #fff
+	background:white;
+	height:100%;
 }
 .header1 p{
 	display: flex;
@@ -106,12 +121,21 @@
 	border-bottom:1px #0000001a solid; 
 
 }
+.header2 ul .xx{
+	padding:0.5rem 0;
+}
+.header2 ul .xx p{
+	margin-left:3.8rem;
+	line-height:1.8rem;
+	margin-top:0.2rem;
+}
 .header2 ul li{
 	width:32%;
 	text-align:center;
 	padding:0.5rem 0;
 
 }
+
 .header2 ul li img{
 	width:2.5rem;
 	height:2.5rem;
@@ -121,25 +145,5 @@
 	line-height:2.2rem;
 	margin-left: 0.6rem;
 
-}
-.header2 ul li .zz1{
-	width:4rem;
-	height:1.6rem;
-	background:white;
-	color:#959595;
-	line-height:1.6rem;
-	border-radius:5px;
-	margin-left:58%;
-	margin-top:6%
-}
-.header2 ul li .zz2{
-	width:4rem;
-	height:1.6rem;
-	background:#43B7B6;
-	color:white;
-	line-height:1.6rem;
-	border-radius:5px;
-	margin-left:58%;
-	margin-top:6%
 }
 </style>
