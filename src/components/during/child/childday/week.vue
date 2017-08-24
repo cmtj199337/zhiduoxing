@@ -17,7 +17,6 @@
 			    placeholder="起始时间"
 			    v-model="startTimeWeek"
 			    size="small"
-			    @change="send"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -32,7 +31,6 @@
 		    placeholder="结束时间"
 		    v-model="endTimeWeek"
 		    size="small"
-		    @change="send"
 		    :picker-options="{
 		      start: '08:30',
 		      step: '00:30',
@@ -97,13 +95,6 @@
 			})
 		},
 		methods:{
-			send(){
-				if(this.startTimeWeek != '' || this.endTimeWeek != ''){
-					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverSTime = this.startTimeWeek
-					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverETime = this.endTimeWeek
-					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serviceTime = this.getDays
-				}
-			},
 			checkFlag(item){
 				if(typeof item.checked == 'undefined'){
 					this.$set(item,'checked',true)
@@ -117,14 +108,23 @@
 				this.list.forEach((item,index) => {
 					if(item.checked){
 						this.totle += item.id+','
-						this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.serverDay = this.totle
 					}
 				})
 			},
 			save(){
+				this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList = []
+
 				if(!this.startTimeWeek || !this.endTimeWeek || !this.totle){
 					this.$message.error('请填写完整时间')
 				}else{
+
+					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.push({
+						serverDay:this.totle,
+						serverSTime:this.startTimeWeek,
+						serverETime:this.endTimeWeek,
+						serviceTime:this.getDays
+					})
+
 					let data = JSON.stringify(this.listdata)
 					sessionStorage.setItem('data',data)
 					this.$router.push('sendProject')

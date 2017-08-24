@@ -69,10 +69,12 @@
 				this.listdata = JSON.parse(sessionStorage.getItem('data'))
 				this.listdata.wxProjectCycleDto.regularType = 0
 				this.listdata.wxProjectCycleDto.timeRate = 2
+				this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList = []
 			})
 		},
 		methods:{
 			add(){
+				
 				if(this.day == ''){
 					this.$message.error("请输入每月第几日")
 				}else{
@@ -82,9 +84,13 @@
 				        eTime:this.eTime,
 				        count:this.count
 				    })
-				    this.day = ''
 
-				    this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.push(this.list)		
+				    this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.push({
+						serverDay:this.day,
+						serverSTime:this.sTime,
+						serverETime:this.eTime,
+						serviceTime:this.count
+					})		
 				}
 			},
 			checkFlag(item){
@@ -115,12 +121,9 @@
 					if(!item.sTime || !item.eTime || !item.day){
 						this.$message.error('请填写完整信息')
 					}else{
-						this.month += item.day+','
-						sessionStorage.setItem('startTime',this.sTime)
-						sessionStorage.setItem('endTime',this.eTime)
-						sessionStorage.setItem('count',this.count)
-						sessionStorage.setItem('day',this.month)
 						
+						let data = JSON.stringify(this.listdata)
+						sessionStorage.setItem('data',data)
 						this.$router.push('sendProject')
 					}
 				})

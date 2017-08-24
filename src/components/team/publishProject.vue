@@ -194,12 +194,12 @@
 						regularType:'',					//是否规律
 						timeRate:'',					//时间频率
 						wxProjectCycleTimeDtoList:[
-						{
-							serverDay :'',				//服务日
-							serverSTime:'',				//服务开始时间
-							serverETime:'',				//服务结束时间
-							serviceTime:''				//单次志愿时长
-						}
+						// {
+						// 	serverDay :'',				//服务日
+						// 	serverSTime:'',				//服务开始时间
+						// 	serverETime:'',				//服务结束时间
+						// 	serviceTime:''				//单次志愿时长
+						// }
 						]
 					}
 				},

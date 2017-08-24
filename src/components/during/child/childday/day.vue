@@ -9,7 +9,6 @@
 			    placeholder="起始时间"
 			    v-model="startTimeDay"
 			    size="small"
-			    @change="send"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -24,7 +23,6 @@
 			    placeholder="结束时间"
 			    v-model="endTimeDay"
 			    size="small"
-			    @change="send"
 			    :picker-options="{
 			      start: '08:30',
 			      step: '00:30',
@@ -78,21 +76,21 @@
 			})
 		},
 		methods:{
-			send(){
-				if(this.startTimeDay != '' || this.endTimeDay != ''){
-					this.listdata.wxProjectCycleDto.push({
+			save(){
+				this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList = []
+
+				if(!this.startTimeDay || !this.endTimeDay){
+					this.$message.error('请填写完整时间')
+				}else{
+
+					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.push({
 						serverDay:null,
 						serverSTime:this.startTimeDay,
 						serverETime:this.endTimeDay,
 						serviceTime:this.getDays
 					})
-					
-				}
-			},
-			save(){
-				if(!this.startTimeDay || !this.endTimeDay){
-					this.$message.error('请填写完整时间')
-				}else{
+
+
 					let data = JSON.stringify(this.listdata)
 					sessionStorage.setItem('data',data)
 
