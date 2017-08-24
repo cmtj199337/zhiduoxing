@@ -84,7 +84,7 @@
 				}else{
 
 					this.listdata.wxProjectCycleDto.wxProjectCycleTimeDtoList.push({
-						serverDay:null,
+						serverDay:'',
 						serverSTime:this.startTimeDay,
 						serverETime:this.endTimeDay,
 						serviceTime:this.getDays

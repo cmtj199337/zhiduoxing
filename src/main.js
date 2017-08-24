@@ -60,6 +60,10 @@ Vue.http.interceptors.push((request, next)  =>{
 
 Vue.config.productionTip = false;
 
+
+router.afterEach((to, from, next) => {
+    window.scrollTo(0, 0);
+});
 // 全局导航钩子
 router.beforeEach((to, from, next) => {
      // 判断该路由是否需要登录权限

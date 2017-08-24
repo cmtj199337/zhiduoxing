@@ -64,6 +64,14 @@
 				</a>
 			</div>
 			<div class="usertext right">
+				<a href="javascript:;"><span>服务对象</span>
+					<!-- <span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span> -->
+					<select class="range" name="" id="" v-model="projectInfo.serverObject">
+						<option v-for="obj in serObj" :value="obj.key">{{obj.value}}</option>
+					</select>
+				</a>
+			</div>
+			<div class="usertext right">
 				<a href="javascript:;"><span>招募开始时间 
 					<el-date-picker
 				      v-model="projectInfo.recruitSTime"
@@ -93,7 +101,7 @@
 				<!-- </router-link> -->
 			</div>
 			<div class="usertext">
-	        	<input type="text" name="" placeholder="计划招募人数"  v-model="projectInfo.planRecruitNum">
+	        	<input type="text" :value="projectInfo.planRecruitNum" placeholder="计划招募人数"  v-model="projectInfo.planRecruitNum">
 	        </div>
 			<div class="kong">
 			</div>
@@ -103,23 +111,23 @@
 	       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字"  v-model="projectInfo.address">
 	        </div>
 	        <div class="usertext right">
-				<router-link to="map"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;">马哥波罗大厦<img src="./you@2x.png"></span></router-link>
+				<router-link to="map"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;"><img src="./you@2x.png"></span></router-link>
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;"><span>项目打卡区域</span>
 					<!-- <span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span> -->
-					<select class="range" name="" id="" v-model="projectInfo.punchRange">
-						<option value="1">1千米</option>
-						<option value="2">2千米</option>
-						<option value="3">3千米</option>
-						<option value="4">4千米</option>
-						<option value="5">5千米</option>
-						<option value="6">6千米</option>
-						<option value="7">7千米</option>
-						<option value="8">8千米</option>
-						<option value="9">9千米</option>
-						<option value="10">10千米</option>
-					</select>
+					<select class="range" style="width:20%;padding-left:10%;margin:0" v-model="projectInfo.punchRange">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select><span style="color:rgb(133, 133, 133)">千米</span>
 				</a>
 			</div>
 	        <div class="kong">
@@ -199,13 +207,17 @@
 					planRecruitNum:'',					//计划招募人数
 					projectIntro:'',					//项目介绍
 					serverType:'',
+					serverObject:'',					//服务对象
 					projectPicture1:'',					//项目图片1
 					projectPicture2:'',
 					projectPicture3:'',
 					punchLng:'',						//经度
 					puchLat:'',							//纬度
 					punchRange:'',						//范围
-					wxProjectCycleDto:{				
+					safeBuyType: 0,						//保险类型
+  					safeIdStr: "",						//保险ID
+  					teamId:'',							
+					wxProjectCycleDto:{			
 						projectSDate:'',				//项目开始时间
 						projectEDate:'',				//项目结束时间
 						regularType:'',					//是否规律
@@ -220,6 +232,7 @@
 				isShow:false,
 				wrap:true,
 				list:[],
+				serObj:[],
 				caleValue:[],
 				pickerOptions0: {
 		            disabledDate(time) {
@@ -232,11 +245,18 @@
 			this.$nextTick(function(){
 				this.exChange()
 				this.showList()
+				this.projectInfo.teamId = this.$route.query.teamId
 			})
 		},
 		computed:{
 			caleCh(){
 				return this.caleValue.slice(0,-1)
+			},
+			limit(){
+				if(this.caleCh.length >= 3){
+					this.isShow = false
+					this.wrap = true
+				}
 			}
 		},
 		methods:{
@@ -259,6 +279,19 @@
             		}
             	}).then(response => {
             		this.list = response.data.data
+            	})
+            	this.showServerObj()
+            },
+            showServerObj(){
+            	this.$http.get('/api/public/getCommonList',{
+            		params:{
+            			type:'SERVER_OBJECT'
+            		}
+            	}).then( response => {
+            		let res = response.data
+            		if(res.result == 0){
+            			this.serObj = res.data
+            		}
             	})
             },
 			showToggle(){

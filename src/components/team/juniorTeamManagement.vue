@@ -107,7 +107,7 @@ border-radius:5px;
 	vertical-align:middle;
 	
 	padding:1.8rem 0;
-	margin:0.5rem;
+	margin:0rem 0.5rem 0.5rem 0.5rem;
 	background:white;
 	border-radius:6px;
 

@@ -63,9 +63,11 @@
 					<span>创建团队</span>
 				</li>
 				<hr>
-				<li @click="toAddress({path: '/sendProject'})">
-					<img class="icon" src="./cjxm.png">
-					<span>创建项目</span>
+				<li>
+					<router-link :to="{path:'sendProject',query:{teamId:list.teamId}}">
+						<img class="icon" src="./cjxm.png">
+						<span>创建项目</span>
+					</router-link>
 				</li>
 			</ul>
 		</div>
@@ -195,6 +197,10 @@ hr{
 	margin:0.6rem 0;
 	background-color: #fff;
 	font-size: 1rem;
+}
+.column ul li a{
+	color: #000;
+	display: block;
 }
 .icon{
 		width: 6%;
