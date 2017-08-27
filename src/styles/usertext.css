@@ -114,6 +114,6 @@
 	margin-right: 0.5rem;
 }
 select{
-	appearance:none;
+	-webkit-appearance:none;
 	background: #fff;
 }

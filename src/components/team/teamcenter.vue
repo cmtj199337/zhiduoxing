@@ -85,7 +85,7 @@
 				</li>
 			</ul>
 		</div>
-		<input class="logout" type="button" value="退出登录">
+		<input class="logout" @click="logout()" type="button" value="退出登录">
 		<footer class="foot">
 	        <section @click="toAddress({path: '/teamIndex'})">
 	            <img src="/static/footicon/shouye1.png">
@@ -127,7 +127,10 @@
             			this.list = res.data
             		}
             	})
-
+            },
+            logout(){
+            	localStorage.clear()
+            	this.$router.push('/index')
             }
         }
 	  

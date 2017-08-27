@@ -90,7 +90,7 @@ const router = new Router({
 		//个人中心
 		{
 			path: '/profile',
-			component:require('../components/profile/profile.vue')
+			component:require('../components/profile/profile.vue'),
 		},
 		{
 			path: '/personalDetails',
@@ -373,6 +373,10 @@ const router = new Router({
 		{
 			path: '/detailsOfTheTeam',
 			component:require('../components/team/detailsOfTheTeam.vue')
+		},
+		{
+			path: '/detailsReset',
+			component:require('../components/team/detailsReset.vue')
 		},
 		{
 			path: '/personnelList',

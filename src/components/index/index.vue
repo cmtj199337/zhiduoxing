@@ -72,16 +72,16 @@
 				</li>
 			</ul>
 		</div>
-		<swiper class="swiper"></swiper>
-		<div class="shoplist title">
+		<!-- <swiper class="swiper"></swiper> -->
+		<!-- <div class="shoplist title">
 			<h5><i></i>猜你喜欢<span @click="toAddress({path: '/shop'})">更多</span></h5>
-			<ul>
+			<ul> -->
 				<!-- <li v-for="item in filtShop">
 					<img class="shop" :src="item.itemPicture">
 					<p>{{item.itemName}}</p>
 					<p><img class="star" src="./star.png"><span>{{item.itemPrice}}</span></p>
 				</li> -->
-				<li @click="toAddress({path: '/shopDetail'})">
+				<!-- <li @click="toAddress({path: '/shopDetail'})">
 					<img class="shop" src="/static/list1.png">
 					<p>志愿者短T</p>
 					<p><img class="star" src="./star.png"><span>300</span></p>
@@ -97,7 +97,7 @@
 					<p><img class="star" src="./star.png"><span>300</span></p>
 				</li>
 			</ul>
-		</div>
+		</div> -->
 		<div class="article title">
 			<h5><i></i>发现精彩<span @click="toAddress({path: '/volunteerStrategy'})">更多</span></h5>
 			<ul>
@@ -167,16 +167,19 @@
 		    	article:[],
 		    	guessCity:'',
 		    	isShow:true,
-		    	userName:''
+		    	userName:'',
+		    	lnglat:''
 		    }
 	  	},
 	  	mounted(){
 	  		this.userName = localStorage.getItem('username')
+
+	  		this.getLocation()
 	  		// 获取当前城市
-	        // this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then(response => {
-	        //     let res = response.data;
-	        //     this.guessCity = res.name;
-	        // })
+	        this.$http.get('http://api.map.baidu.com/geocoder/v2/?callback=renderOption&output=json&address=百度大厦&city=北京市&ak=E4vYNbh4LBcHlmzE9dmE5KVv2NMxvFBY').then(response => {
+	            let res = response.data;
+	            this.guessCity = res.name;
+	        })
 	  		// this.showList()
 	  	},
 	  	computed:{
@@ -207,6 +210,28 @@
 	  				}
 	  			})
 	  		},
+	  		getLocation(){
+		        var geolocation = new BMap.Geolocation();
+		        //弹出地理授权
+		          geolocation.getCurrentPosition(function(r) {
+		              	if(this.getStatus() == BMAP_STATUS_SUCCESS) {
+		                  	// alert('定位成功');
+		                  	// console.log(r.point);
+		                 	this.lnglat = r.point.lng+','+r.point.lat
+		              	}else{
+		                  	alert("baidu return failed");
+		              	}
+		          },
+		          //获取失败时候的回调
+		          function(r) {
+		              console.log(r);
+		              alert('定位失败');
+		              return {
+		                  //设置高精度
+		                  enableHighAccuracy: true
+		              }
+		          });
+		    },
 	  		toAddress(path){
                 this.$router.push(path)
             },
@@ -224,7 +249,7 @@
 	@import '../../styles/swipe.css';
 	.zi{
 		position:absolute;
-		top:7.8%;
+		top:12%;
 		width:62%;
 		left:0;
 		right: 0;

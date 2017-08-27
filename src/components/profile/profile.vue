@@ -86,7 +86,7 @@
 						<img class="arrow" src="./you@2x.png">
 					</li>
 				</ul>
-				<input class="logout" type="button" value="退出登录">
+				<input class="logout" @click="logout()" type="button" value="退出登录">
 			</section>
 		</div>
 		<footer class="foot">
@@ -135,6 +135,10 @@
             			this.voluInfo = res.data
             		}
             	}) 
+            },
+            logout(){
+            	localStorage.clear()
+            	this.$router.push('/index')
             }
 	  	}
 	}

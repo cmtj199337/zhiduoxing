@@ -6,14 +6,14 @@
         <div class="usertext bottom">
         	<span>所在地区</span>
 			<select v-model="f.p" @change="selpro">
-				<option :value="i" v-for="(v,i) in pro">{{v.name}}</option>
+				<option v-for="(v,i) in pro" :value="i">{{v.name}}</option>
 			</select>
 			<img src="./right.png">
 		</div>
 		<div class="usertext bottom">
 			<span>所在区县</span>
 			<select v-model="f.c" @change="selcity">
-				<option :value="i" v-for="(v,i) in city">{{v.name}}</option>
+				<option v-for="(v,i) in city" :value="i">{{v.name}}</option>
 			</select>
 			<img src="./right.png">
 		</div>
@@ -80,18 +80,22 @@ export default {
 	data(){
 		return {
            data:[],
-           pro:"",
-           city:'',
+           pro:[],
+           city:[],
            f:{
 	           p:0,
 	           c:0
-       		}
+       		},
+       		proName:[]
 		}
 	},
 	mounted(){
 		this.dataList();
+		this.ecChange()
 	},
 	methods:{
+		ecChange(){
+		},
 		selpro(){
 			this.city=this.pro[this.f.p]['child'];
 			this.f.c=0;
@@ -111,11 +115,21 @@ export default {
 			this.$http.get('/api/public/getAreaList').then(response =>{
 				let res = response.data
 				if(res.result == 0){
+					let citys = res.data.child
 					this.data = res.data
 
-					this.pro=this.data;
-					this.city=this.pro[0]['child'];
+					this.pro = this.data;
+					this.city = this.pro[0]['child'];
 					this.result();
+
+					res.data.forEach((item,index) => {
+						if(item.id == this.province){
+							this.proName.push({
+								id:this.province,
+								name:item.name
+							})
+						}
+					})
 				}
 			})
 		}

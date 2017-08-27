@@ -89,14 +89,14 @@
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
-	 import UploadImg from '../../components/common/tools/uploadImg.vue'
+	 // import UploadImg from '../../components/common/tools/uploadImg.vue'
 	 import MyArea from '../../components/common/tools/area.vue'
 	export default{
 
 		name:'setUpTeam',
 		components:{
 	  		headerTip,
-	  		 UploadImg,
+	  		 // UploadImg,
 	  		 MyArea
 	  	},
 		data(){

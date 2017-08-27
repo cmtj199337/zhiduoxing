@@ -66,7 +66,7 @@
 			<div class="usertext right">
 				<a href="javascript:;"><span>服务对象</span>
 					<!-- <span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span> -->
-					<select class="range" name="" id="" v-model="projectInfo.serverObject">
+					<select class="range" v-model="projectInfo.serverObject">
 						<option v-for="obj in serObj" :value="obj.key">{{obj.value}}</option>
 					</select>
 				</a>
@@ -95,7 +95,7 @@
 			</div>
 			<div class="usertext right">
 				<!-- <router-link to="during"> -->
-				<a href="javascript:;" @click="saveStatus()">
+				<a href="javascript:;" @click="saveStatus('during')">
 					<span>项目时间<img src="./you@2x.png"></span>
 				</a>
 				<!-- </router-link> -->
@@ -111,7 +111,7 @@
 	       		 <input type="text" name="" placeholder="请填写详细地址，不少于5个字"  v-model="projectInfo.address">
 	        </div>
 	        <div class="usertext right">
-				<router-link to="map"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;"><img src="./you@2x.png"></span></router-link>
+				<a href="javascript:;" @click="saveStatus('map')"><span>项目打卡定位 </span><span style="margin-left:0.4rem;color:#858585;"><img src="./you@2x.png"></span></a>
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;"><span>项目打卡区域</span>
@@ -207,7 +207,7 @@
 					planRecruitNum:'',					//计划招募人数
 					projectIntro:'',					//项目介绍
 					serverType:'',
-					serverObject:'',					//服务对象
+					serverObject:0,						//服务对象
 					projectPicture1:'',					//项目图片1
 					projectPicture2:'',
 					projectPicture3:'',
@@ -216,7 +216,7 @@
 					punchRange:'',						//范围
 					safeBuyType: 0,						//保险类型
   					safeIdStr: "",						//保险ID
-  					teamId:'',							
+  					teamId:0,							
 					wxProjectCycleDto:{			
 						projectSDate:'',				//项目开始时间
 						projectEDate:'',				//项目结束时间
@@ -225,10 +225,6 @@
 						wxProjectCycleTimeDtoList:[]
 					}
 				},
-				imageUrl:'',
-				image1:'',
-				image2:'',
-				image3:'',
 				isShow:false,
 				wrap:true,
 				list:[],
@@ -241,11 +237,14 @@
         		},
 			}
 		},
+		created(){
+			this.projectInfo.teamId = this.$route.query.teamId
+			this.exChange()
+		},
 		mounted(){
 			this.$nextTick(function(){
-				this.exChange()
+				// this.exChange()
 				this.showList()
-				this.projectInfo.teamId = this.$route.query.teamId
 			})
 		},
 		computed:{
@@ -353,10 +352,10 @@
 		        }
 		        return isJPG && isLt2M;
 		    },
-		    saveStatus(){
+		    saveStatus(path){
 		    	let data = JSON.stringify(this.projectInfo)
 		    	sessionStorage.setItem('data',data)
-		    	this.$router.push('during')
+		    	this.$router.push(path)
 		    },
 		    publishPro(){
 		    	this.$http.post('/api/private/createProject',
@@ -367,6 +366,8 @@
 		    				// setInterval(()=>{
 		    				// 	this.$router.push()
 		    				// })
+		    			}else{
+		    				this.$message.error('请完善信息')
 		    			}
 		    	})
 		    }
@@ -601,7 +602,7 @@ span{
 	}
 	.range{
 		width: 65%;
-		appearance:none;
+		-webkit-appearance:none;
 		border: none;
 		font-size: 1rem;
 	    margin-left: 0.4rem;

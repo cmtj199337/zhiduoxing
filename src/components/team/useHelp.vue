@@ -1,6 +1,8 @@
 <template>
 	<div class="useHelp">
-		<headerTip message="使用帮助(团队)" goBack="true"></headerTip>
+		<headerTip message="使用帮助"goBack="true"  v-if="tyoe"></headerTip>
+		<headerTip message="使用帮助(团队)"goBack="true"  v-else></headerTip>
+
 		<div class="kong"></div>
 		<div class="main" v-html="list">
 		</div>
@@ -16,19 +18,33 @@
 	  	},
 		data(){
 			return {
-				list:[]
+				list:[],
 			}
 		},
 		mounted(){
 			this.$nextTick(function(){
-				this.getInfo(2)
+				this.getInfo()
 			})
 		},
 		methods:{
-			getInfo(type){								
+			getInfo(){
+				let type=localStorage.getItem('usertype')
+			if(type==0){	
+				this.$http.get('/api/public/getPlatformIntro',{
+				params:{
+				type:1
+			}}).then(response=>{
+				let res = response.data
+	  				console.log(res)
+	  				if(res.result == 0){
+	  					this.list = res.data
+	  					this.tyoe=true
+	  				}
+			})
+		}else{
 			this.$http.get('/api/public/getPlatformIntro',{
 				params:{
-				type:type
+				type:2
 			}}).then(response=>{
 				let res = response.data
 	  				console.log(res)
@@ -36,7 +52,9 @@
 	  					this.list = res.data
 	  				}
 			})
-		},
+		}
+	}	,					
+		
 	}
 
 }

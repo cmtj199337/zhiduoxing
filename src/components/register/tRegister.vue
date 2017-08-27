@@ -164,7 +164,7 @@
 <script>
     import headerTip from '../../components/common/header/header.vue'
     import TimerBtn from '../common/tools/countdown.vue'
-    import UploadImg from '../../components/common/tools/uploadImg.vue'
+    // import UploadImg from '../../components/common/tools/uploadImg.vue'
     import MyArea from '../../components/common/tools/area.vue'
     export default{
 
@@ -172,7 +172,7 @@
         components:{
             headerTip,
             TimerBtn,
-            UploadImg,
+            // UploadImg,
             MyArea
         },
         data(){

@@ -3,7 +3,7 @@
   <headerTip message="定位" goBack="true"></headerTip>
     <input v-model.number="lng" style="display:none">
     <input v-model.number="lat" style="display:none">
-    <baidu-map class="main" :center="center" @ready="handler" :zoom="15" 
+    <baidu-map class="main" :center="center" @ready="handler" :zoom="12" 
         @moving="syncCenterAndZoom"
         @moveend="syncCenterAndZoom">
       <bm-view class="map"></bm-view>
@@ -29,7 +29,7 @@
     },
     data () {
       return {
-        center: {lng: 0, lat: 0},
+        center:{},
         lng:'',
         lat:'',
         listdata:{}
@@ -42,6 +42,7 @@
     },
     methods:{
       handler ({BMap, map}) {
+        this.getLocation()
         this.center = localStorage.getItem('hesh')
         this.center = this.center.split(',')
         this.center = {
@@ -59,7 +60,7 @@
         //弹出地理授权
           geolocation.getCurrentPosition(function(r) {
               if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                  // // alert('定位成功');
+                  // alert('定位成功');
                   // console.log(r.point);
                   localStorage.setItem('hesh',r.point.lng+','+r.point.lat)
               } else {

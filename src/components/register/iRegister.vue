@@ -42,7 +42,7 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
-					<span class="good">擅长<span v-for="item in goodSelect">{{item}}</span><img src="./right.png"></span>
+					<span class="good">擅长<span v-for="item in goodSelect">{{item.value}}</span><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="read">
@@ -55,7 +55,8 @@
 				<span>我已阅读并授权</span><router-link to="agreement">《志多星用户协议》</router-link>
 			</div>
 			<div class="sub">
-				<input type="button" value="确认提交" @click="confirm"/>
+				<input v-if="items == true" type="button" value="确认提交" @click="confirm"/>
+				<input v-else-if="items == false" type="button" style="background:#ccc" value="确认提交"/>
 			</div>
 		</form>
 		<!-- 遮罩、弹框 -->
@@ -117,6 +118,17 @@
 		        code:''
 		    }
 	  	},
+	  	computed:{
+	  		limit(){
+	  			return this.goodSelect.length
+	  		},
+	  		control(){
+	  			if(this.limit >= 3){
+	  				this.isShow = false
+	  				this.wrap = true
+	  			}
+	  		}
+	  	},
 	  	mounted(){
 	  		this.$nextTick(function(){
 	  			this.goodList()
@@ -132,29 +144,23 @@
             	this.$router.push({ path: 'login' })
             },
 	  		confirm() {
-	  			// if(this.userinfo){
-	  			// 	this.showAlert = true
-	  			// 	this.alertText = '请填写基本信息'
-	  			// }
-	  			this.$http.post('/api/public/addVolunteer',this.userinfo).then(response => {
-	  				let res = response.data
-	  				if(res.result == 0){
-	  					//将返回的volunteerId存入
-	  					//sessionStorage.setItem('volunteerId',res.data)
-						//this.isConfirm = true;
-
-						//注册成功返回登录
-						this.$router.push('login')
-	  				}else{
-
-	  				}
-	  			})
+	  			if(this.userinfo.headIcon == '' || this.userinfo.mobileNo == '' || this.userinfo.password == '' || this.userinfo.nickName == '' ||this.userinfo.goodAt == ''){
+	  				this.$message.error('请完善信息')
+	  			}else{
+	  				this.$http.post('/api/public/addVolunteer',this.userinfo).then(response => {
+		  				let res = response.data
+		  				if(res.result == 0){
+							this.$router.push('login')
+		  				}
+		  			})
+	  			}
 	  		},
 	  		//发送短信验证码
 	  		send(){
      			this.$refs.timerbtn.setDisabled(true);
 	            this.$http.post('/api/public/sendShortMessage',{
-	            	mobileNo:this.userinfo.mobileNo
+	            	mobileNo:this.userinfo.mobileNo,
+	            	messageType:'1'
 	            },{
 	            	emulateJSON:true
 	            }).then( response =>{
@@ -208,24 +214,23 @@
             checkFlag(item){
 	  			if(typeof item.checked == 'undefined'){
 	  				this.$set(item,'checked',true);
-	  				let count = 0
-	  				this.userinfo.goodAt += item.key+','
-	  				//this.userinfo.goodAt = this.userinfo.goodAt.slice(0,-1)
-	  				this.arr += item.value+','
-	  				this.goodSelect = this.arr.split(',').slice(0,-1)
-	  				this.list.forEach((item,index)=>{
-	  					if(item.checked == true){
-	  						count++
-	  					}
-	  				})
-	  				if(count>=3){
-	  					this.isShow = false;
-	  					this.wrap = true;
-	  				}
 	  			}else{
-
 	  				item.checked = !item.checked	
 	  			}
+	  			this.cale()
+	  		},
+	  		cale(){
+	  			this.goodSelect = []
+	  			this.userinfo.goodAt = ''
+	  			this.list.forEach((item,index) => {
+	  				if(item.checked){
+	  					this.goodSelect.push({
+	  						key:item.key,
+	  						value:item.value
+	  					})
+	  					this.userinfo.goodAt += item.key + ','
+	  				}
+	  			})
 	  		},
 	  		handleAvatarSuccess(res, file) {
 	  			let result = res.data
