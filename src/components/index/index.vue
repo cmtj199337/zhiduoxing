@@ -145,6 +145,7 @@
             <p><img src="/static/loading.gif" alt=""></p>
             <span>正在加载</span>
         </div>
+        <baidu-map @ready="handler"></baidu-map>
 	</div>
 </template>
 
@@ -173,13 +174,6 @@
 	  	},
 	  	mounted(){
 	  		this.userName = localStorage.getItem('username')
-
-	  		this.getLocation()
-	  		// 获取当前城市
-	        this.$http.get('http://api.map.baidu.com/geocoder/v2/?callback=renderOption&output=json&address=百度大厦&city=北京市&ak=E4vYNbh4LBcHlmzE9dmE5KVv2NMxvFBY').then(response => {
-	            let res = response.data;
-	            this.guessCity = res.name;
-	        })
 	  		// this.showList()
 	  	},
 	  	computed:{
@@ -197,6 +191,9 @@
 	  		}
 		},
 	  	methods:{
+	  		handler ({BMap, map}) {
+			    this.getLocation()
+		    },
 	  		showList(){
 	  			this.$http.get('/api/public/homePage').then(response => {
 	  				let res = response.data
@@ -213,11 +210,11 @@
 	  		getLocation(){
 		        var geolocation = new BMap.Geolocation();
 		        //弹出地理授权
+		        let _this = this
 		          geolocation.getCurrentPosition(function(r) {
 		              	if(this.getStatus() == BMAP_STATUS_SUCCESS) {
-		                  	// alert('定位成功');
-		                  	// console.log(r.point);
-		                 	this.lnglat = r.point.lng+','+r.point.lat
+		                  	_this.guessCity = r.address.city
+		                 	_this.lnglat = r.point.lng+','+r.point.lat
 		              	}else{
 		                  	alert("baidu return failed");
 		              	}

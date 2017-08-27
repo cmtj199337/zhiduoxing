@@ -14,7 +14,7 @@
 		</swipe>
 		<img src="./zi.png" class="zi">
 		<div class="classify clearfix">
-			<div class="location"><p><img src="./weizhi.png">北京</p><input @click="toggle()" v-on:blur="changeCount()"class="search" type="text" placeholder="搜索" align="center"><img src="./sou.png" class="ss" v-show="isShow"></div>
+			<div class="location"><p><img src="./weizhi.png">{{guessCity}}</p><input @click="toggle()" v-on:blur="changeCount()" class="search" type="text" placeholder="搜索" align="center"><img src="./sou.png" class="ss" v-show="isShow"></div>
 			<ul>
 				<!-- <li v-for="item in filtIcon">
 					<router-link :to="item.url">
@@ -141,6 +141,7 @@
             <p><img src="/static/loading.gif" alt=""></p>
             <span>正在加载</span>
         </div>
+        <baidu-map @ready="handler"></baidu-map>
 	</div>
 </template>
 
@@ -168,11 +169,6 @@
 	  	},
 	  	mounted(){
 	  		this.userName = localStorage.getItem('username')
-	  		// 获取当前城市
-	        // this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then(response => {
-	        //     let res = response.data;
-	        //     this.guessCity = res.name;
-	        // })
 	  		// this.showList()
 	  	},
 	  	computed:{
@@ -187,6 +183,9 @@
 		    }
 		},
 	  	methods:{
+	  		handler ({BMap, map}) {
+			    this.getLocation()
+		    },
 	  		showList(){
 	  			this.$http.get('/api/public/homePage').then(response => {
 	  				let res = response.data
@@ -200,6 +199,28 @@
 	  				}
 	  			})
 	  		},
+	  		getLocation(){
+		        var geolocation = new BMap.Geolocation();
+		        //弹出地理授权
+		        let _this = this
+		          geolocation.getCurrentPosition(function(r) {
+		              	if(this.getStatus() == BMAP_STATUS_SUCCESS) {
+		                  	_this.guessCity = r.address.city
+		                 	_this.lnglat = r.point.lng+','+r.point.lat
+		              	}else{
+		                  	alert("baidu return failed");
+		              	}
+		          },
+		          //获取失败时候的回调
+		          function(r) {
+		              console.log(r);
+		              alert('定位失败');
+		              return {
+		                  //设置高精度
+		                  enableHighAccuracy: true
+		              }
+		          });
+		    },
 	  		toAddress(path){
                 this.$router.push(path)
             },

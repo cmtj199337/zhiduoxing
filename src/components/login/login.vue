@@ -4,8 +4,8 @@
 		<form action="" method="post">
 			<div class="usertext">
 				<i class="s-icon"><img src="./phone.png"></i>
-				<input v-validate ="'required|mobile|min:11'"  type="text" placeholder="手机号/身份证号" v-model="name" name="userName" maxlength="18" />
-				<span class="toast" v-show="errors.has('userName')">{{ errors.first('userName')}}</span>
+				<input v-validate ="'required|mobile|min:11'"  type="text" placeholder="账号/手机号" v-model="name" name="userName" maxlength="18" />
+				<span class="toast" v-show="errors.has('userName')">请输入账号</span>
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./lock.png"></i>

@@ -7,10 +7,19 @@
 		<div class="info">
 				<div class="info-left">
 					<img class="photo" :src="voluInfo.headIcon">
-					<img class="renz" src="./renzheng@2x.png">
+					<!-- <img class="renz" src="./renzheng@2x.png"> -->
 				</div>
 				<div class="info-right">
-					<p class="name"><span>{{voluInfo.nickName}}</span><i></i><i></i><i></i><i></i><i></i></p>
+					<p class="name">
+						<span>{{voluInfo.nickName}}</span>
+						<el-rate
+						  v-model="caleStar"
+						  disabled
+						  text-color="#ff9900"
+						  disabled-void-color="#fff"
+						  text-template="{value}">
+						</el-rate>
+					</p>
 					<p class="kouhao"><span>志愿口号</span><i>{{voluInfo.volunteSlogan}}</i></p>
 				</div>
 				</div>
@@ -112,11 +121,29 @@
 	 	data () {
 		    return {
 		    	voluInfo:[],
-		    	username:null
+		    	username:null,
+		    	star:0
 		    }
 	  	},
 	  	mounted(){
 	  		this.profile();
+	  	},
+	  	computed:{
+	  		caleStar(){
+	  			if(this.voluInfo.serviceHour >= 100){
+	  				return this.star = 1
+	  			}else if(this.voluInfo.serviceHour >= 300){
+	  				return this.star = 2
+	  			}else if(this.voluInfo.serviceHour >= 600){
+	  				return this.star = 3
+	  			}else if(this.voluInfo.serviceHour >= 1000){
+	  				return this.star = 4
+	  			}else if(this.voluInfo.serviceHour >= 1500){
+	  				return this.star = 5
+	  			}else{
+	  				return this.star = 0
+	  			}
+	  		}
 	  	},
 	  	methods:{
 	  		toAddress(path){
@@ -165,9 +192,10 @@
 		padding:0.5rem 0;
 	}
 	.info2 ul {
-		display:flex;
-
-		 
+		display:flex; 
+	}
+	.el-rate{
+		display: inline-block;
 	}
 	.info2 ul li{
 		width:25%;

@@ -195,11 +195,12 @@
 	margin-bottom: 0;
 }
 .mm ul li img{
-	width:5rem;
-	height:5rem;
+	width:4.5rem;
+	height:4.5rem;
 	position:absolute;
-	left: -2.5rem;
+	left: -2.25rem;
 	top:5%;
+	border-radius: 50%;
 }
 .mm ul li .m1{
 	display:flex;
@@ -217,8 +218,9 @@
 	color: #43B7B6;
 }
 .mm ul li h3{
-margin-bottom: 0.8rem;
-margin-left:4rem;
+	height: 1.35rem;
+	margin-bottom: 0.8rem;
+	margin-left:4rem;
 }
 .active{
 	color:#43B7B5;

@@ -85,17 +85,9 @@
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
 			<span class="bm3"><p @click="chooseFamily()" class="bm">我要报名</p></span>
 		</footer>
-		<!-- <div class="overlay"></div> -->
-<!-- 		<qrcode
-			:value="qrcodeUrl" 
-			v-if="qrcodeUrl" 
-			:options="{ size: 170 }">
-		</qrcode>-->	
 	</div>	
 </template>
 <script>
-	import Qrcode from 'vue-qrcode';
-
 	export default{
 		name:'detail',
 		data () {
@@ -110,13 +102,9 @@
 				regular:true, 		//规律不规律时间
 		    }
 	  	},
-	  	components: {
-		    qrcode: Qrcode
-		},
 	  	mounted(){
 	  		this.$nextTick(function(){
 	  			this.showView()
-	  			this.qrcodeUrl = window.location.href
 	  		})
 	  		
 	  	},
@@ -131,8 +119,12 @@
 	  	},
 	  	methods:{
 	  		showView(){
+	  			let userid = localStorage.getItem('userId')
 	  			this.$http.get('api/public/getProjectDetail',{
-					  params:{id:this.$route.query.projectId}
+					params:{
+					  	id:this.$route.query.projectId,
+					  	userId: userid
+					}
 				  }).then(response =>{
 	  				let res = response.data
 	  				if(res.result == 0){

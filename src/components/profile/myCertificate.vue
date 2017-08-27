@@ -4,22 +4,21 @@
 <img src="./bgg.png" class="bg">
 <div class="main">
 	<p class="header">志多星注册志愿服务证书<img src="./chenggong.png"></p>
-	<p ><img src="./toux@2x.png" class="header2"></p>
-	<p style="color:#2C2C2C">李小萌</p>
-	<p class="number">证书编号：256345</p>
-	<p>2017年2月12日</p>
+	<p ><img :src="info.volunteerLogo" class="header2"></p>
+	<p style="color:#2C2C2C">{{info.nickName}}</p>
+	<p class="number">证书编号：{{info.volunteerNo}}</p>
+	<p>{{info.registerDate | formatDate}}</p>
 	<p>注册成为志多星志愿者</p>
-	<p class="number">截止2017年8月14日</p>
+	<p class="number">截止{{info.nowDate | formatDate}}</p>
 	<ul class="header3">
-	<li>累计服务次数</li>
-	<li>累计服务时长</li>
+		<li>累计服务次数</li>
+		<li>累计服务时长</li>
 	</ul>
 	<ul class="header4">
-	<li>66次</li>
-	<li>22小时</li>
+		<li>{{info.serverTimes}}次</li>
+		<li>{{info.serverTime}}小时</li>
 	</ul>
 	<p class="end">认证机构：和众泽益志愿者服务中心<img src="./yinzhang.png"></p>
-
 </div>
 </div>	
 </template>
@@ -33,7 +32,27 @@ export default{
 	},
 	data(){
 		return{
-
+			info:[]
+		}
+	},
+	filters:{
+	    formatDate(value){
+	      	return value.substr(0,4)+'年'+value.substr(4,2)+'月'+value.substr(6,2)+'日'
+	    }
+  	},
+	mounted(){
+		this.$nextTick(function(){
+			this.getInfo()
+		})
+	},
+	methods:{
+		getInfo(){
+			this.$http.post('/api/private/getMyCertificate').then(response => {
+				let res = response.data
+				if(res.result == 0){
+					this.info = res.data
+				}
+			})
 		}
 	}
 }
@@ -72,7 +91,7 @@ export default{
 .header2{
 	width:15%;
 	margin:3% auto; 
-	
+	border-radius: 50%;
 }
 .header img{
 	position:absolute;
