@@ -2,10 +2,10 @@
 	<div class="login">
 		<headerTip message="登录" goBack="true"></headerTip>
 		<form action="" method="post">
-			<div class="usertext">
+			<div class="usertext shengfeng" >
 				<i class="s-icon"><img src="./phone.png"></i>
-				<input v-validate ="'required|mobile|min:11'"  type="text" placeholder="账号/手机号" v-model="name" name="userName" maxlength="18" />
-				<span class="toast" v-show="errors.has('userName')">请输入账号</span>
+				<input v-validate ="'required|alpha_dash|min:6|max:20'"  type="text" placeholder="账号/手机号" v-model="name" name="userName" maxlength="18" @blur="chenkUser"/>
+				<!-- <span class="toast" v-show="errors.has('userName')">请输入账号</span> -->
 			</div>
 			<div class="usertext">
 				<i class="s-icon"><img src="./lock.png"></i>
@@ -37,6 +37,7 @@
 	  		headerTip,
 	  		alertTip
 	  	},
+
 	 	data () {
 		    return {
 		      	name:'',
@@ -54,6 +55,11 @@
 	  		}
 	  	},
 	  	methods:{
+	  		chenkUser(){
+	  			if(this.errors.has('userName')){
+	  				this.$message.error('请输入正确的账号')
+	  			}
+	  		},
 	  		isLogin() {
 	  			if(!this.name || !this.pwd){
 	  				this.showAlert = true
@@ -101,8 +107,6 @@
 	@import '../../styles/usertext.css';
 	.login{
 		text-align: center;
-		height: 100%;
-		background: #fff;
 	}
 	.link{
 		position: absolute;
@@ -130,5 +134,13 @@
 	    right: 0;
 	    top: 1rem;
 		opacity: 0;
+	}
+	.shengfeng input{
+		width:80% !important;
+		margin-bottom: 0.3rem;
+
+	}
+	.usertext input{
+		margin-bottom: 0.3rem !important;
 	}
 </style>

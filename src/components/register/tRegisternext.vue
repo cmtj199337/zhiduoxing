@@ -16,16 +16,16 @@
             <h4 class="texttitle"><span><img src="./t1.png"></span>注册信息</h4>
         </div>
          <div class="usertext">
-			<input type="text" placeholder="请输入团队管理员姓名" v-model="dataList.contactName" />
+			<input type="text" name="contactName" v-validate="'required'" placeholder="请输入团队管理员姓名" @blur="checkForm('contactName','请输入正确的姓名')" v-model="dataList.contactName"/>
 		</div>
 		<div class="usertext">
-			<input type="tel" placeholder="请输入团队管理员手机号" maxlength="11" v-model="dataList.contactMobileNo"/>
+			<input type="tel" name="contactMobileNo" v-validate="'required|mobile'" max-length="11" placeholder="请输入团队管理员手机号" maxlength="11" v-model="dataList.contactMobileNo" @blur="checkForm('contactMobileNo','请输入正确的手机号')"/>
 		</div>
 		 <div class="usertext">
-			<input type="text" placeholder="请输入联系人邮箱" maxlength="11" v-model="dataList.contactMail" />
+			<input type="text" name="contactMail" v-validate="'required|email'" placeholder="请输入联系人邮箱" v-model="dataList.contactMail" @blur="checkForm('contactMail','请输入正确邮箱')"/>
 		</div>
 		 <div class="usertext" style="margin-bottom:0">
-			<input type="text" placeholder="请输入团队法人/负责人姓名" v-model="dataList.managerName"/>
+			<input type="text" name="managerName" v-validate="'required'" placeholder="请输入团队法人/负责人姓名" v-model="dataList.managerName" @blur="checkForm('managerName','请输入正确的姓名')"/>
 		</div>
 		<div class="kong"></div>
 
@@ -35,15 +35,20 @@
 				<li v-for="item in typelist"><el-radio :label="item.key">{{item.value}}</el-radio></li>
 			</el-radio-group>
 		</ul>
-
+		
         <div class="usertext" style="border-top:1px solid #f5f5f5">
-			<input type="tel" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" />
+			<input v-if="dataList.managerIdType == 1" type="text" name="sfz" v-validate="'required|regIdCard'" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" @blur="checkForm('sfz','身份证格式不正确')" key="sfz"/>
+			<input v-else-if="dataList.managerIdType == 2" type="text" name="gatxz" v-validate="'required|isHKMacao'" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" @blur="checkForm('gatxz','港澳通行证格式不正确')" key="gatxz"/>
+			<input v-else-if="dataList.managerIdType == 3" type="text" name="hz" v-validate="'required|isPassport'" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" @blur="checkForm('hz','护照格式不正确')" key="hz"/>
+			<input v-else-if="dataList.managerIdType == 4" type="text" name="jgz" v-validate="'required|jsJgz'" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" @blur="checkForm('jgz','军官证格式不正确')" key="jgz"/>
+			<input v-else-if="dataList.managerIdType == 5" type="text" name="xsz" v-validate="'required|isXsz'" v-model="dataList.managerIdNo" placeholder="请输入团队法人/负责人证件号" @blur="checkForm('xsz','学生证格式不正确')" key="xsz"/>
+		</div>
+
+		<div class="usertext">
+			<input type="text" name="managerMobileNo" v-validate="'required|mobile'" v-model="dataList.managerMobileNo" placeholder="请输入团队法人/负责人手机号" maxlength="11" @blur="checkForm('managerMobileNo','请输入正确的手机号')"/>
 		</div>
 		 <div class="usertext">
-			<input type="text" v-model="dataList.managerMobileNo" placeholder="请输入团队法人/负责人手机号" maxlength="11" />
-		</div>
-		 <div class="usertext">
-			<input type="text" v-model="dataList.managerMail" placeholder="请输入团队法人/负责人邮箱"/>
+			<input type="text" name="managerMail" v-validate="'required|email'" v-model="dataList.managerMail" placeholder="请输入团队法人/负责人邮箱" @blur="checkForm('managerMail','请输入正确的邮箱')"/>
 		</div>
 		<div class="end">
 			<div class="chuan chuan1">
@@ -56,9 +61,9 @@
 				  <img v-if="imageUrl" :src="imageUrl" class="avatar">
 				  <i v-else class="avatar-uploader-icon">
 				  	<img src="./tianjia.png" alt="">
+				  	<p>上传资质照片</p>
 				  </i>
 				</el-upload>
-				<p>上传资质照片</p>
 			</div>
 			<div class="chuan chuan2">
 				<el-upload
@@ -70,9 +75,9 @@
 				  <img v-if="image" :src="image" class="avatar">
 				  <i v-else class="avatar-uploader-icon">
 				  	<img src="./tianjia.png" alt="">
+				  	<p>上传资质照片</p>
 				  </i>
 				</el-upload>
-				<p>上传资质照片</p>
 			</div>
 		</div>
 		<div class="ee"><p>亲，提交资质证明，可以提升团队级别噢</p></div>
@@ -98,7 +103,7 @@
 					contactMobileNo:'', 		//联系人手机号
 					contactMail:'', 			//邮箱
 					managerName:'', 			//团队法人/负责人姓名
-					managerIdType:'',  			//证件类型
+					managerIdType:1,  			//证件类型
 					managerIdNo:'',				//团队法人/负责人证件号码
 					managerMobileNo:'', 		//团队法人/负责人手机号
 					managerMail:'', 			//团队法人/负责人邮箱
@@ -115,9 +120,11 @@
 			this.teamId = this.$route.query.teamId
 		},
 		methods:{
-			toAddress(path){
-                this.$router.push(path)
-            },
+			checkForm(name,filed){
+	  			if(this.errors.has(name)){
+	  				this.$message.error(filed)
+	  			}
+	  		},
             getType(){
             	this.$http.get('/api/public/getCommonList',{
             		params:{

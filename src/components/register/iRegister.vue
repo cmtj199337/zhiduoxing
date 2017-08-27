@@ -21,8 +21,7 @@
 				</a>
 			</div>
 			<div class="usertext">
-				<input type="tel" v-validate ="'required|mobile'" name="mobile" placeholder="请输入手机号" maxlength="11" v-model="userinfo.mobileNo" @change="isRegister" />
-				<span class="toast" v-show="errors.has('mobile')">请输入正确手机号</span>
+				<input type="tel" v-validate ="'required|mobile'" name="mobile" placeholder="请输入手机号" maxlength="11" v-model="userinfo.mobileNo" @blur="isRegister" />
 			</div>
 			<div class="usertext">
 				<input type="number" @change="checkCode" v-model="code" placeholder="请输入验证码" maxlength="6" style="width:56%" />
@@ -30,19 +29,18 @@
 			</div>
 			<div class="usertext">
 				<input type="password" name="password" v-validate="'required'" style="width:100%" placeholder="请输入密码(6~12位数字或字母)" v-model="userinfo.password" />
-				<span class="toast" v-show="errors.has('password')">{{ errors.first('password')}}</span>
 			</div>
 			<div class="usertext">
-				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" />
-				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
+				<input type="password" @blur="checkForm('pwdagain','两次输入密码不一致')" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" />
 			</div>
 			<div class="usertext">
-				<input type="text" v-validate="'required'" name="nickname" placeholder="请输入昵称" v-model="userinfo.nickName" /><br />
-				<span class="toast" v-show="errors.has('nickname')">请输入昵称</span>
+				<input type="text" v-validate="'required|min:6|max:20'" @blur="checkForm('nickname','请输入正确昵称')" name="nickname" placeholder="请输入昵称" v-model="userinfo.nickName" />
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
-					<span class="good">擅长<span v-for="item in goodSelect">{{item.value}}</span><img src="./right.png"></span>
+					<span class="good">擅长
+					<!-- <span v-for="item in goodSelect">{{item.value}}</span> -->
+					<img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="read">
@@ -72,7 +70,7 @@
 		<div class="goodlist" v-show="isShow">
 			<div class="head_top">
 				<div class='tip'>
-	            	<p><span @click="showToggle"><img src="./back.png"></span>服务类型</p>
+	            	<p><span @click="showToggle"><img src="./back.png"></span>擅长</p>
 	        	</div>
         	</div>
 			<form action="" method="post">
@@ -136,6 +134,11 @@
 	  		})
 	  	},
 	  	methods:{
+	  		checkForm(name,filed){
+	  			if(this.errors.has(name)){
+	  				this.$message.error(filed)
+	  			}
+	  		},
 	  		closeTip(){
                 this.showAlert = false;
             },
@@ -239,19 +242,17 @@
 		        this.userinfo.headIcon = result
 		    },
 		    beforeAvatarUpload(file) {
-		        const isJPG = file.type === 'image/jpeg';
 		        const isLt2M = file.size / 1024 / 1024 < 2;
-
-		        if (!isJPG) {
-		          this.$message.error('上传头像图片只能是 JPG 格式!');
-		        }
 		        if (!isLt2M) {
 		          this.$message.error('上传头像图片大小不能超过 2MB!');
 		        }
-		        return isJPG && isLt2M;
+		        return isLt2M;
 		    },
 		    isRegister(){
-		    	if(this.userinfo.mobileNo){
+		    	if(this.errors.has('mobile')){
+		    		this.$message.error('请输入正确的手机号')
+		    		this.$refs.timerbtn.setDisabled(true);
+		    	}else{
 		    		this.$http.post('/api/public/checkMobileNo',{
 		    			mobileNo:this.userinfo.mobileNo,
 		    			userType:1
@@ -268,8 +269,6 @@
 							this.$message.error("该账号已注册过")
 		  				}
 		  			})
-		    	}else{
-		    		this.$refs.timerbtn.setDisabled(true);
 		    	}
 	  		}
 	  	}

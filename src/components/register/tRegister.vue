@@ -34,20 +34,16 @@
 				</a>
 			</div>
 			<div class="usertext" style="border-top:1px solid #f5f5f5">
-	       		 <input type="text" name="teamName" v-validate="'required'"  v-model="teamInfo.teamName" placeholder="请输入团队名称">
-	       		 <span class="toast" v-show="errors.has('teamName')">请输入团队名称</span>
+	       		 <input type="text" name="teamName" v-validate="'required|max:20'" @blur="checkForm('teamName','请输入正确团队名称')" v-model="teamInfo.teamName" placeholder="请输入团队名称">
 	        </div>
 	        <div class="usertext">
-	       		 <input type="text" name="teamAccount" v-validate="'required'"  v-model="teamInfo.teamAccount" placeholder="请输入团队账号">
-	       		 <span class="toast" v-show="errors.has('teamAccount')">请输入团队账号</span>
+	       		 <input type="text" name="teamAccount" v-validate="'required'"  v-model="teamInfo.teamAccount" placeholder="请输入团队账号" @blur="checkForm('teamAccount','请输入正确团队账号')">
 	        </div>
 			<div class="usertext">
 				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
-				<span class="toast" v-show="errors.has('password')">请输入密码</span>
 			</div>
 			<div class="usertext">
-				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" /><br />
-				<span class="toast" v-show="errors.has('pwdagain')">两次密码不一致</span>
+				<input type="password" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" @blur="checkForm('pwdagain','两次密码不一致')"/>
 			</div>
 			<!-- <div class="usertext">
 				<input type="text" v-validate="'required'" v-model="teamInfo.teamSlogan" name="slogan" placeholder="请输入团队口号" /><br />
@@ -71,8 +67,8 @@
 					<option v-for="item in teamKlist" :value="item.key">{{item.value}}</option>
 				</select><img src="./bottom.png"></span>
 				<span style="position:relative;">
-				<img src="./quanxian.png" style="margin-left:-10%;position:absolute;top:20%;width:8%">
-				<span style="margin-left:20%;font-size:0.8rem;color:#CACACA">团队权限介绍</span></span>
+				<img src="./quanxian.png" style="margin-left:-20%;position:absolute;top:20%;width:9%">
+				<span style="margin-left:15%;font-size:0.8rem;color:#CACACA">团队权限介绍</span></span>
 			</div>
 			<!-- <div class="usertext">
 	        	<input type="text" v-model="teamInfo.teamManager" placeholder="请输入团队管理员">
@@ -85,7 +81,7 @@
 
 			<my-area @select="haha"></my-area>
 			<div class="usertext">
-	       		 <input type="text" v-model="teamInfo.address" placeholder="请填写详细地址，不少于5个字">
+	       		 <input type="text" name="addr" v-validate="'required|min:5'" @blur="checkForm('addr','请输入正确地址')" v-model="teamInfo.address" placeholder="请填写详细地址，不少于5个字">
 	        </div>
 	        <div class="kong">
 			</div>
@@ -93,8 +89,7 @@
 	            <h4 class="texttitle"><span><img src="./jianjie.png"></span>团队简介</h4>
 	        </div>
 	        <div class="usertextend">
-	       		<textarea v-model="teamInfo.teamIntro" v-validate="'required'" class="jianjie" name="teamIntro" rows="5"></textarea>
-	       		<span class="toast" v-show="errors.has('teamIntro')">请输入团队简介</span>
+	       		<textarea v-model="teamInfo.teamIntro" v-validate="'required|min:10|max:500'" class="jianjie" name="teamIntro" rows="5" @blur="checkForm('teamIntro','团队简介10-500字')"></textarea>
 	        </div>
 	        <div class="end">
 	        10-500字
@@ -211,6 +206,11 @@
         	})
         },
         methods:{
+        	checkForm(name,filed){
+	  			if(this.errors.has(name)){
+	  				this.$message.error(filed)
+	  			}
+	  		},
 	  		send(){
      			this.$refs.timerbtn.setDisabled(true); 
 	            this.$http.post('/api/public/sendShortMessage',{
@@ -318,21 +318,15 @@
 	  			let result = res.data
 	  			
 		        this.imageUrl = URL.createObjectURL(file.raw);
-
-		        //this.imageUrl = result
 		        this.teamInfo.teamIcon = result
 		    },
 		    beforeAvatarUpload(file) {
-		        const isJPG = file.type === 'image/jpeg';
 		        const isLt2M = file.size / 1024 / 1024 < 2;
 
-		        if (!isJPG) {
-		          this.$message.error('上传头像图片只能是 JPG 格式!');
-		        }
 		        if (!isLt2M) {
 		          this.$message.error('上传头像图片大小不能超过 2MB!');
 		        }
-		        return isJPG && isLt2M;
+		        return isLt2M;
 		    },
 		    checkMobile(){
 		    	this.$http.post('/api/public/checkMobileNo',{
@@ -373,7 +367,7 @@
 	  					//将返回的teamId存入
 	  			// 		sessionStorage.setItem('teamId',res.data)
 						// this.$router.push('tregisternext')
-						this.$router.push({path:'tregisternext',query:{teamId:res.data.teamId}})
+						this.$router.push({path:'tregisternext',query:{teamId:res.data}})
 	  				}else{
 
 	  				}

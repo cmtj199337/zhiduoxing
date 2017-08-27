@@ -28,10 +28,39 @@ Validator.extend('regIdCard', {
       zh_CN:field => '输入正确的身份证号',
     },
     validate: value => {
-      return value.length == /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(value)
+      return value.length == /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)
     }
 });
-
-
-
+Validator.extend('isPassport', {
+    messages: {
+      zh_CN:field => '护照格式不正确',
+    },
+    validate: value => {
+      return value.length == /^[a-zA-Z0-9]{5,17}$/.test(value)
+    }
+});
+Validator.extend('isHKMacao', {
+    messages: {
+      zh_CN:field => '港澳通行证格式不正确',
+    },
+    validate: value => {
+      return value.length == /^[HMhm]{1}([0-9]{10}|[0-9]{8})$/.test(value)
+    }
+});
+Validator.extend('isXsz', {
+    messages: {
+      zh_CN:field => '学生证格式不正确',
+    },
+    validate: value => {
+      return value.length == /^[0-9]{10}$/.test(value)
+    }
+});
+Validator.extend('jsJgz', {
+    messages: {
+      zh_CN:field => '军官证格式不正确',
+    },
+    validate: value => {
+      return value.length == /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value)
+    }
+});
 Vue.use(VeeValidate,config);
