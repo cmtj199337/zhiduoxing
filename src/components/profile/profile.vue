@@ -236,9 +236,13 @@
 		color: #535353;
 		height: 2rem;
 		line-height: 2rem;
+		display: flex;
 	}
 	.name span{
 		padding-right:0.5rem;
+		overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
 	}
 	.name i{
 		width: 1rem;height: 1rem;

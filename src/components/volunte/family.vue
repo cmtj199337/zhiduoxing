@@ -73,18 +73,18 @@
 			// }
 			comfirm(){
 				let userId = localStorage.getItem('userId')
-            	this.$http.post('/api/private/joinProject',{
+            	this.$http.post('/api/private/joinProjectFam',{
             		projectId:this.$route.query.projectId,
-            		volunteerId:userId+','+this.currFamily
+            		idStr:userId+','+this.currFamily
             	},{
             		emulateJSON:true
             	}).then( response => {
             		let res = response.data
             		if(res.result == 0){
             			this.$message.success("已报名")
-            			setInterval(()=>{
-            				this.$router.go(0)
-            			},500)
+            			
+            			this.$router.push({path:'myprojectDetails',query:{projectId:this.$route.query.projectId}})
+            			
             		}
             	})
 			}
@@ -117,6 +117,7 @@
 	position:absolute;
  	top:15%; 
 	left:-9%;
+	border-radius: 50%;
 }
 .t p{
 	margin: 0.5rem 0;

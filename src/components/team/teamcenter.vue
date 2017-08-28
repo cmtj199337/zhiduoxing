@@ -58,9 +58,11 @@
 					<span>全部团队查看</span>
 				</li>
 				<hr>
-				<li @click="toAddress({path: '/tregister'})">
-					<img class="icon" src="./td.png">
-					<span>创建团队</span>
+				<li>
+					<router-link :to="{path:'/tregister',query:{from:1}}">
+						<img class="icon" src="./td.png">
+						<span>创建团队</span>
+					</router-link>
 				</li>
 				<hr>
 				<li>

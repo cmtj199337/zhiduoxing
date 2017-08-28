@@ -34,7 +34,7 @@
 				<input type="password" @blur="checkForm('pwdagain','两次输入密码不一致')" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" />
 			</div>
 			<div class="usertext">
-				<input type="text" v-validate="'required|min:6|max:20'" @blur="checkForm('nickname','请输入正确昵称')" name="nickname" placeholder="请输入昵称" v-model="userinfo.nickName" />
+				<input type="text" v-validate="'required|max:10'" @blur="checkForm('nickname','请输入正确昵称')" name="nickname" placeholder="请输入昵称" v-model="userinfo.nickName" />
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
@@ -242,7 +242,7 @@
 		        this.userinfo.headIcon = result
 		    },
 		    beforeAvatarUpload(file) {
-		        const isLt2M = file.size / 1024 / 1024 < 2;
+		        const isLt2M = file.size / 1024 / 1024 < 4;
 		        if (!isLt2M) {
 		          this.$message.error('上传头像图片大小不能超过 2MB!');
 		        }

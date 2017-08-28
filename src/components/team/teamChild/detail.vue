@@ -43,12 +43,12 @@
 	    </div>
 
 		<div class="touxiang">
-			<img src="../touxiang2.png" v-for="item in list.wXTeamVolunteerList">
+			<img :src="item.volunteerIcon" v-for="item in list.wXTeamVolunteerList">
 		</div>
 		<div class="kong2">
 		</div>
 		<footer class="foot">
-			<span class="bm1" v-if="list.collectFlg == 0" @click="addCollect()"><img src="../shoucang.png">收藏</span>
+			<span class="bm1" v-if="list.collectFlg == 0" @click="addCollect()"><img src="/static/sc333.png">收藏</span>
 			<span class="bm1" v-else-if="list.collectFlg == 1" @click="cancelCollect()"><img src="../shoucang.png">取消收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
 			<span class="bm3" v-if="list.joinFlg == 1" @click="joinTeam()"><p class="bm">我要加入</p></span>
@@ -196,6 +196,8 @@ width:33%;
 	display:inline;
 	vertical-align: middle;
 	margin-left:-1rem;
+	border-radius: 50%;
+	border: 2px solid #fff;
 }
 .foot{
 	display:flex;

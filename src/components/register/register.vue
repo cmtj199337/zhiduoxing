@@ -6,7 +6,7 @@
 				<img src="./ire.png">
 				<span>个人注册</span>
 			</a>
-			<router-link class="tre" to="tregister">
+			<router-link class="tre" :to="{path:'/tregister',query:{from:0}}">
 				<img src="./tre.png">
 				<span>团队注册</span>
 			</router-link>

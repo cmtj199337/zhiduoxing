@@ -22,33 +22,6 @@
 						</el-upload>
 					</a>
 				</div>
-				<el-upload
-				  class="bg"
-				  action="/api/public/upload"
-				  :show-file-list="false"
-				  :on-success="handleAvatar1"
-				  :before-upload="beforeAvatarUpload">
-				  <img v-if="projectInfo.projectPicture1" :src="projectInfo.projectPicture1" class="bg-img">
-				  <i v-else class="el-icon-plus avatar-bg"></i>
-				</el-upload>
-				<el-upload
-				  class="bg"
-				  action="/api/public/upload"
-				  :show-file-list="false"
-				  :on-success="handleAvatar2"
-				  :before-upload="beforeAvatarUpload">
-				  <img v-if="projectInfo.projectPicture2" :src="projectInfo.projectPicture2" class="bg-img">
-				  <i v-else class="el-icon-plus avatar-bg"></i>
-				</el-upload>
-				<el-upload
-				  class="bg"
-				  action="/api/public/upload"
-				  :show-file-list="false"
-				  :on-success="handleAvatar3"
-				  :before-upload="beforeAvatarUpload">
-				  <img v-if="projectInfo.projectPicture3" :src="projectInfo.projectPicture3" class="bg-img">
-				  <i v-else class="el-icon-plus avatar-bg"></i>
-				</el-upload>
 			<div class="usertext" style="border-top:none">
 				<input type="text" placeholder="请输入项目名称" v-model="projectInfo.projectName" /><br />
 			</div>
@@ -142,6 +115,38 @@
 	        <div class="end">
 	        10-500字
 	        </div>
+	        <div class="kong"></div>
+
+	        <div class="header2">
+	            <h4 class="texttitle"><span><img src="./jianjie@2x.png"></span>项目图片</h4>
+	        </div>
+	        <el-upload
+				  class="bg"
+				  action="/api/public/upload"
+				  :show-file-list="false"
+				  :on-success="handleAvatar1"
+				  :before-upload="beforeAvatarUpload">
+				  <img v-if="projectInfo.projectPicture1" :src="projectInfo.projectPicture1" class="bg-img">
+				  <i v-else class="el-icon-plus avatar-bg"></i>
+				</el-upload>
+				<el-upload
+				  class="bg"
+				  action="/api/public/upload"
+				  :show-file-list="false"
+				  :on-success="handleAvatar2"
+				  :before-upload="beforeAvatarUpload">
+				  <img v-if="projectInfo.projectPicture2" :src="projectInfo.projectPicture2" class="bg-img">
+				  <i v-else class="el-icon-plus avatar-bg"></i>
+				</el-upload>
+				<el-upload
+				  class="bg"
+				  action="/api/public/upload"
+				  :show-file-list="false"
+				  :on-success="handleAvatar3"
+				  :before-upload="beforeAvatarUpload">
+				  <img v-if="projectInfo.projectPicture3" :src="projectInfo.projectPicture3" class="bg-img">
+				  <i v-else class="el-icon-plus avatar-bg"></i>
+				</el-upload>
 	        <div class="kong">
 			</div>
 		<!-- 	<div class="header3">

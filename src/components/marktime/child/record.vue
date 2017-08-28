@@ -4,7 +4,7 @@
 			<ul>
 				<li>
 					<span class="left">
-						<p><b>{{list.serverTimeMonth}}</b></p> 
+						<p><b>{{list.serverTimeMonth | formatMonth}}</b></p> 
 						<p>本月志愿时长</p>
 					</span>
 					<span class="right">
@@ -32,6 +32,11 @@ import Calendar from '../../common/tools/calendar.vue'
 	  	},
 	  	mounted(){
 	  		this.getRecord()
+	  	},
+	  	filters:{
+	  		formatMonth(value){
+	  			return value.toFixed(1)
+	  		}
 	  	},
 	  	methods:{
 	  		getRecord(){

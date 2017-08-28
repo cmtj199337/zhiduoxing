@@ -46,7 +46,8 @@
 	  	},
 	  	methods:{
 	  		code(){
-	  			let url = 'http://114.215.143.132:8088/#/myprojectDetails?projectId='
+	  			let url = 'http://139.219.98.10:8084/#/myprojectDetails?projectId='
+	  			// let url = 'http://10.58.155.2:8080/#/myprojectDetails?projectId='
 	  			this.qrcodeUrl = url + this.$route.query.projectId
 	  		},
 	  		showInfo(){

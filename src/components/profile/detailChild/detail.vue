@@ -10,10 +10,10 @@
 			<span>活动状态：{{status}}</span>
 		</div>
 		<div class="usertext">
-			<span>发布人：{{data.projectStatus}}</span>
+			<span>发布人：{{data.teamName}}</span>
 		</div>
 		<div class="usertext">
-			<span>服务类别：{{data.serverObject}}</span>
+			<span>服务类别：{{data.serverType}}</span>
 		</div>
 		<div class="usertext">
 			<span>服务对象：{{data.serverObject}}</span>
@@ -25,15 +25,15 @@
 			<span>招募日期：{{data.recruitDate}}</span>
 		</div>
 		<div class="usertext">
-			<span>项目日期：2017/5/10-2017/5/10，每周一，二</span>
+			<span>项目日期：{{data.projectDate}}</span>
 		</div>
-		<!-- 不规律 -->
-		<form v-show="regular">
+		<!-- 规律 -->
+		<form v-if="data.regularType == 0">
 			<div class="usertext">
-				<span>服务时间：08：00-18：00</span>
+				<span>服务时间：{{data.serverTime}}</span>
 			</div>
 			<div class="usertext">
-				<span>单日志愿时长：10小时</span>
+				<span>单日志愿时长：{{data.serverTimes}}</span>
 			</div>
 		</form>
 		<div class="last">
@@ -79,11 +79,13 @@
 			<textarea class="jianjie" rows="5">{{data.projectIntro}}</textarea>
 		</div>
 		<footer class="foot">
-			<span class="bm1" @click="addCollect()">
-				<img src="../shoucang.png">
-			收藏</span>
+			<span class="bm1" v-if="data.collectFlg == 1" @click="addCollect(0,'取消收藏成功')"><img src="../shoucang.png">取消收藏</span>
+			<span class="bm1" v-else-if="data.collectFlg == 0" @click="addCollect(1,'收藏成功')"><img src="/static/sc333.png">收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
-			<span class="bm3"><p @click="chooseFamily()" class="bm">我要报名</p></span>
+			<span class="bm3" v-if="data.joinFlg == 1"><p @click="chooseFamily()" class="bm">我要报名</p></span>
+			<span class="bmout" v-else-if="data.joinFlg == 0"><p @click="chooseFamily()" class="bm">我要退出</p></span>
+			
+
 		</footer>
 	</div>	
 </template>
@@ -110,8 +112,8 @@
 	  	},
 	  	computed:{
 	  		status(){
-	  			if(this.isPaid === 1){
-	  				this.paid = true
+	  			if(this.data.projectStatus == 6){
+	  				return this.data.projectStatus = '已结束'
 	  			}else{
 	  				this.paid = false
 	  			}
@@ -144,7 +146,7 @@
             		let res = response.data
             		if(res.result == 0){
             			if(res.data.familyNum > 0){
-            				this.$router.push('familys')
+            				// this.$router.push('familys')
             				this.$router.push({path:'familys',query:{projectId:this.data.projectId}})
             			}else{
             				// this.$message.success('报名成功')
@@ -165,24 +167,25 @@
             		let res = response.data
             		if(res.result == 0){
             			this.$message.success("已报名")
-            			setInterval(()=>{
-            				this.$router.go(0)
-            			},500)
+            			this.$router.go(0)
             		}
             	})
             },
-            addCollect(){
+            addCollect(status,msg){
             	this.$http.post('/api/private/addCollect',{
-            		collectType:1,
+            		collectType:status,
             		collectId:this.data.projectId
             	},{
             		emulateJSON:true
             	}).then( response => {
             		let res = response.data
             		if(res.result == 0){
-            			this.$message.success('收藏成功')
+            			this.$message.success(msg)
+            			setInterval(()=>{
+            				this.$router.go(0)
+            			},500)
             		}else{
-            			this.$message.error('收藏失败')
+            			this.$message.error('操作失败')
             		}
             	})
             }
@@ -241,7 +244,7 @@
 	}
 	.kong2{
 			background:rgba(235, 234, 234, 0.48);
-			padding: 0.8rem;
+			padding: 0.4rem;
 		}
 	.touxiang{
 		position:relative;
@@ -256,6 +259,7 @@
 		display:inline;
 		vertical-align: middle;
 		margin-left:-1rem;
+		border-radius: 50%;
 	}
 	.foot{
 		display:flex;
@@ -303,6 +307,11 @@
 		left:35%;
 		font-size:0.9rem;
 	}
+	.bmout{
+		width:56%;
+		background: #e15050;
+	}
+
 	.detail{
 		padding-bottom:20%;
 		background: #fff

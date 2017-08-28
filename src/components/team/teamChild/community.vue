@@ -1,6 +1,6 @@
 <template>
 	<div class="mycommunity"  @click="toAddress({path: '/communityDetails'})">
-		<div class="cheader">
+		<!-- <div class="cheader">
 			<span><img src="../touxiang2.png"></span>
 			<div class="name"><span>大蜗牛子</span><p>1小时</p></div>
 		</div>
@@ -22,7 +22,8 @@
 			<p><img src="../jubao.png"><span>举报</span></p>
 		</div>
 		<div class="kong"></div>
-		<div class="fb"><img src="../fabiao.png"></div>
+		<div class="fb"><img src="../fabiao.png"></div> -->
+		<div style="text-align:center;margin-top:30%"><p>团队社区建设中，敬请期待！</p></div>
 	</div>
 </template>
 <script >

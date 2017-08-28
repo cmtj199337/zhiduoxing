@@ -123,11 +123,11 @@ p{
 
 }
 .m2 ul li .touxiang{
-	width:5rem;
-	height:5rem;
+	width:4.5rem;
+	height:4.5rem;
 	border-radius:50%;
 	position:absolute;
-	left: -11%;
+	left: -2.25rem;
 	top:8%;
 }
 .m2 ul li .m11{
@@ -150,9 +150,9 @@ p{
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin-bottom:1.2rem;
     color:black;
     width:12rem;
+    font-size: 1rem;
 }
 .mm1 p{
 	text-align:left;

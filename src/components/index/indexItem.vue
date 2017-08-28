@@ -35,10 +35,12 @@
 					</router-link>
 				</li>
 				<li>
-					<router-link to="insurance">
-						<img src="./3.png" alt="">
-						<span>志愿保障</span>
-					</router-link>
+					<a href="javascript:;" @click="pop('志愿保障建设中，敬请期待！')">
+						<!-- <router-link to="insurance"> -->
+							<img src="./3.png" alt="">
+							<span>志愿保障</span>
+						<!-- </router-link> -->
+					</a>
 				</li>
 				<li>
 					<router-link to="makeupTimet">
@@ -47,16 +49,20 @@
 					</router-link>
 				</li>
 				<li>
-					<router-link to="shop">
+					<a href="javascript:;" @click="pop('志愿回馈建设中，敬请期待！')">
+						<!-- <router-link to="shop"> -->
 						<img src="./5.png" alt="">
 						<span>志愿回馈</span>
-					</router-link>
+						<!-- </router-link> -->
+					</a>
 				</li>
 				<li>
-					<router-link to="communityInteraction">
-						<img src="./2.png" alt="">
-						<span>社区互动</span>
-					</router-link>
+					<a href="javascript:;" @click="pop('志愿回馈建设中，敬请期待！')">
+						<!-- <router-link to="communityInteraction"> -->
+							<img src="./2.png" alt="">
+							<span>社区互动</span>
+						<!-- </router-link> -->
+					</a>
 				</li>
 				<li>
 					<router-link to="volunteerStrategy">
@@ -142,18 +148,21 @@
             <span>正在加载</span>
         </div>
         <baidu-map @ready="handler"></baidu-map>
+        <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 
 <script>
 	import { Swipe, SwipeItem } from 'c-swipe';
 	import Swiper from '../common/swiper.vue'
+	import alertTip from '../../components/common/tools/alertTip.vue'
 	export default {
 	  	name: 'index',
 	  	components:{
 	  		Swipe,
 	  		SwipeItem,
-	  		Swiper
+	  		Swiper,
+	  		alertTip
 	  	},
 	 	data () {
 		    return {
@@ -164,7 +173,9 @@
 		    	article:[],
 		    	guessCity:'',
 		    	isShow:true,				//当前定位城市
-		    	userName:''
+		    	userName:'',
+		    	showAlert: false, //显示提示组件
+                alertText: null, //提示的内容
 		    }
 	  	},
 	  	mounted(){
@@ -183,6 +194,13 @@
 		    }
 		},
 	  	methods:{
+	  		pop(msg){
+	  			this.showAlert = true
+                this.alertText = msg
+	  		},
+	  		closeTip(){
+                this.showAlert = false;
+            },
 	  		handler ({BMap, map}) {
 			    this.getLocation()
 		    },

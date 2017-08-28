@@ -13,9 +13,9 @@
 					<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click.stop="toggle(item)">
 				        <svg class="icon icon-ok"></svg>
 				    </span>
-					<p><img src="../tou1@2x.png" ><span>联系人</span></p>
+					<p><img :src="item.icon" ><span>{{item.nickName}}</span></p>
 				</li>
-				<li><p>2017/05/21</p></li>
+				<li><p>{{item.crtDate}}</p></li>
 			</ul>
 		</div>
 		<div class="end">
@@ -90,15 +90,19 @@
             	this.cale()
             },
             assess(way){
-				this.$http.get('/api/teamHub/private/approveVo',{
-					params:{
-						status:way,
-						voIds:this.id
-					}
+            	let id = this.id.slice(0,-1)
+				this.$http.post('/api/teamHub/private/approveVo',{
+					status:way,
+					voIds:id
+				},{
+					emulateJSON:true
 				}).then( response => {
 					let res = response.data
 					if(res.result == 0){
 						this.$message.success("审核成功")
+						setInterval(()=>{
+							this.$router.go(0)
+						},500)
 					}
 				})
 			}
@@ -164,7 +168,7 @@
 	vertical-align:middle;
 	width:2.8rem;
 	height:2.8rem;
-
+	border-radius: 50%;
 }
 .header2 ul li p span{
 	margin-left:0.2rem;

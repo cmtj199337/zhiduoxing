@@ -1,7 +1,8 @@
 ﻿<template>
 	<div class="teamRegistration">
 		<div v-show="wrap">
-			<headerTip message="团队注册" goBack="true"></headerTip>
+			<headerTip v-if="$route.query.from == 0" message="团队注册" goBack="true"></headerTip>
+			<headerTip v-else message="创建团队" goBack="true"></headerTip>
 	        <div class="header">
 	       		<span class="ire" style="z-index: 1">
 					<img src="./t3.png">
