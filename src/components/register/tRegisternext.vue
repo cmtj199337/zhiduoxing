@@ -1,6 +1,6 @@
 <template>
 	<div class="tRegisternext">
-		<headerTip message="团队注册" goBack="true"></headerTip>
+		<headerTip message="完善信息" goBack="true"></headerTip>
         <div class="header">
        		<span class="ire" style="z-index:1;">
 				<img src="./t3.png">

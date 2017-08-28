@@ -55,7 +55,7 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle()">
-					<span class="good">服务类别<span v-for="item in listSelected">{{item}}</span><img src="./right.png"></span>
+					<span class="good">服务类别<!--span v-for="item in listSelected">{{item}}</span--><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="usertext right">
@@ -96,7 +96,7 @@
 	        10-500字
 	        </div>
 	        <div class="eee">
-	        	<input type="button" name=""  class="next" value="下一步" @click="formData()">
+	        	<input type="button" class="next" value="下一步" @click="formData()">
 	        </div>
         </div>
 		<!-- 服务类型 -->
@@ -132,7 +132,7 @@
 	                <div class="weui-search-bar__box">
 	                    <i class="weui-icon-search"></i>
 	                    <input type="search" v-model="contant" @blur="getContactTeam(contant,teamInfo.teamKind)" class="sousuokuang" id="searchInput" placeholder="搜索" required="">
-	                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+	                    <a href="javascript:;" class="weui-icon-clear" id="searchClear"></a>
 	                </div>
 	                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
 	                    <i class="weui-icon-search"></i>
@@ -160,7 +160,6 @@
 <script>
     import headerTip from '../../components/common/header/header.vue'
     import TimerBtn from '../common/tools/countdown.vue'
-    // import UploadImg from '../../components/common/tools/uploadImg.vue'
     import MyArea from '../../components/common/tools/area.vue'
     export default{
 
@@ -198,7 +197,7 @@
 		        teamclist:[],
 		        teamKlist:[],
 		        contactTeam:[],
-		        contant:''
+		        contant:'',
             }
         },
         mounted(){
@@ -356,23 +355,29 @@
      				if(res.result == 0){
      					this.$refs.timerbtn.stop();
      					this.$refs.timerbtn.setDisabled(true)
-     				}else{
-
      				}
      			})
 		    },
 		    formData(){
-		    	this.$http.post('/api/public/addTeam',this.teamInfo).then( response => {
-	  				let res = response.data
-	  				if(res.result == 0){
-	  					//将返回的teamId存入
-	  			// 		sessionStorage.setItem('teamId',res.data)
-						// this.$router.push('tregisternext')
-						this.$router.push({path:'tregisternext',query:{teamId:res.data}})
+		    	if(this.errors){
+	  				let arr = JSON.parse(JSON.stringify(this.errors)).errors
+	  				if(arr.length<1){
+	  					this.$message.error("请完善信息")
 	  				}else{
-
+	  					console.log(arr)
+	  					this.$message.success(arr[0].msg)
 	  				}
-	  			})
+	  			}else{
+		    		this.$http.post('/api/public/addTeam',this.teamInfo).then( response => {
+		  				let res = response.data
+		  				if(res.result == 0){
+							this.$router.push({path:'tregisternext',query:{teamId:res.data}})
+		  				}else{
+
+		  				}
+		  			})
+		  			this.$message.success('arr[0].msg')
+		    	}
 		    },
 	  	}
 

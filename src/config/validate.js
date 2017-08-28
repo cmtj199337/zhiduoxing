@@ -28,7 +28,7 @@ Validator.extend('regIdCard', {
       zh_CN:field => '输入正确的身份证号',
     },
     validate: value => {
-      return value.length == /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)
+      return value.length == 18 && /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)
     }
 });
 Validator.extend('isPassport', {

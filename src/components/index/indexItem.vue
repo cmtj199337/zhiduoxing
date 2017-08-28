@@ -286,7 +286,7 @@
 	.headerBar div span{
 		font-size:1.1rem;
 		display: inline-block;
-		width: 4rem;
+		width: 8rem;
 	}
 	.headerBar div{
 		width: 50%;

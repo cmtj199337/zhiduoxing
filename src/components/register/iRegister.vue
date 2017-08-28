@@ -6,7 +6,6 @@
 		<form method="post" v-show="wrap" enctype="multipart/form-data">
 			<div class="usertext userphoto" style="padding:0.8rem 0 0 0">
 				<a href="javascript:;" style="top:-0.5rem"><span>头像上传</span>
-					<!-- <upload-img v-model="picture"></upload-img> -->
 					<el-upload
 					  class="avatar-uploader"
 					  action="/api/public/upload"
@@ -17,12 +16,15 @@
 					  <i v-else class="avatar-uploader-icon">
 					  	<img src="./picture.png" alt="">
 					  </i>
-					</el-upload>
+					</el-upload> 
 				</a>
 			</div>
 			<div class="usertext">
 				<input type="tel" v-validate ="'required|mobile'" name="mobile" placeholder="请输入手机号" maxlength="11" v-model="userinfo.mobileNo" @blur="isRegister" />
 			</div>
+			<!-- <div class="usertext">
+				<input type="tel" v-validate ="'required|mobile'" name="mobile" placeholder="请输入手机号" maxlength="11" v-model="userinfo.mobileNo"/>
+			</div> -->
 			<div class="usertext">
 				<input type="number" @change="checkCode" v-model="code" placeholder="请输入验证码" maxlength="6" style="width:56%" />
 				<timer-btn ref="timerbtn" class="btn getcode" v-on:run="send()" :second="60"></timer-btn>
@@ -149,6 +151,9 @@
 	  		confirm() {
 	  			if(this.userinfo.headIcon == '' || this.userinfo.mobileNo == '' || this.userinfo.password == '' || this.userinfo.nickName == '' ||this.userinfo.goodAt == ''){
 	  				this.$message.error('请完善信息')
+	  			}else if(this.errors){
+	  				let arr = JSON.parse(JSON.stringify(this.errors)).errors
+	  				this.$message.error(arr[0].msg)
 	  			}else{
 	  				this.$http.post('/api/public/addVolunteer',this.userinfo).then(response => {
 		  				let res = response.data
@@ -242,7 +247,7 @@
 		        this.userinfo.headIcon = result
 		    },
 		    beforeAvatarUpload(file) {
-		        const isLt2M = file.size / 1024 / 1024 < 4;
+		        const isLt2M = file.size / 1024 / 1024 < 2;
 		        if (!isLt2M) {
 		          this.$message.error('上传头像图片大小不能超过 2MB!');
 		        }
@@ -255,7 +260,7 @@
 		    	}else{
 		    		this.$http.post('/api/public/checkMobileNo',{
 		    			mobileNo:this.userinfo.mobileNo,
-		    			userType:1
+		    			userType:0
 		    		},{
 		    			emulateJSON:true
 		    		}).then(response =>{
