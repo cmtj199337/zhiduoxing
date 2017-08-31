@@ -48,7 +48,7 @@
 <style scoped>
 .main2{
 	background:#F5F5F5;
-	padding: 0.6rem 0;
+	padding:0 0 0.6rem 0;
 	position:relative;
 }
 .main2 ul{
@@ -71,11 +71,12 @@
 	margin-bottom:0; 
 }
 .main2 ul li img{
-    width: 5rem;
-    height: 5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     position: absolute;
-    left: -2.5rem;
-    top: 5%;
+    left: -2.25rem;
+    border-radius: 50%;
+    top: 8%;
 }
 .main2 ul li .m1{
 	display:flex;
@@ -91,5 +92,10 @@
 .main2 ul li h3{
 	margin-bottom: 0.8rem;
 	margin-left:4rem;
+	font-weight: normal;
+	width: 75%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 </style>

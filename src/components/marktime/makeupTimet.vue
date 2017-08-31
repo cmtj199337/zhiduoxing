@@ -64,6 +64,10 @@
 	}
 </script>
 <style scoped>
+.makeupTimet{
+	background: #f5f5f5;
+	height: 100%;
+}
 .header{
 	padding:0.8rem 0;
 	display:flex;
@@ -77,11 +81,9 @@
 width:20%;
 
 }
-.main{
+.main{	
 	background: #F5F5F5;
 	padding:0.2rem 0;
-	height: 40rem;
-
 }
 .m1{
 	position:relative;
@@ -93,8 +95,7 @@ width:20%;
 	position:relative;
 }
 .m1 ul li h3{
-	margin-bottom: 0.8rem;
-	width:14rem;
+	margin-bottom: 1rem;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -112,11 +113,12 @@ width:20%;
 	color:rgb(70, 184, 183);
 }
 .m1 ul li .touxiang{
-	width:5rem;
-	height:5rem;
+	width:4.5rem;
+	height:4.5rem;
 	border-radius: 50%;
 	position:absolute;
-	left: -11%;
+	left: -2.25rem;
+	border-radius: 50%;
 	top:8%;
 }
 .m1 ul li p{

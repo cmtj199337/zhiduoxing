@@ -115,9 +115,11 @@
 				image:''
 			}
 		},
+		created(){
+			this.dataList.teamId = this.$route.query.teamId
+		},
 		mounted(){
 			this.getType();
-			this.teamId = this.$route.query.teamId
 		},
 		methods:{
 			checkForm(name,filed){
@@ -155,14 +157,24 @@
 		        return isLt2M;
 		    },
 		    submitInfo(){
-		    	this.$http.post('/api/public/completeTeam',
-		    		this.dataList
-		    	).then(response => {
-		    		let res = response.data
-		    		if(res.result == 0){
-		    			this.$router.push('login')
-		    		}
-		    	})
+		    	let arr = JSON.parse(JSON.stringify(this.errors)).errors
+		    	if(this.dataList.contactMobileNo == '' || this.dataList.teamId == '' || this.dataList.picture1 == '' || this.dataList.managerMobileNo == '' || this.dataList.managerIdNo == ''){
+		    		this.$message.error('请完善信息')
+		    	}else if(arr.length>0){
+		    		this.$message.error(arr[0].msg)
+		    	}else{
+		    		this.$http.post('/api/public/completeTeam',
+			    		this.dataList
+			    	).then(response => {
+			    		let res = response.data
+			    		if(res.result == 0){
+			    			this.$message.success('创建成功')
+			    			setTimeout(()=>{
+			    				this.$router.push('login')
+			    			},500)
+			    		}
+			    	})
+		    	}
 		    }
 		}
 	}

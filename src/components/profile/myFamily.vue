@@ -1,20 +1,20 @@
 <template>
   <div class="myFamily">
-   <headerTip message="我的家庭" goBack="true" style="background: #FFFFFF"></headerTip>
-   <span class="h" @click="toAddress({path: '/addFamily'})">添加成员</span>
-   <div class="header">
-	<ul>
-	<li>
-	<span class="left">
-	<p ><b>{{list.familyNum}}</b></p> 
-	<p >家庭成员（人）</p>
-	</span>
-	<span>
-	<p><b>{{list.serverTime}}</b></p> 
-	<p>志愿总时长（小时）</p>
-	</span>
-	</li>
-	</ul>
+  	<headerTip message="我的家庭" goBack="true" style="background: #FFFFFF"></headerTip>
+  	<span class="h" @click="toAddress({path: '/addFamily'})">添加成员</span>
+   	<div class="header">
+		<ul>
+			<li>
+				<span class="left">
+					<p ><b>{{list.familyNum}}</b></p> 
+					<p >家庭成员（人）</p>
+				</span>
+				<span>
+					<p><b>{{list.serverTime}}</b></p> 
+					<p>志愿总时长（小时）</p>
+				</span>
+			</li>
+		</ul>
 	</div>
 	<div class="main">
 	<ul>
@@ -152,6 +152,7 @@
 	top:0;
 	bottom: 0;
 	margin: auto;
+	border-radius: 50%;
 }
 .main ul li p .bj{
 	color:#FF9E14;

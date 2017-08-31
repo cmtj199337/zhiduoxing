@@ -1,9 +1,9 @@
 <template>
 	<div class="platformIntroduction">
-		
-		<div class="title">
+		<headerTip message="志多星平台介绍" goBack="true"></headerTip>
+		<!-- <div class="title">
 		<p style="font-size:1rem;">志多星平台介绍</p>
-		</div>
+		</div> -->
 		<div class="text">
 		<img src="./image.png">
 		<p v-html="list"></p>

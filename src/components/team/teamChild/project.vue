@@ -19,6 +19,7 @@
 				</ul>
 			</router-link>
 		</span>
+		<p style="text-align:center;margin-top:4%" v-show="list.length < 1">没有更多了</p>
 	</div>
 </template>
  <script>

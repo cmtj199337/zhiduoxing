@@ -54,7 +54,7 @@
 	       		 <textarea name="" class="jianjie"></textarea>
 	        </div>
 	        <div class="end">
-	        不超过100字
+	        10-500字
 	        </div>
 	        <div class="eee">
         	<input type="button" name=""  class="next" value="确定">
@@ -121,6 +121,9 @@
 </script>
 <style scoped>
 @import '../../../../styles/usertext.css';
+.modifiteam{
+	background: #fff;
+}
 .header1{
     border-bottom: 1px rgba(238, 238, 244, 0.5) solid;
 }
@@ -182,6 +185,7 @@
 	margin-left: 67%;
 	padding: 0.5rem;
 	color:#ccc;
+	text-align: right;
 	}
 .eee{
 	padding: 2rem 0;

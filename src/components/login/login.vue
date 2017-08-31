@@ -54,6 +54,11 @@
 	  			return this.$store.state.user
 	  		}
 	  	},
+	  	created(){
+	  		this.$nextTick(function(){
+	  			this.name = sessionStorage.getItem('user')
+	  		})
+	  	},
 	  	methods:{
 	  		chenkUser(){
 	  			if(this.errors.has('userName')){
@@ -81,14 +86,9 @@
 	  					localStorage.setItem('username',verify.userName)
 	  					localStorage.setItem('usertype',verify.userType)
 	  					
-	  					if(verify.userType == 0){
-	  						this.$store.commit('isLogin',res.data)
-                        	this.$router.push({ path: 'index' })
-	  					}else if(verify.userType == 1){
-	  						this.$store.commit('isLogin',res.data)
-                        	this.$router.push({ path: 'teamIndex' })
-	  					}
-
+  						this.$store.commit('isLogin',res.data)
+                    	this.$router.push({ path: 'index' })
+	  				
 	  				}else{
 	  					this.showAlert = true
                         this.alertText = '用户名或密码错误'

@@ -89,11 +89,9 @@ import{ Swipe,SwipeItem}from'c-swipe';
 				})
 			},
 			assess(way){
-				this.$http.get('/api/private/updateTeamStatus',{
-					params:{
-						status:way,
-						teamIds:this.info.teamId
-					}
+				this.$http.post('/api/private/updateTeamStatus',{
+					status:way,
+					teamIds:this.info.teamId
 				}).then( response => {
 					let res = response.data
 					if(res.result == 0){
@@ -186,5 +184,6 @@ span{
 }
 .teamIntroduction{
 	padding-bottom:20%;
+	background: #fff;
 }
 </style>

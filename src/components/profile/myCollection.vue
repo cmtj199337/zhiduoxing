@@ -55,6 +55,7 @@ span{
 }
 .myCollection{
 	height:100%;
+	background:#f5f5f5;
 }
 .header{
 	padding:0;

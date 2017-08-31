@@ -170,7 +170,7 @@
 	background:white;
 	padding:0.9rem 0;
 	border-radius:7px;
-	margin:0rem 0.5rem 0 2.4rem;
+	margin:0rem 0.5rem 0 3rem;
 	position:relative;
 
 }
@@ -256,7 +256,7 @@
 	width:2.8rem;
 	height:2.8rem;
 	margin-left: 0.4rem;
-
+	border-radius: 50%;
 }
 .header2 ul li .tg{
 	width:1.3rem;

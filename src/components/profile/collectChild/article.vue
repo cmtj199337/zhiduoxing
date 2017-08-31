@@ -1,6 +1,6 @@
 <template>
 	<div class="article">
-		<ul>
+		<!-- <ul>
 			<li v-for="item in articleList">
 				<span style="width:40%"><img src="../tup2.png"></span>
 				<span>
@@ -17,7 +17,8 @@
 					<p>四川赶集周处青藏高原一处发现了真后悔的的。。。</p>
 				</span>
 			</li>	
-		</ul>
+		</ul> -->
+		<p style="text-align:center;margin-top:30%;">文章收藏建设中，敬请期待</p>
 	</div>
 </template>
 <script>
@@ -29,7 +30,7 @@
 			}
 		},
 		mounted(){
-			this.getList();
+			// this.getList();
 		},
 		methods:{
 			getList(){

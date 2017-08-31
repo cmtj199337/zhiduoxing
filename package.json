@@ -25,6 +25,7 @@
     "vue-qrcode": "xkeshi/vue-qrcode",
     "vue-router": "^2.3.1",
     "vuex": "^2.3.1",
+    "weixin-js-sdk": "^1.2.0",
     "weui": "^1.1.2"
   },
   "devDependencies": {

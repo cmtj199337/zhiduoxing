@@ -8,7 +8,7 @@
 	<div class="dt">
 	<div class="t"><img src="./name.png" alt=""><input type="text" name="" placeholder="  请输入姓名"  v-model="userInfo.name"></div>
 	<div class="t"><img src="./xing.png" alt=""><input type="text" name="" placeholder="  请输入邮箱"  v-model="userInfo.eMail"></div>
-	<div class="t"><img src="./haoma.png" alt="" style="width:4.5%;"><input type="text" name="" placeholder="  请输入手机号"  v-model="userInfo.mobileNo"></div>
+	<div class="t"><img src="./haoma.png" alt="" style="width:4.5%;"><input type="text" name="" placeholder="  请输入手机号" maxlength="11" v-model="userInfo.mobileNo"></div>
 	<div class="t"><img src="./jigou.png" alt=""><input type="text" name="" placeholder="  请输入您的机构" v-model="userInfo.orgName">
 	</div>
 	</div>

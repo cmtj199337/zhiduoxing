@@ -31,11 +31,11 @@
 							</div>
 						</div>
 					</li>
-					<infinite-loading :on-infinite="getProject" ref="infiniteLoading">
-						<i slot="no-more">
+					<!-- <infinite-loading :on-infinite="getProject" ref="infiniteLoading">
+						<span slot="no-more">
 							没有更多了...
-						</i>
-					</infinite-loading>
+						</span>
+					</infinite-loading> -->
 				</ul>
 			</div>
 		</div>	
@@ -52,8 +52,11 @@
 				list:[]
 			}
 		},
-		components:{
-			InfiniteLoading
+		// components:{
+		// 	InfiniteLoading
+		// },
+		mounted(){
+			this.getProject()
 		},
 		methods:{
 			toAddress(path){
@@ -63,15 +66,14 @@
             	this.$http.get('/api/private/getATProject').then( response => {
             		let res = response.data
             		if(res.result == 0){
-						// this.info = this.info.concat(res.data)
 						this.info = res.data
 						this.list = res.data.wxatProjectDetail
-						if(res.data.length > 0){
-		    				this.list = this.list.concat(res.data);
-		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-		    			}else{
-		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-		    			}
+						// if(res.data.length > 0){
+		    // 				this.list = this.list.concat(res.data);
+		    // 				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+		    // 			}else{
+		    // 				this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+		    // 			}
             		}
             	})
             }

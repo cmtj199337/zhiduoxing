@@ -78,14 +78,23 @@
 		<div class="usertextend">
 			<textarea class="jianjie" rows="5">{{data.projectIntro}}</textarea>
 		</div>
-		<footer class="foot">
-			<span class="bm1" v-if="data.collectFlg == 1" @click="addCollect(0,'取消收藏成功')"><img src="../shoucang.png">取消收藏</span>
-			<span class="bm1" v-else-if="data.collectFlg == 0" @click="addCollect(1,'收藏成功')"><img src="/static/sc333.png">收藏</span>
+		<footer class="foot" v-if="userType == 0">
+			<span class="bm1" v-if="data.collectFlg == 1" @click="addCollect('delCollect','取消收藏成功')"><img src="../shoucang.png">取消收藏</span>
+			<span class="bm1" v-else-if="data.collectFlg == 0" @click="addCollect('addCollect','收藏成功')"><img src="/static/sc333.png">收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
-			<span class="bm3" v-if="data.joinFlg == 1"><p @click="chooseFamily()" class="bm">我要报名</p></span>
-			<span class="bmout" v-else-if="data.joinFlg == 0"><p @click="chooseFamily()" class="bm">我要退出</p></span>
-			
-
+			<!-- 项目状态(0:审核中,1:审核通过,2:审核未通过,3:未开始,4:招募,5:进行,6:结束) -->
+			<span class="bmout" style="#ccc" v-if="data.projectStatus <= 3"><p class="bm">未开始</p></span>
+			<span class="bm3" v-else-if="data.projectStatus == 4 && data.honNum == data.yotNum"><p class="bm">报名已满</p></span>
+			<span class="bmout" v-else-if="data.projectStatus == 4 && data.honNum < data.yotNum && data.joinFlg == 0"><p @click="chooseFamily()" class="bm">我要退出</p></span>
+			<span class="bm3" v-else-if="data.projectStatus == 4 && data.honNum < data.yotNum && data.joinFlg == 1"><p @click="chooseFamily()" class="bm">我要报名</p></span>
+			<!-- 签到（灰） 签到 签退 -->
+			<!-- signInFlg 0:已签,1:未签 -->
+			<!-- rangeFlg 0:在打卡范围,1:不再打卡范围 -->
+			<span class="bmout" v-else-if="data.projectStatus == 5 && data.signInFlg == 1 && data.rangeFlg == 1"><p class="bm">签到</p></span>
+			<span class="bmout" style="#ccc" v-else-if="data.projectStatus == 5 && data.signInFlg == 1 && data.rangeFlg == 0"><p class="bm">签到</p></span>
+			<span class="bmout" v-else-if="data.projectStatus == 5 && data.signInFlg == 0 && data.rangeFlg == 1"><p class="bm">签退</p></span>
+			<span class="bmout" style="#ccc" v-else-if="data.projectStatus == 5 && data.signInFlg == 0 && data.rangeFlg == 0"><p class="bm">签退</p></span>
+			<span class="bmout" v-else-if="data.projectStatus == 6"><p class="bm">已结束</p></span>
 		</footer>
 	</div>	
 </template>
@@ -102,19 +111,34 @@
 				isShow:false,
 				paid:false,
 				regular:true, 		//规律不规律时间
+				userType:''
 		    }
+	  	},
+	  	created(){
+	  		this.userType = localStorage.getItem('usertype')
 	  	},
 	  	mounted(){
 	  		this.$nextTick(function(){
 	  			this.showView()
 	  		})
-	  		
 	  	},
 	  	computed:{
 	  		status(){
-	  			if(this.data.projectStatus == 6){
-	  				return this.data.projectStatus = '已结束'
-	  			}else{
+				if(this.data.projectStatus == 0) {
+					return '审核中'
+				} else if (this.data.projectStatus == 1) {
+					return '审核通过'
+				} else if (this.data.projectStatus == 2) {
+					return '审核未通过'
+				} else if (this.data.projectStatus == 3) {
+					return '未开始'
+				} else if (this.data.projectStatus == 4) {
+					return '招募中'
+				} else if (this.data.projectStatus == 5) {
+					return '进行中'
+				} else if (this.data.projectStatus == 6) {
+	  				return '已结束'
+	  			} else {
 	  				this.paid = false
 	  			}
 	  		}
@@ -125,7 +149,9 @@
 	  			this.$http.get('api/public/getProjectDetail',{
 					params:{
 					  	id:this.$route.query.projectId,
-					  	userId: userid
+					  	userId: userid,
+						punchLng: 1,
+						punchLat: 1,
 					}
 				  }).then(response =>{
 	  				let res = response.data
@@ -171,9 +197,9 @@
             		}
             	})
             },
-            addCollect(status,msg){
-            	this.$http.post('/api/private/addCollect',{
-            		collectType:status,
+            addCollect(oprateType,msg){
+            	this.$http.post('/api/private/'+oprateType,{
+            		collectType:1,
             		collectId:this.data.projectId
             	},{
             		emulateJSON:true
@@ -181,7 +207,7 @@
             		let res = response.data
             		if(res.result == 0){
             			this.$message.success(msg)
-            			setInterval(()=>{
+            			setTimeout(()=>{
             				this.$router.go(0)
             			},500)
             		}else{

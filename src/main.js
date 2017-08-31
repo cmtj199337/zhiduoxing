@@ -33,8 +33,10 @@ Vue.use(BaiduMap, {
   ak: 'ir1SlQ9SPtO7x7j0Ha4cj1xTwNasLhAB'
 })
 
-
 import './config/validate.js'
+
+// import wx from 'weixin-js-sdk'
+// Vue.use(wx)
 
 // import Easemob from 'easemob-websdk'
 // // Vue.use(Easemob)
@@ -66,23 +68,21 @@ router.afterEach((to, from, next) => {
 });
 // 全局导航钩子
 router.beforeEach((to, from, next) => {
+    let isLogin = localStorage.access_token
       // 判断该路由是否需要登录权限
-      if (to.meta.requireAuth) {
-        // 通过vuex state获取当前的token是否存在
-        // console.log(isEmptyObject(store.state.user))
-        if(!isEmptyObject(store.state.user)) {   
-            next();
-        }
-        else {
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        //判断用户是否登录
+        if (!isLogin) {
             next({
                 path: '/index',
-                query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+                query: { redirect: to.fullPath }
             })
+        } else {
+            next()
         }
-    }
-    else {
-      next()
-    }
+      } else {
+          next()
+      }
 })
 
 function isEmptyObject(obj) {
@@ -96,6 +96,29 @@ new Vue({
   el: '#app',
   router,
   store,
+  // mounted(){
+  //   const wx = require('weixin-js-sdk')
+  //   // 配置微信 config信息
+  //   let data = {
+  //     noncestr: '',
+  //     timestamp: +new Date(),
+  //     url: window.location.href.split('#')[0],
+  //     jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
+  //   }
+    
+  //   this.$http.post('/api/private/getWeixinSet').then((response) => {
+  //     let res = response.data
+  //     // alert(res)
+  //     wx.config({
+  //       debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+  //       appId: 'wx5111d3a733bc84f7', // 必填，公众号的唯一标识
+  //       timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+  //       nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+  //       signature: res.data.signature, // 必填，签名，见附录1
+  //       jsApiList: data.jsApiList // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+  //     })
+  //   })
+  // },
   render: h => h(App)
 })
 

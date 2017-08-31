@@ -8,7 +8,6 @@
 				</li>
 			</ul>
 		</div>
-		<div class="kong"></div>
 		<component :is='currentView' keep-alive></component>
 	</div>
 </template>
@@ -46,6 +45,10 @@
 	}
 </script>
 <style scoped>
+.team{
+	height: 100%;
+	background: #f5f5f5;
+}
 span{
 	font-size:0.85rem;
 	}

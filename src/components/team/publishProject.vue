@@ -33,12 +33,11 @@
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle()">
-					<span class="good">服务类别<span v-for="item in caleCh">{{item}}</span><img src="./right.png"></span>
+					<span class="good">服务类别<!-- <span v-for="item in caleCh">{{item}}</span> --><img src="./right.png"></span>
 				</a>
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;"><span>服务对象</span>
-					<!-- <span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span> -->
 					<select class="range" v-model="projectInfo.serverObject">
 						<option v-for="obj in serObj" :value="obj.key">{{obj.value}}</option>
 					</select>
@@ -74,7 +73,7 @@
 				<!-- </router-link> -->
 			</div>
 			<div class="usertext">
-	        	<input type="text" :value="projectInfo.planRecruitNum" placeholder="计划招募人数"  v-model="projectInfo.planRecruitNum">
+	        	<input style="width:80%;" type="number" :value="projectInfo.planRecruitNum" placeholder="计划招募人数"  v-model="projectInfo.planRecruitNum"><i style="width:20%;color:#ccc;">(单位：人)</i>
 	        </div>
 			<div class="kong">
 			</div>
@@ -90,6 +89,7 @@
 				<a href="javascript:;"><span>项目打卡区域</span>
 					<!-- <span style="margin-left:0.4rem;color:#858585;"> 一千米<img src="./you@2x.png"></span> -->
 					<select class="range" style="width:20%;padding-left:10%;margin:0" v-model="projectInfo.punchRange">
+						<option value="0.5">0.5</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -139,6 +139,7 @@
 				  <i v-else class="el-icon-plus avatar-bg"></i>
 				</el-upload>
 				<el-upload
+				  style="padding-bottom:1rem"
 				  class="bg"
 				  action="/api/public/upload"
 				  :show-file-list="false"
@@ -368,9 +369,9 @@
 		    			let res = response.data
 		    			if(res.result == 0){
 		    				this.$message.success('创建成功')
-		    				// setInterval(()=>{
-		    				// 	this.$router.push()
-		    				// })
+		    				setTimeout(()=>{
+		    					this.$router.push('/teamcenter')
+		    				},500)
 		    			}else{
 		    				this.$message.error('请完善信息')
 		    			}

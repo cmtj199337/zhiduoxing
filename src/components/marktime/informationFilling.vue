@@ -95,10 +95,10 @@
 		methods:{
 			toggle(index){
 				this.isCur = index
-				if(this.isCur == 0){
-					this.time = this.time
-				}else if(this.isCur == 1){
+				if(this.isCur == 1){
 					this.time = -this.time
+				}else if(this.isCur == 0){
+					this.time = Math.abs(this.time);
 				}
 			},
 			volutorInfo(){
@@ -117,7 +117,7 @@
 						let res = response.data
 						if(res.result == 0){
 							this.$message.success("提交成功")
-							setInterval(()=>{
+							setTimeout(()=>{
 								//补录记录
 								this.$router.push('makeupRecord')
 							},500)
@@ -150,17 +150,17 @@
 	background:white;
 	padding:0.8rem 0;
 	border-radius:7px;
-	margin:0rem 0.5rem 0 2.4rem;
+	margin:0rem 0.5rem 0 3rem;
 	position:relative;
 
 }
 .header ul li .touxiang{
-	width:5rem;
-	height:5rem;
+	width:4.5rem;
+	height:4.5rem;
 	border-radius: 50%;
 	position:absolute;
 	left: -11%;
-	top:7%;
+	top:10%;
 }
 .header ul li .m11{
 	display:flex;

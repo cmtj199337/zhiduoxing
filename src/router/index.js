@@ -37,11 +37,8 @@ const router = new Router({
 		},
 		{
 			path: '/main',
-			meta:{
-				//添加该字段，表示进入这个路由是需要登录的
-				requireAuth: true,
-			},
-			component:require('../components/main.vue')
+			component:require('../components/main.vue'),
+			meta: { requiresAuth: true }
 		},
 		//个人注册
 		{
@@ -80,7 +77,7 @@ const router = new Router({
 		},
 		{
 			path: '/teamIndex',
-			component:require('../components/index/indexItem.vue')
+			component:require('../components/index/indexItem.vue'),
 		},
 		//签到打卡
 		{
@@ -337,6 +334,11 @@ const router = new Router({
 		{
 			path: '/personalData',
 			component:require('../components/team/personalData.vue')
+		},
+		//个人资料-编辑
+		{
+			path: '/personal',
+			component:require('../components/team/personal.vue')
 		},
 		//本团队管理
 		{

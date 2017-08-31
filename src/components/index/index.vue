@@ -1,7 +1,7 @@
 <template>
 	<div class="index">
 		<div class="headerBar">
-			<div class="number"><img src="./logo.png"><span>5000人</span></div>
+			<div class="number"><img src="./logo.png"><span>{{totle}}人</span></div>
 			<div class="denglu">
 				<span v-if="userName">{{userName}}</span>
 				<span v-else @click="toAddress({path: '/login'})">登录</span>
@@ -43,7 +43,15 @@
 					</a>
 				</li>
 				<li>
-					<router-link to="makeupTime">
+					<router-link to="makeupTime" v-if="userType == 0">
+						<img src="./6.png" alt="">
+						<span>补录时长</span>
+					</router-link>
+					<router-link to="makeupTimet" v-else-if="userType == 1">
+						<img src="./6.png" alt="">
+						<span>补录时长</span>
+					</router-link>
+					<router-link to="makeupTime" v-else>
 						<img src="./6.png" alt="">
 						<span>补录时长</span>
 					</router-link>
@@ -133,7 +141,33 @@
 				</li>
 			</ul>
 		</div>
-		<footer class="foot">
+		<!-- 个人中心 -->
+		<footer class="foot" v-if="userType == 0">
+	        <section class="check">
+	            <img src="/static/footicon/shouye2.png">
+	            <p>首页</p>
+	        </section>
+	        <section @click="toAddress({path: '/scan'})">
+	            <img src="/static/footicon/qiandaodaka1.png">
+	            <p>签到打卡</p>
+	        </section>
+	        <section @click="toAddress({path: '/profile'})">
+	            <img src="/static/footicon/geren1.png">
+	            <p>个人中心</p>
+	        </section>
+	    </footer>
+	    <!-- 团队中心 -->
+	    <footer class="fooot" v-else-if="userType == 1">
+	        <section class="check">
+	            <img src="/static/footicon/shouye2.png">
+	            <p>首页</p>
+	        </section>
+	        <section @click="toAddress({path: '/teamcenter'})">
+	            <img src="/static/footicon/team02.png">
+	            <p>团队中心</p>
+	        </section>
+	    </footer>
+	    <footer class="foot" v-else>
 	        <section class="check">
 	            <img src="/static/footicon/shouye2.png">
 	            <p>首页</p>
@@ -181,11 +215,14 @@
 		    	lnglat:'',
 		    	showAlert: false, //显示提示组件
                 alertText: null, //提示的内容
+                totle:'',
+                userType:''
 		    }
 	  	},
 	  	mounted(){
 	  		this.userName = localStorage.getItem('username')
-	  		// this.showList()
+	  		this.userType = localStorage.getItem('usertype')
+	  		this.showList()
 	  	},
 	  	computed:{
 		    filtIcon() {
@@ -220,6 +257,7 @@
 	  					this.iconList = data.menu
 	  					this.shoplist = data.goods
 	  					this.article = data.strategy
+	  					this.totle = data.volunteerNum
 
 	  					this.isLoading = false
 	  				}
@@ -512,6 +550,27 @@
     }
     .foot section img{
         width: 25%;
+        margin: 0 auto;
+    }
+    .fooot{
+        width: 100%;
+        height: 2.5rem;
+        max-width: 720px;
+        padding: 0.3rem 0;
+        position: fixed;
+        bottom: 0;
+        background: #fff;
+        box-shadow: 0px 5px 10px #000;
+        z-index: 10;
+    }
+    .fooot section{
+        width: 50%;
+        text-align: center;
+        color: #cbcbcb;
+        float: left;
+    }
+    .fooot section img{
+        width: 18%;
         margin: 0 auto;
     }
     .check{

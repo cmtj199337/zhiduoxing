@@ -85,9 +85,6 @@
 				area:''
 			}
 		},
-		mounted(){
-			
-		},
 		methods:{
 			toAddress(path){
 			    this.$router.push(path)
@@ -110,7 +107,7 @@
 		    },
 		    onInfinite(){
 		    	let pages = Math.ceil(this.teamList.length/10)+1;
-		    	console.log(this.condition)
+		    	// console.log(this.condition)
 		    	this.$http.post('/api/public/getTeamList?nowPage='+pages,{
 		    		province:0,
 		    		serverType:this.serverType,
@@ -218,9 +215,14 @@
 	color: #43B7B6;
 }
 .mm ul li h3{
+	width: 75%;
 	height: 1.35rem;
 	margin-bottom: 0.8rem;
 	margin-left:4rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-weight: normal;
 }
 .active{
 	color:#43B7B5;

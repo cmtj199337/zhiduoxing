@@ -2,7 +2,7 @@
 <template>
 	<div class="insurancePolicy">
 		<headerTip message="我的保单" goBack="true"></headerTip>
-		<div class="header">
+		<!-- <div class="header">
 			<ul>
 				<li v-for="(item,index) in tabs">
 					<span :class="{active: index == iscur }" @click="toggle(item.view,index)">{{item.type}}</span>
@@ -10,8 +10,9 @@
 			</ul>
 		</div>
 		<div class="kong"></div>
-		<component :is='currentView' keep-alive></component>
-		</div>
+		<component :is='currentView' keep-alive></component> -->
+		<p style="text-align:center;margin-top:30%;">模块建设中，敬请期待</p>
+	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'

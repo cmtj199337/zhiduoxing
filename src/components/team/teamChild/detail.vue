@@ -45,11 +45,17 @@
 		<div class="touxiang">
 			<img :src="item.volunteerIcon" v-for="item in list.wXTeamVolunteerList">
 		</div>
-		<div class="kong2">
+		<!--<div class="kong2">
 		</div>
-		<footer class="foot">
-			<span class="bm1" v-if="list.collectFlg == 0" @click="addCollect()"><img src="/static/sc333.png">收藏</span>
-			<span class="bm1" v-else-if="list.collectFlg == 1" @click="cancelCollect()"><img src="../shoucang.png">取消收藏</span>
+	 	<div class="header4">
+			<h4 class="texttitle"><span><img src="../jianjie.png" alt=""></span>团队简介</h4>
+		</div>
+		<div class="usertextend">
+			<textarea class="jianjie" rows="5"></textarea>
+		</div> -->
+		<footer v-if="userType == 0" class="foot">
+			<span class="bm1" v-if="list.collectFlg == 1" @click="addCollect('delCollect','取消收藏成功')"><img src="../shoucang.png">取消收藏</span>
+			<span class="bm1" v-else-if="list.collectFlg == 0" @click="addCollect('addCollect','收藏成功')"><img src="/static/sc333.png">收藏</span>
 			<span class="bm2"><img src="../fenxiang.png">分享</span>
 			<span class="bm3" v-if="list.joinFlg == 1" @click="joinTeam()"><p class="bm">我要加入</p></span>
 			<span class="bm3 disable" v-else-if="list.joinFlg == 0"><p class="bm">我要退出</p></span>
@@ -57,6 +63,7 @@
 	</div>
 </template>
 <script>
+	import wx from 'weixin-js-sdk'
 	export default{
 
 		name:'detail',
@@ -66,8 +73,12 @@
 		data () {
 		    return {
 		    	list:[],
-		    	status:''	    
+		    	status:'',
+		    	userType:''	    
 		    }
+	  	},
+	  	created(){
+	  		this.userType = localStorage.getItem('usertype')
 	  	},
 	  	mounted(){
 	  		this.getInfo()
@@ -87,23 +98,30 @@
 	  		},
 	  		joinTeam(){
 	  			let user = localStorage.getItem('userId')
-	  			this.$http.post('/api/private/joinTeam',{
-	  				teamId:this.list.teamId,
-	  				volunteerId:user,
-	  			},{
-	  				emulateJSON:true
-	  			}).then( response => {
-	  				let res = response.data
-	  				if(res.result == 0){
-	  					this.$message.success('团队管理员审核中...')
-	  					setInterval(()=>{
-	  						this.$router.go(0)
-	  					},500)
-	  				}
-	  			})
+	  			if(!user){
+	  				this.$message.error("您还没登录，请先登录")
+	  				setTimeout(()=>{
+	  					this.$router.push('login')
+	  				},500)
+	  			}else{
+	  				this.$http.post('/api/private/joinTeam',{
+		  				teamId:this.list.teamId,
+		  				volunteerId:user,
+		  			},{
+		  				emulateJSON:true
+		  			}).then( response => {
+		  				let res = response.data
+		  				if(res.result == 0){
+		  					this.$message.success('团队管理员审核中...')
+		  					setInterval(()=>{
+		  						this.$router.go(0)
+		  					},500)
+		  				}
+		  			})
+	  			}
 	  		},
-	  		addCollect(){
-	  			this.$http.post('/api/private/addCollect',{
+	  		addCollect(oprateType,msg){
+	  			this.$http.post('/api/private/'+oprateType,{
 	  				collectType:0,
 	  				collectId:this.list.teamId
 	  			},{
@@ -112,7 +130,7 @@
 	  				let res = response.data
 	  				if(res.result == 0){
 	  					this.$message.success('收藏成功')
-	  					setInterval(()=>{
+	  					setTimeout(()=>{
 	  						this.$router.go(0)
 	  					},1000)
 	  				}else{
@@ -120,26 +138,7 @@
 	  				}
 	  			})
 	  		},
-	  		cancelCollect(){
-	  			this.$http.post('/api/private/delCollect',{
-	  				collectType:0,
-	  				collectId:this.list.teamId
-	  			},{
-	  				emulateJSON:true
-	  			}).then( response => {
-	  				let res = response.data
-	  				if(res.result == 0){
-	  					this.message.success('取消收藏成功')
-	  					setInterval(()=>{
-	  						this.$router.go(0)
-	  					},1000)
-	  				}else{
-	  					this.$message.error('取消收藏失败')
-	  				}
-	  			})
-	  		}
 	  	}
-
 	}
 </script>
 <style scoped>
@@ -192,7 +191,8 @@ width:33%;
 
 }
 .touxiang img{
-	width:11%;
+	width:3rem;
+	height: 3rem;
 	display:inline;
 	vertical-align: middle;
 	margin-left:-1rem;
@@ -244,5 +244,22 @@ margin:0.3rem 0;
 	top:35%;
 	left:35%;
 	font-size:0.9rem;
+}
+.texttitle {
+    font-size: 1rem;
+    font-weight: normal;
+    margin:0rem 1rem;
+	padding:0.8rem 0; 
+	border-bottom:1px #dcdcdc solid;
+}
+.usertextend textarea{
+    border: none;
+    width: 94%;
+    padding: 3%;
+    font-size: .9rem;
+    font-family: Microsoft yahei;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    text-indent: 2em;
 }
 </style>

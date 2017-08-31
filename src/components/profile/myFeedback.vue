@@ -2,28 +2,29 @@
 	<div class="myFeedback">
 		<headerTip message="我的回馈" goBack="true"></headerTip>
 		<div class="kong"></div>
-		<div class="main">
-		<ul>
-			<li @click="toAddress({path: '/checkLogistics'})">
-				<span class="left"><img src="./a2.png" ></span>
-				<span class="right">
-				<p class="tou">志愿者短T</p>
-				<p class="date">兑换日期：2017/06/02 12:00</p>
-				<p class="ee"><span><img src="./xingbi.png"><b>300</b></span>
-				<span class="wuliu">查看物流</span></p>
-				</span>
-			</li>
-			<li @click="toAddress({path: '/checkLog'})">
-				<span class="left"><img src="./a1.png" ></span>
-				<span class="right">
-				<p class="tou">志愿者短T</p>
-				<p class="date">兑换日期：2017/06/02 12:00</p>
-				<p class="ee"><span><img src="./xingbi.png"><b>300</b></span>
-				<span class="shouhuo">已收货</span></p>
-				</span>
-			</li>
-		</ul>
-		</div>
+		<!-- <div class="main">
+			<ul>
+				<li @click="toAddress({path: '/checkLogistics'})">
+					<span class="left"><img src="./a2.png" ></span>
+					<span class="right">
+					<p class="tou">志愿者短T</p>
+					<p class="date">兑换日期：2017/06/02 12:00</p>
+					<p class="ee"><span><img src="./xingbi.png"><b>300</b></span>
+					<span class="wuliu">查看物流</span></p>
+					</span>
+				</li>
+				<li @click="toAddress({path: '/checkLog'})">
+					<span class="left"><img src="./a1.png" ></span>
+					<span class="right">
+					<p class="tou">志愿者短T</p>
+					<p class="date">兑换日期：2017/06/02 12:00</p>
+					<p class="ee"><span><img src="./xingbi.png"><b>300</b></span>
+					<span class="shouhuo">已收货</span></p>
+					</span>
+				</li>
+			</ul>
+		</div> -->
+		<p style="text-align:center;margin-top:30%">模块建设中，敬请期待</p>
 	</div>
 </template>
 <script>

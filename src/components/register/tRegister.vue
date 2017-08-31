@@ -35,10 +35,10 @@
 				</a>
 			</div>
 			<div class="usertext" style="border-top:1px solid #f5f5f5">
-	       		 <input type="text" name="teamName" v-validate="'required|max:20'" @blur="checkForm('teamName','请输入正确团队名称')" v-model="teamInfo.teamName" placeholder="请输入团队名称">
+	       		 <input type="text" name="teamName" v-validate="'required|max:20'" @blur="checkForm('teamName','请输入正确团队名称')" @change="checkTeamName" v-model="teamInfo.teamName" placeholder="请输入团队名称">
 	        </div>
 	        <div class="usertext">
-	       		 <input type="text" name="teamAccount" v-validate="'required'"  v-model="teamInfo.teamAccount" placeholder="请输入团队账号" @blur="checkForm('teamAccount','请输入正确团队账号')">
+	       		 <input type="text" name="teamAccount" v-validate="'required|min:6|max:20'"  v-model="teamInfo.teamAccount" @change="checkAccount" placeholder="请输入团队账号" @blur="checkForm('teamAccount','请输入正确团队账号')">
 	        </div>
 			<div class="usertext">
 				<input type="password" v-validate="'required'" v-model="teamInfo.password" name="password" style="width:100%" placeholder="请输入密码" /><br />
@@ -131,7 +131,8 @@
 	            <form class="weui-search-bar__form">
 	                <div class="weui-search-bar__box">
 	                    <i class="weui-icon-search"></i>
-	                    <input type="search" v-model="contant" @blur="getContactTeam(contant,teamInfo.teamKind)" class="sousuokuang" id="searchInput" placeholder="搜索" required="">
+	                    <!-- <input type="search" v-model="contant" @blur="getContactTeam(contant,teamInfo.teamKind)" class="sousuokuang" id="searchInput" placeholder="搜索" required=""> -->
+	                    <input type="search" v-model="contant" class="sousuokuang" id="searchInput" placeholder="搜索" required="">
 	                    <a href="javascript:;" class="weui-icon-clear" id="searchClear"></a>
 	                </div>
 	                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -206,6 +207,32 @@
         	})
         },
         methods:{
+        	checkAccount(){
+        		this.$http.post('/api/public/checkAccountNo',{
+        			accountNo:this.teamInfo.teamAccount
+        		},{
+        			emulateJSON:true
+        		}).then( response => {
+        			let res = response.data
+        			if(res.result != 0){
+        				this.$message.error("账号不可用，请重新输入")
+        				this.teamInfo.teamAccount = ''
+        			}
+        		})
+        	},
+        	checkTeamName(){
+        		this.$http.post('/api/public/checkTeamName',{
+        			teamName:this.teamInfo.teamName
+        		},{
+        			emulateJSON:true
+        		}).then( response => {
+        			let res = response.data
+        			if(res.result != 0){
+        				this.$message.error("团队名称不可用，请重新输入")
+        				this.teamInfo.teamName = ''
+        			}
+        		})
+        	},
         	checkForm(name,filed){
 	  			if(this.errors.has(name)){
 	  				this.$message.error(filed)
@@ -259,7 +286,7 @@
             	})
             	this.teamcatlist()
             	this.showteamKlist()
-				// this.getContactTeam()
+				this.getContactTeam()
             },
             teamcatlist(){
             	this.$http.get('/api/public/getCommonList',{
@@ -359,24 +386,17 @@
      			})
 		    },
 		    formData(){
-		    	if(this.errors){
-	  				let arr = JSON.parse(JSON.stringify(this.errors)).errors
-	  				if(arr.length<1){
-	  					this.$message.error("请完善信息")
-	  				}else{
-	  					console.log(arr)
-	  					this.$message.success(arr[0].msg)
-	  				}
+		    	let arr = JSON.parse(JSON.stringify(this.errors)).errors
+		    	if(arr.length>0){
+	  				this.$message.error(arr[0].msg)
 	  			}else{
 		    		this.$http.post('/api/public/addTeam',this.teamInfo).then( response => {
 		  				let res = response.data
 		  				if(res.result == 0){
+		  					sessionStorage.setItem('user',this.teamInfo.teamAccount)
 							this.$router.push({path:'tregisternext',query:{teamId:res.data}})
-		  				}else{
-
 		  				}
 		  			})
-		  			this.$message.success('arr[0].msg')
 		    	}
 		    },
 	  	}

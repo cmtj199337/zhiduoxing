@@ -89,7 +89,7 @@ p{
 	padding:0.2rem 0;
 }
 .header{
-	margin: 0.6rem 0.6rem 0.6rem 2rem;
+	margin: 0.6rem 0.6rem 0.6rem 3rem;
 	background:white;
 	position:relative;
 	border-radius:5px;
@@ -121,15 +121,16 @@ p{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	font-size: 1rem;
 }
 h1 {text-align:center;}
 .header img{
-	width:3.5rem;
-	height:3.5rem;
+	width:4.5rem;
+	height:4.5rem;
 	border-radius:50%; 
 	position:absolute;
-	top:11.5%; 
-	left:-2rem; 
+	top:8%; 
+	left:-2.25rem; 
 }
 .texts{
 	background: #FFFFFF;

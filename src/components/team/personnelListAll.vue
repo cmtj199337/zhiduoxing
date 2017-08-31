@@ -61,7 +61,6 @@
 }
 .personnelListAll{
 	background:white;
-	height:100%;
 }
 .header1 ul{
 	display: flex;
@@ -71,7 +70,6 @@
 	width:47%;
 	text-align:center;
 	padding:0.8rem 0;
-
 }
 .zz1{
 	display:flex;

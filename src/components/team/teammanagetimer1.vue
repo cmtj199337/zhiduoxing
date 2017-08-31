@@ -52,7 +52,6 @@
 <style scoped>
 .personnelListAll{
 	background:white;
-	height:100%;
 }
 .header1 ul{
 	display: flex;
@@ -97,7 +96,7 @@
 .header2 ul li img{
 	width:2.5rem;
 	height:2.5rem;
-
+	border-radius: 50%;
 }
 .header2 p{
 	line-height:2.5rem;

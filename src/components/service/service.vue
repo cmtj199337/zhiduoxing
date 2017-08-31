@@ -15,7 +15,8 @@
 			</div>
 			<div class="header2">
 				<ul>
-					<li @click="toAddress({path: '/detailsProblem'})">
+					<li @click="tips()">
+					<!-- <li @click="toAddress({path: '/detailsProblem'})"> -->
 						<img src="./a3.png" class="zhiyuan"><p>客服中心</p>
 					</li>
 					<li @click="toAddress({path: '/feedback'})">
@@ -24,24 +25,35 @@
 				</ul>
 			</div>
 		</div>
+		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 <script>
 	import headerTip from '../../components/common/header/header.vue'
+	import alertTip from '../../components/common/tools/alertTip.vue'
 	export default{
 
 		name:'allTeamChecked',
 		components:{
-	  		headerTip
+	  		headerTip,
+	  		alertTip
 	  	},
 		data(){
 			return {
-				
+				showAlert: false, //显示提示组件
+                alertText: null, //提示的内容
 			}
 		},
 		methods:{
 			toAddress(path){
                 this.$router.push(path)
+            },
+            closeTip(){
+                this.showAlert = false;
+            },
+            tips(){
+            	this.showAlert = true
+                this.alertText = '客服中心建设中，敬请期待'
             }
 		}
 	}

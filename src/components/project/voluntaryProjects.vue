@@ -38,7 +38,7 @@
 			</a>
 			</span>
 
-			<infinite-loading :on-infinite="projeckList(current)" ref="infiniteLoading">
+			<infinite-loading :on-infinite="projeckList" ref="infiniteLoading">
 				<i slot="no-more">
 					没有更多了...
 				</i>

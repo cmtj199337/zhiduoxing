@@ -26,7 +26,7 @@
 				<span class="item-check-btn list-btn" :class="{'check':item.checked}" @click="checkFlag(item)">
 					<svg class="icon icon-ok"></svg>
 				</span>
-				<img src="./toux.png" class="tx"><p>{{item.volunteerName}}</p></li>
+				<img :src="item.volunteerIcon" class="tx"><p>{{item.volunteerName}}</p></li>
 				<li>{{item.serverTime}}小时</li>
 				<li style="text-align:center;">补录时长</li>
 			</ul>
@@ -153,7 +153,7 @@
 	background:white;
 	padding:0.7rem 0;
 	border-radius:7px;
-	margin:0rem 0.5rem 0 2.4rem;
+	margin:0rem 0.5rem 0 3rem;
 	position:relative;
 
 }
@@ -170,12 +170,12 @@
 	margin-left:50%; 
 }
 .header ul li .touxiang{
-	width:5rem;
-	height:5rem;
+	width:4.5rem;
+	height:4.5rem;
 	border-radius: 50%;
 	position:absolute;
 	left: -11%;
-	top:5%;
+	top:10%;
 }
 
 
@@ -222,6 +222,7 @@
 .header3 ul li .tx{
 	width:2.5rem;
 	height:2.5rem;
+	border-radius: 50%;
 	margin-left: 0.4rem;
 	vertical-align: middle;
 

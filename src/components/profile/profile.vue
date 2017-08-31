@@ -48,7 +48,7 @@
 		<div class="main">
 			<section class="project">
 				<ul>
-					<li @click="toAddress({path: '/personalData'})">
+					<li @click="toAddress({path: '/personal'})">
 						<img class="icon" src="./gere.png">
 						<span>个人资料</span>
 						<img class="arrow" src="./you@2x.png">
@@ -196,6 +196,7 @@
 	}
 	.el-rate{
 		display: inline-block;
+		padding-top: 0.3rem;
 	}
 	.info2 ul li{
 		width:25%;

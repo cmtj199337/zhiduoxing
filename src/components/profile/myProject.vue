@@ -84,9 +84,6 @@
 		    		}
 		    	})
 		    },
-		    collect(){
-		    	alert("fsd")
-		    }
 		}
 	}
 </script>

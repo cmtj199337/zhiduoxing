@@ -1,6 +1,6 @@
 <template>
 	<div class="allTeamChecked">
-		<headerTip message="全部团队查看" goBack="true"></headerTip>
+		<headerTip message="全层级团队查看" goBack="true"></headerTip>
 		<div class="header"><img src="/static/bg02.png"></div>
 		<div class="main">
 			<div class="header1">
@@ -64,6 +64,10 @@
 	}
 </script>
 <style scoped>
+.allTeamChecked{
+	background: #f5f5f5;
+	height: 100%;
+}
 .main{
 	background:#f5f5f5;
 }

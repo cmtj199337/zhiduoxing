@@ -1,7 +1,7 @@
 <template>
 	<div class="index">
 		<div class="headerBar">
-			<div class="number"><img src="./logo.png"><span>5000人</span></div>
+			<div class="number"><img src="./logo.png"><span>{{totle}}人</span></div>
 			<div class="denglu">
 				<span v-if="userName">{{userName}}</span>
 				<span v-else @click="toAddress({path: '/login'})">登录</span>
@@ -176,11 +176,12 @@
 		    	userName:'',
 		    	showAlert: false, //显示提示组件
                 alertText: null, //提示的内容
+                totle:''
 		    }
 	  	},
 	  	mounted(){
 	  		this.userName = localStorage.getItem('username')
-	  		// this.showList()
+	  		this.showList()
 	  	},
 	  	computed:{
 		    filtIcon() {
@@ -212,6 +213,7 @@
 	  					this.iconList = data.menu
 	  					this.shoplist = data.goods
 	  					this.article = data.strategy
+	  					this.totle = data.volunteerNum
 
 	  					this.isLoading = false
 	  				}

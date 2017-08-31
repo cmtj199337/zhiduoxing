@@ -88,11 +88,9 @@
             	})
             },
             assess(way){
-				this.$http.get('/api/private/updateTeamStatus',{
-					params:{
-						status:way,
-						teamIds:this.teamId
-					}
+				this.$http.post('/api/private/updateTeamStatus',{
+					status:way,
+					teamIds:this.teamId
 				}).then( response => {
 					let res = response.data
 					if(res.result == 0){
@@ -108,7 +106,7 @@
 @import '../../../../styles/usertext.css';
 .main2{
 	background:#F5F5F5;
-	padding: 0.6rem 0;
+	padding:0 0 0.6rem 0;
 	position:relative;
 }
 .main2 ul{
@@ -131,12 +129,12 @@
 	margin-bottom:0; 
 }
 .main2 ul li img{
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     position: absolute;
-    /*left: -2.5rem;*/
-    left: 1.5rem;
-    top: 5%;
+    left: 2rem;
+    top: 13%;
+    border-radius: 50%;
 }
 .main2 ul li .m1{
 	display:flex;
@@ -152,6 +150,9 @@
 .main2 ul li h3{
 	margin-bottom: 0.8rem;
 	margin-left:7rem;
+	font-size: 1rem;
+	height: 1rem;
+	font-weight: normal;
 }
 .end{
 	width: 100%;

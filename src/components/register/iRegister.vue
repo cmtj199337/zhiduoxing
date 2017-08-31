@@ -12,7 +12,7 @@
 					  :show-file-list="false"
 					  :on-success="handleAvatarSuccess"
 					  :before-upload="beforeAvatarUpload">
-					  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+					  <img v-if="userinfo.headIcon" :src="userinfo.headIcon" class="avatar">
 					  <i v-else class="avatar-uploader-icon">
 					  	<img src="./picture.png" alt="">
 					  </i>
@@ -36,7 +36,7 @@
 				<input type="password" @blur="checkForm('pwdagain','两次输入密码不一致')" v-validate="'confirmed:password'" name="pwdagain" placeholder="请确认密码" />
 			</div>
 			<div class="usertext">
-				<input type="text" v-validate="'required|max:10'" @blur="checkForm('nickname','请输入正确昵称')" name="nickname" placeholder="请输入昵称" v-model="userinfo.nickName" />
+				<input type="text" v-validate="'required|max:10'" @blur="checkForm('nickname','请输入正确昵称')" name="nickname" @change="checkNickName" placeholder="请输入昵称" v-model="userinfo.nickName" />
 			</div>
 			<div class="usertext right">
 				<a href="javascript:;" @click="showToggle">
@@ -52,7 +52,9 @@
 					</span>
 				</span>
 				
-				<span>我已阅读并授权</span><router-link to="agreement">《志多星用户协议》</router-link>
+				<span>我已阅读并授权</span><!-- 
+				<router-link to="agreement"></router-link> -->
+				<a href="javascript:;" @click="scan">《志多星用户协议》</a>
 			</div>
 			<div class="sub">
 				<input v-if="items == true" type="button" value="确认提交" @click="confirm"/>
@@ -129,10 +131,15 @@
 	  			}
 	  		}
 	  	},
+	  	created(){
+	  		if(sessionStorage.data){
+  				this.userinfo = JSON.parse(sessionStorage.data)
+  			}
+	  	},
 	  	mounted(){
 	  		this.$nextTick(function(){
 	  			this.goodList()
-	  			this.$refs.timerbtn.setDisabled(true);
+	  			this.$refs.timerbtn.setDisabled(true)
 	  		})
 	  	},
 	  	methods:{
@@ -149,16 +156,20 @@
             	this.$router.push({ path: 'login' })
             },
 	  		confirm() {
-	  			if(this.userinfo.headIcon == '' || this.userinfo.mobileNo == '' || this.userinfo.password == '' || this.userinfo.nickName == '' ||this.userinfo.goodAt == ''){
+	  			let arr = JSON.parse(JSON.stringify(this.errors)).errors
+	  			if(this.userinfo.mobileNo == '' || this.userinfo.password == '' || this.userinfo.nickName == '' ||this.userinfo.goodAt == ''){
 	  				this.$message.error('请完善信息')
-	  			}else if(this.errors){
-	  				let arr = JSON.parse(JSON.stringify(this.errors)).errors
+	  			}else if(arr.length>0){
 	  				this.$message.error(arr[0].msg)
 	  			}else{
 	  				this.$http.post('/api/public/addVolunteer',this.userinfo).then(response => {
 		  				let res = response.data
 		  				if(res.result == 0){
-							this.$router.push('login')
+		  					this.$message.success("注册成功")
+		  					sessionStorage.setItem('user',this.userinfo.mobileNo)
+		  					setTimeout(()=>{
+		  						this.$router.push('login')
+		  					},500)
 		  				}
 		  			})
 	  			}
@@ -242,8 +253,7 @@
 	  		},
 	  		handleAvatarSuccess(res, file) {
 	  			let result = res.data
-		        this.imageUrl = URL.createObjectURL(file.raw);
-		        // this.imageUrl = result
+		        this.userinfo.headIcon = URL.createObjectURL(file.raw);
 		        this.userinfo.headIcon = result
 		    },
 		    beforeAvatarUpload(file) {
@@ -275,6 +285,23 @@
 		  				}
 		  			})
 		    	}
+	  		},
+	  		checkNickName(){
+	  			this.$http.post('/api/public/checkNickName',{
+	  				nickName:this.userinfo.nickName
+	  			},{
+	  				emulateJSON:true
+	  			}).then( response => {
+	  				let res = response.data
+	  				if(res.result != 0){
+	  					this.$message.error('该昵称被占用，不可注册')
+	  					this.userinfo.nickName = ''
+	  				}
+	  			})
+	  		},
+	  		scan(){
+	  			sessionStorage.setItem('data',JSON.stringify(this.userinfo))
+	  			this.$router.push('agreement')
 	  		}
 	  	}
 	}

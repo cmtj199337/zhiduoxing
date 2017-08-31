@@ -50,12 +50,12 @@
 			<ul>
 				<li @click="toAddress({path:'./juniorTeamManagement'})">
 					<img class="icon" src="./gl.png">
-					<span>下级团队管理</span>
+					<span>下一级团队管理</span>
 				</li>
 				<hr>
 				<li @click="toAddress({path: '/allTeam'})">
 					<img class="icon" src="./qb.png">
-					<span>全部团队查看</span>
+					<span>全层级团队查看</span>
 				</li>
 				<hr>
 				<li>

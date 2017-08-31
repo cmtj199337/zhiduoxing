@@ -5,7 +5,7 @@
 			<div class="header">
 				<ul>
 					<li>
-						<img src="./toux.png" class="touxiang">
+						<img :src="list.projectIcon" class="touxiang">
 						<div class="m11">
 							<div class="mm1">
 								<h3>{{list.projectName}}</h3>
@@ -88,16 +88,17 @@
 	background:white;
 	padding:0.8rem 0;
 	border-radius:7px;
-	margin:0rem 0.6rem 0 2.4rem;
+	margin:0rem 0.6rem 0 3rem;
 	position:relative;
 
 }
 .header ul li .touxiang{
 	width:4rem;
 	height:4rem;
+	border-radius: 50%;
 	position:absolute;
 	left: -11%;
-	top:8%;
+	top:13%;
 }
 .header ul li .m11{
 	display:flex;

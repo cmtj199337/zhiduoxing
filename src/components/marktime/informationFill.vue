@@ -89,7 +89,7 @@
 
 <style scoped>
 p{
-	font-size:0.9rem;
+	font-size:1rem;
 }
 .main{
 	background:#F5F5F5;
@@ -103,12 +103,12 @@ p{
 	padding:0.6rem 0;
 }
 .header img{
-	width:5.5rem;
-	height:5.5rem;
+	width:4.5rem;
+	height:4.5rem;
 	border-radius:50%;
 	position:absolute;
-	top:1.5%; 
-	left:-2.75rem; 
+	top:10%; 
+	left:-2.25rem; 
 }
 .header p .ac{
 	border:1px #46B8B7 solid;

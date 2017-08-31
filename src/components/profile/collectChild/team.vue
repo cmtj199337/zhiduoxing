@@ -2,46 +2,55 @@
 <div class="team">
 	<ul>
 		<li v-for="item in teamlist">
-			<img :src="item.teamIcon">
-			<p class="hd">{{item.teamName}}</p>
-			<p class="two">
-				<span class="s1"><b>{{item.serverDuration}}</b>小时</span>
-				<span class="s2"><b>{{item.teamMember}}</b>人</span>
-				<span class="s3">{{item.teamManager}}</span>
-			</p>
-			<p class="three">
-				<span>志愿总时长</span>
-				<span>团队人数</span>
-				<span>团队管理员</span>
-			</p>
+			<router-link :to="{path:'teamPresentation',query:{teamId:item.teamId}}">
+				<img :src="item.teamIcon">
+				<p class="hd">{{item.teamName}}</p>
+				<p class="two">
+					<span class="s1"><b>{{item.serverDuration}}</b>小时</span>
+					<span class="s2"><b>{{item.teamMember}}</b>人</span>
+					<span class="s3">{{item.teamManager}}</span>
+				</p>
+				<p class="three">
+					<span>志愿总时长</span>
+					<span>团队人数</span>
+					<span>团队管理员</span>
+				</p>
+			</router-link>
 		</li>
+		<infinite-loading :on-infinite="getList" ref="infiniteLoading">
+			<i slot="no-more">
+				没有更多了...
+			</i>
+		</infinite-loading>
 	</ul>
 </div>
 </template>
 <script>
+	import InfiniteLoading from 'vue-infinite-loading'
+
 	export default{
 
 		name:'team',
+		components:{
+	  		InfiniteLoading
+	  	},
 		data(){
 			return {
 				teamlist:[]
 			}
 		},
-		mounted(){
-			this.getList()
-		},
 		methods:{
 			getList(){
-				var userId = localStorage.getItem('userId')
-				
-				this.$http.get('/api/private/getTeamByCollect',{
-					params:{
-						id:userId
-					}
-				}).then(response =>{
+				let pages = Math.ceil(this.teamlist.length/10)+1;
+				this.$http.get('/api/private/getTeamByCollect?nowPage='+pages).then(response =>{
 					let res = response.data
 					if(res.result == 0){
-						this.teamlist = res.data
+						if(res.data.length > 0){
+		    				this.teamlist = this.teamlist.concat(res.data);
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+		    			}else{
+		    				this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+		    			}
 					}
 				})
 			}
@@ -75,17 +84,21 @@ p{
 	background:white;
 	padding:0.5rem 0;
 	border-radius:7px;
-	margin-left:15%;
+	margin-left:12%;
 	margin-right: 2%;
 	position:relative;
 	margin-bottom: 0.6rem;
 }
-.team  ul li img{
-	width:5.1rem;
-	height:5.1rem;
+.team ul li a{
+	color: #000;
+}
+.team ul li img{
+	width:4.5rem;
+	height:4.5rem;
+	border-radius: 50%;
 	position:absolute;
-	left: -12%;
-	top:9%;
+	left: -2.25rem;
+	top:10%;
 }
 .team ul li .m1{
 	display:flex;

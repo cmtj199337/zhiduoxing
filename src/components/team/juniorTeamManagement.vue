@@ -1,6 +1,6 @@
 <template>
 	<div class="juniorTeamManagement">
-		<headerTip message="下级团队管理" goBack="true"></headerTip>
+		<headerTip message="下一级团队管理" goBack="true"></headerTip>
 		<div class="header"><img src="/static/bg02.png"></div>
 		<div class="main">
 			<div class="header1">
@@ -61,6 +61,10 @@
 	}
 </script>
 <style scoped>
+.juniorTeamManagement{
+	background: #f5f5f5;
+	height: 100%;
+}
 span{
 	color: #555;
 	font-weight: 400;

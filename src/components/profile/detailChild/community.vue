@@ -1,6 +1,6 @@
 <template>
 	<div class="community">
-		<div class="cheader">
+		<!-- <div class="cheader">
 			<span><img src="../touxiang2.png"></span>
 			<div class="name"><span>大蜗牛子</span><p>1小时</p></div>
 		</div>
@@ -21,7 +21,8 @@
 			<p><img src="../jubao.png"><span>举报</span></p>
 		</div>
 		<div class="kong"></div>
-		<div class="fb"><img src="../fabiao.png"></div>
+		<div class="fb"><img src="../fabiao.png"></div> -->
+		<p style="text-align:center;margin-top:30%">模块正在建设中，敬请期待</p>
 	</div>
 </template>
 <script>
